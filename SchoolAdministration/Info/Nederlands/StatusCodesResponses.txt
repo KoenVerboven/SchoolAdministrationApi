@@ -1,0 +1,10 @@
+﻿
+
+200 OK  bv bij het returnen van 1 student
+201 CreatedAtAction  bv bij het insert van een nieuwe student
+204 NoContent bv bij het verwijderen van een student
+
+400 BadRequest
+404 Not found
+
+500 Server Error

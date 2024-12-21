@@ -1,0 +1,9 @@
+﻿
+
+StudentController :
+
+ public async Task<ActionResult<Student>> CreateStudent(Student student)
+
+ public async Task<ActionResult<IEnumerable<Student>>> GetAllStudentsAsync()
+
+ -> dit zijn end-points

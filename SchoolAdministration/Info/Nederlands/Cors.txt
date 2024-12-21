@@ -1,0 +1,20 @@
+﻿Cors:
+Cross-Origin Requests
+
+-> onze API is bereikbaar van bepaalde domains of van bepaalde locaties.
+
+link : 
+https://learn.microsoft.com/en-us/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api
+
+
+configureren in file Program.cs:
+
+builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("MyCors", builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+                });
+            });

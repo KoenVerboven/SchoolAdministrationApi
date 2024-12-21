@@ -1,0 +1,9 @@
+﻿
+
+ApiController vs MVC controller :
+
+Web API Controller : leveren van data in verschillende formaten (XML, JSON, ...)
+bv : public class ProductApiController : ApiController
+
+MVC controller : kan communiceren met de Views (user interfaces) in een MVC-programma.
+bv : public class ProductController : Controller
