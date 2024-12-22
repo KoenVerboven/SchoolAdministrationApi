@@ -17,6 +17,9 @@ namespace SchoolAdministration.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<Course>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<Course>>> GetAllCoursers()
         {
             var allCourses = await _courseRepository.GetAllAsync();
@@ -24,6 +27,10 @@ namespace SchoolAdministration.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Course), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Course>> GetCourseById(int id)
         {
             var course = await _courseRepository.GetByIdAsync(id);
@@ -36,7 +43,10 @@ namespace SchoolAdministration.Controllers
             return Ok(course);
         }
 
-        [HttpPost] // voor ALLE endpoint de mogelijke response types opgeven
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Course>> CreateCourse(Course course)
         {
             if (!ModelState.IsValid)
@@ -48,8 +58,10 @@ namespace SchoolAdministration.Controllers
             return CreatedAtAction(nameof(GetCourseById), new { id = course.Id, course });
         }
 
-
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> DeleteCourse(int id)
         {
             await _courseRepository.DeleteCourseAsync(id);
@@ -57,6 +69,9 @@ namespace SchoolAdministration.Controllers
         }
 
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status201Created)] // 200 of 201 hier??
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> UpdateCourseAsync(int id,Course course)
         {
             if(id != course.Id)
