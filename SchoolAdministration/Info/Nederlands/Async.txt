@@ -1,0 +1,4 @@
+﻿Async = Asynchroon
+
+Bij Async Task hoort ook altijd : 
+await voor de uitvoering van de taak (bv deleten,...)

@@ -12,7 +12,7 @@ namespace SchoolAdministration.Controllers
     {
         private readonly IStudentRepository _studentRepository;
 
-        public StudentController(IStudentRepository studentRepository)
+        public StudentController(IStudentRepository studentRepository) 
         {
             _studentRepository = studentRepository;
         }
@@ -24,8 +24,7 @@ namespace SchoolAdministration.Controllers
         public async Task<ActionResult<IEnumerable<Student>>> GetAllStudentsAsync()
         {
             var allEmployees = await _studentRepository.GetAllAsync();
-            
-            return Ok(allEmployees);
+            return Ok(allEmployees.OrderBy(p=>p.LastName).ThenBy(p=>p.FirstName));
         }
 
         [HttpGet("{id}")]
@@ -67,18 +66,18 @@ namespace SchoolAdministration.Controllers
         public async Task<ActionResult> DeleteStudentById(int id)
         {
             await _studentRepository.DeleteStudentAsync(id);
-            return NoContent();//Status 204
+            return NoContent();
         }
 
         [HttpPut("{id}")]
-        [ProducesResponseType(StatusCodes.Status201Created)] // 200 of 201 hier??
+        [ProducesResponseType(StatusCodes.Status201Created)] 
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<Student>>UpdateStudentAsync(int id,Student student)
+        public async Task<ActionResult<Student>> UpdateStudentAsync(int id,Student student)
         {
             if(id != student.Id)
             {
-                return BadRequest();//Status 400
+                return BadRequest();
             }
 
             if (!ModelState.IsValid)
@@ -87,8 +86,7 @@ namespace SchoolAdministration.Controllers
             }
 
             await _studentRepository.UpdateStudentAsync(student);
-
-            return CreatedAtAction(nameof(GetStudentById), new { id = student.Id }, student); //Status 201
+            return CreatedAtAction(nameof(GetStudentById), new { id = student.Id }, student); 
         }
 
     }

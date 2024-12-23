@@ -7,3 +7,18 @@ bv : public class ProductApiController : ApiController
 
 MVC controller : kan communiceren met de Views (user interfaces) in een MVC-programma.
 bv : public class ProductController : Controller
+
+-------------------------------------------------------------------------
+
+
+private readonly IStudentRepository _studentRepository;
+
+        public StudentController(IStudentRepository studentRepository) --> constructor : aanmaken door : ctor tab tab
+        {
+            _studentRepository = studentRepository;
+        }
+
+studentRepository -> wordt als paramter ge-injecteerd in de constructor (DI, Denpendency Injectie)
+_studentRepository = studentRepository; -> de waarde van de parameter wordt toegekend aan de lokale variable _studentRepository
+
+-------------------------------------------------------------------------

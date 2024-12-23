@@ -69,7 +69,7 @@ namespace SchoolAdministration.Controllers
         }
 
         [HttpPut]
-        [ProducesResponseType(StatusCodes.Status201Created)] // 200 of 201 hier??
+        [ProducesResponseType(StatusCodes.Status201Created)] 
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> UpdateCourseAsync(int id,Course course)

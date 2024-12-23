@@ -1,0 +1,11 @@
+﻿
+In TeacherController : 
+
+public async Task<ActionResult<Teacher>>GetTeacherById(int id)   --> endpoint 1
+
+
+ public async Task<ActionResult<Teacher>> CreateTeacher(Teacher teacher) --> endpoint 2
+     return CreatedAtAction(nameof(GetTeacherById), new {id= teacher.Id, teacher});
+
+het voordeel van nameof(GetTeacherById) is nu: dat waneer GetTeacherById van naam verandert in endpoint 1:
+de naam in enpoint 2 van GetTeacherById , automatisch mee veranderd.
