@@ -24,7 +24,7 @@ namespace SchoolAdministration.Repositories
             var studentInDb = await _context.Students.FindAsync(id);
 
             if (studentInDb == null) {
-                throw new KeyNotFoundException($"Student with id {id} was not found.");//string interpolation
+                throw new KeyNotFoundException($"Student with id {id} was not found.");
             }
 
             _context.Students.Remove(studentInDb);

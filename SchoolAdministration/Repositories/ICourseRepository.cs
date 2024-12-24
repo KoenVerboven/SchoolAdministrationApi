@@ -1,4 +1,5 @@
-﻿using SchoolAdministration.Models;
+﻿using SchoolAdministration.Dtos;
+using SchoolAdministration.Models;
 
 namespace SchoolAdministration.Repositories
 {
@@ -6,6 +7,7 @@ namespace SchoolAdministration.Repositories
     {
         Task<IEnumerable<Course>> GetAllAsync();
         Task<Course?> GetByIdAsync(int id);
+        Task<IEnumerable<Course>> GetSearchAsync(CourseSearchParameters courseSearchParameters);
         Task AddCourseAsync(Course course);
         Task UpdateCourseAsync(Course course);
         Task DeleteCourseAsync(int id);

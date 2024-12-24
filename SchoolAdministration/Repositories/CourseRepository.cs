@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Data;
+using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
+
 
 namespace SchoolAdministration.Repositories
 {
@@ -36,6 +38,33 @@ namespace SchoolAdministration.Repositories
         public async Task<Course?> GetByIdAsync(int id)
         {
             return await _context.Courses.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<Course>> GetSearchAsync(CourseSearchParameters courseSearchParameters)
+        {
+            IEnumerable<Course> courses = null;
+
+            if (string.IsNullOrWhiteSpace(courseSearchParameters.CourseName) && string.IsNullOrWhiteSpace(courseSearchParameters.CourseCode))
+            {
+                courses = await _context.Courses.ToListAsync();
+            }
+
+            if (!string.IsNullOrWhiteSpace(courseSearchParameters.CourseName) && string.IsNullOrWhiteSpace(courseSearchParameters.CourseCode))
+            {
+                courses = await _context.Courses.Where(
+                                         p => p.CourseName.ToLower().Contains(courseSearchParameters.CourseName.ToLower()))
+                          .ToListAsync();
+            }
+
+            if (!string.IsNullOrWhiteSpace(courseSearchParameters.CourseName) && !string.IsNullOrWhiteSpace(courseSearchParameters.CourseCode))
+            {
+                courses = await _context.Courses.Where(
+                                         p => p.CourseName.ToLower().Contains(courseSearchParameters.CourseName.ToLower())
+                                         && p.CourseCode.ToLower().Contains(courseSearchParameters.CourseCode.ToLower()))
+                          .ToListAsync();
+            }
+
+            return courses;
         }
 
         public async Task UpdateCourseAsync(Course course)

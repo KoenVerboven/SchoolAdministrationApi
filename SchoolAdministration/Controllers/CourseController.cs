@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories;
 
@@ -26,7 +27,7 @@ namespace SchoolAdministration.Controllers
             return Ok(allCourses);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("getById/{id}")]
         [ProducesResponseType(typeof(Course), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -88,13 +89,21 @@ namespace SchoolAdministration.Controllers
             return CreatedAtAction(nameof(GetCourseById), new { id = course.Id, course });
         }
 
-      
-        //todo endpoint met filter op Course naam, starttijd, stoptijd,onlile cursus
-        //todo sortering toevoegen
-        //todo paging toevoegen
+        [HttpGet("getBySearch")]
+        [ProducesResponseType(typeof(IEnumerable<Course>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<Course>>> Search([FromQuery] CourseSearchParameters @params)
+        {
+            var courses = await _courseRepository.GetSearchAsync(@params);  
 
-        //todo unitTesting toevoegen: max plaatsen beschikbaar aangevraagde plaats moet hierbinnen vallen.
+            if (courses == null)
+            {
+                return NotFound();
+            }
 
-        //todo relaties tussen tabellen bv student en courses
+            return Ok(courses);
+        }
+        
     }
 }

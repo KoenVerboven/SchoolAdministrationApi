@@ -9,3 +9,13 @@ public async Task<ActionResult<Teacher>>GetTeacherById(int id)   --> endpoint 1
 
 het voordeel van nameof(GetTeacherById) is nu: dat waneer GetTeacherById van naam verandert in endpoint 1:
 de naam in enpoint 2 van GetTeacherById , automatisch mee veranderd.
+
+----------------------------------------------------------
+
+string interpolation voorbeeld :
+
+if (studentInDb == null) {
+   throw new KeyNotFoundException($"Student with id {id} was not found.");//string interpolation
+}
+
+----------------------------------------------------------

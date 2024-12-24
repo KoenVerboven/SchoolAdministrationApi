@@ -28,6 +28,7 @@ namespace SchoolAdministration
             //add the student repository to the DI (dependency injection)
             builder.Services.AddScoped<IStudentRepository, StudentRepository>();
             builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+            builder.Services.AddScoped<ITeacherRepository,TeacherRepository>();
 
             builder.Services.AddControllers();
 
