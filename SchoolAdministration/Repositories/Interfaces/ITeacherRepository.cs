@@ -1,7 +1,6 @@
-﻿
-using SchoolAdministration.Models;
+﻿using SchoolAdministration.Models;
 
-namespace SchoolAdministration.Repositories
+namespace SchoolAdministration.Repositories.Interfaces
 {
     public interface ITeacherRepository
     {

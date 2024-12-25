@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Data;
 using SchoolAdministration.Models;
+using SchoolAdministration.Repositories.Interfaces;
 
-namespace SchoolAdministration.Repositories
+namespace SchoolAdministration.Repositories.Repos
 {
     public class StudentRepository : IStudentRepository
     {
-       private readonly AppDbContext _context;
-        
+        private readonly AppDbContext _context;
+
         public StudentRepository(AppDbContext context)
         {
             _context = context;
@@ -23,7 +24,8 @@ namespace SchoolAdministration.Repositories
         {
             var studentInDb = await _context.Students.FindAsync(id);
 
-            if (studentInDb == null) {
+            if (studentInDb == null)
+            {
                 throw new KeyNotFoundException($"Student with id {id} was not found.");
             }
 
@@ -39,6 +41,11 @@ namespace SchoolAdministration.Repositories
         public async Task<Student?> GetByIdAsync(int id)
         {
             return await _context.Students.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<Student>> GetByNameAsync(string name)
+        {
+            return await _context.Students.Where(p => (p.LastName.ToLower() + " " + p.FirstName).Contains(name.ToLower())).ToListAsync();
         }
 
         public async Task UpdateStudentAsync(Student student)

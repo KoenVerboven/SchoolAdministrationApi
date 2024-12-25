@@ -2,13 +2,14 @@
 using SchoolAdministration.Data;
 using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
+using SchoolAdministration.Repositories.Interfaces;
 
 
-namespace SchoolAdministration.Repositories
+namespace SchoolAdministration.Repositories.Repos
 {
     public class CourseRepository : ICourseRepository
     {
-        
+
         private readonly AppDbContext _context;
 
         public CourseRepository(AppDbContext context)
@@ -24,7 +25,7 @@ namespace SchoolAdministration.Repositories
 
         public async Task DeleteCourseAsync(int id)
         {
-            var courseInDb = await _context.Courses.FindAsync(id) 
+            var courseInDb = await _context.Courses.FindAsync(id)
                 ?? throw new KeyNotFoundException($"course with id {id} was not found."); //coalesce expression
             _context.Courses.Remove(courseInDb);
             await _context.SaveChangesAsync();

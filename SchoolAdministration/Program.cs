@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using SchoolAdministration.Data;
-using SchoolAdministration.Repositories;
+using SchoolAdministration.Repositories.Interfaces;
+using SchoolAdministration.Repositories.Repos;
 
 namespace SchoolAdministration
 {

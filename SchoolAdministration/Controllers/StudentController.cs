@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Models;
-using SchoolAdministration.Repositories;
+using SchoolAdministration.Repositories.Interfaces;
 
 
 namespace SchoolAdministration.Controllers
@@ -23,8 +23,8 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<Student>>> GetAllStudentsAsync()
         {
-            var allEmployees = await _studentRepository.GetAllAsync();
-            return Ok(allEmployees.OrderBy(p=>p.LastName).ThenBy(p=>p.FirstName));
+            var students = await _studentRepository.GetAllAsync();
+            return Ok(students.OrderBy(p=>p.LastName).ThenBy(p=>p.FirstName));
         }
 
         [HttpGet("{id}")]
@@ -34,15 +34,27 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Student>>GetStudentById(int id)
         {
-            var employee = await _studentRepository.GetByIdAsync(id);
+            var student = await _studentRepository.GetByIdAsync(id);
 
-            if (employee == null)
+            if (student == null)
             {
                 return NotFound();
             }
 
-            return Ok(employee);
+            return Ok(student);
         }
+
+
+        [HttpGet("getByName/{name}")]
+        [ProducesResponseType(typeof(IEnumerable<Student>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<Student>>> GetStudentByName(string name)
+        {
+            var students = await _studentRepository.GetByNameAsync(name);
+            return Ok(students);
+        }
+
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]

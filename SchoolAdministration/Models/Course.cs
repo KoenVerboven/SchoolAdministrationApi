@@ -6,6 +6,11 @@ namespace SchoolAdministration.Models
 {
     public class Course
     {
+        //public Course()
+        //{
+        //    this.Students = new HashSet<Student>();
+        //}
+
         [Key]
         public  int Id { get; set; }
 
@@ -27,6 +32,8 @@ namespace SchoolAdministration.Models
 
         [Column(TypeName = "decimal(6, 2)")]
         public decimal?  CoursePrice { get; set; }
+
+        //public virtual ICollection<Student> Students { get; set; }
 
         //todo hoeveel leerlingen maximaal
         //todo hoeveel leerlingen minimaal

@@ -1,6 +1,7 @@
 ﻿using SchoolAdministration.Models;
+using SchoolAdministration.Repositories.Interfaces;
 
-namespace SchoolAdministration.Repositories
+namespace SchoolAdministration.Repositories.Repos
 {
     public class TeacherRepository : ITeacherRepository
     {

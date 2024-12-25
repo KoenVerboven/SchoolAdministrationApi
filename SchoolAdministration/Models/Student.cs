@@ -1,10 +1,17 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading.Channels;
 
 namespace SchoolAdministration.Models
 {
     public class Student
     {
+        //public Student()
+        //{
+        //        this.Courses = new HashSet<Course>();
+        //}
+
         public int Id { get; set; }
 
         [Display(Name ="First name")]
@@ -19,6 +26,12 @@ namespace SchoolAdministration.Models
 
         [Display(Name = "Date of birth")]
         public DateTime? DateOfBirth { get; set; }
+
+        [NotMapped]
+        public string FullName { get => LastName + " " + FirstName; }
+
+        [NotMapped]
+        public int Age { get; set; }
 
         [Display(Name = "Street and number")]
         [StringLength(30, ErrorMessage = "Street and number cannot longer than 30 characters")]
@@ -46,6 +59,12 @@ namespace SchoolAdministration.Models
         [Display(Name = "Parent first name")]
         [StringLength(30, ErrorMessage = "Parent first cannot longer than 30 characters")]
         public string? ParentFirstName { get; set; }
+
+        //public virtual ICollection<Course> Courses { get; set; }
+
+       // changed this to results of the exams taken
+       // you can still get exam via ExamResult -> Exam
+       //public virtual ICollection<ExamResult> ExamsTaken { get; set; }
 
     }
 
