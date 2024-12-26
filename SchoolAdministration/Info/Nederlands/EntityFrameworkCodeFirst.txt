@@ -8,9 +8,6 @@ microsoft.entityframeworkcore.sqlserver\9.0.0
 entityframeworkcore.tools\9.0.0  (anders kunnen we geen commandos intikken in de Package Manager Console)
 
 
-
-
-
 in Program.cs :
 
 useSqlServer
@@ -22,9 +19,6 @@ en vul de connectie string in
   builder.Services.AddDbContext<AppDbContext>(
       options => options.UseSqlServer("Data Source=KOENI7;Initial Catalog=School2;Integrated Security=True;TrustServerCertificate=True;")
       );
-
-
-
 
 
 
@@ -139,6 +133,27 @@ Add-Migration AddAdditionalFieldsToStudent
 Remove-Migration --> als we de migratie terug willen draaien.
 
 update-Database
+
+------------------------------------------------
+
+Add-Migration "AddStudentCourseRelationship"
+Update-Database
+
+AddStudentCourseRelationship = vrij te kiezen naam, geeft duidelijk aan wat de betreffende update bewerkstelligd.
+
+de tussen-table 'CourseStudent' wordt nu automatisch aangemaakt.
+
+Dit komt doordat we onderstaande properties hebben toegevoegd :
+
+model Student:
+->  public ICollection<Course> Courses { get; set; }
+
+model Course:
+-> public ICollection<Student> Students { get; set; }
+
+
+-----------------------------------------------
+
 
 
 

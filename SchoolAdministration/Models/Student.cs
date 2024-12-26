@@ -1,7 +1,6 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Threading.Channels;
 
 namespace SchoolAdministration.Models
 {
@@ -33,9 +32,7 @@ namespace SchoolAdministration.Models
         [Display(Name = "Street and number")]
         [StringLength(30, ErrorMessage = "Street and number cannot longer than 30 characters")]
         public  string? StreetAndNumber { get; set; }
-
         public  int? Zipcode { get; set; }
-
         public int Gender { get; set; }
 
         [Required(ErrorMessage = "Email Name is required.")]
@@ -57,7 +54,7 @@ namespace SchoolAdministration.Models
         [StringLength(30, ErrorMessage = "Parent first cannot longer than 30 characters")]
         public string? ParentFirstName { get; set; }
 
-        //public virtual ICollection<Course> Courses { get; set; }
+        public ICollection<Course> Courses { get; set; }
 
     }
 
