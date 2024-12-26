@@ -1,7 +1,10 @@
-﻿namespace SchoolAdministration.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SchoolAdministration.Models
 {
     public class Exam
     {
+        [Key]
         public int Id { get; set; }
         public int CourseId { get; set; }
         public string ExamTitle { get; set; }

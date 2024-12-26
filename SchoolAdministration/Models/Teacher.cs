@@ -4,6 +4,7 @@ namespace SchoolAdministration.Models
 {
     public class Teacher
     {
+        [Key]
         public int Id { get; set; }
 
         [Display(Name = "First name")]

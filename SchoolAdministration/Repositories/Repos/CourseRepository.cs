@@ -43,29 +43,21 @@ namespace SchoolAdministration.Repositories.Repos
 
         public async Task<IEnumerable<Course>> GetSearchAsync(CourseSearchParameters courseSearchParameters)
         {
-            IEnumerable<Course> courses = null;
-
-            if (string.IsNullOrWhiteSpace(courseSearchParameters.CourseName) && string.IsNullOrWhiteSpace(courseSearchParameters.CourseCode))
-            {
-                courses = await _context.Courses.ToListAsync();
-            }
+            var query = _context.Courses.AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(courseSearchParameters.CourseName) && string.IsNullOrWhiteSpace(courseSearchParameters.CourseCode))
             {
-                courses = await _context.Courses.Where(
-                                         p => p.CourseName.ToLower().Contains(courseSearchParameters.CourseName.ToLower()))
-                          .ToListAsync();
+                query = query.Where(p => p.CourseName.ToLower().Contains(courseSearchParameters.CourseName.ToLower()));
             }
 
             if (!string.IsNullOrWhiteSpace(courseSearchParameters.CourseName) && !string.IsNullOrWhiteSpace(courseSearchParameters.CourseCode))
             {
-                courses = await _context.Courses.Where(
-                                         p => p.CourseName.ToLower().Contains(courseSearchParameters.CourseName.ToLower())
-                                         && p.CourseCode.ToLower().Contains(courseSearchParameters.CourseCode.ToLower()))
-                          .ToListAsync();
+                query = query.Where(p => p.CourseName.ToLower().Contains(courseSearchParameters.CourseName.ToLower())
+                                         && p.CourseCode.ToLower().Contains(courseSearchParameters.CourseCode.ToLower()));
+                          
             }
 
-            return courses;
+            return await query.ToListAsync();
         }
 
         public async Task UpdateCourseAsync(Course course)

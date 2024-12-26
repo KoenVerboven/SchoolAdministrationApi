@@ -7,11 +7,8 @@ namespace SchoolAdministration.Models
 {
     public class Student
     {
-        //public Student()
-        //{
-        //        this.Courses = new HashSet<Course>();
-        //}
 
+        [Key]
         public int Id { get; set; }
 
         [Display(Name ="First name")]
@@ -62,12 +59,6 @@ namespace SchoolAdministration.Models
 
         //public virtual ICollection<Course> Courses { get; set; }
 
-       // changed this to results of the exams taken
-       // you can still get exam via ExamResult -> Exam
-       //public virtual ICollection<ExamResult> ExamsTaken { get; set; }
-
     }
-
-
 
 }

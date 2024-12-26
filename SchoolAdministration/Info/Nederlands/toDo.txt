@@ -1,0 +1,20 @@
+﻿course :
+--------
+ hoeveel leerlingen maximaal
+hoeveel leerlingen minimaal
+ minimum aantal studies om aan deze cursus te mogen beginnen
+welke leeraar?
+online cursus of ter plaatse
+oefeningen (excercise) vs proefwerk (test)
+
+Algemeen :
+----------
+dto's and read models
+Logging
+Authentication en authorisation
+
+user class -> login gegevens
+
+Versioning
+
+UnitTesting !!!!

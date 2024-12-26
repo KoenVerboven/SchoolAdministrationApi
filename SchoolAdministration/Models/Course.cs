@@ -6,11 +6,6 @@ namespace SchoolAdministration.Models
 {
     public class Course
     {
-        //public Course()
-        //{
-        //    this.Students = new HashSet<Student>();
-        //}
-
         [Key]
         public  int Id { get; set; }
 
@@ -34,22 +29,7 @@ namespace SchoolAdministration.Models
         public decimal?  CoursePrice { get; set; }
 
         //public virtual ICollection<Student> Students { get; set; }
-
-        //todo hoeveel leerlingen maximaal
-        //todo hoeveel leerlingen minimaal
-
-        //todo minimum aantal studies om aan deze cursus te mogen beginnen
-
-        //todo welke leeraar?
-
-        //todo online cursus of ter plaatse
-
-        //todo totaal punten te behalen
-
-        //todo examendate(s) (testdate)
-
-        //todo oefeningen (excercise) vs proefwerk (test)
-
+ 
     }
 
 }
