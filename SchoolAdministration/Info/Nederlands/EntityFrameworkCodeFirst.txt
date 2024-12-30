@@ -135,9 +135,9 @@ Remove-Migration --> als we de migratie terug willen draaien.
 update-Database
 
 ------------------------------------------------
+MANY TO MANY relationship
 
-Add-Migration "AddStudentCourseRelationship"
-Update-Database
+tussen Student en Course
 
 AddStudentCourseRelationship = vrij te kiezen naam, geeft duidelijk aan wat de betreffende update bewerkstelligd.
 
@@ -151,9 +151,68 @@ model Student:
 model Course:
 -> public ICollection<Student> Students { get; set; }
 
-
+Add-Migration "AddStudentCourseRelationship"
+Update-Database
 -----------------------------------------------
+ONE TO MANY relationship
+
+tussen StudyPlan en StudyPlanPart
 
 
 
+model StudyPlan:
+public int Id { get; set; }
+..
+public ICollection<StudyPlanPart>? StudyPlanParts { get; set; } -> wordt ook 'Navigation property' genoemd
 
+model StudyPlanPart:
+[Key] --> Attribuut voor primary key.Dit hoeft hier in principe niet als we Id als naam gebuiken.
+Als we bv StudyPlanPartId zouden gebruiken moet dit wel!
+public int Id { get; set; }
+public int StudyPlanId { get; set; } --> dit wordt een foreign key in de database. Hou je wel aan de naamgeving : tabel (hier: StudyPlan) + Id
+
+Het is belangrijk om bij de benaming van de pk en fk, aan de naming conventions te houden.
+https://learn.microsoft.com/en-us/ef/ef6/modeling/code-first/conventions/built-in
+
+Voeg toe in de contextClass (AppDbContext) :
+ public DbSet<StudyPlan> StudyPlans { get; set; }
+ public DbSet<StudyPlanPart> StudyPlanParts { get; set; }
+
+ opmerking:
+ de controller voor beide tabellen is niet nodig om te tabelen aan te maken in de database.
+ Een controller en endpoints zijn natuurlijk wel nodig om deze endpoint in swagger te laten verschijnen.
+
+Voer uit in Package Manager Console:
+Add-Migration "AddStudyPlanAndStudyPlanPart"
+Update-Database
+
+SQL-server:
+Nu zijn beide tabellen en de meer op 1 relatie toegevoegd in database.
+
+ TABLE [dbo].[Students](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [nvarchar](30) NOT NULL,
+	[LastName] [nvarchar](30) NOT NULL,
+	[Email] [nvarchar](max) NOT NULL,
+	[Phone] [nvarchar](max) NOT NULL,
+	[DateOfBirth] [datetime2](7) NULL,
+	[Gender] [int] NOT NULL,
+	[ParentFirstName] [nvarchar](30) NULL,
+	[ParentLastname] [nvarchar](30) NULL,
+	[ParentPhoneNumber] [nvarchar](max) NULL,
+	[StreetAndNumber] [nvarchar](30) NULL,
+	[Zipcode] [int] NULL,
+ CONSTRAINT [PK_Students] PRIMARY KEY CLUSTERED 
+
+  TABLE [dbo].[StudyPlanParts](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Start] [datetime2](7) NOT NULL,
+	[End] [datetime2](7) NOT NULL,
+	[GoalDescription] [nvarchar](max) NOT NULL,
+	[Remarks] [nvarchar](max) NOT NULL,
+	[StudyObjectiveArchievedInProcent] [int] NOT NULL,
+	[StudyPlanId] [int] NOT NULL,
+ CONSTRAINT [PK_StudyPlanParts] PRIMARY KEY CLUSTERED 
+ ONSTRAINT [FK_StudyPlanParts_StudyPlans_StudyPlanId] FOREIGN KEY([StudyPlanId])  --> foreign key
+REFERENCES [dbo].[StudyPlans] ([Id])
+ON DELETE CASCADE --> let hier wel mee op, als je dit niet wilt moet dit aangepast worden
