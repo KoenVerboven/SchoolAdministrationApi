@@ -10,7 +10,10 @@ namespace SchoolAdministration.Data
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Exam> Exams { get; set; }
         public DbSet<ExamResult> ExamResults { get; set; }
-        
+        public DbSet<StudyPlan> StudyPlans { get; set; }
+        public DbSet<StudyPlanPart> StudyPlanParts { get; set; }
+
+
         public AppDbContext(DbContextOptions<AppDbContext> options)
             :base(options)
         {
