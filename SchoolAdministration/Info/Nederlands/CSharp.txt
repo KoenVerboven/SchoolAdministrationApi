@@ -19,3 +19,10 @@ if (studentInDb == null) {
 }
 
 ----------------------------------------------------------
+
+een constructor aanmaken -> ctor tab 
+een property aanmaken --> prop tab 
+
+-------------------------------------------------------------
+IEnumerable vs IList vs ICollection :
+

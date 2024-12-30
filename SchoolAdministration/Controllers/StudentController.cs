@@ -24,7 +24,7 @@ namespace SchoolAdministration.Controllers
         public async Task<ActionResult<IEnumerable<Student>>> GetAllStudentsAsync()
         {
             var students = await _studentRepository.GetAllAsync();
-            return Ok(students.OrderBy(p=>p.LastName).ThenBy(p=>p.FirstName));
+            return Ok(students);
         }
 
         [HttpGet("{id}")]
@@ -68,7 +68,7 @@ namespace SchoolAdministration.Controllers
             }
             
             await _studentRepository.AddStudentAsync(student);
-            return CreatedAtAction(nameof(GetStudentById), new {id = student.Id}, student); //Status 201
+            return CreatedAtAction(nameof(GetStudentById), new {id = student.Id}, student);
         }
 
         [HttpDelete("{id}")]

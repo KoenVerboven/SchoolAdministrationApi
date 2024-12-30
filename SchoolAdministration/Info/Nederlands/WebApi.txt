@@ -1,0 +1,4 @@
+﻿nieuw project:
+Visual studio 2022
+kies new project
+kies ASP.NET Core Web Application

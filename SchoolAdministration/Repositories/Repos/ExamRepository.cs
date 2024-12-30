@@ -1,4 +1,5 @@
-﻿using SchoolAdministration.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolAdministration.Data;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
 
@@ -15,27 +16,31 @@ namespace SchoolAdministration.Repositories.Repos
 
         public async Task AddExamAsync(Exam exam)
         {
-            throw new NotImplementedException();
+            await _context.Exams.AddAsync(exam);
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteExamAsync(int id)
         {
-            throw new NotImplementedException();
+            var ExamInDb = await _context.Exams.FindAsync(id) ?? throw new KeyNotFoundException($"Exam with id {id} was not found.");
+            _context.Exams.Remove(ExamInDb);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Exam>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Exams.ToListAsync();
         }
 
-        public async Task<Exam> GetByIdAsync(int id)
+        public async Task<Exam?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Exams.FindAsync(id);
         }
 
         public async Task UpdateExamAsync(Exam exam)
         {
-            throw new NotImplementedException();
+            _context.Exams.Update(exam);
+            await _context.SaveChangesAsync();
         }
     }
 }

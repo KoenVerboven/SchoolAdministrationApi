@@ -1,33 +1,46 @@
-﻿using SchoolAdministration.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolAdministration.Data;
+using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
 
 namespace SchoolAdministration.Repositories.Repos
 {
-    public class ExamResultRepository : IExamRepository
+    public class ExamResultRepository : IExamResultRepository
     {
-        public Task AddExamAsync(Exam exam)
+        private readonly AppDbContext _context;
+
+        public ExamResultRepository(AppDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task DeleteExamAsync(int id)
+        public async Task AddExamResultAsync(ExamResult examResult)
         {
-            throw new NotImplementedException();
+            await _context.ExamResults.AddAsync(examResult);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Exam>> GetAllAsync()
+        public async Task DeleteExamResultAsync(int id)
         {
-            throw new NotImplementedException();
+            var examResultInDb = await _context.ExamResults.FindAsync(id) ?? throw new KeyNotFoundException($"ExamResult with id {id} was not found.");
+            _context.ExamResults.Remove(examResultInDb);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<Exam>? GetByIdAsync(int id)
+        public async Task<IEnumerable<ExamResult>> GetAllExamResultsAsync()
         {
-            throw new NotImplementedException();
+            return await _context.ExamResults.ToListAsync();
         }
 
-        public Task UpdateExamAsync(Exam exam)
+        public async Task<ExamResult?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.ExamResults.FindAsync(id);
+        }
+
+        public async Task UpdateExamResultAsync(ExamResult examResult)
+        {
+            _context.ExamResults.Update(examResult);
+            await _context.SaveChangesAsync();
         }
     }
 }

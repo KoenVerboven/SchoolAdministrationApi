@@ -18,3 +18,5 @@ user class -> login gegevens
 Versioning
 
 UnitTesting !!!!
+
+opvraging (lazy loading ..) student - course : alle cursussen dat een bepaalde student volgt.

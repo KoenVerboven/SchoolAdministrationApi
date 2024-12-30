@@ -1,33 +1,47 @@
-﻿using SchoolAdministration.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolAdministration.Data;
+using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
 
 namespace SchoolAdministration.Repositories.Repos
 {
     public class TeacherRepository : ITeacherRepository
     {
-        public Task AddTeacherAsync(Teacher teacher)
+
+        private readonly AppDbContext _context;
+
+        public TeacherRepository(AppDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;         
         }
 
-        public Task DeleteTeacherAsync(int id)
+        public async Task AddTeacherAsync(Teacher teacher)
         {
-            throw new NotImplementedException();
+            await _context.Teachers.AddAsync(teacher);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Teacher>> GetAllAsyn()
+        public async Task DeleteTeacherAsync(int id)
         {
-            throw new NotImplementedException();
+            var teacherInDb = _context.Teachers.Find(id) ?? throw new KeyNotFoundException($"Teachter with id {id} was not found.");
+            _context.Teachers.Remove(teacherInDb);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<Teacher?> GetAsynById(int id)
+        public async Task<IEnumerable<Teacher>> GetAllAsyn()
         {
-            throw new NotImplementedException();
+            return await _context.Teachers.ToListAsync();   
         }
 
-        public Task UpdateTeacherAsync(Teacher teacher)
+        public async Task<Teacher?> GetAsynById(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Teachers.FindAsync(id);
+        }
+
+        public async Task UpdateTeacherAsync(Teacher teacher)
+        {
+            _context.Teachers.Update(teacher);
+            await _context.SaveChangesAsync();
         }
     }
 }
