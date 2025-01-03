@@ -1,0 +1,5 @@
+﻿ 
+ program.cs :
+ 
+ // add the student repository to the DI (dependency injection) :
+  builder.Services.AddScoped<IStudentRepository, StudentRepository>();

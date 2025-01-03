@@ -1,0 +1,45 @@
+﻿public class StudentController : ControllerBase
+    {
+        private readonly IStudentRepository _studentRepository;
+
+        private readonly ILogger<StudentController> _logger;-------- = build in logger (stadaard)
+
+        public StudentController(ILogger<StudentController> logger-------------, IStudentRepository studentRepository)
+        {
+            _logger = logger;---------------------
+            _studentRepository = studentRepository;
+        }
+
+        public async Task<ActionResult<IEnumerable<Student>>> GetAllStudentsAsync()
+        {
+            _logger.LogInformation("Getting all the students.");-------
+            var students = await _studentRepository.GetAllAsync();
+            return Ok(students);
+        }
+
+        public async Task<ActionResult<Student>>GetStudentById(int id)
+        {
+            if(id == 0)
+            {
+                _logger.LogError("Get Student error with Id " + id);---------------------
+                return BadRequest();
+         }
+-------------------------------------------------------------------------------------------------------------------------------------------
+    Serilog gebruiken om de logging weg te schrijven naar een file :
+    
+    Install nuget package(s) : 
+         Serilog.AspNetCore
+         Serilog.Sinks.file
+
+         in program.cs :
+
+         using Serilog;
+
+    var builder = WebApplication.CreateBuilder(args);
+
+    //we use Serilog for logging:
+    Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
+        .WriteTo.File("log/villaLogs.txt", rollingInterval: RollingInterval.Day).CreateLogger();
+    builder.Host.UseSerilog();
+
+    --------------------------------------------------------------------------------------------------------------------------------------------

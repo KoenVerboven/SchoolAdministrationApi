@@ -2,11 +2,10 @@ Make entity framwork work with sql-server :
 
 installeer volgende nuget-packets:
 
-microsoft.entityframeworkcore\9.0.0
-microsoft.entityframeworkcore.inmemory\9.0.0  (is niet meer nodig en mag verwijdert worden)
 microsoft.entityframeworkcore.sqlserver\9.0.0
 entityframeworkcore.tools\9.0.0  (anders kunnen we geen commandos intikken in de Package Manager Console)
 
+microsoft.entityframeworkcore\9.0.0 (is niet nodig, microsoft.entityframeworkcore.sqlserver installeerd dit automatisch mee)
 
 in Program.cs :
 
@@ -137,6 +136,8 @@ update-Database
 ------------------------------------------------
 MANY TO MANY relationship
 
+https://learn.microsoft.com/en-us/ef/core/modeling/relationships/many-to-many
+
 tussen Student en Course
 
 AddStudentCourseRelationship = vrij te kiezen naam, geeft duidelijk aan wat de betreffende update bewerkstelligd.
@@ -155,6 +156,8 @@ Add-Migration "AddStudentCourseRelationship"
 Update-Database
 -----------------------------------------------
 ONE TO MANY relationship
+
+https://learn.microsoft.com/en-us/ef/core/modeling/relationships/one-to-many
 
 tussen StudyPlan en StudyPlanPart
 
@@ -216,3 +219,11 @@ Nu zijn beide tabellen en de meer op 1 relatie toegevoegd in database.
  ONSTRAINT [FK_StudyPlanParts_StudyPlans_StudyPlanId] FOREIGN KEY([StudyPlanId])  --> foreign key
 REFERENCES [dbo].[StudyPlans] ([Id])
 ON DELETE CASCADE --> let hier wel mee op, als je dit niet wilt moet dit aangepast worden
+
+-------------------------------------------------------------------------------------
+
+ONE TO ONE relationship:
+
+https://learn.microsoft.com/en-us/ef/core/modeling/relationships/one-to-one
+
+

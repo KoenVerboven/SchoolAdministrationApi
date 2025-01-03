@@ -12,10 +12,14 @@ namespace SchoolAdministration.Controllers
     {
         private readonly IStudentRepository _studentRepository;
 
-        public StudentController(IStudentRepository studentRepository) 
+        private readonly ILogger<StudentController> _logger;
+
+        public StudentController(ILogger<StudentController> logger, IStudentRepository studentRepository)
         {
+            _logger = logger;
             _studentRepository = studentRepository;
         }
+
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Student>), StatusCodes.Status200OK)]
@@ -23,6 +27,7 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<Student>>> GetAllStudentsAsync()
         {
+            _logger.LogInformation("Getting all the students.");
             var students = await _studentRepository.GetAllAsync();
             return Ok(students);
         }
@@ -34,6 +39,12 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<Student>>GetStudentById(int id)
         {
+            if(id == 0)
+            {
+                _logger.LogError("Get Student error with Id " + id);
+                return BadRequest();
+            }
+            
             var student = await _studentRepository.GetByIdAsync(id);
 
             if (student == null)

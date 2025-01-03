@@ -10,7 +10,17 @@ Web API Controller : leveren van data in verschillende formaten (XML, JSON, ...)
 bv : public class ProductApiController : ControllerBase
 
 MVC controller : kan communiceren met de Views (user interfaces) in een MVC-programma.
-bv : public class ProductController : Controller
+bv : public class ProductController : Controller -- >controller zou ook werken, maar geeft een overhead van zaken die we niet nodig hebben
+
+[Route("api/controller")] --> rout attribuur is ook verplicht
+[ApiController]  --> dit attribuut moet we ook verplicht toevoegen
+public class CourseController : ControllerBase
+
+ [Route("api/[controller]")] vs [Route("api/controller")] vs [Route("api/Course")]:
+
+ [Route("api/[controller]")] --> vult ipv van gewoon controller, automatisch de naam in van onze controller(in bovenstaand voorbeeld dus : Course).
+ [Route("api/Course")] --> hard coded route, is op zich ook geen slecht idee, want de naam veranderen van een controller moet steeds doorgegeven 
+                           worden aan de clients die de API gebruiken.
 
 -------------------------------------------------------------------------
 

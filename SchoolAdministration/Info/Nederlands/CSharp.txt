@@ -26,3 +26,24 @@ een property aanmaken --> prop tab
 -------------------------------------------------------------
 IEnumerable vs IList vs ICollection :
 
+
+--------------------------------------------------------------
+
+  private readonly ICourseRepository _courseRepository;
+
+        public CourseController(ICourseRepository courseRepository)
+        {
+            _courseRepository = courseRepository;
+        }
+
+  bovenstaande snel aanmaken :
+
+  tik ctor
+  vul de parameter aan : ICourseRepository courseRepository
+  cursor op courseRepository, kies quick Action: create and assign property
+
+
+  public CourseController(ICourseRepository courseRepository)
+        {
+ 
+        }

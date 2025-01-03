@@ -12,5 +12,6 @@ namespace SchoolAdministration.Models
         public string Remarks { get; set; }
         public int StudyObjectiveArchievedInProcent { get; set; }
         public int StudyPlanId { get; set; }
+        public int CourseId { get; set; }
     }
 }
