@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer;
 using SchoolAdministration.Data;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Repositories.Repos;
@@ -21,11 +20,12 @@ namespace SchoolAdministration
             builder.Host.UseSerilog();
 
 
-            // ADD SERVICES TO THE CONTAINER:
+            // ADD SERVICES TO THE CONTAINER :
 
-            builder.Services.AddDbContext<AppDbContext>(
-                options => options.UseSqlServer("Data Source=KOENI7;Initial Catalog=School2;Integrated Security=True;TrustServerCertificate=True;")
-                );
+            builder.Services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
+            });
 
             builder.Services.AddCors(options =>
             {
@@ -47,7 +47,10 @@ namespace SchoolAdministration
 
             var app = builder.Build();
 
-            var entities = app.Services.CreateScope().ServiceProvider.GetRequiredService<IStudentRepository>();//toegevoegd
+            var entities = app.Services.CreateScope().ServiceProvider.GetRequiredService<IStudentRepository>();
+
+
+            // SWAGGER :
 
             if(app.Environment.IsDevelopment())
             {
@@ -60,9 +63,7 @@ namespace SchoolAdministration
             }
 
             app.UseCors("MyCors");  
-
             app.MapControllers();
-
             app.Run();
         }
     }

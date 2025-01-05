@@ -53,7 +53,7 @@ namespace SchoolAdministration.Models
         [Display(Name = "Parent first name")]
         [StringLength(30, ErrorMessage = "Parent first cannot longer than 30 characters")]
         public string? ParentFirstName { get; set; }
-        public ICollection<Course> Courses { get; set; }
+        public ICollection<Course>? Courses { get; set; }
         public ICollection<StudyPlan>? StudyPlans { get; set; }
     }
 
