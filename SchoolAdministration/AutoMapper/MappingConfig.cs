@@ -9,9 +9,8 @@ namespace SchoolAdministration.AutoMapper
         public MappingConfig()
         {
             CreateMap<Student, StudentDTO>().ReverseMap();
-            CreateMap<StudentDTO, StudentCreateDTO>().ReverseMap();
-            CreateMap<StudentDTO,StudentUpdateDTO>().ReverseMap();
-
+            CreateMap<Student, StudentCreateDTO>().ReverseMap();
+            CreateMap<Student,StudentUpdateDTO>().ReverseMap();
         }
     }
 }

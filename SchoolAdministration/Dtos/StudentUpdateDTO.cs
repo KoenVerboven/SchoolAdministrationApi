@@ -17,13 +17,7 @@ namespace SchoolAdministration.Dtos
 
         [Display(Name = "Date of birth")]
         public DateTime? DateOfBirth { get; set; }
-
-        [NotMapped]
-        public string FullName { get => LastName + " " + FirstName; }
-
-        [NotMapped]
-        public int Age { get; set; }
-
+        
         [StringLength(30, ErrorMessage = "Street and number cannot longer than 30 characters")]
         public string? StreetAndNumber { get; set; }
         public int? Zipcode { get; set; }

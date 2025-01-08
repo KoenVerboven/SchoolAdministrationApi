@@ -78,28 +78,20 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<Student>> CreateStudent(StudentCreateDTO studentCreateDTO)
+        public async Task<ActionResult<StudentCreateDTO>> CreateStudent(StudentCreateDTO studentCreateDTO)
         {
             if (! ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            Student student = new()
-            {
-                FirstName = studentCreateDTO.FirstName,
-                LastName = studentCreateDTO.LastName,
-                Email = studentCreateDTO.Email,
-                DateOfBirth = studentCreateDTO.DateOfBirth,
-                StreetAndNumber = studentCreateDTO.StreetAndNumber,
-                Zipcode = studentCreateDTO.Zipcode,
-                Gender = studentCreateDTO.Gender,
-                Phone = studentCreateDTO.Phone,
-                ParentFirstName = studentCreateDTO.ParentFirstName,
-                ParentLastname = studentCreateDTO.ParentLastname,
-                ParentPhoneNumber = studentCreateDTO.ParentPhoneNumber
-            };
+            //if (await _studentRepository.GetByNameAsync(studentCreateDTO.FullName) != null)
+            //{
+            //    ModelState.AddModelError("CustomError", "Student already Exists!");
+            //    return BadRequest(ModelState);
+            //}
 
+            Student student = _mapper.Map<Student>(studentCreateDTO);
             await _studentRepository.AddStudentAsync(student);
             return CreatedAtAction(nameof(GetStudentById), new {id = student.Id}, student);
         }
@@ -130,22 +122,7 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            Student student = new()
-            {
-                Id = studentUpdateDTO.Id,
-                FirstName = studentUpdateDTO.FirstName,
-                LastName = studentUpdateDTO.LastName,
-                Email = studentUpdateDTO.Email,
-                DateOfBirth = studentUpdateDTO.DateOfBirth,
-                StreetAndNumber = studentUpdateDTO.StreetAndNumber,
-                Zipcode = studentUpdateDTO.Zipcode,
-                Gender = studentUpdateDTO.Gender,
-                Phone = studentUpdateDTO.Phone,
-                ParentFirstName = studentUpdateDTO.ParentFirstName,
-                ParentLastname = studentUpdateDTO.ParentLastname,
-                ParentPhoneNumber = studentUpdateDTO.ParentPhoneNumber
-            };
-
+            Student student = _mapper.Map<Student>(studentUpdateDTO);
             await _studentRepository.UpdateStudentAsync(student);
             return CreatedAtAction(nameof(GetStudentById), new { id = student.Id }, student); 
         }

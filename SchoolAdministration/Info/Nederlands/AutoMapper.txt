@@ -1,0 +1,34 @@
+﻿            
+            nuget-package :  automapper
+
+            maak volgende classe aan :
+
+            public class MappingConfig:Profile
+            {
+                public MappingConfig()
+                {
+                    CreateMap<Student, StudentDTO>().ReverseMap();
+                    CreateMap<Student, StudentCreateDTO>().ReverseMap();
+                    CreateMap<Student,StudentUpdateDTO>().ReverseMap();
+                }
+            }
+            
+            
+            Student student = _mapper.Map<Student>(studentCreateDTO);
+            vervangt ->
+
+            //obsolete :
+            //Student student = new()
+            //{
+            //    FirstName = studentCreateDTO.FirstName,
+            //    LastName = studentCreateDTO.LastName,
+            //    Email = studentCreateDTO.Email,
+            //    DateOfBirth = studentCreateDTO.DateOfBirth,
+            //    StreetAndNumber = studentCreateDTO.StreetAndNumber,
+            //    Zipcode = studentCreateDTO.Zipcode,
+            //    Gender = studentCreateDTO.Gender,
+            //    Phone = studentCreateDTO.Phone,
+            //    ParentFirstName = studentCreateDTO.ParentFirstName,
+            //    ParentLastname = studentCreateDTO.ParentLastname,
+            //    ParentPhoneNumber = studentCreateDTO.ParentPhoneNumber
+            //};
