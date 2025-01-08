@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
@@ -12,13 +13,16 @@ namespace SchoolAdministration.Controllers
     public class StudentController : ControllerBase
     {
         private readonly IStudentRepository _studentRepository;
-
+        private readonly IMapper _mapper;
         private readonly ILogger<StudentController> _logger;
 
-        public StudentController(ILogger<StudentController> logger, IStudentRepository studentRepository)
+        public StudentController(ILogger<StudentController> logger, 
+            IStudentRepository studentRepository,
+            IMapper mapper)
         {
             _logger = logger;
             _studentRepository = studentRepository;
+            _mapper = mapper;
         }
 
 
@@ -29,8 +33,9 @@ namespace SchoolAdministration.Controllers
         public async Task<ActionResult<IEnumerable<StudentDTO>>> GetAllStudentsAsync()
         {
             _logger.LogInformation("Getting all the students.");
-            var students = await _studentRepository.GetAllAsync();
-            return Ok(students);
+            var students = await  _studentRepository.GetAllAsync();
+            var studentsDTO = _mapper.Map<List<StudentDTO>>(students);
+            return Ok(studentsDTO);
         }
 
         [HttpGet("{id}")]
@@ -53,7 +58,8 @@ namespace SchoolAdministration.Controllers
                 return NotFound();
             }
 
-            return Ok(student);
+            var studentDTO = _mapper.Map<StudentDTO>(student);
+            return Ok(studentDTO);
         }
 
 

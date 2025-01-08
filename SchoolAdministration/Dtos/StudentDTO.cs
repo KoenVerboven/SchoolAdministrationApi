@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using SchoolAdministration.Models;
 
 namespace SchoolAdministration.Dtos
 {
@@ -24,7 +25,7 @@ namespace SchoolAdministration.Dtos
 
         [NotMapped]
         public int Age { get; set; }
-        
+
         [StringLength(30, ErrorMessage = "Street and number cannot longer than 30 characters")]
         public string? StreetAndNumber { get; set; }
         public int? Zipcode { get; set; }
@@ -45,5 +46,6 @@ namespace SchoolAdministration.Dtos
 
         [StringLength(30, ErrorMessage = "Parent first cannot longer than 30 characters")]
         public string? ParentFirstName { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SchoolAdministration.AutoMapper;
 using SchoolAdministration.Data;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Repositories.Repos;
@@ -26,6 +27,8 @@ namespace SchoolAdministration
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
             });
+
+            builder.Services.AddAutoMapper(typeof(MappingConfig));
 
             builder.Services.AddCors(options =>
             {
