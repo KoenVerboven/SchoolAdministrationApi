@@ -6,10 +6,10 @@ namespace SchoolAdministration.Repositories.Interfaces
     {
         Task<IEnumerable<Student>> GetAllAsync();
         Task<Student?> GetByIdAsync(int id);
-        Task<IEnumerable<Student>> GetByNameAsync(string name);
+        Task<IEnumerable<Student>> GetByNameStartWithAsync(string name);
         Task AddStudentAsync(Student student);
         Task UpdateStudentAsync(Student student);
         Task DeleteStudentAsync(int id);
-
+        Task<Student?> StudentExistsAsync(Student student);
     }
 }

@@ -37,9 +37,17 @@ namespace SchoolAdministration.Repositories.Repos
             return await _context.Students.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Student>> GetByNameAsync(string name)
+        public async Task<IEnumerable<Student>> GetByNameStartWithAsync(string name)
         {
             return await _context.Students.Where(p => (p.LastName.ToLower() + " " + p.FirstName).Contains(name.ToLower())).ToListAsync();
+        }
+
+        public async Task<Student?> StudentExistsAsync(Student student)
+        {
+            return await  _context.Students.FirstOrDefaultAsync(p => p.LastName.Trim().ToLower().Equals(student.LastName.Trim().ToLower()) 
+                                                                   && p.FirstName.Trim().ToLower().Equals(student.FirstName.Trim().ToLower())
+                                                                   && p.DateOfBirth.Equals(student.DateOfBirth)
+                                                                   );
         }
 
         public async Task UpdateStudentAsync(Student student)

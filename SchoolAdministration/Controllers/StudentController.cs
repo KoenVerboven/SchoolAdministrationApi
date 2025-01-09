@@ -63,13 +63,13 @@ namespace SchoolAdministration.Controllers
         }
 
 
-        [HttpGet("getByName/{name}")]
+        [HttpGet("getByNameStartWith/{name}")]
         [ProducesResponseType(typeof(IEnumerable<Student>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<Student>>> GetStudentByName(string name)
+        public async Task<ActionResult<IEnumerable<Student>>> GetStudentByNameStartWith(string name)
         {
-            var students = await _studentRepository.GetByNameAsync(name);
+            var students = await _studentRepository.GetByNameStartWithAsync(name);
             return Ok(students);
         }
 
@@ -85,13 +85,14 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            //if (await _studentRepository.GetByNameAsync(studentCreateDTO.FullName) != null)
-            //{
-            //    ModelState.AddModelError("CustomError", "Student already Exists!");
-            //    return BadRequest(ModelState);
-            //}
-
             Student student = _mapper.Map<Student>(studentCreateDTO);
+
+            if (await _studentRepository.StudentExistsAsync(student) != null)
+            {
+                ModelState.AddModelError("CustomError", "Student already Exists!");
+                return BadRequest(ModelState);
+            }
+            
             await _studentRepository.AddStudentAsync(student);
             return CreatedAtAction(nameof(GetStudentById), new {id = student.Id}, student);
         }
