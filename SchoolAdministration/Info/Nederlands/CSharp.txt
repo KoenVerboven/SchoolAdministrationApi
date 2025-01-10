@@ -19,6 +19,11 @@ if (studentInDb == null) {
 }
 
 ----------------------------------------------------------
+var courseInDb = await _context.Courses.FindAsync(id)
+                ?? throw new KeyNotFoundException($"course with id {id} was not found."); //coalesce expression
+
+--------------------------------------------------------------
+
 
 een constructor aanmaken -> ctor tab 
 een property aanmaken --> prop tab 

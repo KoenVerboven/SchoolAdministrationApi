@@ -28,7 +28,7 @@ namespace SchoolAdministration.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)] //todo badrequest ?
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<StudentDTO>>> GetAllStudentsAsync()
         {
@@ -87,7 +87,7 @@ namespace SchoolAdministration.Controllers
 
             Student student = _mapper.Map<Student>(studentCreateDTO);
 
-            if (await _studentRepository.StudentExistsAsync(student) != null)
+            if (_studentRepository.StudentExist(student))
             {
                 ModelState.AddModelError("CustomError", "Student already Exists!");
                 return BadRequest(ModelState);

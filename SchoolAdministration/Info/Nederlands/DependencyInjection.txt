@@ -2,4 +2,23 @@
  program.cs :
  
  // add the student repository to the DI (dependency injection) :
-  builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+ 
+ builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+
+
+ studentController :
+
+ [Route("api/[Controller]")]
+    [ApiController]
+    public class StudentController : ControllerBase
+    {
+        private readonly IStudentRepository _studentRepository;
+
+
+        public StudentController(
+            IStudentRepository studentRepository  <-- DI , DependencyInjection
+            )
+        {
+            _studentRepository = studentRepository;
+
+        }

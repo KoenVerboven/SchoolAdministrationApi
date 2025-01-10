@@ -42,12 +42,17 @@ namespace SchoolAdministration.Repositories.Repos
             return await _context.Students.Where(p => (p.LastName.ToLower() + " " + p.FirstName).Contains(name.ToLower())).ToListAsync();
         }
 
-        public async Task<Student?> StudentExistsAsync(Student student)
+        public bool StudentExist(Student student)
         {
-            return await  _context.Students.FirstOrDefaultAsync(p => p.LastName.Trim().ToLower().Equals(student.LastName.Trim().ToLower()) 
+            var studentFind = _context.Students.FirstOrDefault(p => p.LastName.Trim().ToLower().Equals(student.LastName.Trim().ToLower()) 
                                                                    && p.FirstName.Trim().ToLower().Equals(student.FirstName.Trim().ToLower())
                                                                    && p.DateOfBirth.Equals(student.DateOfBirth)
                                                                    );
+            if(studentFind == null)
+            {
+                return false;
+            }
+            return true;
         }
 
         public async Task UpdateStudentAsync(Student student)

@@ -26,7 +26,7 @@ namespace SchoolAdministration.Repositories.Repos
         public async Task DeleteCourseAsync(int id)
         {
             var courseInDb = await _context.Courses.FindAsync(id)
-                ?? throw new KeyNotFoundException($"course with id {id} was not found."); //coalesce expression
+                ?? throw new KeyNotFoundException($"course with id {id} was not found.");
             _context.Courses.Remove(courseInDb);
             await _context.SaveChangesAsync();
         }
@@ -53,7 +53,7 @@ namespace SchoolAdministration.Repositories.Repos
             if (!string.IsNullOrWhiteSpace(courseSearchParameters.CourseName) && !string.IsNullOrWhiteSpace(courseSearchParameters.CourseCode))
             {
                 query = query.Where(p => p.CourseName.ToLower().Contains(courseSearchParameters.CourseName.ToLower())
-                                         && p.CourseCode.ToLower().Contains(courseSearchParameters.CourseCode.ToLower()));
+                                         && p.CourseCode.ToLower().Contains(courseSearchParameters.CourseCode.ToLower()));//todo courseCode may be null
                           
             }
 
