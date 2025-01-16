@@ -1,0 +1,22 @@
+unitTest :
+-----------
+
+add new project to solution : xUnit test Project
+
+nuget packages install : FluentAssertions, Moq
+
+Rechtermuis klik op project TestSchoolAdmin
+Kies
+Project Reference
+Vink SchoolAdministration-Project aan.
+
+links :
+
+https://learn.microsoft.com/en-us/aspnet/web-api/overview/testing-and-debugging/unit-testing-with-aspnet-web-api
+
+https://medium.com/@jeslurrahman/mastering-unit-testing-in-asp-net-core-web-api-359cad8c87b6
+
+https://fluentassertions.com/
+
+https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices
+
