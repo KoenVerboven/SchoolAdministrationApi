@@ -12,3 +12,8 @@ technologies:
 * EntityFrameworkCore code first
 * AutoMapper
 * Unittesting : xunit , Moq, fluentAssertions
+
+
+
+  ![image](https://github.com/user-attachments/assets/6cbeb1ce-4168-425f-a7fa-389a75b431d7)
+
