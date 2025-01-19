@@ -3,21 +3,24 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
+using System.Collections.Generic;
 
 
 namespace SchoolAdministration.Controllers
 {
 
     [Route("api/[Controller]")]
+    [ApiVersion("1.0")] //attribuut dat de versie van de controller bepaald
     [ApiController]
     public class StudentController : ControllerBase
     {
         private readonly IStudentRepository _studentRepository;
-        private readonly IMapper _mapper;
         private readonly ILogger<StudentController> _logger;
+        private readonly IMapper _mapper;
 
-        public StudentController(ILogger<StudentController> logger, 
+        public StudentController( 
             IStudentRepository studentRepository,
+            ILogger<StudentController> logger,
             IMapper mapper)
         {
             _logger = logger;
@@ -64,13 +67,14 @@ namespace SchoolAdministration.Controllers
 
 
         [HttpGet("getByNameStartWith/{name}")]
-        [ProducesResponseType(typeof(IEnumerable<Student>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<Student>>> GetStudentByNameStartWith(string name)
+        public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudentByNameStartWith(string name)
         {
             var students = await _studentRepository.GetByNameStartWithAsync(name);
-            return Ok(students);
+            var studentsDTO = _mapper.Map<IEnumerable<StudentDTO>>(students);
+            return Ok(studentsDTO);
         }
 
 
@@ -111,7 +115,7 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)] 
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<Student>> UpdateStudentAsync(int id,StudentUpdateDTO studentUpdateDTO)
+        public async Task<ActionResult<StudentDTO>> UpdateStudentAsync(int id,StudentUpdateDTO studentUpdateDTO)
         {
             if(id != studentUpdateDTO.Id)
             {

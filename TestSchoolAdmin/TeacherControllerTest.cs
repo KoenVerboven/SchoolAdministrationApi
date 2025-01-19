@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
+using SchoolAdministration.AutoMapper;
 using SchoolAdministration.Controllers;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
@@ -11,18 +14,23 @@ namespace TestSchoolAdmin
     {
 
         private readonly Mock<ITeacherRepository> _mockTeacherRepo;
+        private readonly Mock<ILogger<TeacherController>> _mockILogger;
 
         public TeacherControllerTest()
         {
             _mockTeacherRepo = new Mock<ITeacherRepository>(MockBehavior.Default);
+            _mockILogger = new Mock<ILogger<TeacherController>>(MockBehavior.Default);
         }
 
         [Fact]
         public async Task GetAllAync_MustBe_OfType_OkObjectResult()
         {
             //arrange
+            var myProfile = new MappingConfig();
+            var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
+            var mapper = new Mapper(configuration);
             _mockTeacherRepo.Setup(x => x.GetAllAsyn()).ReturnsAsync(TeacherList());
-            var controller = new TeacherController(_mockTeacherRepo.Object);
+            var controller = new TeacherController(_mockTeacherRepo.Object, _mockILogger.Object, mapper);
 
             //act
             var actionResult = await controller.GetAllTeachersAsync();
@@ -36,6 +44,9 @@ namespace TestSchoolAdmin
         public async Task GetAsynById_teacherClass_must_be_equal_to_teacherResult()
         {
             //arrange
+            var myProfile = new MappingConfig();
+            var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
+            var mapper = new Mapper(configuration);
             var expected = new Teacher()
             {
                 Id = 1,
@@ -52,7 +63,7 @@ namespace TestSchoolAdmin
                 MaritalStatusId = 1,
             };
             _mockTeacherRepo.Setup(x => x.GetAsynById(1)).ReturnsAsync(expected);
-            var controller = new TeacherController(_mockTeacherRepo.Object);
+            var controller = new TeacherController(_mockTeacherRepo.Object, _mockILogger.Object, mapper);
 
             //act
             var actionResult = await  controller.GetTeacherById(1);

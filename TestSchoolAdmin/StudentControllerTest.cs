@@ -29,7 +29,7 @@ namespace TestSchoolAdmin
             var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
             var mapper = new Mapper(configuration);
             _mockStudentRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(StudentList());
-            var controller = new StudentController(_mockILogger.Object, _mockStudentRepo.Object, mapper);
+            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object,mapper);
 
             //act
             var actionResult = await controller.GetAllStudentsAsync();
@@ -82,7 +82,7 @@ namespace TestSchoolAdmin
             var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
             var mapper = new Mapper(configuration);
             _mockStudentRepo.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(student);
-            var controller = new StudentController(_mockILogger.Object, _mockStudentRepo.Object, mapper);
+            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object, mapper);
 
             //act
             var actionResult = await controller.GetStudentById(1);
@@ -93,7 +93,7 @@ namespace TestSchoolAdmin
 
             var actual = okObjectResult.Value as StudentDTO;
             Assert.NotNull(actual);
-            Assert.Equal(studentsDTO.Id, actual.Id);
+            Assert.Equal(studentsDTO.Id, actual.Id); // equal checks the reference of both objects
             Assert.Equal(studentsDTO.FirstName, actual.FirstName);
             Assert.Equal(studentsDTO.LastName, actual.LastName);
             Assert.Equivalent(studentsDTO, actual);

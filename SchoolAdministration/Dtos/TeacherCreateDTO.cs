@@ -1,12 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SchoolAdministration.Models
+namespace SchoolAdministration.Dtos
 {
-    public class Teacher
+    public class TeacherCreateDTO
     {
-        [Key]
-        public int Id { get; set; }
-
         [Display(Name = "First name")]
         [Required(ErrorMessage = "First Name is required.")]
         [StringLength(30, ErrorMessage = "First Name cannot longer than 30 characters")]
@@ -43,8 +40,5 @@ namespace SchoolAdministration.Models
 
         [Display(Name = "Marital status")]
         public byte MaritalStatusId { get; set; }
-
-        //todo leraar geeft volgend lessen + create date + updatedate + createdby + updatedby
-
     }
 }

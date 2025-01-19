@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SchoolAdministration.Models
+namespace SchoolAdministration.Dtos
 {
-    public class Teacher
+    public class TeacherDTO
     {
         [Key]
         public int Id { get; set; }
@@ -43,8 +43,5 @@ namespace SchoolAdministration.Models
 
         [Display(Name = "Marital status")]
         public byte MaritalStatusId { get; set; }
-
-        //todo leraar geeft volgend lessen + create date + updatedate + createdby + updatedby
-
     }
 }

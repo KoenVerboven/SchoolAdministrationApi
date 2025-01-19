@@ -11,3 +11,6 @@
         options.AssumeDefaultVersionWhenUnspecified = true;
         options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1,0);
     });
+
+    version toepassen op controller gebied :
+    [ApiVersion("2.0")] //attribuut dat de versie van de controller bepaald

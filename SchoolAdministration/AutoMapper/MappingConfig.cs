@@ -10,7 +10,15 @@ namespace SchoolAdministration.AutoMapper
         {
             CreateMap<Student, StudentDTO>().ReverseMap();
             CreateMap<Student, StudentCreateDTO>().ReverseMap();
-            CreateMap<Student,StudentUpdateDTO>().ReverseMap();
+            CreateMap<Student, StudentUpdateDTO>().ReverseMap();
+
+            CreateMap<Teacher, TeacherDTO>().ReverseMap();
+            CreateMap<Teacher, TeacherCreateDTO>().ReverseMap();
+            CreateMap<Teacher, TeacherUpdateDTO>().ReverseMap();
+
+            CreateMap<Course, CourseDTO>().ReverseMap();
+            CreateMap<Course, CourseCreateDTO>().ReverseMap();
+            CreateMap<Course, CourseUpdateDTO>().ReverseMap();
         }
     }
 }
