@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using SchoolAdministration.AutoMapper;
 using SchoolAdministration.Controllers;
+using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
 
@@ -41,18 +42,40 @@ namespace TestSchoolAdmin
         }
 
         [Fact]
+        public async Task GetAllAync_CountMustBe_3()
+        {
+            //arrange
+            var myProfile = new MappingConfig();
+            var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
+            var mapper = new Mapper(configuration);
+            _mockTeacherRepo.Setup(x => x.GetAllAsyn()).ReturnsAsync(TeacherList());
+            var controller = new TeacherController(_mockTeacherRepo.Object, _mockILogger.Object, mapper);
+
+            //act
+            var actionResult = await controller.GetAllTeachersAsync();
+            var okObjectResult = actionResult.Result as OkObjectResult;
+            Assert.NotNull(okObjectResult);
+            var actual = okObjectResult.Value as IEnumerable<TeacherDTO>;
+
+            //assert
+            Assert.Equal(3, actual.Count());
+        }
+
+
+
+        [Fact]
         public async Task GetAsynById_teacherClass_must_be_equal_to_teacherResult()
         {
             //arrange
             var myProfile = new MappingConfig();
             var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
             var mapper = new Mapper(configuration);
-            var expected = new Teacher()
+            var teacher = new Teacher()
             {
                 Id = 1,
                 FirstName = "Koen",
                 LastName = "Verboven",
-                DateOfBirth = new DateTime(1999,10,10),
+                DateOfBirth = new DateTime(1999, 10, 10),
                 StreetAndNumber = "Grotelaan 45",
                 Zipcode = 2000,
                 Gender = 1,
@@ -62,23 +85,42 @@ namespace TestSchoolAdmin
                 LeaveDate = null,
                 MaritalStatusId = 1,
             };
-            _mockTeacherRepo.Setup(x => x.GetAsynById(1)).ReturnsAsync(expected);
+
+            var teacherDTO = new TeacherDTO
+            {
+                Id = teacher.Id,
+                FirstName = teacher.FirstName,
+                LastName = teacher.LastName,
+                DateOfBirth = teacher.DateOfBirth,
+                StreetAndNumber = teacher.StreetAndNumber,
+                Zipcode = teacher.Zipcode,
+                Gender = teacher.Gender,
+                Email = teacher.Email,
+                Phone = teacher.Phone,
+                HireDate = teacher.HireDate,
+                LeaveDate = teacher.LeaveDate,
+                MaritalStatusId = teacher.MaritalStatusId,
+            };
+
+
+            _mockTeacherRepo.Setup(x => x.GetAsynById(1)).ReturnsAsync(teacher);
             var controller = new TeacherController(_mockTeacherRepo.Object, _mockILogger.Object, mapper);
 
             //act
-            var actionResult = await  controller.GetTeacherById(1);
+            var actionResult = await controller.GetTeacherById(1);
 
             //assert
             var okObjectResult = actionResult.Result as OkObjectResult;
             Assert.NotNull(okObjectResult);
 
-            var model = okObjectResult.Value as Teacher;
+            var model = okObjectResult.Value as TeacherDTO;
             Assert.NotNull(model);
 
             var actual = model;
-            Assert.Equal(expected, actual);
+            Assert.Equal(teacherDTO.LastName, actual.LastName);
 
         }
+
 
         private IEnumerable<Teacher> TeacherList()
         {
@@ -109,6 +151,21 @@ namespace TestSchoolAdmin
                     Gender = 1,
                     Email="mark@test.be",
                     Phone = "44994989",
+                    HireDate = DateTime.Now,
+                    LeaveDate = null,
+                    MaritalStatusId = 1,
+                },
+                new Teacher()
+                {
+                    Id = 2,
+                    FirstName = "Linda",
+                    LastName = "Versmissen",
+                    DateOfBirth = DateTime.Now.AddYears(-30),
+                    StreetAndNumber = "BerkenStraat 4",
+                    Zipcode = 2000,
+                    Gender = 1,
+                    Email="linda@test.be",
+                    Phone = "44994419",
                     HireDate = DateTime.Now,
                     LeaveDate = null,
                     MaritalStatusId = 1,

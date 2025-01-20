@@ -3,22 +3,24 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
-using System.Collections.Generic;
+using System.Net;
+
 
 
 namespace SchoolAdministration.Controllers
 {
 
     [Route("api/[Controller]")]
-    [ApiVersion("1.0")] //attribuut dat de versie van de controller bepaald
+    [ApiVersion("1.0")] 
     [ApiController]
     public class StudentController : ControllerBase
     {
+        protected APIResponse _response;
         private readonly IStudentRepository _studentRepository;
         private readonly ILogger<StudentController> _logger;
         private readonly IMapper _mapper;
 
-        public StudentController( 
+        public StudentController(
             IStudentRepository studentRepository,
             ILogger<StudentController> logger,
             IMapper mapper)
@@ -26,19 +28,32 @@ namespace SchoolAdministration.Controllers
             _logger = logger;
             _studentRepository = studentRepository;
             _mapper = mapper;
+            _response = new();
         }
 
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]//klop dit nog wel?
         [ProducesResponseType(StatusCodes.Status400BadRequest)] //todo badrequest ?
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<StudentDTO>>> GetAllStudentsAsync()
+        public async Task<ActionResult<APIResponse>> GetAllStudentsAsync()
         {
-            _logger.LogInformation("Getting all the students.");
-            var students = await  _studentRepository.GetAllAsync();
-            var studentsDTO = _mapper.Map<List<StudentDTO>>(students);
-            return Ok(studentsDTO);
+            try
+            {
+                var students = await _studentRepository.GetAllAsync();
+                _response.Result = _mapper.Map<List<StudentDTO>>(students);
+                _response.Statuscode=HttpStatusCode.OK;
+                return Ok(_response);
+            }
+            catch (Exception ex)
+            {
+                _response.IsSuccess=false;
+                _response.ErrorMessages = new List<string>() { ex.ToString()};
+                //_logger.LogInformation("Getting all the students.");
+                //_logger.LogInformation(ex.Message);
+                //return BadRequest(ex.Message);
+            }
+            return _response;
         }
 
         [HttpGet("{id}")]

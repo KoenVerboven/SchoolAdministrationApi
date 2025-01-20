@@ -20,3 +20,74 @@ Versioning
 UnitTesting !!!!
 
 opvraging (lazy loading ..) student - course : alle cursussen dat een bepaalde student volgt.
+
+try catch + paging + authentication    to unittests toevoegen
+
+
+----------------------------------------------------
+
+Testing a CreateController in xUnit can be a bit nuanced, but it's totally doable. Here's a simple approach to get you started:
+
+Set Up Your Test Project: Ensure that you have a separate test project in your solution.
+
+Install Necessary Packages: Add relevant NuGet packages for xUnit and any mocking framework you prefer, such as Moq.
+
+Write the Test: Here’s an example of how you might structure your test:
+
+csharp
+using Xunit;
+using Moq;
+using YourProject.Controllers;
+using YourProject.Services;
+using YourProject.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+
+public class CreateControllerTests
+{
+    [Fact]
+    public async Task Create_ReturnsRedirectToActionResult_WhenModelStateIsValid()
+    {
+        // Arrange
+        var mockService = new Mock<IYourService>();
+        var controller = new CreateController(mockService.Object);
+        var model = new YourModel
+        {
+            // initialize your model properties here
+        };
+
+        // Act
+        var result = await controller.Create(model);
+
+        // Assert
+        var redirectToActionResult = Assert.IsType<RedirectToActionResult>(result);
+        Assert.Equal("Index", redirectToActionResult.ActionName);
+    }
+
+    [Fact]
+    public async Task Create_ReturnsViewResult_WhenModelStateIsInvalid()
+    {
+        // Arrange
+        var mockService = new Mock<IYourService>();
+        var controller = new CreateController(mockService.Object);
+        controller.ModelState.AddModelError("Name", "Required");
+        var model = new YourModel();
+
+        // Act
+        var result = await controller.Create(model);
+
+        // Assert
+        var viewResult = Assert.IsType<ViewResult>(result);
+        Assert.Equal(model, viewResult.Model);
+    }
+}
+In this example, the CreateController is being tested to ensure that:
+
+When the model state is valid, it redirects to the Index action.
+
+When the model state is invalid, it returns the View result with the same model.
+
+Run Your Tests: Execute your tests to see if they pass or fail.
+
+This is a basic example, so you might need to tweak it based on your specific controller's logic and dependencies. If you have any specific requirements or issues, feel free to share, and I can help you refine your test further!
+
