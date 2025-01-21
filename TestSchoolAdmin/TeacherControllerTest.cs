@@ -24,7 +24,7 @@ namespace TestSchoolAdmin
         }
 
         [Fact]
-        public async Task GetAllAync_ShallReturnTypeOK_ForTeacherListOf3objects()
+        public async Task GetAllAync_ShallReturnTypeOK_ForTeacherListNotNull()
         {
             //arrange
             var myProfile = new MappingConfig();
@@ -42,7 +42,7 @@ namespace TestSchoolAdmin
         }
 
         [Fact]
-        public async Task GetAllAync_ShallReturnCount3_ForTeacherListWith3objects()
+        public async Task GetAllAync_ShallReturnCountX_ForTeacherListWithXobjects()
         {
             //arrange
             var myProfile = new MappingConfig();
@@ -64,7 +64,7 @@ namespace TestSchoolAdmin
 
 
         [Fact]
-        public async Task GetAsynById_ShallReturnLastnameVerboven_ForId1()
+        public async Task GetAsynById_ShallReturnTeacherWithID_ForId()
         {
             //arrange
             var myProfile = new MappingConfig();
@@ -118,6 +118,7 @@ namespace TestSchoolAdmin
 
             var actual = model;
             Assert.Equal(teacherDTO.LastName, actual.LastName);
+            Assert.Equivalent(teacherDTO, actual);
 
         }
 
