@@ -5,7 +5,7 @@ add new project to solution : xUnit test Project
 
 nuget packages install : FluentAssertions, Moq
 
-Rechtermuis klik op project TestSchoolAdmin
+Rechtermuis klik op project SchoolAdministrationTests
 Kies
 Project Reference
 Vink SchoolAdministration-Project aan.

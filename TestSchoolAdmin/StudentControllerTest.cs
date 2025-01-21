@@ -22,7 +22,7 @@ namespace TestSchoolAdmin
         }
 
         [Fact]
-        public async Task GetAllAync_MustBe_OfType_OkObjectResult()
+        public async Task GetAllAync_ShallReturnTypeOK_ForStudentListOf2objects()
         {
             //arrange
             var myProfile = new MappingConfig();
@@ -41,7 +41,7 @@ namespace TestSchoolAdmin
 
 
         [Fact]
-        public async Task GetAsynById_studentClass_must_be_equal_to_studentResult()
+        public async Task GetAsynById_ShallReturnFirstnameKoen_ForId1()
         {
             //arrange
             var student = new Student()

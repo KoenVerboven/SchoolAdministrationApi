@@ -24,7 +24,7 @@ namespace TestSchoolAdmin
         }
 
         [Fact]
-        public async Task GetAllAync_MustBe_OfType_OkObjectResult()
+        public async Task GetAllAync_ShallReturnTypeOK_ForTeacherListOf3objects()
         {
             //arrange
             var myProfile = new MappingConfig();
@@ -42,7 +42,7 @@ namespace TestSchoolAdmin
         }
 
         [Fact]
-        public async Task GetAllAync_CountMustBe_3()
+        public async Task GetAllAync_ShallReturnCount3_ForTeacherListWith3objects()
         {
             //arrange
             var myProfile = new MappingConfig();
@@ -64,7 +64,7 @@ namespace TestSchoolAdmin
 
 
         [Fact]
-        public async Task GetAsynById_teacherClass_must_be_equal_to_teacherResult()
+        public async Task GetAsynById_ShallReturnLastnameVerboven_ForId1()
         {
             //arrange
             var myProfile = new MappingConfig();
