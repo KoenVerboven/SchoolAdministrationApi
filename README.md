@@ -22,8 +22,18 @@ Installed NuGet-packages :
 
 With Serilog we can easly write our logs to a txt.file.
 
+Program.cs:
 
-To show our endpoints and testing :
+  Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
+      .WriteTo.File("log/villaLogs.txt", rollingInterval: RollingInterval.Day).CreateLogger();
+  builder.Host.UseSerilog();
+
+  StudentController:
+
+  _logger.LogInformation("Getting all the students.")
+
+
+Exploring Endpoints :
 -----------------------------------
  We use Swagger.
 
@@ -94,21 +104,25 @@ MappingConfig:
 
  CreateMap<Student, StudentDTO>().ReverseMap();
  
- CreateMap<Student, StudentCreateDTO>().ReverseMap();
- 
- CreateMap<Student, StudentUpdateDTO>().ReverseMap();
- 
 In the Controller we can write some like this:
 
- _response.Result = _mapper.Map<List<StudentDTO>>(students);
+ _mapper.Map < StudentDTO > (student)
  
-Here we map students to StudentDTO.
+Here we map student to StudentDTO.
 
 Versioning:
 -----------
 Installed NuGet-packages : 
 * Microsoft.AspNetCore.Mvc.Versioning
 * Microsoft.AspNetCore.Mvc.Versioning.ApiExlorer
+
+  Program.cs :
+
+ builder.Services.AddApiVersioning(options =>
+ {
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
+ });
 
 
 Unittesting : 
