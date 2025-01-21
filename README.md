@@ -91,6 +91,7 @@ Because we do not need always the same data.
 Example : for insert we do not need a ID, for a update is ID necessary.
  
 MappingConfig:
+
  CreateMap<Student, StudentDTO>().ReverseMap();
  
  CreateMap<Student, StudentCreateDTO>().ReverseMap();
@@ -101,7 +102,7 @@ In the Controller we can write some like this:
 
  _response.Result = _mapper.Map<List<StudentDTO>>(students);
  
-We map here students to StudentDTO.
+Here we map students to StudentDTO.
 
 Versioning:
 -----------
@@ -115,7 +116,8 @@ Unittesting :
 add new project to solution : xUnit test Project
 
 Installed Nuget-Packages:
-* FluentAssertions, Moq
+* FluentAssertions
+* Moq
 
 Make a reference to SchoolAdministration project:
 
