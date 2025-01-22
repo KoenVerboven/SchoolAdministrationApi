@@ -10,6 +10,11 @@ Kies
 Project Reference
 Vink SchoolAdministration-Project aan.
 
+Naming UnitTest : 
+MethodName_ExpectedBehavior_Scenario
+example:
+GetAllAync_ShallReturnTypeOK_ForStudentListNotNull
+
 links :
 
 https://learn.microsoft.com/en-us/aspnet/web-api/overview/testing-and-debugging/unit-testing-with-aspnet-web-api
@@ -19,4 +24,6 @@ https://medium.com/@jeslurrahman/mastering-unit-testing-in-asp-net-core-web-api-
 https://fluentassertions.com/
 
 https://learn.microsoft.com/en-us/dotnet/core/testing/unit-testing-best-practices
+
+https://docs.nunit.org/articles/nunit/writing-tests/assertions/classic-assertions/Assert.False.html
 

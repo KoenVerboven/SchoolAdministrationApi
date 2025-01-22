@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
+using SchoolAdministration.Repositories.Repos;
 using System.Net;
 
 
@@ -31,30 +32,51 @@ namespace SchoolAdministration.Controllers
             _response = new();
         }
 
-
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]//klop dit nog wel?
         [ProducesResponseType(StatusCodes.Status400BadRequest)] //todo badrequest ?
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<APIResponse>> GetAllStudentsAsync()
+        public async Task<ActionResult<StudentDTO>> GetAllStudentsAsync()
         {
             try
             {
-                var students = await _studentRepository.GetAllAsync();
-                _response.Result = _mapper.Map<List<StudentDTO>>(students);
-                _response.Statuscode=HttpStatusCode.OK;
-                return Ok(_response);
+                var allStudents = await _studentRepository.GetAllAsync();
+                var studentsDTO = _mapper.Map<List<StudentDTO>>(allStudents);
+                return Ok(studentsDTO);
             }
             catch (Exception ex)
             {
-                _response.IsSuccess=false;
-                _response.ErrorMessages = new List<string>() { ex.ToString()};
-                //_logger.LogInformation("Getting all the students.");
-                //_logger.LogInformation(ex.Message);
-                //return BadRequest(ex.Message);
+                _logger.LogInformation("Getting all the students.");
+                _logger.LogInformation(ex.Message);
+                return BadRequest(ex.Message);
             }
-            return _response;
         }
+
+
+
+        //[HttpGet]
+        //[ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)] //todo badrequest ?
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public async Task<ActionResult<APIResponse>> GetAllStudentsAsync()
+        //{
+        //    try
+        //    {
+        //        var students = await _studentRepository.GetAllAsync();
+        //        _response.Result = _mapper.Map<List<StudentDTO>>(students);
+        //        _response.Statuscode=HttpStatusCode.OK;
+        //        return Ok(_response);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _response.IsSuccess=false;
+        //        _response.ErrorMessages = new List<string>() { ex.ToString()};
+        //        //_logger.LogInformation("Getting all the students.");
+        //        //_logger.LogInformation(ex.Message);
+        //        //return BadRequest(ex.Message);
+        //    }
+        //    return _response;
+        //}
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(StudentDTO), StatusCodes.Status200OK)]

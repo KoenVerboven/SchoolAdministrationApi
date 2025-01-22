@@ -16,20 +16,22 @@ namespace TestSchoolAdmin
 
         private readonly Mock<ITeacherRepository> _mockTeacherRepo;
         private readonly Mock<ILogger<TeacherController>> _mockILogger;
+        private readonly MapperConfiguration _mapperConfiguration;
 
         public TeacherControllerTest()
         {
             _mockTeacherRepo = new Mock<ITeacherRepository>(MockBehavior.Default);
             _mockILogger = new Mock<ILogger<TeacherController>>(MockBehavior.Default);
+
+            var myProfile = new MappingConfig();
+            _mapperConfiguration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
         }
 
         [Fact]
         public async Task GetAllAync_ShallReturnTypeOK_ForTeacherListNotNull()
         {
             //arrange
-            var myProfile = new MappingConfig();
-            var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
-            var mapper = new Mapper(configuration);
+            var mapper = new Mapper(_mapperConfiguration);
             _mockTeacherRepo.Setup(x => x.GetAllAsyn()).ReturnsAsync(TeacherList());
             var controller = new TeacherController(_mockTeacherRepo.Object, _mockILogger.Object, mapper);
 
@@ -45,9 +47,7 @@ namespace TestSchoolAdmin
         public async Task GetAllAync_ShallReturnCountX_ForTeacherListWithXobjects()
         {
             //arrange
-            var myProfile = new MappingConfig();
-            var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
-            var mapper = new Mapper(configuration);
+            var mapper = new Mapper(_mapperConfiguration);
             _mockTeacherRepo.Setup(x => x.GetAllAsyn()).ReturnsAsync(TeacherList());
             var controller = new TeacherController(_mockTeacherRepo.Object, _mockILogger.Object, mapper);
 
@@ -58,7 +58,7 @@ namespace TestSchoolAdmin
             var actual = okObjectResult.Value as IEnumerable<TeacherDTO>;
 
             //assert
-            Assert.Equal(3, actual.Count());
+            Assert.Equal(3, actual!.Count());
         }
 
 
@@ -102,7 +102,6 @@ namespace TestSchoolAdmin
                 MaritalStatusId = teacher.MaritalStatusId,
             };
 
-
             _mockTeacherRepo.Setup(x => x.GetAsynById(1)).ReturnsAsync(teacher);
             var controller = new TeacherController(_mockTeacherRepo.Object, _mockILogger.Object, mapper);
 
@@ -121,7 +120,6 @@ namespace TestSchoolAdmin
             Assert.Equivalent(teacherDTO, actual);
 
         }
-
 
         private IEnumerable<Teacher> TeacherList()
         {

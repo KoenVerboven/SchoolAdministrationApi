@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
 
@@ -9,20 +11,26 @@ namespace SchoolAdministration.Controllers
     public class ExamController : ControllerBase
     {
         private readonly IExamRepository _examRepository;
+        private readonly IMapper _mapper;
 
-        public ExamController(IExamRepository examRepository  )
+        public ExamController(
+            IExamRepository examRepository,
+            IMapper mapper
+            )
         {
-            _examRepository = examRepository;        
+            _examRepository = examRepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<Student>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<ExamDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<Exam>>> GetAllExamsAsync()
+        public async Task<ActionResult<IEnumerable<ExamDTO>>> GetAllExamsAsync()
         {
             var exams = await _examRepository.GetAllAsync();
-            return Ok(exams);
+            var examsDTO = _mapper.Map<List<ExamDTO>>(exams);
+            return Ok(examsDTO);
         }
 
         [HttpGet("{id}")]
@@ -30,7 +38,7 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<Exam>> GetExamById(int id)
+        public async Task<ActionResult<ExamDTO>> GetExamById(int id)
         {
             var exam = _examRepository.GetByIdAsync(id);
 
@@ -39,7 +47,8 @@ namespace SchoolAdministration.Controllers
                 return NotFound();
             }
 
-            return Ok(exam);
+            var examDTO = _mapper.Map<CourseDTO>(exam);
+            return Ok(examDTO);
         }
 
 
@@ -47,13 +56,15 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<Exam>> CreateExam(Exam exam)
+        public async Task<ActionResult<ExamDTO>> CreateExam(ExamCreateDTO examCreateDTO)
         {
             if(! ModelState.IsValid)
             {
                 return BadRequest();
             }
-            
+
+            Exam exam = _mapper.Map<Exam>(examCreateDTO);
+
             await _examRepository.AddExamAsync(exam);   
             return CreatedAtAction(nameof(GetExamById), new { id = exam.Id },exam);
         }
@@ -72,9 +83,9 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<Exam>> UpdateExamAsync(int id, Exam exam)
+        public async Task<ActionResult<Exam>> UpdateExamAsync(int id, ExamUpdateDTO examUpdateDTO)
         {
-            if( id != exam.Id)
+            if( id != examUpdateDTO.Id)
             {
                 return BadRequest();
             }
@@ -83,7 +94,8 @@ namespace SchoolAdministration.Controllers
             {
                 return BadRequest();
             }
-            
+
+            Exam exam = _mapper.Map<Exam>(examUpdateDTO);
             await _examRepository.UpdateExamAsync(exam);
             return CreatedAtAction(nameof(GetExamById), new { id = exam.Id }, exam);
         }

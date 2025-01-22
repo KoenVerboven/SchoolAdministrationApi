@@ -14,20 +14,22 @@ namespace TestSchoolAdmin
     {
         private readonly Mock<IStudentRepository> _mockStudentRepo;
         private readonly Mock<ILogger<StudentController>> _mockILogger;
+        private readonly MapperConfiguration _mapperConfiguration;
 
         public StudentControllerTest()
         {
             _mockStudentRepo = new Mock<IStudentRepository>(MockBehavior.Default);
             _mockILogger = new Mock<ILogger<StudentController>>(MockBehavior.Default);
+
+            var myProfile = new MappingConfig();
+            _mapperConfiguration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
         }
 
         [Fact]
         public async Task GetAllAync_ShallReturnTypeOK_ForStudentListNotNull()
         {
             //arrange
-            var myProfile = new MappingConfig();
-            var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
-            var mapper = new Mapper(configuration);
+            var mapper = new Mapper(_mapperConfiguration);
             _mockStudentRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(StudentList());
             var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object,mapper);
 
@@ -78,9 +80,7 @@ namespace TestSchoolAdmin
                 ParentFirstName = student.ParentFirstName
             };
            
-            var myProfile = new MappingConfig();
-            var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
-            var mapper = new Mapper(configuration);
+            var mapper = new Mapper(_mapperConfiguration);
             _mockStudentRepo.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(student);
             var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object, mapper);
 
@@ -93,7 +93,7 @@ namespace TestSchoolAdmin
 
             var actual = okObjectResult.Value as StudentDTO;
             Assert.NotNull(actual);
-            Assert.Equal(studentsDTO.Id, actual.Id); // equal checks the reference of both objects
+            Assert.Equal(studentsDTO.Id, actual.Id); 
             Assert.Equal(studentsDTO.FirstName, actual.FirstName);
             Assert.Equal(studentsDTO.LastName, actual.LastName);
             Assert.Equivalent(studentsDTO, actual);
@@ -140,5 +140,16 @@ namespace TestSchoolAdmin
                 ];
             return studentList;
         }
+
+        //Doto Create more test
+        //https://www.linkedin.com/pulse/how-develop-simple-c-api-crud-create-read-upodate-delete-ba8ee
+        //    https://dotnettutorials.net/lesson/unit-testing-in-asp-net-core-web-api-using-xunit-framework/
+        //    https://stackoverflow.com/questions/59472877/testing-crud-operations-using-xunit-in-an-asp-net-web-api-core-application
+        //    https://github.com/CariZa/XUnit-CRUD-Example/blob/master/CRUD_Tests/Pages/BookList/CreateTest.cs
+        //    https://www.linkedin.com/pulse/unit-testing-based-xunit-net-vahid-alizadeh
+        //    https://stackoverflow.com/questions/3993739/how-to-properly-unit-test-crud-operations-on-a-repository
+        //    https://www.programmingwithmukesh.com/articles/testing/how-to-perform-crud-operations-unit-testing-in-aspnet-core-web-api-with-xunit
+        //    https://www.c-sharpcorner.com/article/crud-operations-unit-testing-in-asp-net-core-web-api-with-xunit/
+
     }
 }

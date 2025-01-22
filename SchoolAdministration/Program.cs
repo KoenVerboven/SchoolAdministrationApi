@@ -43,7 +43,9 @@ namespace SchoolAdministration
             builder.Services.AddScoped<IStudentRepository, StudentRepository>();
             builder.Services.AddScoped<ICourseRepository, CourseRepository>();
             builder.Services.AddScoped<ITeacherRepository,TeacherRepository>();
-
+           
+            //VERSIONING :
+            
             builder.Services.AddApiVersioning(options =>
             {
                 options.AssumeDefaultVersionWhenUnspecified = true;

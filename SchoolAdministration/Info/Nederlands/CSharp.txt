@@ -52,3 +52,9 @@ IEnumerable vs IList vs ICollection :
         {
  
         }
+
+-----------------------------------------------------------
+
+input!.SumOfEvenNumbes -> != null forgiving operator
+
+-------------------------------------------------------------
