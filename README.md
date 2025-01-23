@@ -9,6 +9,10 @@ We have CRUD-operations for:
 Student, Teacher, Course, Exam, 
 ExamenResult, StudyPlan, StudyPlanPart
 
+Note :
+If you like my project; please give me a star!
+Thanks!
+
 
 Cross-origin-requests :
 ------------
@@ -140,20 +144,13 @@ Right click project SchoolAdministrationTests
 choose Project Reference
 
 Example of tests:
-* GetAllAync_ShallReturnTypeOK_ForStudentListNotNull
-* GetAsynById_ShallReturnStudentWithID_ForId
-* GetAllAync_ShallReturnTypeOK_ForTeacherListNotNull
-* GetAsynById_ShallReturnTeacherWithID_ForId
-* GetAllAync_ShallReturnCountX_ForTeacherListWithXobjects
+
+![image](https://github.com/user-attachments/assets/91cc26be-4a32-4187-97e3-1de327700231)
 
 
 
+![image](https://github.com/user-attachments/assets/6cbeb1ce-4168-425f-a7fa-389a75b431d7)
 
 
-
-
-  ![image](https://github.com/user-attachments/assets/6cbeb1ce-4168-425f-a7fa-389a75b431d7)
-
-  ![image](https://github.com/user-attachments/assets/bd41d2d2-cf16-416d-928d-ef113e9b843f)
 
 
