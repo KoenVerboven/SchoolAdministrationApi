@@ -52,8 +52,6 @@ namespace SchoolAdministration.Controllers
             }
         }
 
-
-
         //[HttpGet]
         //[ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
         //[ProducesResponseType(StatusCodes.Status400BadRequest)] //todo badrequest ?

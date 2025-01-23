@@ -8,6 +8,7 @@ using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
 
+
 namespace TestSchoolAdmin
 {
     public  class StudentControllerTest
@@ -26,7 +27,7 @@ namespace TestSchoolAdmin
         }
 
         [Fact]
-        public async Task GetAllAync_ShallReturnTypeOK_ForStudentListNotNull()
+        public async Task GetAllAync_ShallReturnTypeOK_ForStudentListContainItems()
         {
             //arrange
             var mapper = new Mapper(_mapperConfiguration);
@@ -43,7 +44,29 @@ namespace TestSchoolAdmin
 
 
         [Fact]
-        public async Task GetAsynById_ShallReturnStudentWithID_ForId() 
+        public async Task GetAllAync_ShallReturnItemsCount_ForStudentListContainItems()
+        {
+            //arrange
+            var mapper = new Mapper(_mapperConfiguration);
+            _mockStudentRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(StudentList());
+            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object, mapper);
+
+            //act
+            var actionResult = await controller.GetAllStudentsAsync();
+
+            //assert
+            Assert.IsType<OkObjectResult>(actionResult.Result);
+            Assert.NotNull(actionResult);
+
+            var okObjectResult = actionResult.Result as OkObjectResult;
+            var actual = okObjectResult!.Value as IEnumerable<StudentDTO>;
+            var count = actual!.Count();
+            Assert.Equal(2, count);
+        }
+
+
+        [Fact]
+        public async Task GetAsynById_ShallReturnStudentWithId_ForExistingStudentWithId() 
         {
             //arrange
             var student = new Student()
@@ -86,7 +109,6 @@ namespace TestSchoolAdmin
 
             //act
             var actionResult = await controller.GetStudentById(1);
-
             //assert
             var okObjectResult = actionResult.Result as OkObjectResult;
             Assert.NotNull(okObjectResult);
@@ -99,9 +121,92 @@ namespace TestSchoolAdmin
             Assert.Equivalent(studentsDTO, actual);
         }
 
+        [Fact]
+        public async Task GetAsynById_ShallReturnNull_WhenStudentNotFound()
+        {
+            //arrange
+            var student = new Student()
+            {
+                Id = 1,
+                FirstName = "Koen",
+                LastName = "Verboven",
+                DateOfBirth = new DateTime(1999, 10, 10),
+                StreetAndNumber = "Grotelaan 45",
+                Zipcode = 2000,
+                Gender = 1,
+                Email = "koen@test.be",
+                Phone = "448389639",
+                ParentPhoneNumber = "546",
+                ParentLastname = null,
+                ParentFirstName = null,
+                Courses = null,
+                StudyPlans = null
+            };
+
+            var mapper = new Mapper(_mapperConfiguration);
+            _mockStudentRepo.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(student);
+            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object, mapper);
+
+            //act
+            var actionResult = await controller.GetStudentById(99);
+
+            //assert
+            var okObjectResult = actionResult.Result as OkObjectResult;
+            Assert.Null(okObjectResult);
+        }
+
+        [Fact]
+        public async Task CreateStudent_AddStudentCorrectly_WhenNewStudentIsAdded()
+        {
+            //arrange
+            var student = new Student()
+            {
+                Id = 1,
+                FirstName = "Koen",
+                LastName = "Verboven",
+                DateOfBirth = new DateTime(1999, 10, 10),
+                StreetAndNumber = "Grotelaan 45",
+                Zipcode = 2000,
+                Gender = 1,
+                Email = "koen@test.be",
+                Phone = "448389639",
+                ParentPhoneNumber = "546",
+                ParentLastname = null,
+                ParentFirstName = null,
+                Courses = null,
+                StudyPlans = null
+            };
+
+            var newStudent = new StudentCreateDTO()
+            {
+                FirstName = "Maria",
+                LastName = "Poels",
+                DateOfBirth = new DateTime(1999, 10, 10),
+                StreetAndNumber = "Grotelaan 145",
+                Zipcode = 2000,
+                Gender = 1,
+                Email = "maria@test.be",
+                Phone = "4483892639",
+                ParentPhoneNumber = "54644",
+                ParentLastname = null,
+                ParentFirstName = null,
+            };
+
+            var mapper = new Mapper(_mapperConfiguration);
+            _mockStudentRepo.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(student);
+            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object, mapper);
+
+            //act
+            var actionResult = await controller.CreateStudent(newStudent);
+            //assert
+            var okObjectResult = actionResult.Result as OkObjectResult;
+            Assert.IsType<CreatedAtActionResult>(actionResult.Result);
+        }
+
+
 
         private IEnumerable<Student> StudentList()
-        {
+    {
             IEnumerable<Student> studentList = [
                 new Student()
                 {
@@ -141,15 +246,7 @@ namespace TestSchoolAdmin
             return studentList;
         }
 
-        //Doto Create more test
-        //https://www.linkedin.com/pulse/how-develop-simple-c-api-crud-create-read-upodate-delete-ba8ee
-        //    https://dotnettutorials.net/lesson/unit-testing-in-asp-net-core-web-api-using-xunit-framework/
-        //    https://stackoverflow.com/questions/59472877/testing-crud-operations-using-xunit-in-an-asp-net-web-api-core-application
-        //    https://github.com/CariZa/XUnit-CRUD-Example/blob/master/CRUD_Tests/Pages/BookList/CreateTest.cs
-        //    https://www.linkedin.com/pulse/unit-testing-based-xunit-net-vahid-alizadeh
-        //    https://stackoverflow.com/questions/3993739/how-to-properly-unit-test-crud-operations-on-a-repository
-        //    https://www.programmingwithmukesh.com/articles/testing/how-to-perform-crud-operations-unit-testing-in-aspnet-core-web-api-with-xunit
-        //    https://www.c-sharpcorner.com/article/crud-operations-unit-testing-in-asp-net-core-web-api-with-xunit/
+        
 
     }
 }

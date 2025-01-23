@@ -28,7 +28,7 @@ namespace TestSchoolAdmin
         }
 
         [Fact]
-        public async Task GetAllAync_ShallReturnTypeOK_ForTeacherListNotNull()
+        public async Task GetAllAync_ShallReturnTypeOK_ForTeacherListContainItems()
         {
             //arrange
             var mapper = new Mapper(_mapperConfiguration);
@@ -44,7 +44,7 @@ namespace TestSchoolAdmin
         }
 
         [Fact]
-        public async Task GetAllAync_ShallReturnCountX_ForTeacherListWithXobjects()
+        public async Task GetAllAync_ShallReturnCount_ForTeacherListContainItems()
         {
             //arrange
             var mapper = new Mapper(_mapperConfiguration);
@@ -64,7 +64,7 @@ namespace TestSchoolAdmin
 
 
         [Fact]
-        public async Task GetAsynById_ShallReturnTeacherWithID_ForId()
+        public async Task GetAsynById_ShallReturnTeacherWithId_ForExistingTeacherWithId()
         {
             //arrange
             var myProfile = new MappingConfig();
