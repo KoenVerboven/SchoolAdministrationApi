@@ -143,14 +143,12 @@ Right click project SchoolAdministrationTests
 
 choose Project Reference
 
-Example of tests:
+UnitTests :
 
 ![image](https://github.com/user-attachments/assets/91cc26be-4a32-4187-97e3-1de327700231)
 
+Swagger :Exploring Endpoints
 
-
-![image](https://github.com/user-attachments/assets/6cbeb1ce-4168-425f-a7fa-389a75b431d7)
-
-
+![localhost_7213_index html (2)](https://github.com/user-attachments/assets/37967a73-770c-444c-94ba-206baa648ff5)
 
 
