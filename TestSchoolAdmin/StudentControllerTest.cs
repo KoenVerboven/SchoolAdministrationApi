@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -122,7 +123,7 @@ namespace TestSchoolAdmin
         }
 
         [Fact]
-        public async Task GetAsynById_ShallReturnNull_WhenStudentNotFound()
+        public async Task GetAsynById_ShallReturnNotFoundResult_WhenStudentNotFound()
         {
             //arrange
             var student = new Student()
@@ -151,8 +152,41 @@ namespace TestSchoolAdmin
             var actionResult = await controller.GetStudentById(99);
 
             //assert
-            var okObjectResult = actionResult.Result as OkObjectResult;
-            Assert.Null(okObjectResult);
+            var notFoundObjectResult = actionResult.Result as NotFoundResult;
+            Assert.NotNull(notFoundObjectResult);
+        }
+
+        [Fact]
+        public async Task GetAsynById_ShallReturnBadRequest_WhenStudentIdEqualsZero()
+        {
+            //arrange
+            var student = new Student()
+            {
+                Id = 1,
+                FirstName = "Koen",
+                LastName = "Verboven",
+                DateOfBirth = new DateTime(1999, 10, 10),
+                StreetAndNumber = "Grotelaan 45",
+                Zipcode = 2000,
+                Gender = 1,
+                Email = "koen@test.be",
+                Phone = "448389639",
+                ParentPhoneNumber = "546",
+                ParentLastname = null,
+                ParentFirstName = null,
+                Courses = null,
+                StudyPlans = null
+            };
+
+            var mapper = new Mapper(_mapperConfiguration);
+            _mockStudentRepo.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(student);
+            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object, mapper);
+
+            //act
+            var actionResult = await controller.GetStudentById(0);
+
+            //assert
+            Assert.IsType<BadRequestResult>(actionResult.Result);
         }
 
         [Fact]
@@ -198,11 +232,102 @@ namespace TestSchoolAdmin
 
             //act
             var actionResult = await controller.CreateStudent(newStudent);
+
             //assert
-            var okObjectResult = actionResult.Result as OkObjectResult;
             Assert.IsType<CreatedAtActionResult>(actionResult.Result);
         }
 
+
+
+        [Fact]
+        public async Task UpdateStudentAsync_UpdateStudentCorrectly_WhenIdIsEqualToDtudentUpdateDTOIdAndModelStateIsValid()
+        {
+            //arrange
+            var student = new Student()
+            {
+                Id = 1,
+                FirstName = "Koen",
+                LastName = "Verboven",
+                DateOfBirth = new DateTime(1999, 10, 10),
+                StreetAndNumber = "Grotelaan 45",
+                Zipcode = 2000,
+                Gender = 1,
+                Email = "koen@test.be",
+                Phone = "448389639",
+                ParentPhoneNumber = "546",
+                ParentLastname = null,
+                ParentFirstName = null,
+                Courses = null,
+                StudyPlans = null
+            };
+
+            var updatedStudent = new StudentUpdateDTO()
+            {
+                Id = 1,
+                FirstName = "Pieter",
+                LastName = "Verboven",
+                DateOfBirth = new DateTime(1999, 10, 10),
+                StreetAndNumber = "Grotelaan 45",
+                Zipcode = 2000,
+                Gender = 1,
+                Email = "koen@test.be",
+                Phone = "448389639",
+                ParentPhoneNumber = "546",
+                ParentLastname = null,
+                ParentFirstName = null,
+            };
+
+            var mapper = new Mapper(_mapperConfiguration);
+            _mockStudentRepo.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(student);
+            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object, mapper);
+
+            //act
+            var actionResult = await controller.UpdateStudentAsync(1, updatedStudent);
+
+            //assert
+            var okObjectResult = actionResult.Result as CreatedAtActionResult;
+            Assert.IsType<CreatedAtActionResult>(actionResult.Result);
+
+            var actual = okObjectResult!.Value as Student;
+            Assert.NotNull(actual);
+            Assert.Equal(updatedStudent.Id, actual.Id);
+            Assert.Equal(updatedStudent.FirstName, actual.FirstName);
+            Assert.Equivalent(updatedStudent,actual);
+        }
+
+        [Fact]
+        public async Task DeleteStudentById_DeleteCorrectly_WhenValidIdIsGiven()
+        {
+            //arrange
+            var student = new Student()
+            {
+                Id = 1,
+                FirstName = "Koen",
+                LastName = "Verboven",
+                DateOfBirth = new DateTime(1999, 10, 10),
+                StreetAndNumber = "Grotelaan 45",
+                Zipcode = 2000,
+                Gender = 1,
+                Email = "koen@test.be",
+                Phone = "448389639",
+                ParentPhoneNumber = "546",
+                ParentLastname = null,
+                ParentFirstName = null,
+                Courses = null,
+                StudyPlans = null
+            };
+
+            var mapper = new Mapper(_mapperConfiguration);
+            _mockStudentRepo.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(student);
+            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object, mapper);
+
+            //act
+            var actionResult = await controller.DeleteStudentById(1);
+
+            //assert
+            var okObjectResult = actionResult as NoContentResult;
+            Assert.IsType<NoContentResult>(actionResult);
+        }
 
 
         private IEnumerable<Student> StudentList()

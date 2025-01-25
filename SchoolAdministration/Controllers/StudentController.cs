@@ -3,8 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
-using SchoolAdministration.Repositories.Repos;
-using System.Net;
 
 
 
@@ -33,8 +31,8 @@ namespace SchoolAdministration.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]//klop dit nog wel?
-        [ProducesResponseType(StatusCodes.Status400BadRequest)] //todo badrequest ?
+        [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)] 
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<StudentDTO>> GetAllStudentsAsync()
         {

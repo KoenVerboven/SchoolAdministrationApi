@@ -13,7 +13,6 @@ namespace TestSchoolAdmin
 {
     public class TeacherControllerTest
     {
-
         private readonly Mock<ITeacherRepository> _mockTeacherRepo;
         private readonly Mock<ILogger<TeacherController>> _mockILogger;
         private readonly MapperConfiguration _mapperConfiguration;
