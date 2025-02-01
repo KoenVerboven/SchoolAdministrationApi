@@ -23,6 +23,11 @@ opvraging (lazy loading ..) student - course : alle cursussen dat een bepaalde s
 
 try catch + paging + authentication    to unittests toevoegen
 
+inscrhrijvings datum ergens bij houden. (in tussentabel student - course):
+huidige meer op meer relatie wegdoen en vervangen door een tabel (fluent assertions)
+
+Betalingen (Payments) bijhouden
+
 
 ----------------------------------------------------
 
@@ -90,4 +95,43 @@ When the model state is invalid, it returns the View result with the same model.
 Run Your Tests: Execute your tests to see if they pass or fail.
 
 This is a basic example, so you might need to tweak it based on your specific controller's logic and dependencies. If you have any specific requirements or issues, feel free to share, and I can help you refine your test further!
+
+
+-------------------------
+
+make end-points like this : 
+
+//[HttpGet]
+        //[ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)] //todo badrequest ?
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public async Task<ActionResult<APIResponse>> GetAllStudentsAsync()
+        //{
+        //    try
+        //    {
+        //        var students = await _studentRepository.GetAllAsync();
+        //        _response.Result = _mapper.Map<List<StudentDTO>>(students);
+        //        _response.Statuscode=HttpStatusCode.OK;
+        //        return Ok(_response);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _response.IsSuccess=false;
+        //        _response.ErrorMessages = new List<string>() { ex.ToString()};
+        //        //_logger.LogInformation("Getting all the students.");
+        //        //_logger.LogInformation(ex.Message);
+        //        //return BadRequest(ex.Message);
+        //    }
+        //    return _response;
+        //}
+
+  --------------------------------------------------------------------------------------------------------------------------------------
+
+  //show related data : 
+        //student - exam - examResult
+        //student - course
+        //student - studyplan - studyplanpart
+        //student - payment - course
+
+        //student - gender (enum?)
 

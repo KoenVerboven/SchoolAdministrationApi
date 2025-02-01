@@ -6,7 +6,7 @@ namespace SchoolAdministration.Models
     {
         [Key]
         public int Id { get; set; }
-        public int CourseId { get; set; }
+        public int CourseId { get; set; } // doto Foreign key
         public string ExamTitle { get; set; }
         public string Description { get; set; }
         public DateTime ExamenDate { get; set; }

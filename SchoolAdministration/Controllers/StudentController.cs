@@ -44,35 +44,10 @@ namespace SchoolAdministration.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogInformation("Getting all the students.");
-                _logger.LogInformation(ex.Message);
+                WriteMessageToLog("An eror occured during GetAllStudentsAsync", ex.Message);
                 return BadRequest(ex.Message);
             }
         }
-
-        //[HttpGet]
-        //[ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)] //todo badrequest ?
-        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        //public async Task<ActionResult<APIResponse>> GetAllStudentsAsync()
-        //{
-        //    try
-        //    {
-        //        var students = await _studentRepository.GetAllAsync();
-        //        _response.Result = _mapper.Map<List<StudentDTO>>(students);
-        //        _response.Statuscode=HttpStatusCode.OK;
-        //        return Ok(_response);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _response.IsSuccess=false;
-        //        _response.ErrorMessages = new List<string>() { ex.ToString()};
-        //        //_logger.LogInformation("Getting all the students.");
-        //        //_logger.LogInformation(ex.Message);
-        //        //return BadRequest(ex.Message);
-        //    }
-        //    return _response;
-        //}
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(StudentDTO), StatusCodes.Status200OK)]
@@ -83,7 +58,7 @@ namespace SchoolAdministration.Controllers
         {
             if(id == 0)
             {
-                _logger.LogError("Get Student error with Id " + id);
+                WriteMessageToLog("An eror occured during GetStudentById, personId = {id}", id.ToString());
                 return BadRequest();
             }
             
@@ -99,7 +74,15 @@ namespace SchoolAdministration.Controllers
         }
 
 
-        [HttpGet("getByNameStartWith/{name}")]
+        public async Task<ActionResult<StudentExamsResultDTO>> GetStudentExamResultsById(int studentId)
+        {
+            return null;//todo
+        }
+
+
+
+
+            [HttpGet("getByNameStartWith/{name}")]
         [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -163,6 +146,15 @@ namespace SchoolAdministration.Controllers
             Student student = _mapper.Map<Student>(studentUpdateDTO);
             await _studentRepository.UpdateStudentAsync(student);
             return CreatedAtAction(nameof(GetStudentById), new { id = student.Id }, student); 
+        }
+
+
+        private void WriteMessageToLog(string message, string? messageDetail)//Todo : place in special class
+        {
+            _logger.LogInformation("ERROR: {message}" , message);
+            _logger.LogInformation("Logged on {datetime}", DateTime.Now);
+            if (messageDetail != null) 
+                _logger.LogInformation(messageDetail);
         }
 
     }

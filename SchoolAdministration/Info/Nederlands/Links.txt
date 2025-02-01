@@ -5,6 +5,9 @@ https://dotnet.microsoft.com/en-us/apps/aspnet
 https://learn.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-9.0
 https://www.entityframeworktutorial.net/code-first/configure-many-to-many-relationship-in-code-first.aspx
 
+logging:
+https://learn.microsoft.com/nl-nl/dotnet/core/extensions/logging?tabs=command-line#log-message-template-formatting
+
 
 //Doto Create more test
         //https://www.linkedin.com/pulse/how-develop-simple-c-api-crud-create-read-upodate-delete-ba8ee
@@ -15,3 +18,4 @@ https://www.entityframeworktutorial.net/code-first/configure-many-to-many-relati
         //    https://stackoverflow.com/questions/3993739/how-to-properly-unit-test-crud-operations-on-a-repository
         //    https://www.programmingwithmukesh.com/articles/testing/how-to-perform-crud-operations-unit-testing-in-aspnet-core-web-api-with-xunit
         //    https://www.c-sharpcorner.com/article/crud-operations-unit-testing-in-asp-net-core-web-api-with-xunit/
+
