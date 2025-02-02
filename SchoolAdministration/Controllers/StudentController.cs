@@ -58,7 +58,7 @@ namespace SchoolAdministration.Controllers
         {
             if(id == 0)
             {
-                WriteMessageToLog("An eror occured during GetStudentById, personId = {id}", id.ToString());
+                WriteMessageToLog("An eror occured during GetStudentById, studentId = {id}", id.ToString());
                 return BadRequest();
             }
             
@@ -73,16 +73,40 @@ namespace SchoolAdministration.Controllers
             return Ok(studentDTO);
         }
 
-
-        public async Task<ActionResult<StudentExamsResultDTO>> GetStudentExamResultsById(int studentId)
+        [HttpGet("GetStudentExamResultsById/{studentId}")]
+        public async Task<ActionResult<StudentExamsResultDTO>> GetStudentExamResultsById(int studentId) //list van maken
         {
-            return null;//todo
+            if (studentId == 0)
+            {
+                WriteMessageToLog("An eror occured during GetStudentExamResultsById, studentId = {id}", studentId.ToString());
+                return BadRequest();
+            }
+
+            var studentExamResults = await _studentRepository.GetByIdAsync(studentId);
+
+            if (studentExamResults == null)
+            {
+                return NotFound();
+            }
+
+
+            StudentExamsResultDTO studentExamsResultDTO = new StudentExamsResultDTO()
+            {
+                Id = studentId,
+                StudentLastName = studentExamResults.LastName,
+                StudentFirstName = studentExamResults.FirstName,
+                StudentEmail = studentExamResults.Email,
+                ExamName = "",
+                ExamenResult = 7
+            };
+
+            return Ok(studentExamsResultDTO);
         }
 
 
 
 
-            [HttpGet("getByNameStartWith/{name}")]
+        [HttpGet("getByNameStartWith/{name}")]
         [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

@@ -7,7 +7,7 @@
         public string StudentFirstName { get; set; }
         public string StudentEmail { get; set; }
         public string ExamName { get; set; }
-        public decimal ExamenResult { get; set; }
+        public double ExamenResult { get; set; }
 
     }
 }

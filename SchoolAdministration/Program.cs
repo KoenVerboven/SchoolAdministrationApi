@@ -41,11 +41,15 @@ namespace SchoolAdministration
             });
 
             builder.Services.AddScoped<IStudentRepository, StudentRepository>();
-            builder.Services.AddScoped<ICourseRepository, CourseRepository>();
             builder.Services.AddScoped<ITeacherRepository,TeacherRepository>();
-           
+            builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+            builder.Services.AddScoped<IExamRepository, ExamRepository>();
+            builder.Services.AddScoped<IExamResultRepository, ExamResultRepository>();
+            builder.Services.AddScoped<IStudyPlanRepository, StudyPlanRepository>();
+            builder.Services.AddScoped<IStudyPlanPartRepository, StudyPlanPartRepository>();
+
             //VERSIONING :
-            
+
             builder.Services.AddApiVersioning(options =>
             {
                 options.AssumeDefaultVersionWhenUnspecified = true;

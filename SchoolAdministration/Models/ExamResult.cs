@@ -8,7 +8,7 @@ namespace SchoolAdministration.Models
         public int Id { get; set; }
         public int StudentId { get; set; }
         public int CourseId { get; set; } 
-        public decimal?  Score { get; set; }
+        public decimal?  ExamenResultScore { get; set; }
         public string? ExamenResultComment { get; set; }
         public int CheckedByTeacherId { get; set; }
 
