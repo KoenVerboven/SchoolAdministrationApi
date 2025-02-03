@@ -15,7 +15,7 @@ A teacher gives 1 or more courses.
 
 
 Student:
-* getAllStudents
+* GetAllStudents
 * GetStudentById
 * GetExamResultsByStudentId
 * GetStudentByNameStartWith
