@@ -15,7 +15,7 @@ A teacher gives 1 or more courses.
 
 A teacher can create 1 or more Exames.
 
-A teacher can give exam grades give for a particularr student
+A teacher can give exam grades for a specific student
 
 Student:
 * GetAllStudents
