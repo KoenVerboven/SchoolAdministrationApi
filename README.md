@@ -2,16 +2,54 @@ WEB API for schoolAdministration
 ----------------------------------
 
 Visual Studio 2022 
+
 Target framework : .NET 9.0
 
-We have CRUD-operations for:
+Student:
+* getAllStudents
+* GetStudentById
+* GetExamResultsByStudentId
+* GetStudentByNameStartWith
+* CreateStudent
+* DeleteStudentById
+* UpdateStudent
 
-Student, Teacher, Course, Exam, 
-ExamenResult, StudyPlan, StudyPlanPart
+Teacher:
+* GetAllTeachers
+* GetTeacherById
+* CreateTeacher
+* DeleteTeacherById
+* UpdateTeacher
 
-Note :
-If you like my project; please give me a star!
-Thanks!
+Course:
+
+* GetAllCoursers 
+* GetCourseById 
+* CreateCourse 
+* DeleteCourse 
+* UpdateCourse 
+* SearchCourse
+
+Examen:
+* GetAllExams
+* GetExamById
+* CreateExam
+* DeleteExamById
+* UpdateExamAsync
+
+ExamenResult:
+* GetAllExamResult
+* GetExamResultById
+* CreateExamResult
+* DeleteExamById
+* UpdateExamResult
+
+StudyPlan:
+* GetAllStudyPlans
+* GetStudyPlanById, 
+* CreateStudyPlan, 
+* DeleteStudyPlanById,
+* UpdateStudyPlan
 
 
 Cross-origin-requests :
