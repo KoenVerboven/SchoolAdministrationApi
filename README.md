@@ -37,7 +37,7 @@ Course:
 * CreateCourse 
 * DeleteCourse 
 * UpdateCourse 
-* SearchCourse
+* SearchCourse on CourseName and CourseCode
 
 Examen:
 * GetAllExams
