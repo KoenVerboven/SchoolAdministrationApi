@@ -13,6 +13,9 @@ A student can take an exam and view his results.
 
 A teacher gives 1 or more courses.
 
+A teacher can create 1 or more Exames.
+
+A teacher can give exam grades give for a particularr student
 
 Student:
 * GetAllStudents
