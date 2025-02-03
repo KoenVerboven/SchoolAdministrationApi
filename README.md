@@ -1,9 +1,18 @@
 WEB API for schoolAdministration
 ----------------------------------
 
-Visual Studio 2022 
+This API, written in C#, is intended as a backend for an Angular website for school administration.
 
-Target framework : .NET 9.0
+A student can take 1 or more courses.
+
+A student can create 1 or more studyplans.
+
+With the help of a studyplan, the student can plan a learning period, for example for a specific exam.
+
+A student can take an exam and view his results.
+
+A teacher gives 1 or more courses.
+
 
 Student:
 * getAllStudents
