@@ -14,6 +14,7 @@ namespace SchoolAdministration.Controllers
     [ApiController]
     public class StudentController : ControllerBase
     {
+        private const string controllerName = "StudentController";
         protected APIResponse _response;
         private readonly IStudentRepository _studentRepository;
         private readonly ILogger<StudentController> _logger;
@@ -34,7 +35,7 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)] 
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<StudentDTO>> GetAllStudentsAsync()
+        public async Task<ActionResult<IEnumerable<StudentDTO>>> GetAllStudentsAsync()
         {
             try
             {
@@ -44,7 +45,7 @@ namespace SchoolAdministration.Controllers
             }
             catch (Exception ex)
             {
-                WriteMessageToLog("An eror occured during GetAllStudentsAsync", ex.Message);
+                _logger.LogError("Message: {message}, Controller:{studentcontroller}, Action:{action}", ex.Message, controllerName,nameof(GetAllStudentsAsync));
                 return BadRequest(ex.Message);
             }
         }
@@ -58,10 +59,10 @@ namespace SchoolAdministration.Controllers
         {
             if(id == 0)
             {
-                WriteMessageToLog("An eror occured during GetStudentById, studentId = {id}", id.ToString());
+                _logger.LogInformation("StudentId can not be 0");
                 return BadRequest();
             }
-            
+
             var student = await _studentRepository.GetByIdAsync(id);
 
             if (student == null)
@@ -74,37 +75,34 @@ namespace SchoolAdministration.Controllers
         }
 
         [HttpGet("GetStudentExamResultsById/{studentId}")]
-        public async Task<ActionResult<StudentExamsResultDTO>> GetStudentExamResultsById(int studentId) //list van maken
+        public async Task<ActionResult<IEnumerable<StudentExamsResultDTO>>> GetExamResultsByStudentId(int studentId) 
         {
             if (studentId == 0)
             {
-                WriteMessageToLog("An eror occured during GetStudentExamResultsById, studentId = {id}", studentId.ToString());
+                _logger.LogInformation("StudentId can not be 0");
                 return BadRequest();
             }
+            //var studentExamResults = await _studentRepository.GetByIdAsync(studentId);
 
-            var studentExamResults = await _studentRepository.GetByIdAsync(studentId);
+            //if (studentExamResults == null)
+            //{
+            //    return NotFound();
+            //}
 
-            if (studentExamResults == null)
-            {
-                return NotFound();
-            }
+            var studentExamsResultDTOList = await _studentRepository.GetStudentExamResultsByIdAsync();
 
+            //StudentExamsResultDTO studentExamsResultDTO = new StudentExamsResultDTO()
+            //{
+            //    Id = studentId,
+            //    StudentLastName = studentExamResults.LastName,
+            //    StudentFirstName = studentExamResults.FirstName,
+            //    StudentEmail = studentExamResults.Email,
+            //    ExamName = "",
+            //    ExamenResult = 7
+            //};
 
-            StudentExamsResultDTO studentExamsResultDTO = new StudentExamsResultDTO()
-            {
-                Id = studentId,
-                StudentLastName = studentExamResults.LastName,
-                StudentFirstName = studentExamResults.FirstName,
-                StudentEmail = studentExamResults.Email,
-                ExamName = "",
-                ExamenResult = 7
-            };
-
-            return Ok(studentExamsResultDTO);
+            return Ok(studentExamsResultDTOList);
         }
-
-
-
 
         [HttpGet("getByNameStartWith/{name}")]
         [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
@@ -170,15 +168,6 @@ namespace SchoolAdministration.Controllers
             Student student = _mapper.Map<Student>(studentUpdateDTO);
             await _studentRepository.UpdateStudentAsync(student);
             return CreatedAtAction(nameof(GetStudentById), new { id = student.Id }, student); 
-        }
-
-
-        private void WriteMessageToLog(string message, string? messageDetail)//Todo : place in special class
-        {
-            _logger.LogInformation("ERROR: {message}" , message);
-            _logger.LogInformation("Logged on {datetime}", DateTime.Now);
-            if (messageDetail != null) 
-                _logger.LogInformation(messageDetail);
         }
 
     }

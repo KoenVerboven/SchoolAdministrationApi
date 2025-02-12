@@ -11,14 +11,17 @@ namespace SchoolAdministration.Controllers
     public class ExamController : ControllerBase
     {
         private readonly IExamRepository _examRepository;
+        private readonly ILogger<CourseController> _logger;
         private readonly IMapper _mapper;
 
         public ExamController(
             IExamRepository examRepository,
+            ILogger<CourseController> logger,
             IMapper mapper
             )
         {
             _examRepository = examRepository;
+            _logger = logger;
             _mapper = mapper;
         }
 
@@ -40,7 +43,12 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<ExamDTO>> GetExamById(int id)
         {
-            var exam = _examRepository.GetByIdAsync(id);
+            if (id == 0)
+            {
+                return BadRequest();
+            }
+
+            var exam = await _examRepository.GetByIdAsync(id);
 
             if(exam == null)
             {
@@ -100,5 +108,5 @@ namespace SchoolAdministration.Controllers
             return CreatedAtAction(nameof(GetExamById), new { id = exam.Id }, exam);
         }
 
-    }
+   }
 }

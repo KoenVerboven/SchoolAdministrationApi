@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Data;
+using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
 
@@ -31,6 +32,15 @@ namespace SchoolAdministration.Repositories.Repos
         {
             return await _context.Students.ToListAsync();
         }
+
+        public async Task<IEnumerable<StudentExamsResultDTO>> GetStudentExamResultsByIdAsync()
+        {
+            var test =  await _context.Students.Include(p=>p.ExamResults).ToListAsync();
+
+            var studentExamResultList  = new List<StudentExamsResultDTO>(); //todo : make it works!
+            return studentExamResultList;
+        }
+
 
         public async Task<Student?> GetByIdAsync(int id)
         {

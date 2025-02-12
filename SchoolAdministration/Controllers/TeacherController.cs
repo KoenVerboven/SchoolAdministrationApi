@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
-using SchoolAdministration.Repositories.Repos;
 
 namespace SchoolAdministration.Controllers
 {

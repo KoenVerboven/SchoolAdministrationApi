@@ -1,4 +1,5 @@
-﻿using SchoolAdministration.Models;
+﻿using SchoolAdministration.Dtos;
+using SchoolAdministration.Models;
 
 namespace SchoolAdministration.Repositories.Interfaces
 {
@@ -6,6 +7,7 @@ namespace SchoolAdministration.Repositories.Interfaces
     {
         Task<IEnumerable<Student>> GetAllAsync();
         Task<Student?> GetByIdAsync(int id);
+        Task<IEnumerable<StudentExamsResultDTO>> GetStudentExamResultsByIdAsync();
         Task<IEnumerable<Student>> GetByNameStartWithAsync(string name);
         Task AddStudentAsync(Student student);
         Task UpdateStudentAsync(Student student);

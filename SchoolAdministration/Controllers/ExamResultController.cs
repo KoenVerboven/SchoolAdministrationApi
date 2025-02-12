@@ -1,20 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
-using SchoolAdministration.Repositories.Repos;
 
 
 namespace SchoolAdministration.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ExamenResultController : ControllerBase
+    public class ExamResultController : ControllerBase
     {
         private readonly IExamResultRepository _examResultRepository;
+        private readonly ILogger<ExamResultController> _logger;
 
-        public ExamenResultController(IExamResultRepository examResultRepository)
+        public ExamResultController(IExamResultRepository examResultRepository,
+            ILogger<ExamResultController> logger)
         {
             _examResultRepository = examResultRepository;
+            _logger = logger;
         }
 
 
@@ -36,7 +38,12 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<ExamResult>> GetExamResultById(int id)
         {
-            var examResult = _examResultRepository.GetByIdAsync(id);
+            if (id == 0)
+            {
+                return BadRequest();
+            }
+
+            var examResult = await _examResultRepository.GetByIdAsync(id);
 
             if (examResult == null)
             {
@@ -91,6 +98,5 @@ namespace SchoolAdministration.Controllers
             await _examResultRepository.UpdateExamResultAsync(examResult);
             return CreatedAtAction(nameof(GetExamResultById), new { id = examResult.Id }, examResult);
         }
-
     }
 }

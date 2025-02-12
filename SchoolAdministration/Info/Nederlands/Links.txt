@@ -8,6 +8,10 @@ https://www.entityframeworktutorial.net/code-first/configure-many-to-many-relati
 logging:
 https://learn.microsoft.com/nl-nl/dotnet/core/extensions/logging?tabs=command-line#log-message-template-formatting
 
+bootstrapLinks (for front-end):
+https://icons.getbootstrap.com/
+https://bootswatch.com/
+
 
 //Doto Create more test
         //https://www.linkedin.com/pulse/how-develop-simple-c-api-crud-create-read-upodate-delete-ba8ee

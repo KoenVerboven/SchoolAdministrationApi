@@ -1,0 +1,11 @@
+﻿$ git --version
+
+$ git config --global user.name "Koen Verboven"
+$ git config user.name
+
+$ git config --gloabal user.email "test@test.be"
+$ git config user.email
+
+
+print working directory : 
+$ pwd

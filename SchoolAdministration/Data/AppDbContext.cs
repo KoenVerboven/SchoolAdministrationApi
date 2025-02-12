@@ -10,6 +10,7 @@ namespace SchoolAdministration.Data
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Exam> Exams { get; set; }
         public DbSet<ExamResult> ExamResults { get; set; }
+        public DbSet<ExamQuestion> ExamQuestions { get; set; }
         public DbSet<StudyPlan> StudyPlans { get; set; }
         public DbSet<StudyPlanPart> StudyPlanParts { get; set; }
 
