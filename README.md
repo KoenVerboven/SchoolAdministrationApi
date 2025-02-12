@@ -1,17 +1,67 @@
 WEB API for schoolAdministration
 ----------------------------------
 
-Visual Studio 2022 
-Target framework : .NET 9.0
+This API, written in C#, is intended as a backend for an Angular website for school administration.
 
-We have CRUD-operations for:
+A student can take 1 or more courses.
 
-Student, Teacher, Course, Exam, 
-ExamenResult, StudyPlan, StudyPlanPart
+A student can create 1 or more studyplans.
 
-Note :
-If you like my project; please give me a star!
-Thanks!
+With the help of a studyplan, the student can plan a learning period, for example for a specific exam.
+
+A student can take an exam and view his results.
+
+A teacher gives 1 or more courses.
+
+A teacher can create 1 or more Exames.
+
+A teacher can give exam grades for a specific student
+
+Student:
+* GetAllStudents
+* GetStudentById
+* GetExamResultsByStudentId
+* GetStudentByNameStartWith
+* CreateStudent
+* DeleteStudentById
+* UpdateStudent
+
+Teacher:
+* GetAllTeachers
+* GetTeacherById
+* CreateTeacher
+* DeleteTeacherById
+* UpdateTeacher
+
+Course:
+
+* GetAllCoursers 
+* GetCourseById 
+* CreateCourse 
+* DeleteCourse 
+* UpdateCourse 
+* SearchCourse on CourseName and CourseCode
+
+Examen:
+* GetAllExams
+* GetExamById
+* CreateExam
+* DeleteExamById
+* UpdateExamAsync
+
+ExamenResult:
+* GetAllExamResult
+* GetExamResultById
+* CreateExamResult
+* DeleteExamById
+* UpdateExamResult
+
+StudyPlan:
+* GetAllStudyPlans
+* GetStudyPlanById, 
+* CreateStudyPlan, 
+* DeleteStudyPlanById,
+* UpdateStudyPlan
 
 
 Cross-origin-requests :
@@ -145,7 +195,8 @@ choose Project Reference
 
 UnitTests :
 
-![image](https://github.com/user-attachments/assets/91cc26be-4a32-4187-97e3-1de327700231)
+![image](https://github.com/user-attachments/assets/96426350-2387-4e3e-a6c5-d1930969257e)
+
 
 Swagger :Exploring Endpoints
 
