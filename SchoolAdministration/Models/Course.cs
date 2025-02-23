@@ -11,12 +11,12 @@ namespace SchoolAdministration.Models
 
         [Required(ErrorMessage = "Course Name is required.")]
         [StringLength(30, ErrorMessage = "Course code cannot longer than 30 characters")]
-        public  string CourseName { get; set; }
+        public required string CourseName { get; set; }
 
         [StringLength(5, ErrorMessage = "Course code cannot longer than 5 characters")]
         public string? CourseCode { get; set; }
 
-        [StringLength(50, ErrorMessage = "Course code cannot longer than 50 characters")]
+        [StringLength(400, ErrorMessage = "Course description cannot longer than 400 characters")]
         public string? CourseDescription { get; set; }
 
         [DataType(DataType.DateTime)]
@@ -28,7 +28,7 @@ namespace SchoolAdministration.Models
         [Column(TypeName = "decimal(6, 2)")]
         public decimal?  CoursePrice { get; set; }
         public int MaxNumberOfStudents { get; set; }
-        public ICollection<Student> Students { get; set; }
+        public ICollection<Student>? Students { get; set; }
  
     }
 

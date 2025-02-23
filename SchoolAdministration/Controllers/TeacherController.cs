@@ -27,7 +27,7 @@ namespace SchoolAdministration.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<TeacherDTO>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]// klopt dit voor get all?
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<TeacherDTO>>> GetAllTeachersAsync()
         {
@@ -36,9 +36,20 @@ namespace SchoolAdministration.Controllers
             return Ok(teachersDTO);
         }
 
+        [HttpGet("GetAllTeachersSort/{sort}")]
+        [ProducesResponseType(typeof(IEnumerable<TeacherDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<TeacherDTO>>> GetAllTeachersAsyncSort(string sort)
+        {
+            var allTeachers = await _teacherRepository.GetAllAsynSort(sort);
+            var teachersDTO = _mapper.Map<List<TeacherDTO>>(allTeachers);
+            return Ok(teachersDTO);
+        }
+
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(TeacherDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)] //klopt dit? weg doen (alle controllers)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)] //is this correct?
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<TeacherDTO>>GetTeacherById(int id)
@@ -63,7 +74,7 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)] 
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<TeacherCreateDTO>> CreateTeacher(TeacherCreateDTO teacherCreateDTO)
+        public async Task<ActionResult<TeacherCreateDTO>> CreateTeacher(TeacherCreateDTO teacherCreateDTO) //todo nakijken geeft 500 error
         {
             if(! ModelState.IsValid)
             {

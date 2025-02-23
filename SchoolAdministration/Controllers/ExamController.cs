@@ -55,7 +55,7 @@ namespace SchoolAdministration.Controllers
                 return NotFound();
             }
 
-            var examDTO = _mapper.Map<CourseDTO>(exam);
+            var examDTO = _mapper.Map<ExamDTO>(exam);
             return Ok(examDTO);
         }
 

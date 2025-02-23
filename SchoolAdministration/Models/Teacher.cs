@@ -24,7 +24,7 @@ namespace SchoolAdministration.Models
         [StringLength(30, ErrorMessage = "Street and number cannot longer than 30 characters")]
         public string? StreetAndNumber { get; set; }
 
-        [RegularExpression(@"^([0-9]{4})$", ErrorMessage = "Belgium zipcode must be 4 digits long.")]
+        [RegularExpression(@"^([0-9]{4})$", ErrorMessage = "Belgium zipcode must be 4 digits long.")] // todo : student do not have this !!!
         public int? Zipcode { get; set; }
 
         public int Gender { get; set; }

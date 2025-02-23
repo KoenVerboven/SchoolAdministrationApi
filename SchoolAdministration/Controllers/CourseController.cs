@@ -97,7 +97,7 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)] 
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> UpdateCourseAsync(int id,CourseUpdateDTO courseUpdateDTO)
+        public async Task<ActionResult> UpdateCourseAsync(int id,CourseUpdateDTO courseUpdateDTO) //todo : do not work 400 code
         {
             if(id != courseUpdateDTO.Id)
             {
@@ -120,7 +120,7 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<CourseDTO>>> Search([FromQuery] CourseSearchParameters @params)
         {
-            var courses = await _courseRepository.GetSearchAsync(@params);  
+            var courses = await _courseRepository.GetSearchAsync(@params);
 
             if (courses == null)
             {
@@ -129,6 +129,6 @@ namespace SchoolAdministration.Controllers
             var coursesDTO = _mapper.Map<List<CourseDTO>>(courses);
             return Ok(coursesDTO);
         }
-        
+
     }
 }

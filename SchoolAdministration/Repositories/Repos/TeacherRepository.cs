@@ -2,6 +2,7 @@
 using SchoolAdministration.Data;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
+using System.Collections.Generic;
 
 namespace SchoolAdministration.Repositories.Repos
 {
@@ -31,6 +32,17 @@ namespace SchoolAdministration.Repositories.Repos
         public async Task<IEnumerable<Teacher>> GetAllAsyn()
         {
             return await _context.Teachers.ToListAsync();   
+        }
+
+        public async Task<IEnumerable<Teacher>> GetAllAsynSort(string sort)
+        {
+            List<Teacher>? teachers = sort.ToLower() switch
+            {
+                "name" => await _context.Teachers.OrderBy(p => p.LastName).ThenBy(p => p.FirstName).ToListAsync(),
+                "email" => await _context.Teachers.OrderBy(p => p.Email).ToListAsync(),
+                _ => await _context.Teachers.OrderBy(p => p.Id).ToListAsync(),
+            };
+            return teachers;
         }
 
         public async Task<Teacher?> GetAsynById(int id)
