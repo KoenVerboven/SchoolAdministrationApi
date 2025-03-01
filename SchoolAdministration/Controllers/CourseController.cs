@@ -80,7 +80,7 @@ namespace SchoolAdministration.Controllers
             //}
 
             await _courseRepository.AddCourseAsync(course);
-            return CreatedAtAction(nameof(GetCourseById), new { id = course.Id, course });
+            return CreatedAtAction(nameof(GetCourseById), new { id = course.Id }, course );
         }
 
         [HttpDelete("{id}")]
@@ -93,25 +93,25 @@ namespace SchoolAdministration.Controllers
             return NoContent();
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status201Created)] 
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> UpdateCourseAsync(int id,CourseUpdateDTO courseUpdateDTO) //todo : do not work 400 code
+        public async Task<ActionResult> UpdateCourseAsync(int id,CourseUpdateDTO courseUpdateDTO)
         {
-            if(id != courseUpdateDTO.Id)
+            if (id != courseUpdateDTO.Id)
             {
                 return BadRequest();
             }
-            
-            if (! ModelState.IsValid)
+
+            if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
             Course course = _mapper.Map<Course>(courseUpdateDTO);
             await _courseRepository.UpdateCourseAsync(course);
-            return CreatedAtAction(nameof(GetCourseById), new { id = course.Id, course });
+            return CreatedAtAction(nameof(GetCourseById), new { id = course.Id }, course );
         }
 
         [HttpGet("getBySearch")]

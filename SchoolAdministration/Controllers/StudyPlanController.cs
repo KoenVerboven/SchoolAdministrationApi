@@ -48,6 +48,10 @@ namespace SchoolAdministration.Controllers
             return Ok(studyPlan);
         }
 
+        //todo : get active studyplan for a specifik student (with student id = X)
+        //todo: add active true/false to studyplan
+
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

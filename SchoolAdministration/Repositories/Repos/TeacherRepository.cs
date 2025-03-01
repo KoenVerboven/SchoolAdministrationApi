@@ -40,6 +40,7 @@ namespace SchoolAdministration.Repositories.Repos
             {
                 "name" => await _context.Teachers.OrderBy(p => p.LastName).ThenBy(p => p.FirstName).ToListAsync(),
                 "email" => await _context.Teachers.OrderBy(p => p.Email).ToListAsync(),
+                "phone" => await _context.Teachers.OrderBy(p => p.Phone).ToListAsync(),
                 _ => await _context.Teachers.OrderBy(p => p.Id).ToListAsync(),
             };
             return teachers;

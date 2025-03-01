@@ -49,7 +49,7 @@ namespace SchoolAdministration.Controllers
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(TeacherDTO), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)] //is this correct?
+        [ProducesResponseType(StatusCodes.Status400BadRequest)] 
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<TeacherDTO>>GetTeacherById(int id)
@@ -74,7 +74,7 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)] 
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<TeacherCreateDTO>> CreateTeacher(TeacherCreateDTO teacherCreateDTO) //todo nakijken geeft 500 error
+        public async Task<ActionResult<TeacherDTO>> CreateTeacher(TeacherCreateDTO teacherCreateDTO) //todo nakijken geeft 500 error
         {
             if(! ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace SchoolAdministration.Controllers
             //}
 
             await _teacherRepository.AddTeacherAsync(teacher);
-            return CreatedAtAction(nameof(GetTeacherById), new {id= teacher.Id, teacher});
+            return CreatedAtAction(nameof(GetTeacherById), new { id = teacher.Id }, teacher);
         }
 
         [HttpDelete("{id}")]
@@ -111,7 +111,7 @@ namespace SchoolAdministration.Controllers
             {
                 return BadRequest();    
             }
-            
+         
             if (!ModelState.IsValid)
             {
                 return BadRequest();
