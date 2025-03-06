@@ -74,35 +74,14 @@ namespace SchoolAdministration.Controllers
             return Ok(studentDTO);
         }
 
-        [HttpGet("GetStudentExamResultsById/{studentId}")]
-        public async Task<ActionResult<IEnumerable<StudentExamsResultDTO>>> GetExamResultsByStudentId(int studentId) 
+        [HttpGet("GetStudentsExamResults")]
+        public async Task<ActionResult<IEnumerable<StudentExamsResultDTO>>> GetStudentsExamResults()
         {
-            if (studentId == 0)
-            {
-                _logger.LogInformation("StudentId can not be 0");
-                return BadRequest();
-            }
-            //var studentExamResults = await _studentRepository.GetByIdAsync(studentId);
-
-            //if (studentExamResults == null)
-            //{
-            //    return NotFound();
-            //}
-
-            var studentExamsResultDTOList = await _studentRepository.GetStudentExamResultsByIdAsync();
-
-            //StudentExamsResultDTO studentExamsResultDTO = new StudentExamsResultDTO()
-            //{
-            //    Id = studentId,
-            //    StudentLastName = studentExamResults.LastName,
-            //    StudentFirstName = studentExamResults.FirstName,
-            //    StudentEmail = studentExamResults.Email,
-            //    ExamName = "",
-            //    ExamenResult = 7
-            //};
-
+            var studentExamsResultDTOList = await _studentRepository.GetStudentExamResultsAsync();
             return Ok(studentExamsResultDTOList);
         }
+
+
 
         [HttpGet("getByNameStartWith/{name}")]
         [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]

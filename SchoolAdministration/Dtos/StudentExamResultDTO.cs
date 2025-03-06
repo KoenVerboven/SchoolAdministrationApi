@@ -8,6 +8,7 @@
         public string StudentEmail { get; set; }
         public string ExamName { get; set; }
         public double ExamenResult { get; set; }
-
+        public int MaxScore { get; set; }
+        public int MinScoreToPassExam { get; set; }
     }
 }

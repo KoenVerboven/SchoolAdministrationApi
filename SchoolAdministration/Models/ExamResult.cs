@@ -7,12 +7,10 @@ namespace SchoolAdministration.Models
         [Key]
         public int Id { get; set; }
         public int StudentId { get; set; }
-        public int CourseId { get; set; } 
+        public int CourseId { get; set; }
+        public  int ExamId { get; set; }
         public double?  ExamenResultScore { get; set; }
         public string? ExamenResultComment { get; set; }
         public int CheckedByTeacherId { get; set; }
-
-        //public virtual Student Student { get; set; }
-        //public virtual Exam Exam { get; set; }
     }
 }

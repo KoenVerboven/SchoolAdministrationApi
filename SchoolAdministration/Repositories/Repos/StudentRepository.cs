@@ -14,7 +14,6 @@ namespace SchoolAdministration.Repositories.Repos
         {
             _context = context;
         }
-
         public async Task AddStudentAsync(Student student)
         {
             await _context.Students.AddAsync(student);
@@ -33,11 +32,37 @@ namespace SchoolAdministration.Repositories.Repos
             return await _context.Students.ToListAsync();
         }
 
-        public async Task<IEnumerable<StudentExamsResultDTO>> GetStudentExamResultsByIdAsync()
+        public async Task<IEnumerable<StudentExamsResultDTO>> GetStudentExamResultsAsync()
         {
-            var test =  await _context.Students.Include(p=>p.ExamResults).ToListAsync();
+            var studentExamResults =  await _context.Students.Include(p=>p.ExamResults).ToListAsync();
+            var studentExamResultList  = new List<StudentExamsResultDTO>();
 
-            var studentExamResultList  = new List<StudentExamsResultDTO>(); //todo : make it works!
+            foreach (var studentExamResult in studentExamResults)
+            {
+                var firstname = studentExamResult.FirstName;
+                var lastname = studentExamResult.LastName;
+                var studentEmail = studentExamResult.Email;
+               
+                foreach (ExamResult examResult in studentExamResult.ExamResults)
+                {
+                    var exam =  _context.Exams.SingleOrDefault(p=>p.Id == examResult.ExamId);
+                    var studentExamResultId = examResult.Id;
+                    var examResultScore = examResult.ExamenResultScore;
+                    var studentExamResul = new StudentExamsResultDTO()
+                    {
+                        Id = studentExamResultId,
+                        StudentLastName = lastname,
+                        StudentFirstName = firstname,
+                        StudentEmail = studentEmail,
+                        ExamName = exam.ExamTitle, 
+                        ExamenResult = (double)examResultScore,
+                        MaxScore = exam.MaxScore,
+                        MinScoreToPassExam = exam.MinScoreToPassExam
+                    };
+                    studentExamResultList.Add(studentExamResul);
+                }
+
+            }
             return studentExamResultList;
         }
 
@@ -70,5 +95,6 @@ namespace SchoolAdministration.Repositories.Repos
             _context.Students.Update(student);
             await _context.SaveChangesAsync();
         }
+
     }
 }
