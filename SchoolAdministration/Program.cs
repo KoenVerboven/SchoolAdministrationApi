@@ -47,6 +47,7 @@ namespace SchoolAdministration
             builder.Services.AddScoped<IExamResultRepository, ExamResultRepository>();
             builder.Services.AddScoped<IStudyPlanRepository, StudyPlanRepository>();
             builder.Services.AddScoped<IStudyPlanPartRepository, StudyPlanPartRepository>();
+            builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
 
             //VERSIONING :
 
