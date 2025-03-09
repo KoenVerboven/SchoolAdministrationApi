@@ -10,5 +10,6 @@ namespace SchoolAdministration.Repositories.Interfaces
         Task AddTeacherAsync(Teacher teacher);
         Task UpdateTeacherAsync(Teacher teacher);
         Task DeleteTeacherAsync(int id);
+        bool TeacherExist(Teacher teacher);
     }
 }

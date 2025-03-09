@@ -83,11 +83,11 @@ namespace SchoolAdministration.Controllers
 
             Teacher teacher = _mapper.Map<Teacher>(teacherCreateDTO);
 
-            //if (_teacherRepository.TeacherExist(teacher))
-            //{
-            //    ModelState.AddModelError("CustomError", "Teacher already Exists!");
-            //    return BadRequest(ModelState);
-            //}
+            if (_teacherRepository.TeacherExist(teacher))
+            {
+                ModelState.AddModelError("CustomError", "Teacher already Exists!");
+                return BadRequest(ModelState);
+            }
 
             await _teacherRepository.AddTeacherAsync(teacher);
             return CreatedAtAction(nameof(GetTeacherById), new { id = teacher.Id }, teacher);

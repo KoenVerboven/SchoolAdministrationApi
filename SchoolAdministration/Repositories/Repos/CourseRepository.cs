@@ -23,6 +23,11 @@ namespace SchoolAdministration.Repositories.Repos
             await _context.SaveChangesAsync();
         }
 
+        public bool CourseExist(Course course)
+        {
+            return _context.Courses.Any(p=>p.CourseName.Trim().ToLower() == course.CourseName.Trim().ToLower());
+        }
+
         public async Task DeleteCourseAsync(int id)
         {
             var courseInDb = await _context.Courses.FindAsync(id)
@@ -59,6 +64,8 @@ namespace SchoolAdministration.Repositories.Repos
 
             return await query.ToListAsync();
         }
+
+       
 
         public async Task UpdateCourseAsync(Course course)
         {

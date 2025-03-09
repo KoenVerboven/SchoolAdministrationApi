@@ -73,11 +73,11 @@ namespace SchoolAdministration.Controllers
 
             Course course = _mapper.Map<Course>(courseCreateDTO);
 
-            //if (_courseRepository.StudentExist(course))
-            //{
-            //    ModelState.AddModelError("CustomError", "Course already Exists!");
-            //    return BadRequest(ModelState);
-            //}
+            if (_courseRepository.CourseExist(course))
+            {
+                ModelState.AddModelError("CustomError", "Course already Exists!");
+                return BadRequest(ModelState);
+            }
 
             await _courseRepository.AddCourseAsync(course);
             return CreatedAtAction(nameof(GetCourseById), new { id = course.Id }, course );

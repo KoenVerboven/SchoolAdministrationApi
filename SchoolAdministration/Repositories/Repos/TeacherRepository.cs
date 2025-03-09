@@ -51,6 +51,15 @@ namespace SchoolAdministration.Repositories.Repos
             return await _context.Teachers.FindAsync(id);
         }
 
+        public bool TeacherExist(Teacher teacher)
+        {
+            return _context.Students.Any(p => p.LastName.Trim().ToLower().Equals(teacher.LastName.Trim().ToLower())
+                                                                   && p.FirstName.Trim().ToLower().Equals(teacher.FirstName.Trim().ToLower())
+                                                                   && p.DateOfBirth.Equals(teacher.DateOfBirth)
+                                                                   );
+        }
+
+
         public async Task UpdateTeacherAsync(Teacher teacher)
         {
             _context.Teachers.Update(teacher);

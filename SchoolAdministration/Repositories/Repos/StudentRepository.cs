@@ -79,15 +79,10 @@ namespace SchoolAdministration.Repositories.Repos
 
         public bool StudentExist(Student student)
         {
-            var studentFind = _context.Students.FirstOrDefault(p => p.LastName.Trim().ToLower().Equals(student.LastName.Trim().ToLower()) 
+            return  _context.Students.Any(p => p.LastName.Trim().ToLower().Equals(student.LastName.Trim().ToLower()) 
                                                                    && p.FirstName.Trim().ToLower().Equals(student.FirstName.Trim().ToLower())
                                                                    && p.DateOfBirth.Equals(student.DateOfBirth)
                                                                    );
-            if(studentFind == null)
-            {
-                return false;
-            }
-            return true;
         }
 
         public async Task UpdateStudentAsync(Student student)

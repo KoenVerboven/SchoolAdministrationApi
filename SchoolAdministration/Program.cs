@@ -17,7 +17,7 @@ namespace SchoolAdministration
             // LOGGING :
 
             Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
-                .WriteTo.File("log/villaLogs.txt", rollingInterval: RollingInterval.Day).CreateLogger();
+                .WriteTo.File("log/schoolManagementLogs.txt", rollingInterval: RollingInterval.Day).CreateLogger();
             builder.Host.UseSerilog();
 
 
