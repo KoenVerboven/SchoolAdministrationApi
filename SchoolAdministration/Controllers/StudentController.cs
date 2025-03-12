@@ -15,7 +15,6 @@ namespace SchoolAdministration.Controllers
     public class StudentController : ControllerBase
     {
         private const string controllerName = "StudentController";
-        protected APIResponse _response;
         private readonly IStudentRepository _studentRepository;
         private readonly ILogger<StudentController> _logger;
         private readonly IMapper _mapper;
@@ -28,7 +27,6 @@ namespace SchoolAdministration.Controllers
             _logger = logger;
             _studentRepository = studentRepository;
             _mapper = mapper;
-            _response = new();
         }
 
         [HttpGet]

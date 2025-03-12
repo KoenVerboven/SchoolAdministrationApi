@@ -23,6 +23,8 @@ namespace SchoolAdministration.AutoMapper
             CreateMap<Exam, ExamDTO>().ReverseMap();
             CreateMap<Exam, ExamCreateDTO>().ReverseMap();
             CreateMap<Exam, ExamUpdateDTO>().ReverseMap();
+
+            CreateMap<ApplicationUser, UserDTO>().ReverseMap();
         }
     }
 }
