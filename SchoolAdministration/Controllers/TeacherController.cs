@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
@@ -26,6 +27,7 @@ namespace SchoolAdministration.Controllers
 
 
         [HttpGet]
+        [Authorize]
         [ProducesResponseType(typeof(IEnumerable<TeacherDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -37,6 +39,7 @@ namespace SchoolAdministration.Controllers
         }
 
         [HttpGet("GetAllTeachersSort/{sort}")]
+        [Authorize]
         [ProducesResponseType(typeof(IEnumerable<TeacherDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -48,6 +51,7 @@ namespace SchoolAdministration.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         [ProducesResponseType(typeof(TeacherDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)] 
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -71,6 +75,7 @@ namespace SchoolAdministration.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles ="admin")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)] 
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -94,6 +99,7 @@ namespace SchoolAdministration.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> DeleteTeacherById(int id)
         {
             await _teacherRepository.DeleteTeacherAsync(id);
@@ -102,6 +108,7 @@ namespace SchoolAdministration.Controllers
 
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

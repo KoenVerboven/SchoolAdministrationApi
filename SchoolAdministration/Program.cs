@@ -5,7 +5,10 @@ using SchoolAdministration.Data;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Repositories.Repos;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
 
 
 namespace SchoolAdministration
@@ -50,6 +53,24 @@ namespace SchoolAdministration
             builder.Services.AddScoped<IStudyPlanPartRepository, StudyPlanPartRepository>();
             builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
 
+            var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
+            builder.Services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+             .AddJwtBearer(x => {
+                 x.RequireHttpsMetadata = false;
+                 x.SaveToken = true;
+                 x.TokenValidationParameters = new TokenValidationParameters
+                 {
+                     ValidateIssuerSigningKey = true,
+                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
+                     ValidateIssuer = false,
+                     ValidateAudience = false
+                 };
+             });
+
             //adding identity :
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
             ).AddEntityFrameworkStores<AppDbContext>();
@@ -82,7 +103,9 @@ namespace SchoolAdministration
                 });
             }
 
-            app.UseCors("MyCors");  
+            app.UseCors("MyCors");
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.MapControllers();
             app.Run();
         }
