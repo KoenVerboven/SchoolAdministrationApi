@@ -91,5 +91,9 @@ namespace SchoolAdministration.Repositories.Repos
             await _context.SaveChangesAsync();
         }
 
+        public Task<int> StudentCountAsync()
+        {
+            return _context.Students.CountAsync();
+        }
     }
 }

@@ -15,11 +15,35 @@ namespace SchoolAdministration.Controllers
             _studyPlanPartRepository = studyPlanPartRepository;
         }
 
-        [HttpGet]
+        [HttpGet("getStudyplanPartsFilter")]
         [ProducesResponseType(typeof(IEnumerable<StudyPlanPart>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task <ActionResult<IEnumerable<StudyPlanPart>>> GetAllStudyPlanParts()
+        public async Task <ActionResult<IEnumerable<StudyPlanPart>>> GetStudyPlanPartsFilter()//DateTime startDate
+        {
+            var startDate1 = new DateTime(2025, 4, 13);
+            var allStudyPlanParts = await _studyPlanPartRepository.GetStudyPlanPartFilterAsync(startDate1);
+            return Ok(allStudyPlanParts);
+        }
+
+        //[HttpGet("getStudyplanPartsFilter/{startDate}")]
+        //[ProducesResponseType(typeof(IEnumerable<StudyPlanPart>), StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public async Task<ActionResult<IEnumerable<StudyPlanPart>>> GetStudyPlanPartsFilter(DateTime startDate)//DateTime startDate
+        //{
+        //    var startDate1 = new DateTime(2025, 4, 13);
+        //    var allStudyPlanParts = await _studyPlanPartRepository.GetStudyPlanPartFilterAsync(startDate1);
+        //    return Ok(allStudyPlanParts);
+        //}
+
+
+
+        [HttpGet()]
+        [ProducesResponseType(typeof(IEnumerable<StudyPlanPart>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<StudyPlanPart>>> GetAllStudyPlanParts()
         {
             var allStudyPlanParts = await _studyPlanPartRepository.GetAllAsync();
             return Ok(allStudyPlanParts);

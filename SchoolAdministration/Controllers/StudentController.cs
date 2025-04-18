@@ -149,5 +149,11 @@ namespace SchoolAdministration.Controllers
             return CreatedAtAction(nameof(GetStudentById), new { id = student.Id }, student); 
         }
 
+        [HttpGet("getStudentCount")]
+        public async Task<int>StudentCountAsync()
+        {
+           return await _studentRepository.StudentCountAsync();
+        }
+
     }
 }
