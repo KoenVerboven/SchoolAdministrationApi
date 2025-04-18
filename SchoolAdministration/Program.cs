@@ -1,9 +1,14 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.AutoMapper;
 using SchoolAdministration.Data;
+using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Repositories.Repos;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
 
 
 namespace SchoolAdministration
@@ -14,15 +19,13 @@ namespace SchoolAdministration
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // LOGGING :
-
+            //logger :
             Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
                 .WriteTo.File("log/schoolManagementLogs.txt", rollingInterval: RollingInterval.Day).CreateLogger();
             builder.Host.UseSerilog();
 
 
-            // ADD SERVICES TO THE CONTAINER :
-
+            //add service to the container :
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
@@ -40,6 +43,7 @@ namespace SchoolAdministration
                 });
             });
 
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IStudentRepository, StudentRepository>();
             builder.Services.AddScoped<ITeacherRepository,TeacherRepository>();
             builder.Services.AddScoped<ICourseRepository, CourseRepository>();
@@ -49,8 +53,29 @@ namespace SchoolAdministration
             builder.Services.AddScoped<IStudyPlanPartRepository, StudyPlanPartRepository>();
             builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
 
-            //VERSIONING :
+            var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
+            builder.Services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+             .AddJwtBearer(x => {
+                 x.RequireHttpsMetadata = false;
+                 x.SaveToken = true;
+                 x.TokenValidationParameters = new TokenValidationParameters
+                 {
+                     ValidateIssuerSigningKey = true,
+                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key)),
+                     ValidateIssuer = false,
+                     ValidateAudience = false
+                 };
+             });
 
+            //adding identity :
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(
+            ).AddEntityFrameworkStores<AppDbContext>();
+
+            //versioning :
             builder.Services.AddApiVersioning(options =>
             {
                 options.AssumeDefaultVersionWhenUnspecified = true;
@@ -67,8 +92,7 @@ namespace SchoolAdministration
             var entities = app.Services.CreateScope().ServiceProvider.GetRequiredService<IStudentRepository>();
 
 
-            // SWAGGER :
-
+            //swagger :
             if(app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -79,7 +103,9 @@ namespace SchoolAdministration
                 });
             }
 
-            app.UseCors("MyCors");  
+            app.UseCors("MyCors");
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.MapControllers();
             app.Run();
         }

@@ -2,7 +2,7 @@
 {
     public class UserDTO
     {
-        public int Id { get; set; }
+        public string Id { get; set; } //changed from int to string, must contain not a integer, but a Guid
         public string UserName { get; set; }
         public string Name { get; set; }
     }

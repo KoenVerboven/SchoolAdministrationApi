@@ -1,5 +1,7 @@
 ﻿
 
+
+
 https://learn.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api
 https://dotnet.microsoft.com/en-us/apps/aspnet
 https://learn.microsoft.com/en-us/aspnet/core/web-api/action-return-types?view=aspnetcore-9.0
@@ -22,4 +24,8 @@ https://bootswatch.com/
         //    https://stackoverflow.com/questions/3993739/how-to-properly-unit-test-crud-operations-on-a-repository
         //    https://www.programmingwithmukesh.com/articles/testing/how-to-perform-crud-operations-unit-testing-in-aspnet-core-web-api-with-xunit
         //    https://www.c-sharpcorner.com/article/crud-operations-unit-testing-in-asp-net-core-web-api-with-xunit/
+
+
+        git:
+        https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html
 
