@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SchoolAdministration.Data;
 using SchoolAdministration.Dtos;
@@ -13,28 +14,38 @@ namespace SchoolAdministration.Repositories.Repos
 {
     public class UserRepository : IUserRepository
     {
-        private readonly AppDbContext _db;
+        private readonly AppDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
-        private string secretKey;
+        private readonly string secretKey;
 
         public UserRepository
             (
-                  AppDbContext db,
+                  AppDbContext context,
                   IConfiguration configuration,
                   UserManager<ApplicationUser> userManager,
                   IMapper mapper
             )
         {
-            _db = db;
+            _context = context;
             _userManager = userManager;
             _mapper = mapper;
             secretKey = configuration.GetValue<string>("ApiSettings:Secret");
         }
 
+        public async Task<IEnumerable<ApplicationUser>> GetAllAsync()
+        {
+           return await _context.ApplicationUsers.ToListAsync();
+        }
+
+        public async Task<ApplicationUser?> GetByIdAsync(string id)
+        {
+            return await _context.ApplicationUsers.FindAsync(id);
+        }
+
         public bool IsUniqueUser(string username)
         {
-            var user = _db.ApplicationUsers.FirstOrDefault(x => x.UserName == username);
+            var user = _context.ApplicationUsers.FirstOrDefault(x => x.UserName == username);
             if (user == null)
             {
                 return true;
@@ -44,8 +55,8 @@ namespace SchoolAdministration.Repositories.Repos
 
         public async Task<LoginResponseDTO> Login(LoginRequestDTO loginRequestDTO)
         {
-            var user = _db.ApplicationUsers.FirstOrDefault(
-                u => u.UserName.ToLower() == loginRequestDTO.UserName.ToLower()
+            var user = _context.ApplicationUsers.FirstOrDefault(
+                u => u.UserName.ToLower() == loginRequestDTO.UserName.ToLower() || u.Email.ToLower() == loginRequestDTO.UserName.ToLower()
             );
 
             bool isValid = await _userManager.CheckPasswordAsync(user, loginRequestDTO.Password);
@@ -78,7 +89,7 @@ namespace SchoolAdministration.Repositories.Repos
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            LoginResponseDTO loginResponseDTO = new LoginResponseDTO() // b3cbb9ee-8e3b-48aa-ac18-70dfe3bc572e not in a correct format
+            LoginResponseDTO loginResponseDTO = new LoginResponseDTO()
             {
                 Token = tokenHandler.WriteToken(token),
                 User = _mapper.Map<UserDTO>(user),
@@ -92,8 +103,8 @@ namespace SchoolAdministration.Repositories.Repos
             ApplicationUser user = new()
             {
                 UserName = registrationRequestDTO.UserName,
-                Email = registrationRequestDTO.UserName,
-                NormalizedEmail = registrationRequestDTO.UserName.ToUpper(),
+                Email = registrationRequestDTO.Email,
+                NormalizedEmail = registrationRequestDTO.Email.ToUpper(),
                 Name = registrationRequestDTO.Name,
             };
 
@@ -102,19 +113,18 @@ namespace SchoolAdministration.Repositories.Repos
                 var result = await _userManager.CreateAsync(user, registrationRequestDTO.Password);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "admin");
-                    var userToReturn = _db.ApplicationUsers
+                    await _userManager.AddToRoleAsync(user, registrationRequestDTO.Role);
+                    var userToReturn = _context.ApplicationUsers
                         .FirstOrDefault(u => u.UserName == registrationRequestDTO.UserName);
                     return _mapper.Map<UserDTO>(userToReturn); 
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
 
             return new UserDTO();
-
         }
     }
 }

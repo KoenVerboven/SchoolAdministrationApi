@@ -2,26 +2,78 @@
 using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
+using SchoolAdministration.Repositories.Repos;
 
 namespace SchoolAdministration.Controllers
 {
-    [Route("api/UserAuth")]
+    [Route("api/User")]
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUserRepository _userRepo;
+        private readonly IUserRepository _userRepository;
         protected ApiResponse _apiResponse;
 
         public UserController(IUserRepository userRepo)
         {
-            _userRepo = userRepo;
+            _userRepository = userRepo;
             this._apiResponse = new ApiResponse();
         }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequestDTO model)
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<UserDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<UserDTO>>> GetAllUsers()
         {
-            var LoginResponse = await _userRepo.Login(model);
+            var allUsers = await _userRepository.GetAllAsync();
+            var userDTOList = new List<UserDTO>();
+            foreach (var user in allUsers) 
+            {
+                userDTOList.Add(new UserDTO
+                    {
+                        Id = user.Id,
+                        Name = user.Name,
+                        UserName = user.UserName,
+                        Email = user.Email
+                    });
+            }
+            return Ok(userDTOList);
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(UserDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<UserDTO>> GetUserById(string id)
+        {
+            if (id == "")
+            {
+               return BadRequest();
+            }
+
+            var user = await _userRepository.GetByIdAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userDTO = new UserDTO { 
+                Id = user.Id ,
+                Name = user.Name,
+                UserName = user.UserName   
+            };
+
+            return Ok(userDTO);
+        }
+
+
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDTO model) // correct login : username: maddy@test.be   password: Admin123+
+        {
+            var LoginResponse = await _userRepository.Login(model);
             if (LoginResponse.User == null || string.IsNullOrEmpty(LoginResponse.Token))
             {
                 _apiResponse.Statuscode = System.Net.HttpStatusCode.BadRequest;
@@ -38,7 +90,7 @@ namespace SchoolAdministration.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegistrationRequestDTO model)
         {
-            bool ifUserNamUnique = _userRepo.IsUniqueUser(model.UserName);
+            bool ifUserNamUnique = _userRepository.IsUniqueUser(model.UserName);
             if (!ifUserNamUnique)
             {
                 _apiResponse.Statuscode = System.Net.HttpStatusCode.BadRequest;
@@ -47,7 +99,7 @@ namespace SchoolAdministration.Controllers
                 return BadRequest(_apiResponse);
             }
 
-            var user = await _userRepo.Register(model);
+            var user = await _userRepository.Register(model);
             if (user == null)
             {
                 _apiResponse.Statuscode = System.Net.HttpStatusCode.BadRequest;
