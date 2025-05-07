@@ -34,7 +34,7 @@ namespace SchoolAdministration.Controllers
                         Id = user.Id,
                         Name = user.Name,
                         UserName = user.UserName,
-                        Email = user.Email
+                        Email = user.Email  
                     });
             }
             return Ok(userDTOList);
@@ -59,13 +59,13 @@ namespace SchoolAdministration.Controllers
                 return NotFound();
             }
 
-            var userDTO = new UserDTO { 
-                Id = user.Id ,
-                Name = user.Name,
-                UserName = user.UserName   
-            };
+            //var userDTO = new UserDTO { 
+            //    Id = user.Id ,
+            //    Name = user.Name,
+            //    UserName = user.UserName   
+            //};
 
-            return Ok(userDTO);
+            return Ok(user);
         }
 
 
@@ -74,7 +74,7 @@ namespace SchoolAdministration.Controllers
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO model) // correct login : username: maddy@test.be   password: Admin123+
         {
             var LoginResponse = await _userRepository.Login(model);
-            if (LoginResponse.User == null || string.IsNullOrEmpty(LoginResponse.Token))
+            if (LoginResponse == null || string.IsNullOrEmpty(LoginResponse.Token))
             {
                 _apiResponse.Statuscode = System.Net.HttpStatusCode.BadRequest;
                 _apiResponse.IsSuccess = false;

@@ -38,9 +38,21 @@ namespace SchoolAdministration.Repositories.Repos
            return await _context.ApplicationUsers.ToListAsync();
         }
 
-        public async Task<ApplicationUser?> GetByIdAsync(string id)
+        public async Task<UserDTO?> GetByIdAsync(string id)
         {
-            return await _context.ApplicationUsers.FindAsync(id);
+            var user = await _context.ApplicationUsers.FindAsync(id);
+            var roles = await _userManager.GetRolesAsync(user);//we gaan er hier van uit : 1 role per user // todo : role toevoegen aan gereturnd resultaat !!!!
+            var role = "";
+            if (roles != null) { role = roles[0]; };
+            var userDTO = new UserDTO
+            {
+                Id = user.Id,
+                UserName = user.Name,
+                Name = user.Name,
+                Email = user.Email,
+                role = role
+            };
+            return userDTO;
         }
 
         public bool IsUniqueUser(string username)
@@ -65,8 +77,12 @@ namespace SchoolAdministration.Repositories.Repos
             {
                 return new LoginResponseDTO()
                 {
-                    Token = "",
-                    User = null
+                    Id = "",
+                    UserName = "",
+                    Name= "",
+                    Email = "",
+                    Role = "",
+                    Token = ""
                 };
             }
 
@@ -84,7 +100,7 @@ namespace SchoolAdministration.Repositories.Repos
                         new Claim(ClaimTypes.Role,roles.FirstOrDefault())
                     }
                 ),
-                Expires = DateTime.UtcNow.AddDays(100),
+                Expires = DateTime.UtcNow.AddDays(1000),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
@@ -92,8 +108,13 @@ namespace SchoolAdministration.Repositories.Repos
             LoginResponseDTO loginResponseDTO = new LoginResponseDTO()
             {
                 Token = tokenHandler.WriteToken(token),
-                User = _mapper.Map<UserDTO>(user),
-                Role = roles.FirstOrDefault()
+                //User = _mapper.Map<UserDTO>(user),
+                Id = user.Id,
+                UserName= user.Name,
+                Name= user.Name,
+                Email= user.Email,
+                Role = roles.FirstOrDefault(),
+                //Token ????
             };
             return loginResponseDTO;
         }
