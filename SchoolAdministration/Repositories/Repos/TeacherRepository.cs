@@ -22,6 +22,11 @@ namespace SchoolAdministration.Repositories.Repos
             await _context.SaveChangesAsync();
         }
 
+        public Task<int> CountAsync()
+        {
+            return _context.Teachers.CountAsync();
+        }
+
         public async Task DeleteTeacherAsync(int id)
         {
             var teacherInDb = _context.Teachers.Find(id) ?? throw new KeyNotFoundException($"Teachter with id {id} was not found.");

@@ -20,6 +20,11 @@ namespace SchoolAdministration.Repositories.Repos
             await _context.SaveChangesAsync();
         }
 
+        public Task<int> CountAsync()
+        {
+            return _context.ExamResults.CountAsync();
+        }
+
         public async Task DeleteExamResultAsync(int id)
         {
             var examResultInDb = await _context.ExamResults.FindAsync(id) ?? throw new KeyNotFoundException($"ExamResult with id {id} was not found.");

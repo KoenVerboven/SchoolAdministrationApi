@@ -33,6 +33,11 @@ namespace SchoolAdministration.Repositories.Repos
             secretKey = configuration.GetValue<string>("ApiSettings:Secret");
         }
 
+        public Task<int> CountAsync()
+        {
+            return _context.Users.CountAsync();
+        }
+
         public async Task<IEnumerable<ApplicationUser>> GetAllAsync()
         {
            return await _context.ApplicationUsers.ToListAsync();
@@ -41,13 +46,13 @@ namespace SchoolAdministration.Repositories.Repos
         public async Task<UserDTO?> GetByIdAsync(string id)
         {
             var user = await _context.ApplicationUsers.FindAsync(id);
-            var roles = await _userManager.GetRolesAsync(user);//we gaan er hier van uit : 1 role per user // todo : role toevoegen aan gereturnd resultaat !!!!
+            var roles = await _userManager.GetRolesAsync(user);//we gaan er hier van uit : 1 role per user 
             var role = "";
             if (roles != null) { role = roles[0]; };
             var userDTO = new UserDTO
             {
                 Id = user.Id,
-                UserName = user.Name,
+                UserName = user.UserName,
                 Name = user.Name,
                 Email = user.Email,
                 role = role
@@ -94,18 +99,17 @@ namespace SchoolAdministration.Repositories.Repos
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new System.Security.Claims.ClaimsIdentity(
-                    new Claim[]
-                    {
+                    [
                         new Claim(ClaimTypes.Name, user.Id.ToString()),
                         new Claim(ClaimTypes.Role,roles.FirstOrDefault())
-                    }
+                    ]
                 ),
                 Expires = DateTime.UtcNow.AddDays(1000),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            LoginResponseDTO loginResponseDTO = new LoginResponseDTO()
+            LoginResponseDTO loginResponseDTO = new()
             {
                 Token = tokenHandler.WriteToken(token),
                 //User = _mapper.Map<UserDTO>(user),

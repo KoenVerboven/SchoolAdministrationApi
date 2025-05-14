@@ -20,6 +20,11 @@ namespace SchoolAdministration.Repositories.Repos
             await _context.SaveChangesAsync(); ;
         }
 
+        public Task<int> CountAsync()
+        {
+            return _context.StudyPlans.CountAsync();
+        }
+
         public async Task DeleteStudyPlanAsync(int id)
         {
             var studyPlanInDb = await _context.StudyPlans.FindAsync(id) ?? throw new KeyNotFoundException($"StudyPlan with id {id} was not found.");

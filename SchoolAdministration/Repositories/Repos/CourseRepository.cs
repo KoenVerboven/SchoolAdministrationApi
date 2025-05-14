@@ -23,6 +23,11 @@ namespace SchoolAdministration.Repositories.Repos
             await _context.SaveChangesAsync();
         }
 
+        public Task<int> CountAsync()
+        {
+            return _context.Courses.CountAsync();
+        }
+
         public bool CourseExist(Course course)
         {
             return _context.Courses.Any(p=>p.CourseName.Trim().ToLower() == course.CourseName.Trim().ToLower());

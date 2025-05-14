@@ -10,5 +10,6 @@ namespace SchoolAdministration.Repositories.Interfaces
         bool IsUniqueUser(string username);
         Task<LoginResponseDTO> Login(LoginRequestDTO loginRequestDTO);
         Task<UserDTO> Register(RegistrationRequestDTO registrationRequestDTO);
+        Task<int> CountAsync();
     }
 }

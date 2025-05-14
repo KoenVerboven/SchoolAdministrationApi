@@ -9,5 +9,6 @@ namespace SchoolAdministration.Repositories.Interfaces
         Task AddStudyPlanAsync(StudyPlan studyPlan);
         Task UpdateStudyPlanAsync(StudyPlan studyPlan);
         Task DeleteStudyPlanAsync(int id);
+        Task<int> CountAsync();
     }
 }

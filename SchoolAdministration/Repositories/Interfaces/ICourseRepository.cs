@@ -12,6 +12,7 @@ namespace SchoolAdministration.Repositories.Interfaces
         Task UpdateCourseAsync(Course course);
         Task DeleteCourseAsync(int id);
         bool CourseExist(Course course);
+        Task<int> CountAsync();
 
     }
 }

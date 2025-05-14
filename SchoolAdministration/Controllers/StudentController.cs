@@ -150,7 +150,7 @@ namespace SchoolAdministration.Controllers
         [HttpGet("getStudentCount")]
         public async Task<int>StudentCountAsync()
         {
-           return await _studentRepository.StudentCountAsync();
+           return await _studentRepository.CountAsync();
         }
 
     }

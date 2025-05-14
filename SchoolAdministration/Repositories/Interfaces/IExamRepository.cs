@@ -9,5 +9,7 @@ namespace SchoolAdministration.Repositories.Interfaces
         Task AddExamAsync(Exam exam);
         Task UpdateExamAsync(Exam exam);
         Task DeleteExamAsync(int id);
+
+        Task<int> CountAsync();
     }
 }
