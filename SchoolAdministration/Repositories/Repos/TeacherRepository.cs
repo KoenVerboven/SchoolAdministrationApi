@@ -39,6 +39,30 @@ namespace SchoolAdministration.Repositories.Repos
             return await _context.Teachers.ToListAsync();   
         }
 
+        public async Task<IEnumerable<Teacher>> GetFilterAsyn(string sort, int pageSize, int pageNumber)
+        {
+            IQueryable<Teacher>? teachers;
+
+            teachers = sort.ToLower() switch
+            {
+                "name" =>  _context.Teachers.OrderBy(p => p.LastName).ThenBy(p => p.FirstName).AsQueryable(),
+                "email" =>  _context.Teachers.OrderBy(p => p.Email).AsQueryable(),
+                "phone" =>  _context.Teachers.OrderBy(p => p.Phone).AsQueryable(),
+                _ =>  _context.Teachers.OrderBy(p => p.Id).AsQueryable(),
+            };
+
+            if (pageSize > 0)
+            {
+                if (pageSize > 30)
+                {
+                    pageSize = 30;
+                }
+                teachers = teachers.Skip(pageSize * (pageNumber - 1)).Take(pageSize);
+            }
+
+            return await teachers.ToListAsync(); 
+        }
+
         public async Task<IEnumerable<Teacher>> GetAllAsynSort(string sort)
         {
             List<Teacher>? teachers = sort.ToLower() switch
@@ -50,7 +74,7 @@ namespace SchoolAdministration.Repositories.Repos
             };
             return teachers;
         }
-
+  
         public async Task<Teacher?> GetAsynById(int id)
         {
             return await _context.Teachers.FindAsync(id);

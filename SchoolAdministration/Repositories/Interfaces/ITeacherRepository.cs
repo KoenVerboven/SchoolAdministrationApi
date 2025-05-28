@@ -5,6 +5,7 @@ namespace SchoolAdministration.Repositories.Interfaces
     public interface ITeacherRepository
     {
         Task<IEnumerable<Teacher>> GetAllAsyn();
+        Task<IEnumerable<Teacher>> GetFilterAsyn(string sort, int pageSize, int pageNumber);
         Task<IEnumerable<Teacher>> GetAllAsynSort(string sort);
         Task<Teacher?> GetAsynById(int id);
         Task AddTeacherAsync(Teacher teacher);

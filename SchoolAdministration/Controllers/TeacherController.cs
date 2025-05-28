@@ -50,6 +50,22 @@ namespace SchoolAdministration.Controllers
             return Ok(teachersDTO);
         }
 
+
+
+        [HttpGet("GetAllFilter/{sort}")]
+        //[Authorize]
+        [ProducesResponseType(typeof(IEnumerable<TeacherDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<TeacherDTO>>> GetAllAsyncFilter(string sort, int pageSize, int pageNumber, int zipCode = 0) //add filter object
+        {
+            var allTeachers = await _teacherRepository.GetFilterAsyn(sort, pageSize: pageSize, pageNumber: pageNumber);
+            var teachersDTO = _mapper.Map<List<TeacherDTO>>(allTeachers);
+            return Ok(teachersDTO);
+        }
+
+
+
         [HttpGet("{id}")]
         //[Authorize]
         [ProducesResponseType(typeof(TeacherDTO), StatusCodes.Status200OK)]

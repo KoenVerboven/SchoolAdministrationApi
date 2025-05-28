@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
+using SchoolAdministration.Specifications;
 
 
 
@@ -80,7 +81,6 @@ namespace SchoolAdministration.Controllers
         }
 
 
-
         [HttpGet("getByNameStartWith/{name}")]
         [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -92,6 +92,16 @@ namespace SchoolAdministration.Controllers
             return Ok(studentsDTO);
         }
 
+        [HttpGet("getStudentByFilter")]
+        [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<StudentDTO>>> getStudentByFilter([FromQuery] StudentSpecParams studentSpecParams)
+        {
+            var students = await _studentRepository.GetFilterAsync(studentSpecParams);
+            var studentsDTO = _mapper.Map<IEnumerable<StudentDTO>>(students);
+            return Ok(studentsDTO);
+        }
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
