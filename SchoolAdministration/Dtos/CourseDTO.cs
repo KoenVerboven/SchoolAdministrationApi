@@ -11,7 +11,7 @@ namespace SchoolAdministration.Dtos
 
         [Required(ErrorMessage = "Course Name is required.")]
         [StringLength(30, ErrorMessage = "Course code cannot longer than 30 characters")]
-        public string CourseName { get; set; }
+        public required string CourseName { get; set; }
 
         [StringLength(5, ErrorMessage = "Course code cannot longer than 5 characters")]
         public string? CourseCode { get; set; }

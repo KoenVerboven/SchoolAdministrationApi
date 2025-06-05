@@ -10,12 +10,12 @@ namespace SchoolAdministration.Dtos
         [Display(Name = "First name")]
         [Required(ErrorMessage = "First Name is required.")]
         [StringLength(30, ErrorMessage = "First Name cannot longer than 30 characters")]
-        public string FirstName { get; set; }
+        public required string FirstName { get; set; }
 
         [Display(Name = "Last name")]
         [Required(ErrorMessage = "Last Name is required.")]
         [StringLength(30, ErrorMessage = "Last Name cannot longer than 30 characters")]
-        public string LastName { get; set; }
+        public required string LastName { get; set; }
 
         [Display(Name = "Date of birth")]
         public DateTime? DateOfBirth { get; set; }

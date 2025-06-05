@@ -7,11 +7,11 @@ namespace SchoolAdministration.Dtos
     {
         [Required(ErrorMessage = "First Name is required.")]
         [StringLength(30, ErrorMessage = "First Name cannot longer than 30 characters")]
-        public string FirstName { get; set; }
+        public required string FirstName { get; set; }
 
         [Required(ErrorMessage = "Last Name is required.")]
         [StringLength(30, ErrorMessage = "Last Name cannot longer than 30 characters")]
-        public string LastName { get; set; }
+        public required string LastName { get; set; }
 
         [Display(Name = "Date of birth")]
         public DateTime? DateOfBirth { get; set; }
@@ -30,10 +30,10 @@ namespace SchoolAdministration.Dtos
         [Required(ErrorMessage = "Email Name is required.")]
         [EmailAddress(ErrorMessage = "Invalid email address.")]
         [Length(5, 30)]
-        public string Email { get; set; }
+        public required string Email { get; set; }
 
         [Required(ErrorMessage = "Phone Name is required.")]
-        public string Phone { get; set; }
+        public required string Phone { get; set; }
 
         public string? ParentPhoneNumber { get; set; }
 

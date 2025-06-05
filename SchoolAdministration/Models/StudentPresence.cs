@@ -9,6 +9,6 @@ namespace SchoolAdministration.Models
         public int StudentId { get; set; } //FK
         public int CourseId { get; set; } //FK
         public bool Presence { get; set; }
-        public string AbsenceReason { get; set; }
+        public string? AbsenceReason { get; set; }
     }
 }

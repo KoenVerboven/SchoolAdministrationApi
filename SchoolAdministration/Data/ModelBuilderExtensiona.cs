@@ -19,8 +19,8 @@ namespace SchoolAdministration.Data
                 //}
 
                 // Define the admin user details
-                var adminEmail = "admin@gmail.com";
-                var adminPassword = "Admin@123";
+                //var adminEmail = "admin@gmail.com";
+                //var adminPassword = "Admin@123";
 
                 // Check if the admin user already exists
                 //var userExist = await userManager.FindByEmailAsync(adminEmail);
