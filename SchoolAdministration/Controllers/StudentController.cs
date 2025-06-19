@@ -92,13 +92,24 @@ namespace SchoolAdministration.Controllers
             return Ok(studentsDTO);
         }
 
+        //[HttpGet("getStudentByFilter1")]
+        //[ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public async Task<ActionResult<IEnumerable<StudentDTO>>> getStudentByFilter1([FromQuery] StudentSpecParams studentSpecParams)
+        //{
+        //    var students = await _studentRepository.GetFilterAsync1(studentSpecParams);
+        //    var studentsDTO = _mapper.Map<IEnumerable<StudentDTO>>(students);
+        //    return Ok(studentsDTO);
+        //}
+
         [HttpGet("getStudentByFilter")]
         [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<StudentDTO>>> getStudentByFilter([FromQuery] StudentSpecParams studentSpecParams)
+        public async Task<ActionResult<IEnumerable<StudentDTO>>> getStudentByFilter([FromQuery] string? Name,string? Email, int ZipCode, string Sort, int PageSize, int PageNumber)
         {
-            var students = await _studentRepository.GetFilterAsync(studentSpecParams);
+            var students = await _studentRepository.GetFilterAsync(Name,Email, ZipCode,Sort,PageSize,PageNumber);
             var studentsDTO = _mapper.Map<IEnumerable<StudentDTO>>(students);
             return Ok(studentsDTO);
         }

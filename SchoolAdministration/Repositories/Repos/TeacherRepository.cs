@@ -48,6 +48,7 @@ namespace SchoolAdministration.Repositories.Repos
                 "name" =>  _context.Teachers.OrderBy(p => p.LastName).ThenBy(p => p.FirstName).AsQueryable(),
                 "email" =>  _context.Teachers.OrderBy(p => p.Email).AsQueryable(),
                 "phone" =>  _context.Teachers.OrderBy(p => p.Phone).AsQueryable(),
+                "dateofbirth" => _context.Teachers.OrderBy(p => p.DateOfBirth).AsQueryable(),
                 _ =>  _context.Teachers.OrderBy(p => p.Id).AsQueryable(),
             };
 
@@ -67,9 +68,16 @@ namespace SchoolAdministration.Repositories.Repos
         {
             List<Teacher>? teachers = sort.ToLower() switch
             {
+                "id" => await _context.Teachers.OrderBy(p => p.Id).ToListAsync(),
+                "id_desc" => await _context.Teachers.OrderByDescending(p => p.Id).ToListAsync(),
                 "name" => await _context.Teachers.OrderBy(p => p.LastName).ThenBy(p => p.FirstName).ToListAsync(),
+                "name_desc" => await _context.Teachers.OrderByDescending(p => p.LastName).ThenBy(p => p.FirstName).ToListAsync(),
                 "email" => await _context.Teachers.OrderBy(p => p.Email).ToListAsync(),
+                "email_desc" => await _context.Teachers.OrderByDescending(p => p.Email).ToListAsync(),
                 "phone" => await _context.Teachers.OrderBy(p => p.Phone).ToListAsync(),
+                "phone_desc" => await _context.Teachers.OrderByDescending(p => p.Phone).ToListAsync(),
+                "dateofbirth" => await _context.Teachers.OrderBy(p => p.DateOfBirth).ToListAsync(),
+                "dateofbirth_desc" => await _context.Teachers.OrderByDescending(p => p.DateOfBirth).ToListAsync(),
                 _ => await _context.Teachers.OrderBy(p => p.Id).ToListAsync(),
             };
             return teachers;
