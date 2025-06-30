@@ -17,5 +17,6 @@ namespace SchoolAdministration.Repositories.Interfaces
         Task DeleteStudentAsync(int id);
         bool StudentExist(Student student);
         Task <int>CountAsync();
+        Task<int> CountFilterAsync(string? Name, string? Email, int ZipCode);
     }
 }

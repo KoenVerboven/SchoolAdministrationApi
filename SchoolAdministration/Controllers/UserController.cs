@@ -71,7 +71,7 @@ namespace SchoolAdministration.Controllers
 
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequestDTO model) // correct login : username: maddy@test.be   password: Admin123+
+        public async Task<IActionResult> Login([FromBody] LoginRequestDTO model) // correct login : username: maddy@test.be   password: Admin123+    ; Koen Admin123@
         {
             var LoginResponse = await _userRepository.Login(model);
             if (LoginResponse == null || string.IsNullOrEmpty(LoginResponse.Token))

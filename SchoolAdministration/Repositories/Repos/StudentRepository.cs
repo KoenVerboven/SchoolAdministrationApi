@@ -96,13 +96,46 @@ namespace SchoolAdministration.Repositories.Repos
         {
             return _context.Students.CountAsync();
         }
-   
+
+        public Task<int> CountFilterAsync(string? Name, string? Email, int ZipCode)
+        {
+            IQueryable<Student> students;
+
+            students = _context.Students;
+
+            if (Name is not null)
+            {
+                if (Name.Trim() != string.Empty)
+                {
+                    students = students.Where(p => (p.LastName.ToLower() + " " + p.FirstName).Contains(Name.ToLower())).AsQueryable();
+                }
+            }
+
+            if (Email is not null)
+            {
+                if (Email.Trim() != string.Empty)
+                {
+                    students = students.Where(p => (p.Email.ToLower()).Contains(Email.ToLower())).AsQueryable();
+                }
+            }
+
+            if (ZipCode > 0)
+            {
+                students = students.Where(p => p.Zipcode == ZipCode).AsQueryable();
+            }
+
+            return students.CountAsync();
+        }
+
+
+
+
         //public async Task<IEnumerable<Student>> GetFilterAsync1(StudentSpecParams studentSpecParams)
         //{
         //    IQueryable<Student> students;
 
         //    students = _context.Students;
-            
+
         //    if(studentSpecParams.Name is not null)
         //    {
         //        if (studentSpecParams.Name.Trim() != string.Empty)
@@ -155,9 +188,9 @@ namespace SchoolAdministration.Repositories.Repos
 
         //    return await students.ToListAsync();
         //}
-    
 
-      public async Task<IEnumerable<Student>> GetFilterAsync(string? Name,string? Email, int ZipCode, string Sort, int PageSize, int PageNumber)
+
+        public async Task<IEnumerable<Student>> GetFilterAsync(string? Name,string? Email, int ZipCode, string Sort, int PageSize, int PageNumber)
         {
             IQueryable<Student> students;
 
@@ -203,7 +236,7 @@ namespace SchoolAdministration.Repositories.Repos
                 _ => students.OrderBy(p => p.Id).AsQueryable(),
             };
 
-            if (PageSize > 0)
+            if (PageSize > 0 && PageNumber > 0)
             {
                 if (PageSize > 30)
                 {

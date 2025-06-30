@@ -169,10 +169,15 @@ namespace SchoolAdministration.Controllers
         }
 
         [HttpGet("getStudentCount")]
-        public async Task<int>StudentCountAsync()
+        public async Task<int> StudentCountAsync()
         {
-           return await _studentRepository.CountAsync();
+            return await _studentRepository.CountAsync();
         }
 
+        [HttpGet("getStudentFilterCount")]
+        public async Task<int> StudentFilterCountAsync2(string? Name, string? Email, int ZipCode)
+        {
+            return await _studentRepository.CountFilterAsync(Name,Email,ZipCode);
+        }
     }
 }
