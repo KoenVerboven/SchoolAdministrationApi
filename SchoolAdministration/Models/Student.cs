@@ -43,6 +43,8 @@ namespace SchoolAdministration.Models
         [Required(ErrorMessage = "Phone Name is required.")]
         public string Phone { get; set; }
 
+        public DateTime RegistrationDate { get; set; }
+
         [Display(Name = "Parent phone number")]
         public string? ParentPhoneNumber  { get; set; }
 
