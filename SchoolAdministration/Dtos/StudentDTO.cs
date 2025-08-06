@@ -38,7 +38,9 @@ namespace SchoolAdministration.Dtos
 
         [Required(ErrorMessage = "Phone Name is required.")]
         public string Phone { get; set; }
-      
+
+        public DateTime RegistrationDate { get; set; }
+
         public string? ParentPhoneNumber { get; set; }
 
         [StringLength(30, ErrorMessage = "Parent lastname cannot longer than 30 characters")]
