@@ -15,10 +15,7 @@ namespace SchoolAdministration.Controllers
         private readonly ILogger<TeacherController> _logger;
         private readonly IMapper _mapper;
 
-        public TeacherController(
-            ITeacherRepository teacherRepository,
-            ILogger<TeacherController> logger,
-            IMapper mapper)
+        public TeacherController(ITeacherRepository teacherRepository,ILogger<TeacherController> logger,IMapper mapper)
         {
             _teacherRepository = teacherRepository;
             _logger = logger;

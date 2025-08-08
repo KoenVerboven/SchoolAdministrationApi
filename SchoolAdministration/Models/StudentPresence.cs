@@ -8,14 +8,11 @@ namespace SchoolAdministration.Models
         public int Id { get; set; }
         public int ClassId { get; set; }
         public int StudentId { get; set; } //FK
-        public int CourseId { get; set; } //FK
+        public int? CourseId { get; set; } //FK
         public bool Presence { get; set; }
-
-        //courseDateTime toevoegen;
-        public string? AbsenceReason { get; set; }// lijst van maken ipv string
-
+        public int? AbsenceReason { get; set; }
         public string? Comment { get; set; }
-
-        //createByTeacherId toevoegen;
+        public DateTime RegistrationDate { get; set; }
+        public int RegistratedByTeacherId { get; set; }
     }
 }

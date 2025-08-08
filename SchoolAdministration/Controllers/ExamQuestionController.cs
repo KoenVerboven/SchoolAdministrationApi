@@ -13,8 +13,7 @@ namespace SchoolAdministration.Controllers
         private readonly IExamQuestionRepository _examQuestionRepository;
         private readonly ILogger<ExamResultController> _logger;
 
-        public ExamQuestionController(IExamQuestionRepository examQuestionRepository,
-            ILogger<ExamResultController> logger)
+        public ExamQuestionController(IExamQuestionRepository examQuestionRepository, ILogger<ExamResultController> logger)
         {
             _examQuestionRepository = examQuestionRepository;
             _logger = logger;

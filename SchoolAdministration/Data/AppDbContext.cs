@@ -15,6 +15,11 @@ namespace SchoolAdministration.Data
         public DbSet<ExamQuestion> ExamQuestions { get; set; }
         public DbSet<StudyPlan> StudyPlans { get; set; }
         public DbSet<StudyPlanPart> StudyPlanParts { get; set; }
+        public DbSet<School>Schools { get; set; }
+        public DbSet <SchoolDepartment>SchoolDepartments { get; set; }
+        public DbSet<SchoolClass> SchoolClasses { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<StudentPresence>StudentsPresence { get; set; }
 
 
         public AppDbContext(DbContextOptions<AppDbContext> options)

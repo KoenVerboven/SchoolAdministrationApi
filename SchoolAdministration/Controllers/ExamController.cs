@@ -14,11 +14,7 @@ namespace SchoolAdministration.Controllers
         private readonly ILogger<CourseController> _logger;
         private readonly IMapper _mapper;
 
-        public ExamController(
-            IExamRepository examRepository,
-            ILogger<CourseController> logger,
-            IMapper mapper
-            )
+        public ExamController(IExamRepository examRepository, ILogger<CourseController> logger, IMapper mapper)
         {
             _examRepository = examRepository;
             _logger = logger;

@@ -16,10 +16,7 @@ namespace SchoolAdministration.Controllers
         private readonly IMapper _mapper;
 
        
-        public CourseController(
-            ICourseRepository courseRepository,
-            ILogger<CourseController> logger,
-            IMapper mapper)
+        public CourseController(ICourseRepository courseRepository,ILogger<CourseController> logger,IMapper mapper)
         {
             _courseRepository = courseRepository;
             _logger = logger;

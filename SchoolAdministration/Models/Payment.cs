@@ -5,11 +5,10 @@ namespace SchoolAdministration.Models
     {
         public int Id { get; set; }
         public int StudentId { get; set; }
-        public int CourseId { get; set; }
+        public int? CourseId { get; set; }
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; }
-        public string PaymentMethod { get; set; } // ToDo cash, kreditcart, ...
-        public DateTime TransactionTime { get; set; }
-        public int TransactionId { get; set; }
+        public int PaymentMethodId { get; set; } // ToDo cash, kreditcart, ...
+        public int? TransactionId { get; set; }
     }
 }

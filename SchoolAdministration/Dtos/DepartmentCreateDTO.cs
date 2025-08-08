@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace SchoolAdministration.Models
+﻿namespace SchoolAdministration.Dtos
 {
-    public class SchoolDepartment
+    public class DepartmentCreateDTO
     {
-        [Key]
         public int Id { get; set; }
         public required string Name { get; set; }
         public int SchoolId { get; set; }

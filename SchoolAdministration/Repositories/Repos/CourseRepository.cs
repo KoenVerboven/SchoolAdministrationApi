@@ -35,8 +35,7 @@ namespace SchoolAdministration.Repositories.Repos
 
         public async Task DeleteCourseAsync(int id)
         {
-            var courseInDb = await _context.Courses.FindAsync(id)
-                ?? throw new KeyNotFoundException($"course with id {id} was not found.");
+            var courseInDb = await _context.Courses.FindAsync(id) ?? throw new KeyNotFoundException($"Course with id {id} was not found.");
             _context.Courses.Remove(courseInDb);
             await _context.SaveChangesAsync();
         }

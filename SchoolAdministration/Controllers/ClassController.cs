@@ -1,0 +1,81 @@
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using SchoolAdministration.Dtos;
+using SchoolAdministration.Models;
+using SchoolAdministration.Repositories.Interfaces;
+using SchoolAdministration.Repositories.Repos;
+
+namespace SchoolAdministration.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ClassController : ControllerBase
+    {
+        private readonly IClassRepository _classRepository;
+        private readonly IMapper _mapper;
+
+        public ClassController(IClassRepository  classRepository, IMapper mapper)
+        {
+            _classRepository = classRepository;
+            _mapper = mapper;
+        }
+
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<ClassDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<ClassDTO>>> GetAllClasses()
+        {
+            var allClasses = await _classRepository.GetAllAsync();
+            var classesDTO = _mapper.Map<List<ClassDTO>>(allClasses);
+            return Ok(classesDTO);
+        }
+
+        [HttpGet("getById/{id}")]
+        [ProducesResponseType(typeof(ClassDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<CourseDTO>> GetClassById(int id)
+        {
+            if (id == 0)
+            {
+                return BadRequest();
+            }
+
+            var schoolclass = await _classRepository.GetByIdAsync(id);
+
+            if (schoolclass == null)
+            {
+                return NotFound();
+            }
+
+            var classDTO = _mapper.Map<ClassDTO>(schoolclass);
+            return Ok(classDTO);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<ClassDTO>> CreateClass(ClassCreateDTO classCreateDTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            SchoolClass schoolclass = _mapper.Map<SchoolClass>(classCreateDTO);
+
+            //if (_classRepository.ClassExist(schoolclass))
+            //{
+                ModelState.AddModelError("CustomError", "Class already Exists!");
+                return BadRequest(ModelState);
+            //}
+
+            await _classRepository.AddClassAsync(schoolclass);
+            return CreatedAtAction(nameof(GetClassById), new { id = schoolclass.Id }, schoolclass);
+        }
+
+    }
+}

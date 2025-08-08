@@ -3,9 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
-using SchoolAdministration.Specifications;
-
-
 
 namespace SchoolAdministration.Controllers
 {
@@ -20,10 +17,7 @@ namespace SchoolAdministration.Controllers
         private readonly ILogger<StudentController> _logger;
         private readonly IMapper _mapper;
 
-        public StudentController(
-            IStudentRepository studentRepository,
-            ILogger<StudentController> logger,
-            IMapper mapper)
+        public StudentController(IStudentRepository studentRepository,ILogger<StudentController> logger,IMapper mapper)
         {
             _logger = logger;
             _studentRepository = studentRepository;
