@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolAdministration.Data;
 
@@ -11,9 +12,11 @@ using SchoolAdministration.Data;
 namespace SchoolAdministration.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250808141059_AddTablesSchoolDepartmentClass")]
+    partial class AddTablesSchoolDepartmentClass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -423,7 +426,7 @@ namespace SchoolAdministration.Migrations
                     b.Property<string>("ContactPhone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CountryId")
+                    b.Property<int>("CountryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -436,7 +439,7 @@ namespace SchoolAdministration.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("EstablishedYear")
+                    b.Property<DateTime>("EstablishedYear")
                         .HasColumnType("datetime2");
 
                     b.PrimitiveCollection<string>("Facilities")
@@ -469,6 +472,7 @@ namespace SchoolAdministration.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedBy")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Website")
@@ -480,60 +484,6 @@ namespace SchoolAdministration.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Schools");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ContactEmail = "VTechnischool@gmail.com",
-                            CountryId = 0,
-                            CreatedAt = new DateTime(2025, 8, 10, 12, 37, 11, 51, DateTimeKind.Local).AddTicks(4204),
-                            CreatedBy = "system",
-                            EstablishedYear = new DateTime(2025, 8, 10, 12, 37, 11, 51, DateTimeKind.Local).AddTicks(4322),
-                            Name = "Vrije Technische School",
-                            StreetAndNumber = "Hoofdweg 1",
-                            UpdatedBy = "",
-                            ZipCode = 2300
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ContactEmail = "BSchoolTurnhout@gmail.com",
-                            CountryId = 0,
-                            CreatedAt = new DateTime(2025, 8, 10, 12, 37, 11, 51, DateTimeKind.Local).AddTicks(4564),
-                            CreatedBy = "system",
-                            EstablishedYear = new DateTime(2025, 8, 10, 12, 37, 11, 51, DateTimeKind.Local).AddTicks(4566),
-                            Name = "Basisschool Turnhout",
-                            StreetAndNumber = "Kerkstraat 23",
-                            UpdatedBy = "",
-                            ZipCode = 2300
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ContactEmail = "KSchoolTurnhout@gmail.com",
-                            CountryId = 0,
-                            CreatedAt = new DateTime(2025, 8, 10, 12, 37, 11, 51, DateTimeKind.Local).AddTicks(4569),
-                            CreatedBy = "system",
-                            EstablishedYear = new DateTime(2025, 8, 10, 12, 37, 11, 51, DateTimeKind.Local).AddTicks(4570),
-                            Name = "Kleuterschool Turnhout",
-                            StreetAndNumber = "Hoofdbaan 213",
-                            UpdatedBy = "",
-                            ZipCode = 2300
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ContactEmail = "PSchoolTurnhout@gmail.com",
-                            CountryId = 0,
-                            CreatedAt = new DateTime(2025, 8, 10, 12, 37, 11, 51, DateTimeKind.Local).AddTicks(4572),
-                            CreatedBy = "system",
-                            EstablishedYear = new DateTime(2025, 8, 10, 12, 37, 11, 51, DateTimeKind.Local).AddTicks(4573),
-                            Name = "Privateschool Turnhout",
-                            StreetAndNumber = "steenweg 88",
-                            UpdatedBy = "",
-                            ZipCode = 2300
-                        });
                 });
 
             modelBuilder.Entity("SchoolAdministration.Models.SchoolClass", b =>

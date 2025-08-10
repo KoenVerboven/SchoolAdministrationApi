@@ -2,7 +2,6 @@
 {
     public class SchoolCreateDTO
     {
-        public int Id { get; set; }
         public required string Name { get; set; }
         public required string StreetAndNumber { get; set; }
         public int ZipCode { get; set; }
