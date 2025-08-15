@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Data;
+using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
 
@@ -34,9 +35,9 @@ namespace SchoolAdministration.Repositories.Repos
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<School>> GetAllAsync()
+        public async Task<IEnumerable<SchoolDepartment>> GetAllAsync()
         {
-            return await _context.Schools.ToListAsync();
+            return await _context.SchoolDepartments.ToListAsync();
         }
 
         public async Task<SchoolDepartment?> GetByIdAsync(int id)

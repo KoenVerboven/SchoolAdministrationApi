@@ -11,7 +11,7 @@ namespace SchoolAdministration.Models
         public int ZipCode { get; set; }
         public int? CountryId { get; set; }
         public  string? ContactPhone { get; set; }
-        public string? ContactEmail { get; set; }
+        public required string ContactEmail { get; set; }
         public string? Website { get; set; }
         public string? LogoUrl { get; set; }
         public string? Description { get; set; }
@@ -21,7 +21,7 @@ namespace SchoolAdministration.Models
         public DateTime? EstablishedYear { get; set; }
         public string[]? Facilities { get; set; }
         public string[]? SocialMedia { get; set; }
-        public string CreatedBy { get; set; }
+        public required string CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
         public string? UpdatedBy { get; set; } 
         public DateTime? UpdatedAt { get; set; }
