@@ -38,9 +38,9 @@ namespace SchoolAdministration.Repositories.Repos
             return await _context.Schools.ToListAsync();
         }
 
-        public Task<School?> GetByIdAsync(int id)
+        public async Task<School?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Schools.FindAsync(id);
         }
 
         public bool SchoolExist(SchoolCreateDTO school)

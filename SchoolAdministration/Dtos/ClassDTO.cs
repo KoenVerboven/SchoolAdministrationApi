@@ -14,6 +14,6 @@ namespace SchoolAdministration.Dtos
         public int AcademicYear { get; set; }
         public string? Descripton { get; set; }
         public string? RoomNumber { get; set; }
-
+        //shedule
     }
 }

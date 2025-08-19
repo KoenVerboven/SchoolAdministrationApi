@@ -29,7 +29,10 @@ namespace SchoolAdministration.AutoMapper
        
             CreateMap<SchoolDepartment, DepartmentDTO>().ReverseMap();
             CreateMap<SchoolDepartment, DepartmentCreateDTO>().ReverseMap();
-      
+
+            CreateMap<SchoolClass, ClassDTO>().ReverseMap();
+            CreateMap<SchoolClass, ClassCreateDTO>().ReverseMap();
+
             CreateMap<ApplicationUser, UserDTO>().ReverseMap();
         }
     }
