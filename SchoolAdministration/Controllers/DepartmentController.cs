@@ -58,7 +58,7 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<DepartmentDTO>> DepartmentCourse(DepartmentCreateDTO departmentCreateDTO)
+        public async Task<ActionResult<DepartmentDTO>> CreateDepartment(DepartmentCreateDTO departmentCreateDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -69,12 +69,43 @@ namespace SchoolAdministration.Controllers
 
             //if (_departmentRepository.DepartmentExists(department))
             //{
-                ModelState.AddModelError("CustomError", "Department already Exists!");
-                return BadRequest(ModelState);
+                //ModelState.AddModelError("CustomError", "Department already Exists!");
+                //return BadRequest(ModelState);
             //}
 
             await _departmentRepository.AddDepartmentAsync(deparment);
             return CreatedAtAction(nameof(GetDepartmentById), new { id = deparment.Id }, deparment);
+        }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> DeleteDepartment(int id)
+        {
+            await _departmentRepository.DeleteDepartmentAsync(id);
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> UpdateDepartmentAsync(int id, SchoolUpdateDTO schoolUpdateDTO)
+        {
+            if (id != schoolUpdateDTO.Id)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            SchoolDepartment department = _mapper.Map<SchoolDepartment>(schoolUpdateDTO);
+            await _departmentRepository.UpdateDepartmentAsync(department);
+            return CreatedAtAction(nameof(GetDepartmentById), new { id = department.Id }, department);
         }
     }
 }

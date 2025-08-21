@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace SchoolAdministration.Dtos
+﻿namespace SchoolAdministration.Dtos
 {
-    public class ClassDTO
+    public class ClassUpdateDTO
     {
         public int Id { get; set; }
         public required string Name { get; set; }
@@ -14,6 +12,5 @@ namespace SchoolAdministration.Dtos
         public int AcademicYear { get; set; }
         public string? Descripton { get; set; } //todo :rename Descripton to  Description
         public string? RoomNumber { get; set; }
-        //shedule
     }
 }

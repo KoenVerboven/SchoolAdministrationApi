@@ -4,7 +4,6 @@ using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
 
-
 namespace SchoolAdministration.Controllers
 {
     [Route("api/[controller]")]
@@ -76,6 +75,39 @@ namespace SchoolAdministration.Controllers
             await _schoolRepository.AddSchoolAsync(school);
             return CreatedAtAction(nameof(GetSchoolById), new { id = school.Id }, school);
         }
+
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> DeleteSchool(int id)
+        {
+            await _schoolRepository.DeleteSchoolAsync(id);
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> UpdateCourseAsync(int id,  SchoolUpdateDTO schoolUpdateDTO)
+        {
+            if (id != schoolUpdateDTO.Id)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            School school = _mapper.Map<School>(schoolUpdateDTO);
+            await _schoolRepository.UpdateSchoolAsync(school);
+            return CreatedAtAction(nameof(GetSchoolById), new { id = school.Id }, school);
+        }
+
 
     }
 }

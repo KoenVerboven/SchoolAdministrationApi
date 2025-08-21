@@ -69,13 +69,45 @@ namespace SchoolAdministration.Controllers
 
             //if (_classRepository.ClassExist(schoolclass))
             //{
-                ModelState.AddModelError("CustomError", "Class already Exists!");
-                return BadRequest(ModelState);
+                //ModelState.AddModelError("CustomError", "Class already Exists!");
+                //return BadRequest(ModelState);
             //}
 
             await _classRepository.AddClassAsync(schoolclass);
             return CreatedAtAction(nameof(GetClassById), new { id = schoolclass.Id }, schoolclass);
         }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> DeleteClass(int id)
+        {
+            await _classRepository.DeleteClassAsync(id);
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> UpdateClassAsync(int id, ClassUpdateDTO classUpdateDTO)
+        {
+            if (id != classUpdateDTO.Id)
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            SchoolClass schoolClass = _mapper.Map<SchoolClass>(classUpdateDTO);
+            await _classRepository.UpdateClassAsync(schoolClass);
+            return CreatedAtAction(nameof(GetClassById), new { id = schoolClass.Id }, schoolClass);
+        }
+
 
     }
 }
