@@ -200,6 +200,7 @@ UnitTests :
 
 Swagger :Exploring Endpoints
 
-![localhost_7213_index html (2)](https://github.com/user-attachments/assets/37967a73-770c-444c-94ba-206baa648ff5)
+![swaggerPrintScreenjpg](https://github.com/user-attachments/assets/3554497c-cc8b-4c8a-8f31-e1b02a726779)
+
 
 
