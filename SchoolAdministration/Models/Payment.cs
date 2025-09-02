@@ -6,6 +6,7 @@ namespace SchoolAdministration.Models
         public int Id { get; set; }
         public int StudentId { get; set; }
         public int? CourseId { get; set; }
+        public int? ArticleId { get; set; }
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; }
         public int PaymentMethodId { get; set; } // ToDo cash, kreditcart, ...

@@ -58,6 +58,7 @@ namespace SchoolAdministration.Models
         public ICollection<Course>? Courses { get; set; }
         public ICollection<StudyPlan>? StudyPlans { get; set; }
         public ICollection<ExamResult>? ExamResults { get; set; }
+        public ICollection<StudentPresence>? StudentPresences { get; set; }
 
 
         //public int CreatedByUserId { get; set; }

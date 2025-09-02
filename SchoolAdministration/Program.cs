@@ -54,6 +54,7 @@ namespace SchoolAdministration
             builder.Services.AddScoped<ISchoolRepository, SchoolRepository>();
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             builder.Services.AddScoped<IClassRepository, ClassRepository>();
+            builder.Services.AddScoped<IStudentPresenceRepository, StudentPresenceRepository>();
             builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
 
             var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");

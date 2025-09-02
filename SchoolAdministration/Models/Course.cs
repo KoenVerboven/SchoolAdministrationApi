@@ -29,7 +29,8 @@ namespace SchoolAdministration.Models
         public decimal?  CoursePrice { get; set; }
         public int MaxNumberOfStudents { get; set; }
         public ICollection<Student>? Students { get; set; }
- 
+        public ICollection<StudentPresence>? StudentPresences { get; set; }
+
     }
 
 }
