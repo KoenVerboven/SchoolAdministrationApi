@@ -15,6 +15,12 @@ namespace SchoolAdministration.Repositories.Repos
             await _context.SaveChangesAsync();
         }
 
+        public async Task AddStudentsPresenceAsync(IEnumerable<StudentPresence> studentsPresence)
+        {
+            _context.StudentsPresence.AddRange(studentsPresence);
+            await _context.SaveChangesAsync();
+        }
+
         public Task DeleteStudentPresenceAsync(int id)
         {
             throw new NotImplementedException();

@@ -10,6 +10,7 @@ namespace SchoolAdministration.Models
         public int StudentId { get; set; } //FK
         public int? CourseId { get; set; } //FK
         public bool Presence { get; set; }
+        public int ToLateInMinutes { get; set; }
         public int? AbsenceReason { get; set; }
         public string? Comment { get; set; }
         public DateTime RegistrationDate { get; set; }
