@@ -42,6 +42,11 @@ namespace SchoolAdministration.Repositories.Repos
             return await _context.SchoolClasses.FindAsync(id);
         }
 
+        public async Task<IEnumerable<SchoolClass>> GetClassesBySchoolIdAsync(int schoolId)
+        {
+            return await _context.SchoolClasses.Where(p =>p.SchoolId == schoolId).ToListAsync();
+        }
+
         public async Task UpdateClassAsync(SchoolClass schoolClass)
         {
             _context.SchoolClasses.Update(schoolClass);

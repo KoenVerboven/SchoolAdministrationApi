@@ -13,14 +13,16 @@ namespace SchoolAdministration.Controllers
         private const string controllerName = "StudentPresenceController";
         private readonly IStudentPresenceRepository _studentPresenceRepository;
         private readonly IStudentRepository _studentRepository;
+        private readonly IClassRepository _classRepository;
         private readonly ILogger<StudentPresenceController> _logger;
         private readonly IMapper _mapper;
 
         public IStudentRepository StudentRepository { get; }
 
-        public StudentPresenceController(IStudentPresenceRepository studentPresenceRepository, IStudentRepository studentRepository, ILogger<StudentPresenceController> logger, IMapper mapper) { 
+        public StudentPresenceController(IStudentPresenceRepository studentPresenceRepository, IStudentRepository studentRepository, IClassRepository classRepository ,ILogger<StudentPresenceController> logger, IMapper mapper) { 
             _studentPresenceRepository = studentPresenceRepository;
             _studentRepository = studentRepository;
+            _classRepository = classRepository;
             _logger = logger;
             _mapper = mapper;
         }
@@ -75,7 +77,7 @@ namespace SchoolAdministration.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest("Invalid modelState");
+                return BadRequest("Invalid ModelState");
             }
             if (studentPresenceCreateDTO == null)
             {
@@ -118,12 +120,12 @@ namespace SchoolAdministration.Controllers
         {
             if (id != studentPresenceUpdateDTO.Id)
             {
-                return BadRequest();
+                return BadRequest("Provided Id is not ok");
             }
 
             if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return BadRequest("Invalid modelState");
             }
 
             StudentPresence studentPresence = _mapper.Map<StudentPresence>(studentPresenceUpdateDTO);
@@ -149,6 +151,27 @@ namespace SchoolAdministration.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
+        [HttpGet("getSchoolClasses")]
+        [ProducesResponseType(typeof(IEnumerable<ClassDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<SchoolClass>>> GetSchoolClassesAsync(int SchoolId)
+        {
+            try
+            {
+                var schoolClasses = await _classRepository.GetAllAsync();//todo : add filter schoolId
+                var classesDTO = _mapper.Map<List<ClassDTO>>(schoolClasses);
+                return Ok(classesDTO);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Message: {message}, Controller:{studentcontroller}, Action:{action}", ex.Message, controllerName, nameof(GetSchoolClassesAsync));
+                return BadRequest(ex.Message);
+            }
+        }
+
 
     }
 }

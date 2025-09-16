@@ -48,6 +48,7 @@ namespace SchoolAdministration.Dtos
 
         [StringLength(30, ErrorMessage = "Parent first cannot longer than 30 characters")]
         public string? ParentFirstName { get; set; }
+        public string? Picture { get; set; }
 
     }
 }
