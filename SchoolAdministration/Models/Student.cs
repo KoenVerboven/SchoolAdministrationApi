@@ -45,21 +45,22 @@ namespace SchoolAdministration.Models
 
         public DateTime RegistrationDate { get; set; }
 
-        [Display(Name = "Parent phone number")]
-        public string? ParentPhoneNumber  { get; set; }
+        //[Display(Name = "Parent phone number")]
+        //public string? ParentPhoneNumber  { get; set; }
 
-        [Display(Name = "Parent last name")]
-        [StringLength(30,ErrorMessage = "Parent lastname cannot longer than 30 characters")]
-        public string? ParentLastname { get; set; }
+        //[Display(Name = "Parent last name")]
+        //[StringLength(30,ErrorMessage = "Parent lastname cannot longer than 30 characters")]
+        //public string? ParentLastname { get; set; }
 
-        [Display(Name = "Parent first name")]
-        [StringLength(30, ErrorMessage = "Parent first cannot longer than 30 characters")]
-        public string? ParentFirstName { get; set; }
+        //[Display(Name = "Parent first name")]
+        //[StringLength(30, ErrorMessage = "Parent first cannot longer than 30 characters")]
+        //public string? ParentFirstName { get; set; }
         public string? Picture { get; set; }
         public ICollection<Course>? Courses { get; set; }
         public ICollection<StudyPlan>? StudyPlans { get; set; }
         public ICollection<ExamResult>? ExamResults { get; set; }
         public ICollection<StudentPresence>? StudentPresences { get; set; }
+        public ICollection<Parent>? Parents { get; set; }
 
 
         //public int CreatedByUserId { get; set; }

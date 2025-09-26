@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
 
 namespace SchoolAdministration.Data
@@ -21,6 +20,7 @@ namespace SchoolAdministration.Data
         public DbSet<SchoolClass> SchoolClasses { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<StudentPresence>StudentsPresence { get; set; }
+        public DbSet<Parent> Parents { get; set; }
 
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
