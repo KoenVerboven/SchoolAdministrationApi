@@ -17,7 +17,13 @@ A teacher can create 1 or more Exames.
 
 A teacher can give exam grades for a specific student
 
+Development:
+-------------
+Visual Studio 
 <img width="1915" height="1011" alt="image" src="https://github.com/user-attachments/assets/e5595e0f-0de4-42c8-bc6c-ffb91774dc92" />
+Sql-server
+<img width="1023" height="721" alt="image" src="https://github.com/user-attachments/assets/fa98041c-7225-4952-94ca-806aa133935a" />
+
 
 Student:
 * GetAllStudents
