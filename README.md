@@ -17,6 +17,8 @@ A teacher can create 1 or more Exames.
 
 A teacher can give exam grades for a specific student
 
+<img width="1915" height="1011" alt="image" src="https://github.com/user-attachments/assets/e5595e0f-0de4-42c8-bc6c-ffb91774dc92" />
+
 Student:
 * GetAllStudents
 * GetStudentById
