@@ -17,6 +17,23 @@ A teacher can create 1 or more Exames.
 
 A teacher can give exam grades for a specific student
 
+How to start application :
+--------------------------
+<img width="945" height="456" alt="image" src="https://github.com/user-attachments/assets/53e084e8-9612-4aa4-b46d-04539626f07b" />
+
+
+* Click button Code
+* Choose open with Visual Studio
+* Click Clone
+
+Development:
+-------------
+Visual Studio 
+<img width="1915" height="1011" alt="image" src="https://github.com/user-attachments/assets/e5595e0f-0de4-42c8-bc6c-ffb91774dc92" />
+Sql-server
+<img width="1023" height="721" alt="image" src="https://github.com/user-attachments/assets/fa98041c-7225-4952-94ca-806aa133935a" />
+
+
 Student:
 * GetAllStudents
 * GetStudentById
