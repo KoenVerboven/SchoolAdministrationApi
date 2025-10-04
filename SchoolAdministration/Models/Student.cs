@@ -40,7 +40,7 @@ namespace SchoolAdministration.Models
         [Length(5,30)]
         public required string Email { get; set; }
 
-        [Required(ErrorMessage = "Phone Name is required.")]
+        [Required(ErrorMessage = "Phone Number is required.")]
         public required string Phone { get; set; }
 
         public DateTime RegistrationDate { get; set; }

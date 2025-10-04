@@ -81,9 +81,6 @@ namespace TestSchoolAdmin
                 Gender = 1,
                 Email = "koen@test.be",
                 Phone = "448389639",
-                ParentPhoneNumber = "546",
-                ParentLastname = null,
-                ParentFirstName = null,
                 Courses = null,
                 StudyPlans = null
             };
@@ -99,9 +96,6 @@ namespace TestSchoolAdmin
                 Gender = student.Gender,
                 Email = student.Email,
                 Phone = student.Phone,
-                ParentPhoneNumber = student.ParentPhoneNumber,
-                ParentLastname = student.ParentLastname,
-                ParentFirstName = student.ParentFirstName
             };
            
             var mapper = new Mapper(_mapperConfiguration);
@@ -137,9 +131,6 @@ namespace TestSchoolAdmin
                 Gender = 1,
                 Email = "koen@test.be",
                 Phone = "448389639",
-                ParentPhoneNumber = "546",
-                ParentLastname = null,
-                ParentFirstName = null,
                 Courses = null,
                 StudyPlans = null
             };
@@ -171,9 +162,6 @@ namespace TestSchoolAdmin
                 Gender = 1,
                 Email = "koen@test.be",
                 Phone = "448389639",
-                ParentPhoneNumber = "546",
-                ParentLastname = null,
-                ParentFirstName = null,
                 Courses = null,
                 StudyPlans = null
             };
@@ -204,9 +192,6 @@ namespace TestSchoolAdmin
                 Gender = 1,
                 Email = "koen@test.be",
                 Phone = "448389639",
-                ParentPhoneNumber = "546",
-                ParentLastname = null,
-                ParentFirstName = null,
                 Courses = null,
                 StudyPlans = null
             };
@@ -254,9 +239,6 @@ namespace TestSchoolAdmin
                 Gender = 1,
                 Email = "koen@test.be",
                 Phone = "448389639",
-                ParentPhoneNumber = "546",
-                ParentLastname = null,
-                ParentFirstName = null,
                 Courses = null,
                 StudyPlans = null
             };
@@ -310,9 +292,6 @@ namespace TestSchoolAdmin
                 Gender = 1,
                 Email = "koen@test.be",
                 Phone = "448389639",
-                ParentPhoneNumber = "546",
-                ParentLastname = null,
-                ParentFirstName = null,
                 Courses = null,
                 StudyPlans = null
             };
@@ -344,9 +323,6 @@ namespace TestSchoolAdmin
                     Gender = 1,
                     Email="koen@test.be",
                     Phone = "448389639",
-                    ParentPhoneNumber = "546",
-                    ParentLastname  = null,
-                    ParentFirstName = null,
                     Courses = null,
                     StudyPlans = null
                 },
@@ -361,9 +337,6 @@ namespace TestSchoolAdmin
                     Gender = 1,
                     Email="mark@test.be",
                     Phone = "44994989",
-                    ParentPhoneNumber = "546",
-                    ParentLastname  = null,
-                    ParentFirstName = null,
                     Courses = null,
                     StudyPlans = null
                 }

@@ -2,7 +2,6 @@
 using SchoolAdministration.Data;
 using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
-using System.Collections.Generic;
 
 namespace SchoolAdministration.Repositories.Repos
 {

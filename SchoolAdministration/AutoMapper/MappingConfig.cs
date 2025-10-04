@@ -39,7 +39,11 @@ namespace SchoolAdministration.AutoMapper
             CreateMap<StudentPresence, StudentPresenceDTO>().ReverseMap();
             CreateMap<StudentPresence, StudentPresenceCreateDTO>().ReverseMap();
             CreateMap<StudentPresence, StudentPresenceUpdateDTO>().ReverseMap();
-   
+
+            CreateMap<Parent, ParentDTO>().ReverseMap();
+            CreateMap<Parent, ParentCreateDTO>().ReverseMap();
+            CreateMap<Parent, ParentUpdateDTO>().ReverseMap();
+
             CreateMap<ApplicationUser, UserDTO>().ReverseMap();
         }
     }

@@ -1,16 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SchoolAdministration.Models;
+using System.ComponentModel.DataAnnotations;
 
-namespace SchoolAdministration.Models
+namespace SchoolAdministration.Dtos
 {
-    public class Parent
+    public class ParentCreateDTO
     {
-        [Key]
-        public int Id { get; set; }
-        [Display(Name = "First name")]
         [Required(ErrorMessage = "First Name is required.")]
         [StringLength(30, ErrorMessage = "First Name cannot longer than 30 characters")]
         public required string FirstName { get; set; }
-        [Display(Name = "Last name")]
         [Required(ErrorMessage = "Last Name is required.")]
         [StringLength(30, ErrorMessage = "Last Name cannot longer than 30 characters")]
         public required string LastName { get; set; }
@@ -21,6 +18,7 @@ namespace SchoolAdministration.Models
         public required string PhoneNumber { get; set; }
         public string? Email { get; set; }
         public int SortOrder { get; set; } //most import : 1
+        public ICollection<Student>? Students { get; set; }
         public int RelationShipToStudent { get; set; } //father, mother, brother, sister, grandfather, grandmother,.....
         public bool AddressSameAsStudent { get; set; }
         public string? Occupation { get; set; }
@@ -32,13 +30,7 @@ namespace SchoolAdministration.Models
         public bool ReceivesMailings { get; set; }
         public bool ReceivesSms { get; set; }
         public string? Comments { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
         public string? CreatedBy { get; set; }
-        public string? UpdatedBy { get; set; }
         public bool IsActive { get; set; }
-        public bool IsDeleted { get; set; }
-        public ICollection<Student>? Students { get; set; }
-
     }
 }
