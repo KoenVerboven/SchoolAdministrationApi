@@ -1,6 +1,5 @@
 ﻿using SchoolAdministration.Dtos;
 using SchoolAdministration.Models;
-using SchoolAdministration.Specifications;
 
 namespace SchoolAdministration.Repositories.Interfaces
 {
@@ -9,7 +8,9 @@ namespace SchoolAdministration.Repositories.Interfaces
         Task<IEnumerable<Student>> GetAllAsync();
         Task<Student?> GetByIdAsync(int id);
         Task<IEnumerable<StudentExamsResultDTO>> GetStudentExamResultsAsync();
+        Task<IEnumerable<StudentCoursesDTO>> GetStudentCoursesAsync(int studentId);
         Task<IEnumerable<Student>> GetByNameStartWithAsync(string name);
+
         //Task<IEnumerable<Student>> GetFilterAsync1(StudentSpecParams studentSpecParams);
         Task<IEnumerable<Student>> GetFilterAsync(string? Name, string? Email, int ZipCode, string Sort, int PageSize, int PageNumber);
         Task AddStudentAsync(Student student);

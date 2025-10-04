@@ -173,5 +173,30 @@ namespace SchoolAdministration.Controllers
         {
             return await _studentRepository.CountFilterAsync(Name,Email,ZipCode);
         }
+
+
+        [HttpGet("StudentCourses/{id}")]
+        [ProducesResponseType(typeof(StudentCoursesDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<StudentCoursesDTO>> GetStudentCourses(int id)
+        {
+            if (id == 0)
+            {
+                _logger.LogInformation("StudentId can not be 0");
+                return BadRequest();
+            }
+
+            var studentCourses = await _studentRepository.GetStudentCoursesAsync(id);
+
+            if (studentCourses == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(studentCourses);
+        }
+
     }
 }

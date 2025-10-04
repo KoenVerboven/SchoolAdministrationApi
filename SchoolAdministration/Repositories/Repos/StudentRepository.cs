@@ -33,6 +33,34 @@ namespace SchoolAdministration.Repositories.Repos
             return await _context.Students.ToListAsync();
         }
 
+        public async Task<IEnumerable<StudentCoursesDTO>> GetStudentCoursesAsync(int studentId) 
+        {
+            var studentCourses = await _context.Students.Include(p => p.Courses).Where(p=>p.Id == studentId).ToListAsync();
+            var studentCoursesList = new List<StudentCoursesDTO>();
+
+            foreach (var studentCourse in studentCourses)
+            {
+                var studentFirstname = studentCourse.LastName;
+                var studentLastname = studentCourse.FirstName;
+
+                foreach (Course course in studentCourse.Courses)
+                {
+                    var studentCourseDTO = new StudentCoursesDTO()
+                    {
+                        StudentId = studentId,
+                        StudentLastName = studentLastname,
+                        StudentFirstName = studentFirstname,
+                        CourseId = course.Id,
+                        CourseName = course.CourseName,
+                        CourseStartDate = new DateTime(),
+                        CourseEndDate = new DateTime()
+                    };
+                    studentCoursesList.Add(studentCourseDTO);
+                }
+            }
+            return studentCoursesList;
+        }
+
         public async Task<IEnumerable<StudentExamsResultDTO>> GetStudentExamResultsAsync()
         {
             var studentExamResults =  await _context.Students.Include(p=>p.ExamResults).ToListAsync();
