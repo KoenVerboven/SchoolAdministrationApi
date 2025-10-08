@@ -67,7 +67,7 @@ namespace SchoolAdministration.Controllers
             return Ok(studentDTO);
         }
 
-        [HttpGet("GetStudentsExamResults")]
+        [HttpGet("getStudentsExamResults")]
         public async Task<ActionResult<IEnumerable<StudentExamsResultDTO>>> GetStudentsExamResults()
         {
             var studentExamsResultDTOList = await _studentRepository.GetStudentExamResultsAsync();
@@ -176,11 +176,11 @@ namespace SchoolAdministration.Controllers
 
 
         [HttpGet("StudentCourses/{id}")]
-        [ProducesResponseType(typeof(StudentCoursesDTO), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(StudentCourseDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<StudentCoursesDTO>> GetStudentCourses(int id)
+        public async Task<ActionResult<StudentCourseDTO>> GetStudentCourses(int id)
         {
             if (id == 0)
             {

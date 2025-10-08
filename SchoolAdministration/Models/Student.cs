@@ -21,7 +21,7 @@ namespace SchoolAdministration.Models
         public required string LastName { get; set; }
 
         [Display(Name = "Date of birth")]
-        public DateTime? DateOfBirth { get; set; }
+        public required DateTime DateOfBirth { get; set; }
 
         [NotMapped]
         public string FullName { get => LastName + " " + FirstName; }
@@ -56,7 +56,7 @@ namespace SchoolAdministration.Models
         //[StringLength(30, ErrorMessage = "Parent first cannot longer than 30 characters")]
         //public string? ParentFirstName { get; set; }
         public string? Picture { get; set; }
-        public ICollection<Course>? Courses { get; set; }
+        public ICollection<Course>? Courses { get; set; } //todo aanpassen : vaste tussentabel met registrationdate en registrationperson
         public ICollection<StudyPlan>? StudyPlans { get; set; }
         public ICollection<ExamResult>? ExamResults { get; set; }
         public ICollection<StudentPresence>? StudentPresences { get; set; }

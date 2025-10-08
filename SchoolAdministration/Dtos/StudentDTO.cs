@@ -18,7 +18,7 @@ namespace SchoolAdministration.Dtos
         public required string LastName { get; set; }
 
         [Display(Name = "Date of birth")]
-        public DateTime? DateOfBirth { get; set; } //todo : make required 
+        public DateTime DateOfBirth { get; set; } 
 
         [NotMapped]
         public string FullName { get => LastName + " " + FirstName; }

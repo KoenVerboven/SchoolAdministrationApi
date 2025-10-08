@@ -20,10 +20,10 @@ namespace SchoolAdministration.Models
         public string? CourseDescription { get; set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime? StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime? EndDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         [Column(TypeName = "decimal(6, 2)")]
         public decimal?  CoursePrice { get; set; }

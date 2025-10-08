@@ -35,7 +35,7 @@ namespace SchoolAdministration.Controllers
             return Ok(teachersDTO);
         }
 
-        [HttpGet("GetAllTeachersSort/{sort}")]
+        [HttpGet("getAllTeachersSort/{sort}")]
         //[Authorize]
         [ProducesResponseType(typeof(IEnumerable<TeacherDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -49,7 +49,7 @@ namespace SchoolAdministration.Controllers
 
 
 
-        [HttpGet("GetAllFilter/{sort}")]
+        [HttpGet("getAllFilter/{sort}")]
         //[Authorize]
         [ProducesResponseType(typeof(IEnumerable<TeacherDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

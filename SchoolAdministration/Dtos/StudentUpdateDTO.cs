@@ -15,8 +15,9 @@ namespace SchoolAdministration.Dtos
         [StringLength(30, ErrorMessage = "Last Name cannot longer than 30 characters")]
         public required string LastName { get; set; }
 
+        [Required(ErrorMessage = "Date of birth is required.")]
         [Display(Name = "Date of birth")]
-        public DateTime? DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
         
         [StringLength(30, ErrorMessage = "Street and number cannot longer than 30 characters")]
         public string? StreetAndNumber { get; set; }

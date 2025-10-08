@@ -90,7 +90,7 @@ namespace SchoolAdministration.Controllers
             return CreatedAtAction(nameof(GetStudentPresenceById), new { id = studentPresence.Id }, studentPresence);
         }
        
-        [HttpPost("AddStudentsPresenceList")]
+        [HttpPost("addStudentsPresenceList")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -161,7 +161,7 @@ namespace SchoolAdministration.Controllers
         {
             try
             {
-                var schoolClasses = await _classRepository.GetAllAsync();//todo : add filter schoolId
+                var schoolClasses = await _classRepository.GetAllAsync();// todo : add filter schoolId
                 var classesDTO = _mapper.Map<List<ClassDTO>>(schoolClasses);
                 return Ok(classesDTO);
             }

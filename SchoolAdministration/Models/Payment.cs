@@ -9,7 +9,7 @@ namespace SchoolAdministration.Models
         public int? ArticleId { get; set; }
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; }
-        public int PaymentMethodId { get; set; } // ToDo cash, kreditcart, ...
+        public int PaymentMethodId { get; set; } // todo cash, kreditcart, ...
         public int? TransactionId { get; set; }
     }
 }

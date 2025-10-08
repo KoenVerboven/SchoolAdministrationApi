@@ -33,10 +33,12 @@ namespace SchoolAdministration.Repositories.Repos
             return await _context.Students.ToListAsync();
         }
 
-        public async Task<IEnumerable<StudentCoursesDTO>> GetStudentCoursesAsync(int studentId) 
+        public async Task<IEnumerable<StudentCourseDTO>> GetStudentCoursesAsync(int studentId)                
         {
-            var studentCourses = await _context.Students.Include(p => p.Courses).Where(p=>p.Id == studentId).ToListAsync();
-            var studentCoursesList = new List<StudentCoursesDTO>();
+            var studentCourses = await _context.Students.Include(p => p.Courses)
+                                                        .Where(p=>p.Id == studentId)
+                                                        .ToListAsync();
+            var studentCoursesList = new List<StudentCourseDTO>();
 
             foreach (var studentCourse in studentCourses)
             {
@@ -45,15 +47,17 @@ namespace SchoolAdministration.Repositories.Repos
 
                 foreach (Course course in studentCourse.Courses)
                 {
-                    var studentCourseDTO = new StudentCoursesDTO()
+                    var studentCourseDTO = new StudentCourseDTO()
                     {
                         StudentId = studentId,
                         StudentLastName = studentLastname,
                         StudentFirstName = studentFirstname,
                         CourseId = course.Id,
                         CourseName = course.CourseName,
-                        CourseStartDate = new DateTime(),
-                        CourseEndDate = new DateTime()
+                        CourseStartDate = course.StartDate,
+                        CourseEndDate = course.EndDate,
+                        TotalAmount = course.CoursePrice,
+                        FullyPaid = null
                     };
                     studentCoursesList.Add(studentCourseDTO);
                 }

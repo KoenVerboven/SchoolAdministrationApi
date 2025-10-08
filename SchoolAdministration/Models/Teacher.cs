@@ -18,7 +18,7 @@ namespace SchoolAdministration.Models
         public required string LastName { get; set; }
 
         [Display(Name = "Date of birth")]
-        public DateTime? DateOfBirth { get; set; }
+        public required DateTime DateOfBirth { get; set; }
 
         [Display(Name = "Street and number")]
         [StringLength(30, ErrorMessage = "Street and number cannot longer than 30 characters")]
