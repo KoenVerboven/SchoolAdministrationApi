@@ -33,7 +33,7 @@ Visual Studio
 Sql-server
 <img width="1023" height="721" alt="image" src="https://github.com/user-attachments/assets/fa98041c-7225-4952-94ca-806aa133935a" />
 
-<img width="712" height="576" alt="image" src="https://github.com/user-attachments/assets/15c50466-f892-497d-bcba-9fec4d44c514" />
+<img width="681" height="573" alt="image" src="https://github.com/user-attachments/assets/7dab4d68-5e95-40e2-9857-17c9ba3dda17" />
 
 Cross-origin-requests :
 ------------
