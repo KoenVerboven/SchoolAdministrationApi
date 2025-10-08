@@ -33,53 +33,7 @@ Visual Studio
 Sql-server
 <img width="1023" height="721" alt="image" src="https://github.com/user-attachments/assets/fa98041c-7225-4952-94ca-806aa133935a" />
 
-
-Student:
-* GetAllStudents
-* GetStudentById
-* GetExamResultsByStudentId
-* GetStudentByNameStartWith
-* CreateStudent
-* DeleteStudentById
-* UpdateStudent
-
-Teacher:
-* GetAllTeachers
-* GetTeacherById
-* CreateTeacher
-* DeleteTeacherById
-* UpdateTeacher
-
-Course:
-
-* GetAllCoursers 
-* GetCourseById 
-* CreateCourse 
-* DeleteCourse 
-* UpdateCourse 
-* SearchCourse on CourseName and CourseCode
-
-Examen:
-* GetAllExams
-* GetExamById
-* CreateExam
-* DeleteExamById
-* UpdateExamAsync
-
-ExamenResult:
-* GetAllExamResult
-* GetExamResultById
-* CreateExamResult
-* DeleteExamById
-* UpdateExamResult
-
-StudyPlan:
-* GetAllStudyPlans
-* GetStudyPlanById, 
-* CreateStudyPlan, 
-* DeleteStudyPlanById,
-* UpdateStudyPlan
-
+<img width="712" height="576" alt="image" src="https://github.com/user-attachments/assets/15c50466-f892-497d-bcba-9fec4d44c514" />
 
 Cross-origin-requests :
 ------------
