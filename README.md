@@ -35,6 +35,13 @@ Sql-server
 
 <img width="985" height="614" alt="image" src="https://github.com/user-attachments/assets/4d8ba182-cd3f-4776-ad40-abdd73d43f96" />
 
+Swagger :Exploring Endpoints
+-----------------------------
+![swaggerPrintScreenjpg](https://github.com/user-attachments/assets/3554497c-cc8b-4c8a-8f31-e1b02a726779)
+
+UnitTests :
+------------
+![image](https://github.com/user-attachments/assets/96426350-2387-4e3e-a6c5-d1930969257e)
 
 Cross-origin-requests :
 ------------
@@ -60,8 +67,9 @@ Program.cs:
 
 
 Exploring Endpoints :
------------------------------------
+---------------------
  We use Swagger.
+ 
 
 
 EntityFrameworkCore:
@@ -165,14 +173,14 @@ Right click project SchoolAdministrationTests
 
 choose Project Reference
 
-UnitTests :
 
-![image](https://github.com/user-attachments/assets/96426350-2387-4e3e-a6c5-d1930969257e)
+Milestones :
+-------------
+6 unique visitors in 14 days.
+
+![TraficSchoolAdministrationAPI](https://github.com/user-attachments/assets/d8d70c68-1b04-4f33-a530-7571d327e460)
 
 
-Swagger :Exploring Endpoints
-
-![swaggerPrintScreenjpg](https://github.com/user-attachments/assets/3554497c-cc8b-4c8a-8f31-e1b02a726779)
 
 
 
