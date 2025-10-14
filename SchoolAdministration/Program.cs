@@ -2,13 +2,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.AutoMapper;
 using SchoolAdministration.Data;
-using SchoolAdministration.Models;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Repositories.Repos;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
+using SchoolAdministration.Models.Domain;
 
 
 namespace SchoolAdministration

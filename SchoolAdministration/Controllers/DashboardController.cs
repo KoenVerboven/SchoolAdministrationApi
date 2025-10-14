@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using SchoolAdministration.Dtos;
+using SchoolAdministration.Models.Dtos;
 using SchoolAdministration.Repositories.Interfaces;
 
 namespace SchoolAdministration.Controllers

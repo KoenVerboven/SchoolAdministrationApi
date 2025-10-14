@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SchoolAdministration.Models;
+using SchoolAdministration.Models.Domain;
 using SchoolAdministration.Repositories.Interfaces;
 
 
@@ -65,7 +65,7 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            //if (_studyPlanRepository.(studyPlan)) // Todo
+            //if (_studyPlanRepository.(studyPlan)) // Todo : check if studyplan already exists
             //{
             //    ModelState.AddModelError("CustomError", "StudyPlan already Exists!");
             //    return BadRequest(ModelState);

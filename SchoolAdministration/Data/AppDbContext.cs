@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SchoolAdministration.Models;
+using SchoolAdministration.Models.Domain;
 
 namespace SchoolAdministration.Data
 {

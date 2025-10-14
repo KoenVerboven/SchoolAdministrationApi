@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SchoolAdministration.Dtos;
-using SchoolAdministration.Models;
+using SchoolAdministration.Models.Domain;
+using SchoolAdministration.Models.Dtos;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Repositories.Repos;
 
