@@ -2,7 +2,6 @@
 {
     public class DepartmentCreateDTO
     {
-        public int Id { get; set; } //todo : delete this line
         public required string Name { get; set; }
         public int SchoolId { get; set; }
         public bool IsActive { get; set; }

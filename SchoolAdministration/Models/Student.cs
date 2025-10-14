@@ -45,22 +45,14 @@ namespace SchoolAdministration.Models
 
         public DateTime RegistrationDate { get; set; }
 
-        //[Display(Name = "Parent phone number")]
-        //public string? ParentPhoneNumber  { get; set; }
-
-        //[Display(Name = "Parent last name")]
-        //[StringLength(30,ErrorMessage = "Parent lastname cannot longer than 30 characters")]
-        //public string? ParentLastname { get; set; }
-
-        //[Display(Name = "Parent first name")]
-        //[StringLength(30, ErrorMessage = "Parent first cannot longer than 30 characters")]
-        //public string? ParentFirstName { get; set; }
         public string? Picture { get; set; }
-        public ICollection<Course>? Courses { get; set; } //todo aanpassen : vaste tussentabel met registrationdate en registrationperson
+        public ICollection<Course>? Courses { get; set; } //todo remove many to many relationship between student and course and add a hulp table 'Register' with the fields registerdate and registeredby between the 2 tables
         public ICollection<StudyPlan>? StudyPlans { get; set; }
         public ICollection<ExamResult>? ExamResults { get; set; }
         public ICollection<StudentPresence>? StudentPresences { get; set; }
         public ICollection<Parent>? Parents { get; set; }
+
+        //todo : add relationship between student and payment
 
 
         //public int CreatedByUserId { get; set; }

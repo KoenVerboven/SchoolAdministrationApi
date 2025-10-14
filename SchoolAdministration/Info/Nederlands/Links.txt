@@ -29,3 +29,6 @@ https://bootswatch.com/
         git:
         https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html
 
+        entity-framework:
+        https://learn.microsoft.com/en-us/ef/core/modeling/relationships/one-to-many
+

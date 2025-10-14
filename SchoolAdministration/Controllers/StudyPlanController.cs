@@ -25,6 +25,8 @@ namespace SchoolAdministration.Controllers
             return Ok(allStudyPlans);
         }
 
+        //todo : add endpoint GetStudyplansByStudentId
+
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(StudyPlan), StatusCodes.Status200OK)]

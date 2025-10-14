@@ -11,6 +11,7 @@ namespace SchoolAdministration.Models
         public bool IsActive { get; set; }
         public string? Description { get; set; }
         public string? LocationWithinTheSchool { get; set; }
+        public ICollection<SchoolClass>? Classe { get; set; } //to nullable ??
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }

@@ -35,7 +35,7 @@ namespace SchoolAdministration.Repositories.Repos
 
         public async Task<IEnumerable<StudentCourseDTO>> GetStudentCoursesAsync(int studentId)                
         {
-            var studentCourses = await _context.Students.Include(p => p.Courses)
+            var studentCourses = await _context.Students.Include(p => p.Courses)//todo : add inculde for payments
                                                         .Where(p=>p.Id == studentId)
                                                         .ToListAsync();
             var studentCoursesList = new List<StudentCourseDTO>();
