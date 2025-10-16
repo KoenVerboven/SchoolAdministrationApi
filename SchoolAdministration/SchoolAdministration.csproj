@@ -27,6 +27,7 @@
   <ItemGroup>
     <Folder Include="Info\Englisch\" />
     <Folder Include="log\" />
+    <Folder Include="StudentImages\" />
   </ItemGroup>
 
 </Project>

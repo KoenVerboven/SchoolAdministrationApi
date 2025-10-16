@@ -21,6 +21,7 @@ namespace SchoolAdministration.Data
         public DbSet<Payment> Payments { get; set; }
         public DbSet<StudentPresence>StudentsPresence { get; set; }
         public DbSet<Parent> Parents { get; set; }
+        public DbSet<StudentImage> StudentImages { get; set; }  
 
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
