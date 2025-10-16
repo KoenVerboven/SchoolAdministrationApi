@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Models.Domain;
-using SchoolAdministration.Models.Dtos;
+using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
 
 namespace SchoolAdministration.Controllers

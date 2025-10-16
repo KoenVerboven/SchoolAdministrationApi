@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using SchoolAdministration.Models.Domain;
-using SchoolAdministration.Models.Dtos;
+using SchoolAdministration.Models.DTO;
 
 namespace SchoolAdministration.AutoMapper
 {

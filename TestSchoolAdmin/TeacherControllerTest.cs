@@ -5,7 +5,7 @@ using Moq;
 using SchoolAdministration.AutoMapper;
 using SchoolAdministration.Controllers;
 using SchoolAdministration.Models.Domain;
-using SchoolAdministration.Models.Dtos;
+using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
 
 

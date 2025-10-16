@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using SchoolAdministration.AutoMapper;
 using SchoolAdministration.Controllers;
-using SchoolAdministration.Models.Dtos;
+using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Models.Domain;
 using SchoolAdministration.Repositories.Interfaces;
 
