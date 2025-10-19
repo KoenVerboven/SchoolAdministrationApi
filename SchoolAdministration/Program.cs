@@ -57,6 +57,7 @@ namespace SchoolAdministration
             builder.Services.AddScoped<IStudentPresenceRepository, StudentPresenceRepository>();
             builder.Services.AddScoped<IParentRepository, ParentRepository>();
             builder.Services.AddScoped(typeof(IGenericRepository<>),typeof(GenericRepository<>));
+            builder.Services.AddScoped<IImageRepository, ImageRepository>();
 
             var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
             builder.Services.AddAuthentication(x =>

@@ -50,9 +50,9 @@ namespace SchoolAdministration.Models.Domain
         public ICollection<ExamResult>? ExamResults { get; set; }
         public ICollection<StudentPresence>? StudentPresences { get; set; }
         public ICollection<Parent>? Parents { get; set; }
+        public StudentImage? StudentImage { get; set; }
 
         //todo : add relationship between student and payment
-
 
         //public int CreatedByUserId { get; set; }
         //public DateTime CreatedDate { get; set; }

@@ -5,6 +5,8 @@ namespace SchoolAdministration.Repositories.Interfaces
     public interface IImageRepository
     {
         Task<StudentImage>Upload(IFormFile file, StudentImage studentImage);
+
+        bool StudentImageExist(string fileName);
     }
 }
 

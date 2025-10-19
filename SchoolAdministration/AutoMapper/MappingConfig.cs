@@ -45,6 +45,8 @@ namespace SchoolAdministration.AutoMapper
             CreateMap<Parent, ParentUpdateDTO>().ReverseMap();
 
             CreateMap<ApplicationUser, UserDTO>().ReverseMap();
+
+            CreateMap<StudentImage, StudentImageDTO>().ReverseMap();
         }
     }
 }
