@@ -10,13 +10,13 @@ namespace SchoolAdministration.Controllers
     [ApiController]
     public class SchoolController : ControllerBase
     {
-        private readonly ISchoolRepository _schoolRepository;
+        private readonly IGenericRepository<School> _repository;
         private readonly IMapper _mapper;
 
-        public SchoolController(ISchoolRepository schoolRepository, IMapper mapper )
+        public SchoolController(IGenericRepository<School> repository, IMapper mapper )
         {
-           _schoolRepository = schoolRepository;
-           _mapper = mapper;
+            _repository = repository;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -25,7 +25,7 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<SchoolDTO>>> GetAllSchoolsAsync()
         {
-            var schools = await _schoolRepository.GetAllAsync();
+            var schools = await _repository.ListAllAsync();
             var schoolsDTO = _mapper.Map<List<SchoolDTO>>(schools);
             return Ok(schoolsDTO);
         }
@@ -42,7 +42,7 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            var school = await _schoolRepository.GetByIdAsync(id);
+            var school = await _repository.GetByIdAsync(id);
 
             if (school == null)
             {
@@ -66,13 +66,14 @@ namespace SchoolAdministration.Controllers
 
             School school = _mapper.Map<School>(schoolCreateDTO);
 
-            if (_schoolRepository.SchoolExist(schoolCreateDTO))
-            {
-                ModelState.AddModelError("CustomError", "School already Exists!");
-                return BadRequest(ModelState);
-            }
+            //if (_schoolRepository.SchoolExist(schoolCreateDTO))
+            //{
+            //ModelState.AddModelError("CustomError", "School already Exists!");
+            //return BadRequest(ModelState);
+            //}
 
-            await _schoolRepository.AddSchoolAsync(school);
+            _repository.Add(school);
+            await _repository.SaveAllAsync();
             return CreatedAtAction(nameof(GetSchoolById), new { id = school.Id }, school);
         }
 
@@ -83,7 +84,15 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> DeleteSchool(int id)
         {
-            await _schoolRepository.DeleteSchoolAsync(id);
+            var school = await _repository.GetByIdAsync(id);
+
+            if (school == null)
+            {
+                return NotFound();
+            }
+
+            _repository.Remove(school);
+            await _repository.SaveAllAsync();
             return NoContent();
         }
 
@@ -91,7 +100,7 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> UpdateCourseAsync(int id,  SchoolUpdateDTO schoolUpdateDTO)
+        public async Task<ActionResult> UpdateCourseAsync(int id, SchoolUpdateDTO schoolUpdateDTO)
         {
             if (id != schoolUpdateDTO.Id)
             {
@@ -104,7 +113,8 @@ namespace SchoolAdministration.Controllers
             }
 
             School school = _mapper.Map<School>(schoolUpdateDTO);
-            await _schoolRepository.UpdateSchoolAsync(school);
+            _repository.Update(school);
+            await _repository.SaveAllAsync();
             return CreatedAtAction(nameof(GetSchoolById), new { id = school.Id }, school);
         }
 

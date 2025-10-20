@@ -4,12 +4,17 @@ using SchoolAdministration.Repositories.Interfaces;
 
 namespace SchoolAdministration.Repositories.Repos
 {
-    public class GenericRepository<T>(AppDbContext context) : IGenericRepository<T> where T : class //todo: use this in other repositories
+    public class GenericRepository<T>(AppDbContext context) : IGenericRepository<T> where T : class 
     {
         public void Add(T entity)
         {
             context.Set<T>().Add(entity);
         }
+
+        //public bool Exists(int id)
+        //{
+        //   context.Set<T>().Any(x=>x.Id == id);
+        //}
 
         public async Task<T?> GetByIdAsync(int id)
         {
