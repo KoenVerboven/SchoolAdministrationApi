@@ -21,7 +21,7 @@ namespace SchoolAdministration.Controllers
 
         [HttpPost("UploadStudentImage")]
         [Consumes("multipart/form-data")]
-        public async Task<IActionResult> UploadImage( IFormFile file, int studentId, string studentLastName, string studentFirstName,int createdByUserId) 
+        public async Task<IActionResult> UploadStudentImage( IFormFile file, int studentId, string studentLastName, string studentFirstName,int createdByUserId) 
         {
             ValidateFileUpload(file, 10);
 

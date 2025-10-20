@@ -6,7 +6,6 @@ namespace SchoolAdministration.Models.DTO
 {
     public class StudentDTO
     {
-       
         public int Id { get; set; }
        
         [Required(ErrorMessage = "First Name is required.")]
@@ -34,10 +33,10 @@ namespace SchoolAdministration.Models.DTO
         [Required(ErrorMessage = "Email Name is required.")]
         [EmailAddress(ErrorMessage = "Invalid email address.")]
         [Length(5, 30)]
-        public string Email { get; set; }
+        public required string Email { get; set; }
 
         [Required(ErrorMessage = "Phone Name is required.")]
-        public string Phone { get; set; }
+        public required string Phone { get; set; }
 
         public DateTime RegistrationDate { get; set; }
 

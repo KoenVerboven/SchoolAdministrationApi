@@ -42,7 +42,7 @@ namespace SchoolAdministration.Repositories.Repos
             return await _context.Parents.ToListAsync();
         }
 
-        public async Task<Parent> GetByIdAsync(int id)
+        public async Task<Parent?> GetByIdAsync(int id)
         {
             return await _context.Parents.FindAsync(id);
         }

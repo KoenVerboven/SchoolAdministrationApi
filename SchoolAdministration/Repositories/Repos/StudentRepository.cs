@@ -3,7 +3,6 @@ using SchoolAdministration.Data;
 using SchoolAdministration.Models.Domain;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
-using SchoolAdministration.Specifications;
 
 namespace SchoolAdministration.Repositories.Repos
 {
@@ -76,6 +75,11 @@ namespace SchoolAdministration.Repositories.Repos
                 var lastname = studentExamResult.LastName;
                 var studentEmail = studentExamResult.Email;
                
+                if (studentExamResult.ExamResults == null || studentExamResult.ExamResults.Count == 0)
+                {
+                    continue;
+                }
+
                 foreach (ExamResult examResult in studentExamResult.ExamResults)
                 {
                     var exam =  _context.Exams.SingleOrDefault(p=>p.Id == examResult.ExamId);

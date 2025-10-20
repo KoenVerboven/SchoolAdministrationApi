@@ -112,6 +112,14 @@ namespace SchoolAdministration
             app.UseCors("MyCors");
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "Images\\StudentImages")),
+                RequestPath = "/images/studentimages"
+            });
+
             app.MapControllers();
             app.Run();
         }

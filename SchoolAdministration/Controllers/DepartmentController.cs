@@ -31,6 +31,20 @@ namespace SchoolAdministration.Controllers
             return Ok(departmentsDTO);
         }
 
+
+        [HttpGet("getDepartmentsBySchoolIdAsync/{schoolId}")]
+        [ProducesResponseType(typeof(IEnumerable<DepartmentDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<DepartmentDTO>>> GetDepartmentsBySchoolIdAsync(int schoolId)
+        {
+            var departments = await _departmentRepository.GetDepartmentBySchoolIdAsync(schoolId);
+            var departmentsDTO = _mapper.Map<List<DepartmentDTO>>(departments);
+            return Ok(departmentsDTO);
+        }
+
+
+
         [HttpGet("getById/{id}")]
         [ProducesResponseType(typeof(DepartmentDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Data;
-using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Models.Domain;
 
@@ -43,6 +42,13 @@ namespace SchoolAdministration.Repositories.Repos
         public async Task<SchoolDepartment?> GetByIdAsync(int id)
         {
             return await _context.SchoolDepartments.FindAsync(id);
+        }
+
+        public async Task<IEnumerable<SchoolDepartment>> GetDepartmentBySchoolIdAsync(int schoolId)
+        {
+            return await _context.SchoolDepartments
+                .Where(department => department.SchoolId == schoolId)
+                .ToListAsync();
         }
 
         public async Task UpdateDepartmentAsync(SchoolDepartment schoolDepartment)
