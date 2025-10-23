@@ -47,5 +47,13 @@ namespace SchoolAdministration.Repositories.Repos
             _context.StudyPlans.Update(studyPlan);
             await _context.SaveChangesAsync();
         }
+              
+
+        public async Task<IEnumerable<StudyPlan>> GetStudyPlansByStudentId(int studentId)
+        {
+            return await _context.StudyPlans.Where(p=>p.StudentId == studentId).ToListAsync();
+        }
+
+   
     }
 }

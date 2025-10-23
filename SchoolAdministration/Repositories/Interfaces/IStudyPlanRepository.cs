@@ -6,6 +6,7 @@ namespace SchoolAdministration.Repositories.Interfaces
     {
         Task<IEnumerable<StudyPlan>> GetAllAsync();
         Task<StudyPlan?> GetByIdAsync(int id);
+        Task<IEnumerable<StudyPlan>> GetStudyPlansByStudentId(int studentId);
         Task AddStudyPlanAsync(StudyPlan studyPlan);
         Task UpdateStudyPlanAsync(StudyPlan studyPlan);
         Task DeleteStudyPlanAsync(int id);

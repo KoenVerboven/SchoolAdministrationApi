@@ -25,7 +25,29 @@ namespace SchoolAdministration.Controllers
             return Ok(allStudyPlans);
         }
 
-        //todo : add endpoint GetStudyplansByStudentId
+      
+        [HttpGet("getStudyPlansByStudentId/{studentId}")]
+        [ProducesResponseType(typeof(StudyPlan), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<StudyPlan>>> GetStudyPlansByStudentId(int studentId)
+        {
+            if (studentId == 0)
+            {
+                return BadRequest();
+            }
+
+            var studyPlan = await _studyPlanRepository.GetStudyPlansByStudentId(studentId);
+
+            if (studyPlan == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(studyPlan);
+        }
+
 
 
         [HttpGet("{id}")]

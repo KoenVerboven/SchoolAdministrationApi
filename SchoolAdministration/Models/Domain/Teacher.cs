@@ -32,10 +32,10 @@ namespace SchoolAdministration.Models.Domain
         [Required(ErrorMessage = "Email Name is required.")]
         [EmailAddress(ErrorMessage = "Invalid email address.")]
         [Length(5, 30)]
-        public string Email { get; set; }
+        public required string Email { get; set; }
 
         [Required(ErrorMessage = "Phone Name is required.")]
-        public string Phone { get; set; }
+        public required string Phone { get; set; }
 
         public DateTime HireDate { get; set; }
 
