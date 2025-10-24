@@ -176,9 +176,9 @@ choose Project Reference
 
 Milestones :
 -------------
-6 unique visitors in 14 days.
+7 unique visitors in 14 days.
 
-![TraficSchoolAdministrationAPI](https://github.com/user-attachments/assets/d8d70c68-1b04-4f33-a530-7571d327e460)
+![7uniqueVisitors](https://github.com/user-attachments/assets/89dd5e71-b572-454c-bb3c-91a3682ce3db)
 
 
 
