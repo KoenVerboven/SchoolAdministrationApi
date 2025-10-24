@@ -22,16 +22,22 @@ namespace SchoolAdministration.Repositories.Repos
 
         public async Task<StudentImage> Upload(IFormFile file, StudentImage studentImage)
         {
-            var localPath = Path.Combine(_webHostEnvironment.ContentRootPath,"Images\\StudentImages",$"{studentImage.FileName}{studentImage.FileExtension}");
+            var StudentImagesFolder = Path.Combine(_webHostEnvironment.ContentRootPath, "Images", "StudentImages");
+            if (!Directory.Exists(StudentImagesFolder))
+            {
+                Directory.CreateDirectory(StudentImagesFolder);
+            }
+            var localPath = Path.Combine(StudentImagesFolder, $"{studentImage.FileName}{studentImage.FileExtension}");
             using var stream = new FileStream(localPath, FileMode.Create);
             await file.CopyToAsync(stream);
 
-            var urlPath = "https://localhost:7213/images/1_Verboven_Koen.jpg";//todo: set the correct url path
-            studentImage.Url = urlPath; 
+            studentImage.Url = localPath; 
             _context.StudentImages.Add(studentImage);
             await _context.SaveChangesAsync();
 
             return studentImage;
         }
+
+      
     }
 }

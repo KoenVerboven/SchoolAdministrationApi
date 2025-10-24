@@ -21,7 +21,7 @@ namespace SchoolAdministration.Models.Domain
         public required string PhoneNumber { get; set; }
         public string? Email { get; set; }
         public int SortOrder { get; set; } //most import : 1
-        public int RelationShipToStudent { get; set; } //father, mother, brother, sister, grandfather, grandmother,.....
+        public int RelationShipToStudent { get; set; } //todo int to byte
         public bool AddressSameAsStudent { get; set; }
         public string? Occupation { get; set; }
         public string? WorkPhoneNumber { get; set; }
