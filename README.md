@@ -176,9 +176,11 @@ choose Project Reference
 
 Milestones :
 -------------
-7 unique visitors in 14 days.
+10 unique visitors in 14 days.
 
-![7uniqueVisitors](https://github.com/user-attachments/assets/89dd5e71-b572-454c-bb3c-91a3682ce3db)
+<img width="1901" height="1072" alt="image" src="https://github.com/user-attachments/assets/469b1efe-5305-4b07-b633-5cc39f05609a" />
+
+
 
 
 
