@@ -19,6 +19,16 @@ namespace SchoolAdministration.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
+        public async Task<IActionResult>GetAllStudentImages()
+        {
+            var studentImages = await _imageRepository.GetAllStudentImages();
+            var studentImagesDTO = _mapper.Map<List<StudentImageDTO>>(studentImages);
+            return Ok(studentImagesDTO);
+        }
+
+
+
         [HttpPost("UploadStudentImage")]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> UploadStudentImage( IFormFile file, int studentId, string studentLastName, string studentFirstName,int createdByUserId) 

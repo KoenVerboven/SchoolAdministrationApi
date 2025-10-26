@@ -1,4 +1,5 @@
-﻿using SchoolAdministration.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolAdministration.Data;
 using SchoolAdministration.Models.Domain;
 using SchoolAdministration.Repositories.Interfaces;
 
@@ -13,6 +14,11 @@ namespace SchoolAdministration.Repositories.Repos
         {
             _webHostEnvironment = webHostEnvironment;
             _context = context;
+        }
+
+        public async Task<IEnumerable<StudentImage>> GetAllStudentImages()
+        {
+            return await _context.StudentImages.ToListAsync();
         }
 
         public bool StudentImageExist(string fileName)
