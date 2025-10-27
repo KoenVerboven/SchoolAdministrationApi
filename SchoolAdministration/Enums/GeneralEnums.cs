@@ -15,3 +15,15 @@ public enum ParentRelationship : byte
     Grandmother = 5,
     Other = 6
 }
+
+public enum MessageType : byte
+{
+    SMS = 0,
+    Email = 1
+}
+public enum MessageWeight : byte
+{
+    Normal = 0,
+    Important = 1,
+    Urgent = 2
+}
