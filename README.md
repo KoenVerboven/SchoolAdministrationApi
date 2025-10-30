@@ -17,14 +17,25 @@ A teacher can create 1 or more Exames.
 
 A teacher can give exam grades for a specific student
 
-How to start application :
---------------------------
 <img width="945" height="456" alt="image" src="https://github.com/user-attachments/assets/53e084e8-9612-4aa4-b46d-04539626f07b" />
 
-
+How to get the application :
+----------------------------
 * Click button Code
 * Choose open with Visual Studio
 * Click Clone
+
+How to start the application :
+------------------------------
+
+* Setup the database in SQL-Server
+* Adjust the connectionstring (DefaultSQLConnection) in appsettings.json with your credentinals.
+* Start the application in Visual Studio by clicking the Startbutton (choose https)
+  
+  <img width="73" height="32" alt="image" src="https://github.com/user-attachments/assets/9f6ff179-07ca-4b6d-b389-a927057e22ea" />
+
+* The application start now the Swagger-screen where you can explore the available endpoints.
+
 
 Development:
 -------------
