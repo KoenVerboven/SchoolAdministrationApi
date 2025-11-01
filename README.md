@@ -17,14 +17,25 @@ A teacher can create 1 or more Exames.
 
 A teacher can give exam grades for a specific student
 
-How to start application :
---------------------------
 <img width="945" height="456" alt="image" src="https://github.com/user-attachments/assets/53e084e8-9612-4aa4-b46d-04539626f07b" />
 
-
+How to get the application :
+----------------------------
 * Click button Code
 * Choose open with Visual Studio
 * Click Clone
+
+How to start the application :
+------------------------------
+
+* Setup the database in SQL-Server
+* Adjust the connectionstring (DefaultSQLConnection) in appsettings.json with your credentinals.
+* Start the application in Visual Studio by clicking the Startbutton (choose https)
+  
+  <img width="73" height="32" alt="image" src="https://github.com/user-attachments/assets/9f6ff179-07ca-4b6d-b389-a927057e22ea" />
+
+* The application start now the Swagger-screen where you can explore the available endpoints.
+
 
 Development:
 -------------
@@ -176,11 +187,13 @@ choose Project Reference
 
 Milestones :
 -------------
-12 unique visitors in 14 days.
+13 unique visitors in 14 days.
 
-<img width="570" height="468" alt="image" src="https://github.com/user-attachments/assets/3f0568e7-8f99-449a-a717-0cd55452ed71" />
+<img width="446" height="362" alt="image" src="https://github.com/user-attachments/assets/248f2328-3737-4b80-9a74-8a99df665bcb" />
 
-<img width="1907" height="1072" alt="image" src="https://github.com/user-attachments/assets/e378c31a-2e1d-4e7e-96c5-7ab15a0a4fab" />
+<img width="1867" height="1035" alt="image" src="https://github.com/user-attachments/assets/3de6f7bc-2281-4d27-ac10-631840412dbc" />
+
+
 
 
 
