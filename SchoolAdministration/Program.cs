@@ -120,6 +120,7 @@ namespace SchoolAdministration
                 RequestPath = "/images/studentimages"
             });
 
+            app.UseMiddleware<Middlewares.ErrorHandeling.ExceptionMiddelware>();
             app.MapControllers();
             app.Run();
         }

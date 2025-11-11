@@ -22,10 +22,12 @@ namespace SchoolAdministration.Models.Domain
         public DateTime StartDate { get; set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime EndDate { get; set; }
+        public DateTime EndDate { get; set; }// todo: make sure end date is after start date
 
         [Column(TypeName = "decimal(6, 2)")]
+        [Range(0, 99999.99, ErrorMessage = "Course price must be between 0 and 99999.99")]
         public decimal?  CoursePrice { get; set; }
+        [Range(1, 10000, ErrorMessage = "Max number of students must be between 1 and 10000")]
         public int MaxNumberOfStudents { get; set; }
         public ICollection<Student>? Students { get; set; }
         public ICollection<StudentPresence>? StudentPresences { get; set; }

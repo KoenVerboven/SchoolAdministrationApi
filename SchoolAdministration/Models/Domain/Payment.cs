@@ -1,7 +1,10 @@
-﻿namespace SchoolAdministration.Models.Domain
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SchoolAdministration.Models.Domain
 {
     public class Payment
     {
+        [Key]
         public int Id { get; set; }
         public int StudentId { get; set; }
         public int? CourseId { get; set; }

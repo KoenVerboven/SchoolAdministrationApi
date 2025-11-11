@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Models.Domain;
+using SchoolAdministration.Models.DTO;
 
 namespace SchoolAdministration.Controllers
 {
@@ -40,7 +41,7 @@ namespace SchoolAdministration.Controllers
         }
 
         [HttpGet("validationerror")]
-        public IActionResult GetValidationError(Course course)
+        public IActionResult GetValidationError(CourseCreateDTO course)
         {
             return Ok();
         }
