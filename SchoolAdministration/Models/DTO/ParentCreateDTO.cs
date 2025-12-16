@@ -1,4 +1,4 @@
-﻿using SchoolAdministration.Models.Domain;
+﻿using SchoolAdministration.Models.Domain.Student;
 using System.ComponentModel.DataAnnotations;
 
 namespace SchoolAdministration.Models.DTO

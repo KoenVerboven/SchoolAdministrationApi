@@ -1,10 +1,11 @@
-﻿using SchoolAdministration.Repositories.Interfaces;
+﻿using SchoolAdministration.Models.Domain.General;
+using SchoolAdministration.Repositories.Interfaces;
 
 namespace SchoolAdministration.Repositories.Repos
 {
     public class MessageRepository : IMessageRepository
     {
-        public Task AddMessageWorkAsync(Models.Domain.Message message)
+        public Task AddMessageWorkAsync(Message message)
         {
             throw new NotImplementedException();
         }
@@ -19,17 +20,17 @@ namespace SchoolAdministration.Repositories.Repos
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Models.Domain.Message>> GetAllAsync()
+        public Task<IEnumerable<Message>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<Models.Domain.Message?> GetByIdAsync(int id)
+        public Task<Message?> GetByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task UpdateMessageAsync(Models.Domain.Message message)
+        public Task UpdateMessageAsync(Message message)
         {
             throw new NotImplementedException();
         }

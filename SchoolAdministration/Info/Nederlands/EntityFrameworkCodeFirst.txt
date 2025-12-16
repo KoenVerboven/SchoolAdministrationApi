@@ -80,7 +80,7 @@ namespace SchoolAdministration
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("MyCors", builder =>
+                options.AddPolicy("SchoolAdministrationCors", builder =>
                 {
                     builder.WithOrigins("http://localhost:4200")
                     .AllowAnyMethod()
@@ -114,7 +114,7 @@ namespace SchoolAdministration
                 });
             }
 
-            app.UseCors("MyCors");  
+            app.UseCors("SchoolAdministrationCors");  
 
             app.MapControllers();
 

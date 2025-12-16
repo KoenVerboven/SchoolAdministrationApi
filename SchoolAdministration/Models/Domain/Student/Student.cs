@@ -1,7 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SchoolAdministration.Models.Domain.Exam;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SchoolAdministration.Models.Domain
+namespace SchoolAdministration.Models.Domain.Student
 {
     public class Student // todo : add Person class ; Student and Teacher inherits Person
     {
@@ -45,12 +46,15 @@ namespace SchoolAdministration.Models.Domain
         public DateTime RegistrationDate { get; set; }
 
         public string? Picture { get; set; }
-        public ICollection<Course>? Courses { get; set; } //todo remove many to many relationship between student and course and add a hulp table 'Register' with the fields registerdate and registeredby between the 2 tables
+
+        // Navigation properties
+        public ICollection<Course.Course>? Courses { get; set; } //todo remove many to many relationship between student and course and add a hulp table 'Register' with the fields registerdate and registeredby between the 2 tables
         public ICollection<StudyPlan>? StudyPlans { get; set; }
         public ICollection<ExamResult>? ExamResults { get; set; }
         public ICollection<StudentPresence>? StudentPresences { get; set; }
         public ICollection<Parent>? Parents { get; set; }
         public StudentImage? StudentImage { get; set; }
+        public ICollection<StudentClassRegistration>? StudentClassRegistrations { get; set; }
 
         //todo : add relationship between student and payment
 

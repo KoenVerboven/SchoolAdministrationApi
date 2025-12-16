@@ -1,7 +1,6 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace SchoolAdministration.Models.Domain
+namespace SchoolAdministration.Models.Domain.General
 {
     public class Message
     {

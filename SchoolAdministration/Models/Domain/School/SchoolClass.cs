@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SchoolAdministration.Models.Domain.Student;
+using System.ComponentModel.DataAnnotations;
 
-namespace SchoolAdministration.Models.Domain
+namespace SchoolAdministration.Models.Domain.School
 {
     public class SchoolClass
     {
@@ -16,7 +17,9 @@ namespace SchoolAdministration.Models.Domain
         public string? Descripton { get; set; }
         public string? RoomNumber { get; set; }
 
-        // students list
+        // Navigation properties
+        public Teacher.Teacher? Teacher { get; set; }
+        public ICollection<StudentClassRegistration>? StudentClassRegistrations { get; set; }
 
         // courses list / course shedule
     }

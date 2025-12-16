@@ -1,7 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SchoolAdministration.Models.Domain.Student;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SchoolAdministration.Models.Domain
+namespace SchoolAdministration.Models.Domain.Course
 {
     public class Course
     {
@@ -29,7 +30,7 @@ namespace SchoolAdministration.Models.Domain
         public decimal?  CoursePrice { get; set; }
         [Range(1, 10000, ErrorMessage = "Max number of students must be between 1 and 10000")]
         public int MaxNumberOfStudents { get; set; }
-        public ICollection<Student>? Students { get; set; }
+        public ICollection<Student.Student>? Students { get; set; }
         public ICollection<StudentPresence>? StudentPresences { get; set; }
 
     }

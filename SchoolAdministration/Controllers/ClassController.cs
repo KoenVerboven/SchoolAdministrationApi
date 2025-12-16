@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using SchoolAdministration.Models.Domain;
+using SchoolAdministration.Models.Domain.School;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Repositories.Repos;

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using SchoolAdministration.Models.Domain;
+using SchoolAdministration.Models.Domain.Course;
+using SchoolAdministration.Models.Domain.Exam;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
 

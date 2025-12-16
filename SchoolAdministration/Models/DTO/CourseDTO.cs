@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using SchoolAdministration.Models.Domain;
+using SchoolAdministration.Models.Domain.Student;
 
 namespace SchoolAdministration.Models.DTO
 {

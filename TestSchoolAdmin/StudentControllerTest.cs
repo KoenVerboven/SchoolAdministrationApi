@@ -5,8 +5,8 @@ using Moq;
 using SchoolAdministration.AutoMapper;
 using SchoolAdministration.Controllers;
 using SchoolAdministration.Models.DTO;
-using SchoolAdministration.Models.Domain;
 using SchoolAdministration.Repositories.Interfaces;
+using SchoolAdministration.Models.Domain.Student;
 
 
 namespace TestSchoolAdmin

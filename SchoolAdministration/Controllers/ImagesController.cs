@@ -43,7 +43,7 @@ namespace SchoolAdministration.Controllers
                     return Conflict("An image with the same name already exists.");
                 }
 
-                var studentImage = new Models.Domain.StudentImage
+                var studentImage = new Models.Domain.Student.StudentImage
                 {
                     FileName = fileName,
                     FileExtension = Path.GetExtension(file.FileName).ToLower(),

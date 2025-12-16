@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SchoolAdministration.Models.Domain;
+using SchoolAdministration.Models.Domain.Exam;
 using SchoolAdministration.Repositories.Interfaces;
 
 

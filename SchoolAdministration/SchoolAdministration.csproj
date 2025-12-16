@@ -30,6 +30,7 @@
     <Folder Include="log\" />
     <Folder Include="Images\" />
     <Folder Include="Images\StudentImages\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>

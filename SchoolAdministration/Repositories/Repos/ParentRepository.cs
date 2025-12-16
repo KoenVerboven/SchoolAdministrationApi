@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Data;
-using SchoolAdministration.Models.Domain;
+using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Repositories.Interfaces;
 
 namespace SchoolAdministration.Repositories.Repos

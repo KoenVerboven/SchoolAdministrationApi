@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SchoolAdministration.Models.Domain
+namespace SchoolAdministration.Models.Domain.Student
 {
     public class StudyPlanPart
     {

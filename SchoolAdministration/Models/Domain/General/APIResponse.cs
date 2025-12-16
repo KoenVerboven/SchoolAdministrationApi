@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace SchoolAdministration.Models.Domain
+namespace SchoolAdministration.Models.Domain.General
 {
     public class ApiResponse
     {

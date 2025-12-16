@@ -8,7 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
-using SchoolAdministration.Models.Domain;
+using SchoolAdministration.Models.Domain.General;
 
 
 namespace SchoolAdministration
@@ -25,7 +25,7 @@ namespace SchoolAdministration
             builder.Host.UseSerilog();
 
 
-            //add service to the container :
+            //Add services to the container :
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
@@ -35,7 +35,7 @@ namespace SchoolAdministration
 
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("MyCors", builder =>
+                options.AddPolicy("SchoolAdministrationCors", builder =>
                 {
                     builder.WithOrigins("http://localhost:4200")
                     .AllowAnyMethod()
@@ -43,6 +43,7 @@ namespace SchoolAdministration
                 });
             });
 
+            // Dependency Injection for Repositories:
             builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IStudentRepository, StudentRepository>();
             builder.Services.AddScoped<ITeacherRepository,TeacherRepository>();
@@ -109,7 +110,7 @@ namespace SchoolAdministration
                 });
             }
 
-            app.UseCors("MyCors");
+            app.UseCors("SchoolAdministrationCors");
             app.UseAuthentication();
             app.UseAuthorization();
 

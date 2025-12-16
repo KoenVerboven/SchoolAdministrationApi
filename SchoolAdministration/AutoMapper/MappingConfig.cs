@@ -1,5 +1,10 @@
 ﻿using AutoMapper;
-using SchoolAdministration.Models.Domain;
+using SchoolAdministration.Models.Domain.Course;
+using SchoolAdministration.Models.Domain.Exam;
+using SchoolAdministration.Models.Domain.General;
+using SchoolAdministration.Models.Domain.School;
+using SchoolAdministration.Models.Domain.Student;
+using SchoolAdministration.Models.Domain.Teacher;
 using SchoolAdministration.Models.DTO;
 
 namespace SchoolAdministration.AutoMapper

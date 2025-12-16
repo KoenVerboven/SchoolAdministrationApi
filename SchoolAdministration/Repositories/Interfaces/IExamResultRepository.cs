@@ -1,4 +1,4 @@
-﻿using SchoolAdministration.Models.Domain;
+﻿using SchoolAdministration.Models.Domain.Exam;
 
 namespace SchoolAdministration.Repositories.Interfaces
 {

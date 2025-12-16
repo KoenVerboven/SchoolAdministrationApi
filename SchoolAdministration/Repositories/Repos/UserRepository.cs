@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SchoolAdministration.Data;
-using SchoolAdministration.Models.Domain;
+using SchoolAdministration.Models.Domain.General;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
