@@ -44,7 +44,8 @@ Visual Studio
 Sql-server
 <img width="1023" height="721" alt="image" src="https://github.com/user-attachments/assets/fa98041c-7225-4952-94ca-806aa133935a" />
 
-<img width="985" height="614" alt="image" src="https://github.com/user-attachments/assets/4d8ba182-cd3f-4776-ad40-abdd73d43f96" />
+<img width="1396" height="810" alt="image" src="https://github.com/user-attachments/assets/29200aae-5ec1-4abc-9e34-f6bdaee0f51a" />
+
 
 Swagger :Exploring Endpoints
 -----------------------------
@@ -192,6 +193,13 @@ Milestones :
 <img width="446" height="362" alt="image" src="https://github.com/user-attachments/assets/248f2328-3737-4b80-9a74-8a99df665bcb" />
 
 <img width="1867" height="1035" alt="image" src="https://github.com/user-attachments/assets/3de6f7bc-2281-4d27-ac10-631840412dbc" />
+
+
+If you want to read more info about this API or the used technology :
+
+https://github.com/KoenVerboven/SchoolAdministrationApi/tree/master/SchoolAdministration/Info
+
+
 
 
 
