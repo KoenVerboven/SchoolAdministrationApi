@@ -1,8 +1,13 @@
 Make entity framwork work with sql-server :
 
-installeer volgende nuget-packets:
+Rechte muisklik op het project in Visual Studio -> Manage Nuget Packages for Solution...
+
+Nuget- solution, kies 'Browse' 
+
+installeer volgende nuget-packet: microsoft.EntityFrameworkCore
 
 microsoft.entityframeworkcore.sqlserver\9.0.0
+
 entityframeworkcore.tools\9.0.0  (anders kunnen we geen commandos intikken in de Package Manager Console)
 
 microsoft.entityframeworkcore\9.0.0 (is niet nodig, microsoft.entityframeworkcore.sqlserver installeerd dit automatisch mee)
@@ -19,6 +24,31 @@ en vul de connectie string in
       options => options.UseSqlServer("Data Source=KOENI7;Initial Catalog=School2;Integrated Security=True;TrustServerCertificate=True;")
       );
 
+ Beter : 
+ plaats de connectiestring in appsettings.json :
+
+  "ConnectionStrings": {
+    "DefaultSQLConnection": "Data Source=KOENI7;Initial Catalog=School2;Integrated Security=True;TrustServerCertificate=True;"
+  },
+
+ Maak de file AppDbContext.cs aan in de Data map:
+
+using Microsoft.EntityFrameworkCore;
+using VKmfSoft_EHealth_API.Models.Domain.Hospital;
+
+namespace VKmfSoft_EHealth_API.Data
+{
+    public class AppDbContext : DbContext
+    {
+        public DbSet<Hospital> Hospitals { get; set; }
+
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            : base(options)
+        {
+        }
+ 
+    }
+}
 
 
 Om er voor te zorgen dat de map 'Migrations' verschijnt in ons project:
