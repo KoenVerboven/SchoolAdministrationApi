@@ -39,8 +39,9 @@ How to start the application :
 
 Development:
 -------------
-Visual Studio 
-<img width="1915" height="1011" alt="image" src="https://github.com/user-attachments/assets/e5595e0f-0de4-42c8-bc6c-ffb91774dc92" />
+Visual Studio 2026 Community
+<img width="1692" height="868" alt="image" src="https://github.com/user-attachments/assets/cf2e6c8d-e308-4636-b9a1-7c12123f3dcc" />
+
 Sql-server
 <img width="1023" height="721" alt="image" src="https://github.com/user-attachments/assets/fa98041c-7225-4952-94ca-806aa133935a" />
 
