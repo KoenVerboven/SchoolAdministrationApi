@@ -27,8 +27,7 @@ namespace SchoolAdministration.Data
         public DbSet<StudentPresence>StudentsPresence { get; set; }
         public DbSet<Parent> Parents { get; set; }
         public DbSet<StudentImage> StudentImages { get; set; }
-        //public DbSet<Message> Messages { get; set; }
-        //public DbSet<HomeWork> HomeWorks { get; set; }
+        public DbSet<StudentClassRegistration> StudentClassRegistrations { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             :base(options)

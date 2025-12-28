@@ -61,6 +61,7 @@ tik nu in :
 Add-Migration InitialMigration
 
 --> de map Migration, met hieronder de migration-files worden aangemaakt
+To undo this action, use Remove-Migration.
 
 update-Database
 
@@ -256,4 +257,21 @@ ONE TO ONE relationship:
 
 https://learn.microsoft.com/en-us/ef/core/modeling/relationships/one-to-one
 
+
+------------------------------------------------------------------------------------
+
+Composite Key :
+
+ [PrimaryKey(nameof(StudentId), nameof(SchoolClassId))]
+    public class StudentClassRegistration
+    {
+        public int StudentId { get; set; }
+        public int SchoolClassId { get; set; }
+        public DateTime RegistrationDate { get; set; }
+        public int RegisteredByUserId { get; set; }
+        public Student Student { get; set; } = null!;
+        public SchoolClass SchoolClass  {  get; set; } = null!;
+    }
+
+    ------------------------------------------------------------------------------------
 

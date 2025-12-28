@@ -19,6 +19,8 @@ namespace SchoolAdministration.Models.Domain.Course
         [StringLength(400, ErrorMessage = "Course description cannot longer than 400 characters")]
         public string? CourseDescription { get; set; }
 
+        //public bool Remote { get; set; }
+
         [DataType(DataType.DateTime)]
         public DateTime StartDate { get; set; }
 
