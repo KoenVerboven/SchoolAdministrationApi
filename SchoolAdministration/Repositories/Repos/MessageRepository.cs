@@ -1,4 +1,4 @@
-﻿using SchoolAdministration.Models.Domain.General;
+﻿using SchoolAdministration.Models.Domain.Communication;
 using SchoolAdministration.Repositories.Interfaces;
 
 namespace SchoolAdministration.Repositories.Repos

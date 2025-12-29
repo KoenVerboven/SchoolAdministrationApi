@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SchoolAdministration.Models.Domain.General
+namespace SchoolAdministration.Models.Domain.Communication
 {
     public class Message
     {

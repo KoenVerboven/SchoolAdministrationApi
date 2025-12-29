@@ -44,6 +44,8 @@ namespace SchoolAdministration.Models.Domain.Teacher
         [Display(Name = "Marital status")]
         public byte MaritalStatusId { get; set; }
 
+        public ICollection<TeacherPresence>? TeacherPresences { get; set; }
+
         //todo leraar geeft volgend lessen + create date + updatedate + createdby + updatedby
 
     }
