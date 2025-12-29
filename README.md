@@ -39,14 +39,11 @@ How to start the application :
 
 Development:
 -------------
-Visual Studio 2026 Community
-<img width="1692" height="868" alt="image" src="https://github.com/user-attachments/assets/cf2e6c8d-e308-4636-b9a1-7c12123f3dcc" />
+<img width="577" height="125" alt="image" src="https://github.com/user-attachments/assets/e83d20a4-ed24-4706-940f-4e6fe16d67cf" />
 
-Sql-server
 <img width="1023" height="721" alt="image" src="https://github.com/user-attachments/assets/fa98041c-7225-4952-94ca-806aa133935a" />
 
-<img width="1000" height="628" alt="image" src="https://github.com/user-attachments/assets/adbadb79-4998-4a9f-8509-d7a87441f24e" />
-
+<img width="918" height="685" alt="image" src="https://github.com/user-attachments/assets/95df1f46-9c94-4346-968b-ccfd0200281c" />
 
 
 Swagger :Exploring Endpoints
