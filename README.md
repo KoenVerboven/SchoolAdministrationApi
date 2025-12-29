@@ -45,7 +45,8 @@ Visual Studio 2026 Community
 Sql-server
 <img width="1023" height="721" alt="image" src="https://github.com/user-attachments/assets/fa98041c-7225-4952-94ca-806aa133935a" />
 
-<img width="1396" height="810" alt="image" src="https://github.com/user-attachments/assets/29200aae-5ec1-4abc-9e34-f6bdaee0f51a" />
+<img width="1000" height="628" alt="image" src="https://github.com/user-attachments/assets/adbadb79-4998-4a9f-8509-d7a87441f24e" />
+
 
 
 Swagger :Exploring Endpoints
