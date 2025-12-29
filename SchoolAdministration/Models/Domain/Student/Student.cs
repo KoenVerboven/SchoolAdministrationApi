@@ -1,4 +1,5 @@
 ﻿using SchoolAdministration.Models.Domain.Exam;
+using SchoolAdministration.Models.Domain.Invoice;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -54,9 +55,8 @@ namespace SchoolAdministration.Models.Domain.Student
         public ICollection<StudentPresence>? StudentPresences { get; set; }
         public ICollection<Parent>? Parents { get; set; }
         public StudentImage? StudentImage { get; set; }
+        public ICollection<Payment>? Payments { get; set; }
         public ICollection<StudentClassRegistration>? StudentClassRegistrations { get; set; }
-
-        //todo : add relationship between student and payment
 
         //public int CreatedByUserId { get; set; }
         //public DateTime CreatedDate { get; set; }

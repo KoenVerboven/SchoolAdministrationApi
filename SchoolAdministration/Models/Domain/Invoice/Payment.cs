@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SchoolAdministration.Models.Domain.General
+namespace SchoolAdministration.Models.Domain.Invoice
 {
     public class Payment
     {
@@ -8,10 +8,10 @@ namespace SchoolAdministration.Models.Domain.General
         public int Id { get; set; }
         public int StudentId { get; set; }
         public int? CourseId { get; set; }
-        public int? ArticleId { get; set; }
+        public int? InvoiceId { get; set; }
         public decimal Amount { get; set; }
         public DateTime PaymentDate { get; set; }
-        public int PaymentMethodId { get; set; } // todo cash, kreditcard, ...
+        public byte PaymentMethodId { get; set; } // todo cash, kreditcard, ...
         public int? TransactionId { get; set; }
     }
 }
