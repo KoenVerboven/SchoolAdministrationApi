@@ -187,11 +187,10 @@ choose Project Reference
 
 Milestones :
 -------------
-13 unique visitors in 14 days.
+21 unique visitors in 14 days.
 
-<img width="446" height="362" alt="image" src="https://github.com/user-attachments/assets/248f2328-3737-4b80-9a74-8a99df665bcb" />
+<img width="1785" height="1040" alt="image" src="https://github.com/user-attachments/assets/aac0fd39-88de-42eb-89ef-05b1cae28a68" />
 
-<img width="1867" height="1035" alt="image" src="https://github.com/user-attachments/assets/3de6f7bc-2281-4d27-ac10-631840412dbc" />
 
 
 If you want to read more info about this API or the used technology :
