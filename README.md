@@ -43,7 +43,7 @@ Development:
 
 <img width="1023" height="721" alt="image" src="https://github.com/user-attachments/assets/fa98041c-7225-4952-94ca-806aa133935a" />
 
-<img width="918" height="685" alt="image" src="https://github.com/user-attachments/assets/95df1f46-9c94-4346-968b-ccfd0200281c" />
+![Schermafbeelding 2025-12-31 181438](https://github.com/user-attachments/assets/daade729-5665-4b22-856e-dab487e5c54f)
 
 
 Swagger :Exploring Endpoints
