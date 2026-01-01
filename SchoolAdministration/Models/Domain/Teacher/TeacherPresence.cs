@@ -12,7 +12,7 @@ namespace SchoolAdministration.Models.Domain.Teacher
         public int? AbsenceReason { get; set; }
         public string? Comment { get; set; }
         public DateTime RegistrationDate { get; set; }
-        public int RegistratedByUSerId { get; set; } //FK
+        public int RegistratedByUserId { get; set; } //FK
 
     }
 }

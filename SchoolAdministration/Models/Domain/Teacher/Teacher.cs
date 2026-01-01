@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SchoolAdministration.Models.Domain.School;
+using System.ComponentModel.DataAnnotations;
 
 namespace SchoolAdministration.Models.Domain.Teacher
 {
@@ -45,6 +46,8 @@ namespace SchoolAdministration.Models.Domain.Teacher
         public byte MaritalStatusId { get; set; }
 
         public ICollection<TeacherPresence>? TeacherPresences { get; set; }
+
+        public ICollection<SchoolClass>? SchoolClasses { get; set; }
 
         //todo leraar geeft volgend lessen + create date + updatedate + createdby + updatedby
 

@@ -17,9 +17,6 @@ namespace SchoolAdministration.Models.Domain.School
         public string? Descripton { get; set; }
         public string? RoomNumber { get; set; }
 
-        // Navigation properties
-         //public ICollection<StudentClassRegistration>? StudentClassRegistrations { get; set; }
-
         // courses list / course shedule
     }
 }
