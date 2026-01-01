@@ -43,7 +43,7 @@ Development:
 
 <img width="1023" height="721" alt="image" src="https://github.com/user-attachments/assets/fa98041c-7225-4952-94ca-806aa133935a" />
 
-<img width="918" height="685" alt="image" src="https://github.com/user-attachments/assets/95df1f46-9c94-4346-968b-ccfd0200281c" />
+![Schermafbeelding 2025-12-31 181438](https://github.com/user-attachments/assets/daade729-5665-4b22-856e-dab487e5c54f)
 
 
 Swagger :Exploring Endpoints
@@ -187,11 +187,9 @@ choose Project Reference
 
 Milestones :
 -------------
-13 unique visitors in 14 days.
+22 unique visitors in 14 days.
 
-<img width="446" height="362" alt="image" src="https://github.com/user-attachments/assets/248f2328-3737-4b80-9a74-8a99df665bcb" />
-
-<img width="1867" height="1035" alt="image" src="https://github.com/user-attachments/assets/3de6f7bc-2281-4d27-ac10-631840412dbc" />
+<img width="1850" height="955" alt="image" src="https://github.com/user-attachments/assets/7837eea1-2e96-49cd-b893-7aa925edb029" />
 
 
 If you want to read more info about this API or the used technology :
