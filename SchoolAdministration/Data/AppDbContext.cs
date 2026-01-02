@@ -30,6 +30,8 @@ namespace SchoolAdministration.Data
         public DbSet<StudentImage> StudentImages { get; set; }
         public DbSet<StudentClassRegistration> StudentClassRegistrations { get; set; }
         public DbSet<TeacherPresence> TeacherPresences { get; set; }
+        public DbSet<InvoiceDetailLine> InvoiceDetailLines { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             :base(options)
