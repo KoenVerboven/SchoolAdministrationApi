@@ -9,6 +9,6 @@ namespace SchoolAdministration.Models.Domain.Invoice
         public required string InvoiceNumber { get; set; }
         public int StudentId { get; set; }
         public Decimal TotalAmount { get; set; }
-        public required ICollection<InvoiceDetailLine> InvoiceDetailLines { get; set; }
+        public ICollection<InvoiceDetailLine>? InvoiceDetailLines { get; set; }
     }
 }
