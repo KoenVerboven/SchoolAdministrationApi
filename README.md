@@ -190,7 +190,8 @@ Milestones :
 -------------
 27 unique visitors in 14 days.
 
-<img width="1518" height="971" alt="image" src="https://github.com/user-attachments/assets/ec56e253-4afd-44ff-9a32-1d7e50f4bd42" />
+<img width="1867" height="1067" alt="image" src="https://github.com/user-attachments/assets/e670fc3b-6277-4de7-8cb3-d4a5007ce55e" />
+
 
 
 If you want to read more info about this API or the used technology :
