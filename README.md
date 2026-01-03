@@ -43,7 +43,8 @@ Development:
 
 <img width="1023" height="721" alt="image" src="https://github.com/user-attachments/assets/fa98041c-7225-4952-94ca-806aa133935a" />
 
-<img width="1424" height="894" alt="image" src="https://github.com/user-attachments/assets/62e0cb56-c53e-4492-82c4-6e903047cd49" />
+<img width="1471" height="891" alt="image" src="https://github.com/user-attachments/assets/4543e7b9-6ff4-47b7-961c-cc9c50a11377" />
+
 
 
 Swagger :Exploring Endpoints
@@ -187,9 +188,9 @@ choose Project Reference
 
 Milestones :
 -------------
-24 unique visitors in 14 days.
+27 unique visitors in 14 days.
 
-<img width="1862" height="1073" alt="image" src="https://github.com/user-attachments/assets/00d2e93a-e731-47ff-a0b5-3e067a3f3688" />
+<img width="1867" height="1067" alt="image" src="https://github.com/user-attachments/assets/e670fc3b-6277-4de7-8cb3-d4a5007ce55e" />
 
 
 
