@@ -50,14 +50,12 @@ namespace SchoolAdministration.Models.Domain.Student
         public string? Picture { get; set; }
 
         // Navigation properties
-        public ICollection<Course.Course>? Courses { get; set; } //todo remove many to many relationship between student and course and add a hulp table 'Register' with the fields registerdate and registeredby between the 2 tables
+        public ICollection<Course.Course>? Courses { get; set; } 
         public ICollection<StudyPlan>? StudyPlans { get; set; }
         public ICollection<ExamResult>? ExamResults { get; set; }
         public ICollection<StudentPresence>? StudentPresences { get; set; }
         public ICollection<Parent>? Parents { get; set; }
         public StudentImage? StudentImage { get; set; }
-        public Certificate? Certificate { get; set; }
-        public Diploma? Diploma { get; set; }
         public ICollection<Payment>? Payments { get; set; }
         public ICollection<StudentClassRegistration>? StudentClassRegistrations { get; set; }
         public ICollection<Invoice.Invoice>? Invoices { get; set; }
