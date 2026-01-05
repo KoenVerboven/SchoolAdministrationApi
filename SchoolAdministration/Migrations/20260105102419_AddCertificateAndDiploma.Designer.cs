@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolAdministration.Data;
 
@@ -11,9 +12,11 @@ using SchoolAdministration.Data;
 namespace SchoolAdministration.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260105102419_AddCertificateAndDiploma")]
+    partial class AddCertificateAndDiploma
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -221,6 +224,58 @@ namespace SchoolAdministration.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("SchoolAdministration.Models.Domain.Document.CertificateDocument", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CertificateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CertificateId")
+                        .IsUnique();
+
+                    b.ToTable("CertificateDocument");
+                });
+
+            modelBuilder.Entity("SchoolAdministration.Models.Domain.Document.DiplomaDocument", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DiplomaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DiplomaId")
+                        .IsUnique();
+
+                    b.ToTable("DiplomaDocument");
                 });
 
             modelBuilder.Entity("SchoolAdministration.Models.Domain.Exam.Exam", b =>
@@ -1196,6 +1251,24 @@ namespace SchoolAdministration.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("SchoolAdministration.Models.Domain.Document.CertificateDocument", b =>
+                {
+                    b.HasOne("SchoolAdministration.Models.Domain.Qualification.Certificate", null)
+                        .WithOne("CertificateDocument")
+                        .HasForeignKey("SchoolAdministration.Models.Domain.Document.CertificateDocument", "CertificateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("SchoolAdministration.Models.Domain.Document.DiplomaDocument", b =>
+                {
+                    b.HasOne("SchoolAdministration.Models.Domain.Qualification.Diploma", null)
+                        .WithOne("DiplomaDocument")
+                        .HasForeignKey("SchoolAdministration.Models.Domain.Document.DiplomaDocument", "DiplomaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("SchoolAdministration.Models.Domain.Exam.ExamQuestion", b =>
                 {
                     b.HasOne("SchoolAdministration.Models.Domain.Exam.Exam", null)
@@ -1365,6 +1438,16 @@ namespace SchoolAdministration.Migrations
             modelBuilder.Entity("SchoolAdministration.Models.Domain.Invoice.Invoice", b =>
                 {
                     b.Navigation("InvoiceDetailLines");
+                });
+
+            modelBuilder.Entity("SchoolAdministration.Models.Domain.Qualification.Certificate", b =>
+                {
+                    b.Navigation("CertificateDocument");
+                });
+
+            modelBuilder.Entity("SchoolAdministration.Models.Domain.Qualification.Diploma", b =>
+                {
+                    b.Navigation("DiplomaDocument");
                 });
 
             modelBuilder.Entity("SchoolAdministration.Models.Domain.School.School", b =>

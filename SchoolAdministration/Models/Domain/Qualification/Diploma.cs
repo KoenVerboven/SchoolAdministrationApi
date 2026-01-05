@@ -6,6 +6,5 @@ namespace SchoolAdministration.Models.Domain.Qualification
     {
         public int Id { get; set; }
         public required string Name { get; set; }
-        public DiplomaDocument? DiplomaDocument { get; set; }
     }
 }
