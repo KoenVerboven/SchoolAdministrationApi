@@ -1,10 +1,10 @@
 ﻿namespace SchoolAdministration.Models.Domain.Document
 {
-    public class InvoiceDocument
+    public class DiplomaDocument
     {
         public int Id { get; set; }
         public int StudentId { get; set; }
-        public int InvoiceId { get; set; }
+        public int DiplomaId { get; set; }
         public required string FilePath { get; set; }
     }
 }

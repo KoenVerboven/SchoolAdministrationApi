@@ -4,6 +4,7 @@ using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.Domain.Exam;
 using SchoolAdministration.Models.Domain.General;
 using SchoolAdministration.Models.Domain.Invoice;
+using SchoolAdministration.Models.Domain.Qualification;
 using SchoolAdministration.Models.Domain.School;
 using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.Domain.Teacher;
@@ -24,14 +25,18 @@ namespace SchoolAdministration.Data
         public DbSet<School>Schools { get; set; }
         public DbSet <SchoolDepartment>SchoolDepartments { get; set; }
         public DbSet<SchoolClass> SchoolClasses { get; set; }
+        public DbSet<ClassRoom> ClassRooms { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<StudentPresence>StudentsPresence { get; set; }
         public DbSet<Parent> Parents { get; set; }
-        public DbSet<StudentImage> StudentImages { get; set; }
+        public DbSet<StudentImage> StudentImages { get; set; } //Todo : change name StudentImages to StudentImage? // One-to-one relationship with Student : each student has one image
         public DbSet<StudentClassRegistration> StudentClassRegistrations { get; set; }
         public DbSet<TeacherPresence> TeacherPresences { get; set; }
         public DbSet<InvoiceDetailLine> InvoiceDetailLines { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
+        public DbSet<Diploma> Diplomas { get; set; }
+
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             :base(options)

@@ -14,6 +14,7 @@ namespace SchoolAdministration.Models.Domain.School
         public byte Floor { get; set; }
         public int StudentCapacity { get; set; }
         public string? Remarks { get; set; }
+        //public ICollection<SchoolClass>? SchoolClasses { get; set; }
 
     }
 }
