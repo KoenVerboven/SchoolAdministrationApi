@@ -36,6 +36,8 @@ namespace SchoolAdministration.Data
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Certificate> Certificates { get; set; }
         public DbSet<Diploma> Diplomas { get; set; }
+        public DbSet<StudentCertificate> StudentCertificates { get; set; }
+        public DbSet<StudentDiploma> StudentDiplomas { get; set; }
 
 
         public AppDbContext(DbContextOptions<AppDbContext> options)

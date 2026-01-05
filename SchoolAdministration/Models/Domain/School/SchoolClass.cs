@@ -1,5 +1,4 @@
-﻿using SchoolAdministration.Models.Domain.Student;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SchoolAdministration.Models.Domain.School
 {
