@@ -186,13 +186,6 @@ Right click project SchoolAdministrationTests
 choose Project Reference
 
 
-Milestones :
--------------
-27 unique visitors in 14 days.
-
-<img width="1867" height="1067" alt="image" src="https://github.com/user-attachments/assets/e670fc3b-6277-4de7-8cb3-d4a5007ce55e" />
-
-
 
 If you want to read more info about this API or the used technology :
 
