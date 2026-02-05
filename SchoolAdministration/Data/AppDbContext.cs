@@ -38,6 +38,9 @@ namespace SchoolAdministration.Data
         public DbSet<Diploma> Diplomas { get; set; }
         public DbSet<StudentCertificate> StudentCertificates { get; set; }
         public DbSet<StudentDiploma> StudentDiplomas { get; set; }
+        public DbSet<HomeWork> HomeWorks { get; set; }
+        public DbSet<HomeWorkDetailLine> homeWorkDetailLines { get; set; }
+        public DbSet<HomeWorkDetailLineAnswer> homeWorkDetailLineAnswers { get; set; }
 
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
