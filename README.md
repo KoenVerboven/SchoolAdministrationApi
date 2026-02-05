@@ -43,7 +43,7 @@ Development:
 
 <img width="1023" height="721" alt="image" src="https://github.com/user-attachments/assets/fa98041c-7225-4952-94ca-806aa133935a" />
 
-<img width="1418" height="890" alt="image" src="https://github.com/user-attachments/assets/75d20064-34df-4985-ba5a-d2c450b6be59" />
+<img width="1450" height="903" alt="image" src="https://github.com/user-attachments/assets/d5a2b747-4c88-49cd-8c9a-6768cd9f3813" />
 
 
 
