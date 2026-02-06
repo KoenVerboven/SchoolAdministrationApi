@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolAdministration.Data;
 
@@ -11,9 +12,11 @@ using SchoolAdministration.Data;
 namespace SchoolAdministration.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260205131202_AddHomeWork")]
+    partial class AddHomeWork
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -780,10 +783,10 @@ namespace SchoolAdministration.Migrations
 
                     b.HasIndex("HomeWorkId");
 
-                    b.ToTable("HomeWorkDetailLines");
+                    b.ToTable("homeWorkDetailLines");
                 });
 
-            modelBuilder.Entity("SchoolAdministration.Models.Domain.Student.HomeWorkDetailLineStudentAnswer", b =>
+            modelBuilder.Entity("SchoolAdministration.Models.Domain.Student.HomeWorkDetailLineAnswer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -806,7 +809,7 @@ namespace SchoolAdministration.Migrations
                     b.HasIndex("HomeWorkDetailLineId")
                         .IsUnique();
 
-                    b.ToTable("HomeWorkDetailLineStudentAnswers");
+                    b.ToTable("homeWorkDetailLineAnswers");
                 });
 
             modelBuilder.Entity("SchoolAdministration.Models.Domain.Student.Parent", b =>
@@ -1425,11 +1428,11 @@ namespace SchoolAdministration.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("SchoolAdministration.Models.Domain.Student.HomeWorkDetailLineStudentAnswer", b =>
+            modelBuilder.Entity("SchoolAdministration.Models.Domain.Student.HomeWorkDetailLineAnswer", b =>
                 {
                     b.HasOne("SchoolAdministration.Models.Domain.Student.HomeWorkDetailLine", null)
-                        .WithOne("HomeWorkDetailLineStudentAnswer")
-                        .HasForeignKey("SchoolAdministration.Models.Domain.Student.HomeWorkDetailLineStudentAnswer", "HomeWorkDetailLineId")
+                        .WithOne("HomeWorkDetailLineAnswer")
+                        .HasForeignKey("SchoolAdministration.Models.Domain.Student.HomeWorkDetailLineAnswer", "HomeWorkDetailLineId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1574,7 +1577,7 @@ namespace SchoolAdministration.Migrations
 
             modelBuilder.Entity("SchoolAdministration.Models.Domain.Student.HomeWorkDetailLine", b =>
                 {
-                    b.Navigation("HomeWorkDetailLineStudentAnswer")
+                    b.Navigation("HomeWorkDetailLineAnswer")
                         .IsRequired();
                 });
 

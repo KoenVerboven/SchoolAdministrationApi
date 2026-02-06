@@ -9,6 +9,6 @@ namespace SchoolAdministration.Models.Domain.Student
         public required string HomeWorkAssignment { get; set; }
         public int HomeWorkId { get; set; } // Foreign key to HomeWork
         public int StudentId { get; set; } // Foreign key to Student
-        public required HomeWorkDetailLineAnswer HomeWorkDetailLineAnswer { get; set; }
+        public required HomeWorkDetailLineStudentAnswer HomeWorkDetailLineStudentAnswer { get; set; }
     }
 }
