@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SchoolAdministration.Models.Domain.Student
+namespace SchoolAdministration.Models.Domain.HomeWork
 {
     public class HomeWorkDetailLine
     {

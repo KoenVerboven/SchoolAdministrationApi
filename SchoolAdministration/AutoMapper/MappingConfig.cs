@@ -2,6 +2,7 @@
 using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.Domain.Exam;
 using SchoolAdministration.Models.Domain.General;
+using SchoolAdministration.Models.Domain.HomeWork;
 using SchoolAdministration.Models.Domain.School;
 using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.Domain.Teacher;
@@ -48,6 +49,10 @@ namespace SchoolAdministration.AutoMapper
             CreateMap<Parent, ParentDTO>().ReverseMap();
             CreateMap<Parent, ParentCreateDTO>().ReverseMap();
             CreateMap<Parent, ParentUpdateDTO>().ReverseMap();
+
+            CreateMap<HomeWork, HomeWorkDTO>().ReverseMap();
+            CreateMap<HomeWork, HomeWorkCreateDTO>().ReverseMap();
+            CreateMap<HomeWork, HomeWorkUpdateDTO>().ReverseMap();
 
             CreateMap<ApplicationUser, UserDTO>().ReverseMap();
 

@@ -1,4 +1,4 @@
-﻿namespace SchoolAdministration.Models.Domain.Student
+﻿namespace SchoolAdministration.Models.Domain.HomeWork
 {
     public class HomeWorkDetailLineStudentAnswer
     {

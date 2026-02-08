@@ -1,5 +1,4 @@
-﻿using SchoolAdministration.Models.Domain.Student;
-
+﻿using SchoolAdministration.Models.Domain.HomeWork;
 
 namespace SchoolAdministration.Repositories.Interfaces
 {

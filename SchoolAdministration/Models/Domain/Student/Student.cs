@@ -1,5 +1,4 @@
 ﻿using SchoolAdministration.Models.Domain.Exam;
-using SchoolAdministration.Models.Domain.Qualification; 
 using SchoolAdministration.Models.Domain.Invoice;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -59,7 +58,7 @@ namespace SchoolAdministration.Models.Domain.Student
         public ICollection<Payment>? Payments { get; set; }
         public ICollection<StudentClassRegistration>? StudentClassRegistrations { get; set; }
         public ICollection<Invoice.Invoice>? Invoices { get; set; }
-        public  ICollection<HomeWork>? HomeWorks { get; set; }
+        public  ICollection<HomeWork.HomeWork>? HomeWorks { get; set; }
 
         //todo add audit fields
         //public int CreatedByUserId { get; set; }

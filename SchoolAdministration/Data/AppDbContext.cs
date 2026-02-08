@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.Domain.Exam;
 using SchoolAdministration.Models.Domain.General;
+using SchoolAdministration.Models.Domain.HomeWork;
 using SchoolAdministration.Models.Domain.Invoice;
 using SchoolAdministration.Models.Domain.Qualification;
 using SchoolAdministration.Models.Domain.School;

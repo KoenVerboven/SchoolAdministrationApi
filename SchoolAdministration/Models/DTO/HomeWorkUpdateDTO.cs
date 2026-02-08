@@ -1,10 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SchoolAdministration.Models.Domain.HomeWork;
+using System.ComponentModel.DataAnnotations;
 
-namespace SchoolAdministration.Models.Domain.Student
+namespace SchoolAdministration.Models.DTO
 {
-    public class HomeWork
+    public class HomeWorkUpdateDTO
     {
-        [Key]
         public int Id { get; set; }
         [Required(ErrorMessage = "Homework Name is required.")]
         public required string Name { get; set; }
@@ -17,6 +17,5 @@ namespace SchoolAdministration.Models.Domain.Student
         public string? CreatedBy { get; set; }
         public string? UpdatedBy { get; set; }
         public required HomeWorkDetailLine[] HomeWorkDetailLines { get; set; }
-     
     }
 }
