@@ -54,6 +54,18 @@ UnitTests :
 ------------
 ![image](https://github.com/user-attachments/assets/96426350-2387-4e3e-a6c5-d1930969257e)
 
+add new project to solution : xUnit test Project
+
+Installed Nuget-Packages:
+* FluentAssertions
+* Moq
+
+Make a reference to SchoolAdministration project:
+
+Right click project SchoolAdministrationTests
+
+choose Project Reference
+
 Cross-origin-requests :
 ------------
 Cors
@@ -82,10 +94,6 @@ Program.cs:
   _logger.LogInformation("Getting all the students.")
 
 
-Exploring Endpoints :
----------------------
- We use Swagger.
- 
 
 
 EntityFrameworkCore:
@@ -171,8 +179,12 @@ In the Controller we can write some like this:
  
 Here we map student to StudentDTO.
 
-Versioning:
+Versioning :
 -----------
+
+<img width="1465" height="66" alt="image" src="https://github.com/user-attachments/assets/51d90494-4088-4e7b-b9a2-cdf212506aa4" />
+
+
 Installed NuGet-packages : 
 * Microsoft.AspNetCore.Mvc.Versioning
 * Microsoft.AspNetCore.Mvc.Versioning.ApiExlorer
@@ -186,20 +198,8 @@ Installed NuGet-packages :
  });
 
 
-Unittesting : 
--------------
-add new project to solution : xUnit test Project
-
-Installed Nuget-Packages:
-* FluentAssertions
-* Moq
-
-Make a reference to SchoolAdministration project:
-
-Right click project SchoolAdministrationTests
-
-choose Project Reference
-
+More Info :
+-----------
 
 
 If you want to read more info about this API or the used technology :
