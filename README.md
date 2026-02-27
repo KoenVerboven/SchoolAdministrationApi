@@ -39,9 +39,13 @@ How to start the application :
 
 Development:
 -------------
-<img width="577" height="125" alt="image" src="https://github.com/user-attachments/assets/e83d20a4-ed24-4706-940f-4e6fe16d67cf" />
+* Visual studio 2026 Community Edition
 
-<img width="1023" height="721" alt="image" src="https://github.com/user-attachments/assets/fa98041c-7225-4952-94ca-806aa133935a" />
+* Target framework : .NET9.0
+
+* SQL-Server 2022
+
+* Database diagram :
 
 <img width="1442" height="917" alt="image" src="https://github.com/user-attachments/assets/d1bab6b8-53b3-4deb-b9dd-7fb91db6560c" />
 
@@ -54,9 +58,26 @@ UnitTests :
 ------------
 ![image](https://github.com/user-attachments/assets/96426350-2387-4e3e-a6c5-d1930969257e)
 
+add new project to solution : xUnit test Project
+
+Installed Nuget-Packages:
+* FluentAssertions
+* Moq
+
+Make a reference to SchoolAdministration project:
+
+Right click project SchoolAdministrationTests
+
+choose Project Reference
+
 Cross-origin-requests :
 ------------
 Cors
+
+Program.cs:
+
+<img width="641" height="207" alt="image" src="https://github.com/user-attachments/assets/7fec70e5-84f6-4549-b08f-7b17e3e438bc" />
+
 
 Logging :
 ---------
@@ -77,10 +98,6 @@ Program.cs:
   _logger.LogInformation("Getting all the students.")
 
 
-Exploring Endpoints :
----------------------
- We use Swagger.
- 
 
 
 EntityFrameworkCore:
@@ -100,6 +117,17 @@ Type in Package Manager Console:
 Add-Migration InitialMigration
 
 update-Database
+
+Authentication:
+---------------
+Installed Nuget-packages :
+* microsoft.aspnetcore.identity.entityframeworkcore\9.0.0\
+* microsoft.aspnetcore.authentication.jwtbearer\9.0.3\
+
+extra tables in SQL-Server:
+
+<img width="265" height="161" alt="image" src="https://github.com/user-attachments/assets/f499c52f-6bd4-456c-bcba-89684df2201c" />
+
 
 
 Dependecy Injection :
@@ -155,8 +183,12 @@ In the Controller we can write some like this:
  
 Here we map student to StudentDTO.
 
-Versioning:
+Versioning :
 -----------
+
+<img width="1465" height="66" alt="image" src="https://github.com/user-attachments/assets/51d90494-4088-4e7b-b9a2-cdf212506aa4" />
+
+
 Installed NuGet-packages : 
 * Microsoft.AspNetCore.Mvc.Versioning
 * Microsoft.AspNetCore.Mvc.Versioning.ApiExlorer
@@ -170,20 +202,8 @@ Installed NuGet-packages :
  });
 
 
-Unittesting : 
--------------
-add new project to solution : xUnit test Project
-
-Installed Nuget-Packages:
-* FluentAssertions
-* Moq
-
-Make a reference to SchoolAdministration project:
-
-Right click project SchoolAdministrationTests
-
-choose Project Reference
-
+More Info :
+-----------
 
 
 If you want to read more info about this API or the used technology :
