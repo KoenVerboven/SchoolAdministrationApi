@@ -39,9 +39,13 @@ How to start the application :
 
 Development:
 -------------
-<img width="577" height="125" alt="image" src="https://github.com/user-attachments/assets/e83d20a4-ed24-4706-940f-4e6fe16d67cf" />
+* Visual studio 2026 Community Edition
 
-<img width="1023" height="721" alt="image" src="https://github.com/user-attachments/assets/fa98041c-7225-4952-94ca-806aa133935a" />
+* Target framework : .NET9.0
+
+* SQL-Server
+
+* Database diagram :
 
 <img width="1442" height="917" alt="image" src="https://github.com/user-attachments/assets/d1bab6b8-53b3-4deb-b9dd-7fb91db6560c" />
 
