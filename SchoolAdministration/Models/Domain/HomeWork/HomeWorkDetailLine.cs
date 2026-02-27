@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.ComponentModel.DataAnnotations;
 
 namespace SchoolAdministration.Models.Domain.HomeWork
 {
@@ -9,6 +10,7 @@ namespace SchoolAdministration.Models.Domain.HomeWork
         public required string HomeWorkAssignment { get; set; }
         public int HomeWorkId { get; set; } // Foreign key to HomeWork
         public int StudentId { get; set; } // Foreign key to Student
-        public required HomeWorkDetailLineStudentAnswer HomeWorkDetailLineStudentAnswer { get; set; }
+        public ICollection<HomeWorkDetailLineStudentAnswer>? HomeWorkDetailLineStudentAnswer { get; set; }
+        public HomeWorkDetailLineCorrectAnswer? HomeWorkDetailLineCorrectAnswer { get; set; }
     }
 }

@@ -42,6 +42,7 @@ namespace SchoolAdministration.Data
         public DbSet<HomeWork> HomeWorks { get; set; }
         public DbSet<HomeWorkDetailLine> HomeWorkDetailLines { get; set; }
         public DbSet<HomeWorkDetailLineStudentAnswer> HomeWorkDetailLineStudentAnswers { get; set; }
+        public DbSet<HomeWorkDetailLineCorrectAnswer> HomeWorkDetailLineCorrectAnswers { get; set; }
 
 
         public AppDbContext(DbContextOptions<AppDbContext> options)

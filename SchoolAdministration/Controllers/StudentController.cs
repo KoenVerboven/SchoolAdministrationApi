@@ -10,19 +10,28 @@ namespace SchoolAdministration.Controllers
     [Route("api/[Controller]")]
     [ApiVersion("1.0")] 
     [ApiController]
-    public class StudentController : ControllerBase
+    public class StudentController(IStudentRepository studentRepository, ILogger<StudentController> logger, IMapper mapper) : ControllerBase
     {
         private const string controllerName = "StudentController";
-        private readonly IStudentRepository _studentRepository;
-        private readonly ILogger<StudentController> _logger;
-        private readonly IMapper _mapper;
 
-        public StudentController(IStudentRepository studentRepository,ILogger<StudentController> logger,IMapper mapper)
-        {
-            _logger = logger;
-            _studentRepository = studentRepository;
-            _mapper = mapper;
-        }
+        private readonly IStudentRepository _studentRepository = studentRepository;
+        private readonly ILogger<StudentController> _logger = logger;
+        private readonly IMapper _mapper = mapper;
+
+        //Obsolete way of dependency injection: 
+        //Modern C# allows for a more concise way of injecting dependencies directly through the constructor parameters, eliminating the need for explicit private fields and constructor assignments. This approach reduces boilerplate code and enhances readability. The commented-out code below represents the traditional way of implementing dependency injection, which is now streamlined in the current implementation above.
+        //---------------------------------------
+        //private readonly IStudentRepository _studentRepository;
+        //private readonly ILogger<StudentController> _logger;
+        //private readonly IMapper _mapper;
+
+        //public StudentController(IStudentRepository studentRepository, ILogger<StudentController> logger, IMapper mapper)
+        //{
+        //    _logger = logger;
+        //    _studentRepository = studentRepository;
+        //    _mapper = mapper;
+        //}
+
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]

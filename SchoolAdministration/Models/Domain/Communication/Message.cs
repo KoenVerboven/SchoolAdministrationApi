@@ -13,6 +13,18 @@ namespace SchoolAdministration.Models.Domain.Communication
         public byte MessageWeight { get; set; } //see MessageWeight enum
         public DateTime SentAt { get; set; }
         public int SenderId { get; set; }
+
+        // todo
+        //Bussiness rules propsal:
+        //a parent or student can only send messages to teacher in the time range of 8:00 AM to 6:00 PM, to ensure that teachers are not disturbed during their off hours and can maintain a healthy work-life balance.
+        //a teacher can alltimes send messages to parents and students, to ensure that teachers can communicate important information to parents and students in a timely manner, regardless of the time of day.
+
+
+        public DateTime MinStartTimeToSendMessage { get; set; }
+        public DateTime MaxStartTimeToSendMessage { get; set; }
+
+
+        //Add Documents
         public required int[] ReceiverIds { get; set; }
     }
 }
