@@ -43,7 +43,7 @@ Development:
 
 * Target framework : .NET9.0
 
-* SQL-Server
+* SQL-Server 2022
 
 * Database diagram :
 
