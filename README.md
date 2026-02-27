@@ -11,6 +11,8 @@ This API, written in C#, is intended as a backend for an Angular website for sch
 
 * A teacher can give exam grades for a specific student
 
+*  Schoolmanagement can make invoices.
+
 * ... and more
 
 <img width="945" height="456" alt="image" src="https://github.com/user-attachments/assets/53e084e8-9612-4aa4-b46d-04539626f07b" />
