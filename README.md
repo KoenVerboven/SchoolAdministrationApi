@@ -3,19 +3,15 @@ WEB API for schoolAdministration
 
 This API, written in C#, is intended as a backend for an Angular website for school administration.
 
-A student can take 1 or more courses.
+* A student can take courses, have diplomas and certificates, create studyplans, take an exam and view his(her) results.
 
-A student can create 1 or more studyplans.
+* With the help of a studyplan, the student can plan a learning period, for example for a specific exam.
 
-With the help of a studyplan, the student can plan a learning period, for example for a specific exam.
+* A teacher can create courses,exams and homework.
 
-A student can take an exam and view his results.
+* A teacher can give exam grades for a specific student
 
-A teacher gives 1 or more courses.
-
-A teacher can create 1 or more Exames.
-
-A teacher can give exam grades for a specific student
+* ... and more
 
 <img width="945" height="456" alt="image" src="https://github.com/user-attachments/assets/53e084e8-9612-4aa4-b46d-04539626f07b" />
 
@@ -41,7 +37,7 @@ Development:
 -------------
 * Visual studio 2026 Community Edition
 
-* Target framework : .NET9.0
+* Target framework :  .NET9.0
 
 * SQL-Server 2022
 
