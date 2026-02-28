@@ -5,6 +5,8 @@ This API, written in C#, is intended as a backend for an Angular website for sch
 
 * A student can take courses, have diplomas and certificates, create studyplans, take an exam and view his(her) results.
 
+* A person (student, teacher, ...) can have more than one address.
+
 * With the help of a studyplan, the student can plan a learning period, for example for a specific exam.
 
 * A teacher can create courses,exams and homework.
