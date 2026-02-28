@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SchoolAdministration.Models.Domain.General;
+using System.ComponentModel.DataAnnotations;
 
 namespace SchoolAdministration.Models.Domain.Student
 {
@@ -22,7 +23,6 @@ namespace SchoolAdministration.Models.Domain.Student
         public string? Email { get; set; }
         public int SortOrder { get; set; } //most import : 1
         public int RelationShipToStudent { get; set; } //todo int to byte
-        public bool AddressSameAsStudent { get; set; }
         public string? Occupation { get; set; }
         public string? WorkPhoneNumber { get; set; }
         public string? WorkEmail { get; set; }
@@ -39,6 +39,7 @@ namespace SchoolAdministration.Models.Domain.Student
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
         public ICollection<Student>? Students { get; set; }
+        public ICollection<Address>? Addresses { get; set; }
 
     }
 }

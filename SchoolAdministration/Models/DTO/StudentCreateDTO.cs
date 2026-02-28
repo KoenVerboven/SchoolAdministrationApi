@@ -22,10 +22,7 @@ namespace SchoolAdministration.Models.DTO
 
         [NotMapped]
         public int Age { get; set; }
-
-        [StringLength(30, ErrorMessage = "Street and number cannot longer than 30 characters")]
-        public string? StreetAndNumber { get; set; }
-        public int? Zipcode { get; set; }
+          
         public int Gender { get; set; }
 
         [Required(ErrorMessage = "Email Name is required.")]

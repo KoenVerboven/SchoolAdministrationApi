@@ -1,4 +1,5 @@
 ﻿using SchoolAdministration.Models.Domain.Exam;
+using SchoolAdministration.Models.Domain.General;
 using SchoolAdministration.Models.Domain.Invoice;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -30,10 +31,6 @@ namespace SchoolAdministration.Models.Domain.Student
         [NotMapped]
         public int Age { get; set; }
 
-        [Display(Name = "Street and number")]
-        [StringLength(30, ErrorMessage = "Street and number cannot longer than 30 characters")]
-        public  string? StreetAndNumber { get; set; }
-        public  int? Zipcode { get; set; }
         public int Gender { get; set; }
 
         [Required(ErrorMessage = "Email Name is required.")]
@@ -59,6 +56,7 @@ namespace SchoolAdministration.Models.Domain.Student
         public ICollection<StudentClassRegistration>? StudentClassRegistrations { get; set; }
         public ICollection<Invoice.Invoice>? Invoices { get; set; }
         public  ICollection<HomeWork.HomeWork>? HomeWorks { get; set; }
+        public ICollection<Address>? Addresses { get; set; }
 
         //todo add audit fields
         //public int CreatedByUserId { get; set; }

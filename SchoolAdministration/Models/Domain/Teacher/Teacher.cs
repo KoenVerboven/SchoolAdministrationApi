@@ -1,4 +1,5 @@
-﻿using SchoolAdministration.Models.Domain.School;
+﻿using SchoolAdministration.Models.Domain.General;
+using SchoolAdministration.Models.Domain.School;
 using System.ComponentModel.DataAnnotations;
 
 namespace SchoolAdministration.Models.Domain.Teacher
@@ -20,14 +21,6 @@ namespace SchoolAdministration.Models.Domain.Teacher
 
         [Display(Name = "Date of birth")]
         public required DateTime DateOfBirth { get; set; }
-
-        [Display(Name = "Street and number")]
-        [StringLength(30, ErrorMessage = "Street and number cannot longer than 30 characters")]
-        public string? StreetAndNumber { get; set; }
-
-        [RegularExpression(@"^([0-9]{4})$", ErrorMessage = "Belgium zipcode must be 4 digits long.")] // todo : student do not have this !!!
-        public int? Zipcode { get; set; }
-
         public int Gender { get; set; }
 
         [Required(ErrorMessage = "Email Name is required.")]
@@ -46,8 +39,8 @@ namespace SchoolAdministration.Models.Domain.Teacher
         public byte MaritalStatusId { get; set; }
 
         public ICollection<TeacherPresence>? TeacherPresences { get; set; }
-
         public ICollection<SchoolClass>? SchoolClasses { get; set; }
+        public ICollection<Address>? Addresses { get; set; }
 
         //todo leraar geeft volgend lessen + create date + updatedate + createdby + updatedby
 

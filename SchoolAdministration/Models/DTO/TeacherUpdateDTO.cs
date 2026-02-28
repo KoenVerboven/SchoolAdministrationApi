@@ -20,13 +20,6 @@ namespace SchoolAdministration.Models.DTO
         [Display(Name = "Date of birth")]
         public DateTime? DateOfBirth { get; set; }
 
-        [Display(Name = "Street and number")]
-        [StringLength(30, ErrorMessage = "Street and number cannot longer than 30 characters")]
-        public string? StreetAndNumber { get; set; }
-
-        [RegularExpression(@"^([0-9]{4})$", ErrorMessage = "Belgium zipcode must be 4 digits long.")]
-        public int? Zipcode { get; set; }
-
         public int Gender { get; set; }
 
         [Required(ErrorMessage = "Email Name is required.")]

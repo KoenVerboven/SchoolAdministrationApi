@@ -18,10 +18,7 @@ namespace SchoolAdministration.Models.DTO
         [Required(ErrorMessage = "Date of birth is required.")]
         [Display(Name = "Date of birth")]
         public DateTime DateOfBirth { get; set; }
-        
-        [StringLength(30, ErrorMessage = "Street and number cannot longer than 30 characters")]
-        public string? StreetAndNumber { get; set; }
-        public int? Zipcode { get; set; }
+   
         public int Gender { get; set; }
 
         [Required(ErrorMessage = "Email address is required.")]
