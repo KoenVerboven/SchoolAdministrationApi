@@ -54,10 +54,10 @@ namespace SchoolAdministration.Models.Domain.Student
         public StudentImage? StudentImage { get; set; }
         public ICollection<Payment>? Payments { get; set; }
         public ICollection<StudentClassRegistration>? StudentClassRegistrations { get; set; }
+        public ICollection<StudentAddress>? StudentAddresses { get; set; }
         public ICollection<Invoice.Invoice>? Invoices { get; set; }
         public  ICollection<HomeWork.HomeWork>? HomeWorks { get; set; }
-        public ICollection<Address>? Addresses { get; set; }
-
+ 
         //todo add audit fields
         //public int CreatedByUserId { get; set; }
         //public DateTime CreatedDate { get; set; }

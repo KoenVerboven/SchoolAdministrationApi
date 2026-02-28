@@ -1,5 +1,6 @@
 ﻿using SchoolAdministration.Models.Domain.General;
 using SchoolAdministration.Models.Domain.School;
+using SchoolAdministration.Models.Domain.Student;
 using System.ComponentModel.DataAnnotations;
 
 namespace SchoolAdministration.Models.Domain.Teacher
@@ -38,10 +39,10 @@ namespace SchoolAdministration.Models.Domain.Teacher
         [Display(Name = "Marital status")]
         public byte MaritalStatusId { get; set; }
 
+        public ICollection<TeacherAddress>? TeacherAddresses { get; set; }
         public ICollection<TeacherPresence>? TeacherPresences { get; set; }
         public ICollection<SchoolClass>? SchoolClasses { get; set; }
-        public ICollection<Address>? Addresses { get; set; }
-
+    
         //todo leraar geeft volgend lessen + create date + updatedate + createdby + updatedby
 
     }

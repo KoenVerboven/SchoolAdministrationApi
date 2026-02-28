@@ -39,7 +39,6 @@ namespace SchoolAdministration.Models.Domain.Student
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
         public ICollection<Student>? Students { get; set; }
-        public ICollection<Address>? Addresses { get; set; }
 
     }
 }

@@ -19,11 +19,8 @@ namespace SchoolAdministration.Models.Domain.General
         [StringLength(30, ErrorMessage = "City cannot be longer than 50 characters")]
         public string? City { get; set; }
  
-        [StringLength(4, ErrorMessage = "Country code cannot be longer than 4 characters")]
-        public string? Country { get; set; }
-        public ICollection<Student.Student>? Students { get; set; }
-        public ICollection<Teacher.Teacher>? Teachers { get; set; }
-        public ICollection<Student.Parent>? Parents { get; set; }
-
+        [StringLength(3, ErrorMessage = "Country code cannot be longer than 3 characters")]
+        public string? CountryCode { get; set; }
+    
     }
 }

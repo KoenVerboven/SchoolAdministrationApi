@@ -14,6 +14,7 @@ namespace SchoolAdministration.Data
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Address> Addresses { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
@@ -52,12 +53,17 @@ namespace SchoolAdministration.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //var school1 = new School {Id=1, Name= "Vrije Technische School", StreetAndNumber= "Hoofdweg 1", ZipCode = 2300, CountryId = 0, ContactEmail = "VTechnischool@gmail.com", CreatedAt= DateTime.Now, EstablishedYear= DateTime.Now, CreatedBy = "system", UpdatedBy = ""};
-            //var school2 = new School {Id=2, Name = "Basisschool Turnhout", StreetAndNumber = "Kerkstraat 23", ZipCode = 2300,CountryId = 0, ContactEmail = "BSchoolTurnhout@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
-            //var school3 = new School {Id=3, Name = "Kleuterschool Turnhout", StreetAndNumber = "Hoofdbaan 213", ZipCode = 2300,CountryId = 0, ContactEmail = "KSchoolTurnhout@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now ,CreatedBy = "system", UpdatedBy = "" };
-            //var school4 = new School {Id=4, Name = "Privateschool Turnhout", StreetAndNumber = "steenweg 88", ZipCode = 2300,CountryId = 0, ContactEmail = "PSchoolTurnhout@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now ,CreatedBy = "system", UpdatedBy = "" };
-            //var school5 = new School {Id=5, Name = "Avondonderwijs Turnhout", StreetAndNumber = "Hoofdweg 1", ZipCode = 2300, CountryId = 0, ContactEmail = "ASchoolTurnhout@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
+            var address1 = new Address { Id = 1, StreetAndNumber = "Hoofdweg 1",Zipcode = 2300, City = "Turnhout", CountryCode = "BEL" };
+            var address2 = new Address { Id = 1, StreetAndNumber = "Molenstraat 10", Zipcode = 2350, City = "Vosselaar", CountryCode = "BEL" };
+            var address3 = new Address { Id = 1, StreetAndNumber = "Kerkstraat 13", Zipcode = 2350, City = "Vosselaar", CountryCode = "BEL" };
+            var address4 = new Address { Id = 1, StreetAndNumber = "Pelikaanstraat 188", Zipcode = 2000, City = "Antwerpen", CountryCode = "BEL" };
+            //modelBuilder.Entity<School>().HasData(school1,school2,school3, school4);
 
+            var school1 = new School { Id = 1, Name = "Vrije Technische School", StreetAndNumber = "Hoofdweg 1", ZipCode = 2300, CountryId = 0, ContactEmail = "VTechnischool@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
+            var school2 = new School { Id = 2, Name = "Basisschool Turnhout", StreetAndNumber = "Kerkstraat 23", ZipCode = 2300, CountryId = 0, ContactEmail = "BSchoolTurnhout@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
+            var school3 = new School { Id = 3, Name = "Kleuterschool Turnhout", StreetAndNumber = "Hoofdbaan 213", ZipCode = 2300, CountryId = 0, ContactEmail = "KSchoolTurnhout@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
+            var school4 = new School { Id = 4, Name = "Privateschool Turnhout", StreetAndNumber = "steenweg 88", ZipCode = 2300, CountryId = 0, ContactEmail = "PSchoolTurnhout@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
+            var school5 = new School { Id = 5, Name = "Avondonderwijs Turnhout", StreetAndNumber = "Hoofdweg 1", ZipCode = 2300, CountryId = 0, ContactEmail = "ASchoolTurnhout@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
             //modelBuilder.Entity<School>().HasData(school1,school2,school3, school4);
 
             base.OnModelCreating(modelBuilder);
