@@ -50,9 +50,14 @@ Development:
 <img width="1442" height="917" alt="image" src="https://github.com/user-attachments/assets/d1bab6b8-53b3-4deb-b9dd-7fb91db6560c" />
 
 
-Swagger :Exploring Endpoints
------------------------------
-![swaggerPrintScreenjpg](https://github.com/user-attachments/assets/3554497c-cc8b-4c8a-8f31-e1b02a726779)
+Swagger :
+----------
+Exploring Endpoints.
+
+<img width="400"  alt="localhost_7213_index html (4)" src="https://github.com/user-attachments/assets/fa042a26-a521-4c5c-866d-c1f327ea20f6" />
+
+
+
 
 UnitTests :
 ------------
