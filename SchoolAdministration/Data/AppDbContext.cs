@@ -15,6 +15,8 @@ namespace SchoolAdministration.Data
     public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<StudentAddress> StudentAddresses { get; set; }
+        public DbSet<TeacherAddress> TeacherAddresses { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }

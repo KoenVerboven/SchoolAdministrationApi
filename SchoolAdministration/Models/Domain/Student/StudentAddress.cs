@@ -10,5 +10,6 @@ namespace SchoolAdministration.Models.Domain.Student
         public int AddressOrder { get; set; }
         public DateTime RegistrationDate { get; set; }
         public int RegisteredByUserId { get; set; }
+        public Student Student { get; set; } = null!;
     }
 }
