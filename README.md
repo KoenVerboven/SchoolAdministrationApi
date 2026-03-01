@@ -54,7 +54,7 @@ Swagger :
 ----------
 Exploring Endpoints.
 
-<img width="618" height="40636" alt="localhost_7213_index html (4)" src="https://github.com/user-attachments/assets/fa042a26-a521-4c5c-866d-c1f327ea20f6" />
+<img width="400"  alt="localhost_7213_index html (4)" src="https://github.com/user-attachments/assets/fa042a26-a521-4c5c-866d-c1f327ea20f6" />
 
 
 
