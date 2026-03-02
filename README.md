@@ -95,9 +95,10 @@ With Serilog we can easly write our logs to a txt.file.
 
 Program.cs:
 
-<img width="862" height="91" alt="image" src="https://github.com/user-attachments/assets/09b8bad8-00eb-48f6-99e6-91f95c0616f3" />
+<img width="948" height="157" alt="image" src="https://github.com/user-attachments/assets/5306dabb-9bcd-40bb-8be6-808cfee74233" />
 
-  StudentController:
+
+ StudentController:
 
   _logger.LogInformation("Getting all the students.")
 
