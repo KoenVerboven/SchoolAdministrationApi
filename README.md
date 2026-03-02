@@ -95,9 +95,7 @@ With Serilog we can easly write our logs to a txt.file.
 
 Program.cs:
 
-  Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
-      .WriteTo.File("log/schoolManagementLogs.txt", rollingInterval: RollingInterval.Day).CreateLogger();
-  builder.Host.UseSerilog();
+<img width="862" height="91" alt="image" src="https://github.com/user-attachments/assets/09b8bad8-00eb-48f6-99e6-91f95c0616f3" />
 
   StudentController:
 
