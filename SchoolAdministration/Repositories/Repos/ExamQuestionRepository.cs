@@ -1,33 +1,53 @@
-﻿using SchoolAdministration.Models.Domain.Exam;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolAdministration.Data;
+using SchoolAdministration.Models.Domain.Exam.QuestionAnswer;
 using SchoolAdministration.Repositories.Interfaces;
 
 namespace SchoolAdministration.Repositories.Repos
 {
-    public class ExamQuestionRepository : IExamQuestionRepository
+    public class ExamQuestionRepository : IExamQuestionAnwerRepository
     {
-        public Task AddExamQuestionAsync(ExamQuestion examQuestion)
+        private readonly AppDbContext _context;
+
+        public ExamQuestionRepository(AppDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task DeleteExamQuestionAsync(int id)
+        public async Task AddExamQuestionAsync(ExamQuestionAnwer exam)
         {
-            throw new NotImplementedException();
+            await _context.ExamQuestionAnwers.AddAsync(exam);
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<ExamQuestion>> GetAllExamQuestionsAsync()
+        public async Task<int> CountAsync()
         {
-            throw new NotImplementedException();
+            return _context.ExamQuestionAnwers.Count();
         }
 
-        public Task<ExamQuestion?> GetByIdAsync(int id)
+        public async Task DeleteExamQuestionAsync(int id)
         {
-            throw new NotImplementedException();
+            var ExamInDb = await _context.ExamQuestionAnwers.FindAsync(id) ?? throw new KeyNotFoundException($"Exam with id {id} was not found.");
+            _context.ExamQuestionAnwers.Remove(ExamInDb);
+            await _context.SaveChangesAsync();
         }
 
-        public Task UpdateExamQuestionAsync(ExamQuestion examQuestion)
+        public async Task<IEnumerable<ExamQuestionAnwer>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.ExamQuestionAnwers.ToListAsync();
         }
+
+        public async Task<ExamQuestionAnwer?> GetByIdAsync(int id)
+        {
+            return await _context.ExamQuestionAnwers.FindAsync(id);
+        }
+     
+        public async Task UpdateExamQuestionAsync(ExamQuestionAnwer examExamQuestionAnswer)
+        {
+            _context.ExamQuestionAnwers.Update(examExamQuestionAnswer);
+            await _context.SaveChangesAsync();
+        }
+    
+        
     }
 }

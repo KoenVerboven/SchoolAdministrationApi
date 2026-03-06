@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.Domain.Exam;
+using SchoolAdministration.Models.Domain.Exam.QuestionAnswer;
 using SchoolAdministration.Models.Domain.General;
 using SchoolAdministration.Models.Domain.HomeWork;
 using SchoolAdministration.Models.Domain.School;
@@ -26,9 +27,9 @@ namespace SchoolAdministration.AutoMapper
             CreateMap<Course, CourseCreateDTO>().ReverseMap();
             CreateMap<Course, CourseUpdateDTO>().ReverseMap();
 
-            CreateMap<Exam, ExamDTO>().ReverseMap();
-            CreateMap<Exam, ExamCreateDTO>().ReverseMap();
-            CreateMap<Exam, ExamUpdateDTO>().ReverseMap();
+            CreateMap<ExamQuestionAnwer, ExamDTO>().ReverseMap();
+            CreateMap<ExamQuestionAnwer, ExamCreateDTO>().ReverseMap();
+            CreateMap<ExamQuestionAnwer, ExamUpdateDTO>().ReverseMap();
 
             CreateMap<School, SchoolDTO>().ReverseMap();
             CreateMap<School, SchoolCreateDTO>().ReverseMap();

@@ -43,3 +43,6 @@
     builder.Host.UseSerilog();
 
     --------------------------------------------------------------------------------------------------------------------------------------------
+    extra info :
+    https://github.com/serilog/serilog/wiki/configuration-basics
+    https://blog.postsharp.net/serilog-log-levels

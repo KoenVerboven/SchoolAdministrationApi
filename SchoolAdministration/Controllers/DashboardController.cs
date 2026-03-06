@@ -13,7 +13,7 @@ namespace SchoolAdministration.Controllers
         private readonly ITeacherRepository _teacherRepository;
         private readonly ICourseRepository _courseRepository;
         private readonly IUserRepository _userRepository;
-        private readonly IExamRepository _examRepository;
+        private readonly IExamQuestionAnwerRepository _examQuestionAnswerRepository;
         private readonly ILogger<DashboardController> _logger;
         private readonly IMapper _mapper;
 
@@ -22,7 +22,7 @@ namespace SchoolAdministration.Controllers
             ITeacherRepository teacherRepository,
             ICourseRepository courseRepository,
             IUserRepository userRepository,
-            IExamRepository examRepository,
+            IExamQuestionAnwerRepository examQuestionAnswerRepository,
             ILogger<DashboardController> logger,
             IMapper mapper
             )
@@ -31,7 +31,7 @@ namespace SchoolAdministration.Controllers
             _teacherRepository = teacherRepository;
             _courseRepository = courseRepository;
             _userRepository = userRepository;
-            _examRepository = examRepository;
+            _examQuestionAnswerRepository = examQuestionAnswerRepository;
             _logger = logger;
             _mapper = mapper;
         }
@@ -87,7 +87,7 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<int> ExamCountAsync()
         {
-            return await _examRepository.CountAsync();
+            return await _examQuestionAnswerRepository.CountAsync();
         }
 
     }

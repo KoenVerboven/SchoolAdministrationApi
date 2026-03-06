@@ -1,0 +1,23 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SchoolAdministration.Models.Domain.Exam.QuestionAnswer
+{
+    public class ExamQuestionAnwer
+    {
+        [Key]
+        public int Id { get; set; }
+        public int CourseId { get; set; } // FK
+        public int TeacherId { get; set; } // FK
+        public required string ExamTitle { get; set; }
+        public byte ExamType { get; set; } //0: In writing; 1: Verbally; 2: On Computer
+        public bool IsReExam { get; set; }
+        public string? Description { get; set; }
+        public DateTime ExamenDate { get; set; }
+        public DateTime ExamEndDateTime { get; set; }
+        public int MaxScore { get; set; }
+        public int MinScoreToPassExam { get; set; }
+        public ICollection<ExamQuestion>? ExamQuestions { get; set; }
+        public ICollection<ExamResult>? ExamResults { get; set; }
+
+    }
+}

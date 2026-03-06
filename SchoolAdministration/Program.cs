@@ -20,8 +20,10 @@ namespace SchoolAdministration
             var builder = WebApplication.CreateBuilder(args);
 
             //logger :
-            Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
-                .WriteTo.File("log/schoolManagementLogs.txt", rollingInterval: RollingInterval.Day).CreateLogger();
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Information()
+                .WriteTo.File("log/schoolManagementLogs.txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
             builder.Host.UseSerilog();
 
 
@@ -48,7 +50,7 @@ namespace SchoolAdministration
             builder.Services.AddScoped<IStudentRepository, StudentRepository>();
             builder.Services.AddScoped<ITeacherRepository,TeacherRepository>();
             builder.Services.AddScoped<ICourseRepository, CourseRepository>();
-            builder.Services.AddScoped<IExamRepository, ExamRepository>();
+            builder.Services.AddScoped<IExamQuestionAnwerRepository, ExamQuestionRepository>();
             builder.Services.AddScoped<IExamResultRepository, ExamResultRepository>();
             builder.Services.AddScoped<IStudyPlanRepository, StudyPlanRepository>();
             builder.Services.AddScoped<IStudyPlanPartRepository, StudyPlanPartRepository>();

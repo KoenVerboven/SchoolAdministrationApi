@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SchoolAdministration.Models.Domain.Exam
+namespace SchoolAdministration.Models.Domain.Exam.QuestionAnswer
 {
     public class ExamQuestion
     {

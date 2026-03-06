@@ -72,7 +72,7 @@ namespace SchoolAdministration.Controllers
             return Ok(studyPlan);
         }
 
-        //todo : get active studyplan for a specifik student (with student id = X)
+        //todo : get active studyplan for a specific student (with student id = X)
         //todo: add active true/false to studyplan
 
 

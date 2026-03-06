@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.Domain.Exam;
+using SchoolAdministration.Models.Domain.Exam.QuestionAnswer;
 using SchoolAdministration.Models.Domain.General;
 using SchoolAdministration.Models.Domain.HomeWork;
 using SchoolAdministration.Models.Domain.Invoice;
@@ -21,9 +22,9 @@ namespace SchoolAdministration.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
-        public DbSet<Exam> Exams { get; set; }
+        public DbSet<ExamQuestionAnwer> ExamQuestionAnwers { get; set; }
         public DbSet<ExamResult> ExamResults { get; set; }
-        public DbSet<ExamQuestion> ExamQuestions { get; set; }
+        public DbSet<ExamQuestionAnwer> ExamQuestions { get; set; }
         public DbSet<StudyPlan> StudyPlans { get; set; }
         public DbSet<StudyPlanPart> StudyPlanParts { get; set; }
         public DbSet<School>Schools { get; set; }

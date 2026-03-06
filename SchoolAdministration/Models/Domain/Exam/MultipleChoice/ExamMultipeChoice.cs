@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SchoolAdministration.Models.Domain.Exam.QuestionAnswer;
+using System.ComponentModel.DataAnnotations;
 
-namespace SchoolAdministration.Models.Domain.Exam
+namespace SchoolAdministration.Models.Domain.Exam.MultipleChoice
 {
-    public class Exam
+    public class ExamMultipeChoice
     {
         [Key]
         public int Id { get; set; }
@@ -16,7 +17,7 @@ namespace SchoolAdministration.Models.Domain.Exam
         public DateTime ExamEndDateTime { get; set; }
         public int MaxScore { get; set; }
         public int MinScoreToPassExam { get; set; }
-        public ICollection<ExamQuestion>? ExamQuestions { get; set; }
+        public ICollection<ExamQuestionMultipleChoice>? ExamQuestionMultipleChoices { get; set; }
         public ICollection<ExamResult>? ExamResults { get; set; }
     }
 }

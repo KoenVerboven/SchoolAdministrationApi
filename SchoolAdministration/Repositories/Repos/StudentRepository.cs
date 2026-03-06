@@ -84,7 +84,7 @@ namespace SchoolAdministration.Repositories.Repos
 
                 foreach (ExamResult examResult in studentExamResult.ExamResults)
                 {
-                    var exam =  _context.Exams.SingleOrDefault(p=>p.Id == examResult.ExamId);
+                    var exam =  _context.ExamQuestionAnwers.SingleOrDefault(p=>p.Id == examResult.ExamId);
                     var studentExamResultId = examResult.Id;
                     var examResultScore = examResult.ExamenResultScore;
                     var studentExamResul = new StudentExamsResultDTO()
