@@ -34,8 +34,4 @@
     <Folder Include="Helpers\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="Models\Domain\Exam\Exam.QuestionAnswercs.cs" />
-  </ItemGroup>
-
 </Project>

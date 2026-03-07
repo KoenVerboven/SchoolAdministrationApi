@@ -1,10 +1,10 @@
 ﻿namespace SchoolAdministration.Models.Domain.Exam.MultipleChoice
 {
-    public class ExamQuestionMultipleChoice
+    public class MCExamQuestion
     {
         public int Id { get; set; }
         public int QuestionNumber { get; set; }
         public int QuestionText { get; set; }
-        public ICollection<ExamQuestionMultipleChoiceAnswer>? ExamQuestionMultipleChoiceAnswers { get; set; }
+        public ICollection<MCExamAnswer>? MCExamAnswers { get; set; }
     }
 }

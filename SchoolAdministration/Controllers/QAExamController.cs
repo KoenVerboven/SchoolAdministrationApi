@@ -8,14 +8,14 @@ namespace SchoolAdministration.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class ExamQuestionAnwerController : ControllerBase
+    public class QAExamController : ControllerBase
     {
-        private readonly IExamQuestionAnwerRepository _examQuestionRepository;
+        private readonly IQAExamDetailRepository _qAExamDetailRepository;
         private readonly ILogger<ExamResultController> _logger;
 
-        public ExamQuestionAnwerController(IExamQuestionAnwerRepository examQuestionRepository, ILogger<ExamResultController> logger)
+        public QAExamController(IQAExamDetailRepository qAExamDetailRepository, ILogger<ExamResultController> logger)
         {
-            _examQuestionRepository = examQuestionRepository;
+            _qAExamDetailRepository = qAExamDetailRepository;
             _logger = logger;
         }
 
@@ -23,29 +23,29 @@ namespace SchoolAdministration.Controllers
 
         [HttpGet]
         [ResponseCache(Duration = 30)]
-        [ProducesResponseType(typeof(IEnumerable<ExamQuestionAnwer>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(IEnumerable<QAExamAnswer>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<ExamQuestionAnwer>>> GetAllExamQuestionsAsync()
+        public async Task<ActionResult<IEnumerable<QAExamAnswer>>> GetAllExamQuestionsAsync()
         {
-            var examQuestions = await _examQuestionRepository.GetAllAsync();
+            var examQuestions = await _qAExamDetailRepository.GetAllAsync();
             return Ok(examQuestions);
         }
 
         [HttpGet("{id}")]
         [ResponseCache(Duration = 30)]
-        [ProducesResponseType(typeof(ExamQuestionAnwer), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(QAExamAnswer), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<ExamQuestionAnwer>> GetExamQuestionById(int id)
+        public async Task<ActionResult<QAExamAnswer>> GetExamQuestionById(int id)
         {
             if (id == 0)
             {
                 return BadRequest();
             }
 
-            var examQuestion = await _examQuestionRepository.GetByIdAsync(id);
+            var examQuestion = await _qAExamDetailRepository.GetByIdAsync(id);
 
             if (examQuestion == null)
             {

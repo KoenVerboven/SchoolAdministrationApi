@@ -2,7 +2,7 @@
 
 namespace SchoolAdministration.Models.Domain.Exam.QuestionAnswer
 {
-    public class ExamQuestion
+    public class QAExamQuestion
     {
         [Key]
         public int Id { get; set; }
@@ -10,5 +10,6 @@ namespace SchoolAdministration.Models.Domain.Exam.QuestionAnswer
         public int QuestionNumber { get; set; }
         public required string QuestionText { get; set; }
         public double QuestionGrade { get; set; }
+        public QAExamAnswer? qAExamAnswer { get; set; }
     }
 }

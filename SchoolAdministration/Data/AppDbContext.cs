@@ -22,9 +22,10 @@ namespace SchoolAdministration.Data
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
-        public DbSet<ExamQuestionAnwer> ExamQuestionAnwers { get; set; }
+        public DbSet<QAExamDetail> QAExamDetails { get; set; }
+        public DbSet<QAExamQuestion> QAExamQuestions { get; set; }
+        public DbSet<QAExamAnswer>  QAExamAnswers { get; set; }  
         public DbSet<ExamResult> ExamResults { get; set; }
-        public DbSet<ExamQuestionAnwer> ExamQuestions { get; set; }
         public DbSet<StudyPlan> StudyPlans { get; set; }
         public DbSet<StudyPlanPart> StudyPlanParts { get; set; }
         public DbSet<School>Schools { get; set; }

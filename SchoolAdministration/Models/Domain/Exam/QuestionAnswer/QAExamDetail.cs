@@ -2,7 +2,7 @@
 
 namespace SchoolAdministration.Models.Domain.Exam.QuestionAnswer
 {
-    public class ExamQuestionAnwer
+    public class QAExamDetail
     {
         [Key]
         public int Id { get; set; }
@@ -16,7 +16,7 @@ namespace SchoolAdministration.Models.Domain.Exam.QuestionAnswer
         public DateTime ExamEndDateTime { get; set; }
         public int MaxScore { get; set; }
         public int MinScoreToPassExam { get; set; }
-        public ICollection<ExamQuestion>? ExamQuestions { get; set; }
+        public ICollection<QAExamQuestion>? ExamQuestions { get; set; }
         public ICollection<ExamResult>? ExamResults { get; set; }
 
     }

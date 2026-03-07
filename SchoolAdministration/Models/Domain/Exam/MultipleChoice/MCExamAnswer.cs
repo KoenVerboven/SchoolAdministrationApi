@@ -1,6 +1,6 @@
 ﻿namespace SchoolAdministration.Models.Domain.Exam.MultipleChoice
 {
-    public class ExamQuestionMultipleChoiceAnswer
+    public class MCExamAnswer
     {
         public int Id { get; set; }
         public int ExamQuestionMultipleId { get; set; } //FK
