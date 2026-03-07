@@ -47,7 +47,7 @@ Development:
 
 * Database diagram :
 
-<img width="1453" height="883" alt="image" src="https://github.com/user-attachments/assets/b3bf08ac-5597-4a55-a689-cafb4a30217c" />
+<img width="1505" height="852" alt="image" src="https://github.com/user-attachments/assets/0fceba14-9be4-4ea6-872e-765a7fda1c55" />
 
 
 
