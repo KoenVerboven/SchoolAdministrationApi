@@ -10,10 +10,10 @@ namespace SchoolAdministration.Controllers
     [ApiController]
     public class QAExamController : ControllerBase
     {
-        private readonly IQAExamDetailRepository _qAExamDetailRepository;
+        private readonly IQAExamRepository _qAExamDetailRepository;
         private readonly ILogger<ExamResultController> _logger;
 
-        public QAExamController(IQAExamDetailRepository qAExamDetailRepository, ILogger<ExamResultController> logger)
+        public QAExamController(IQAExamRepository qAExamDetailRepository, ILogger<ExamResultController> logger)
         {
             _qAExamDetailRepository = qAExamDetailRepository;
             _logger = logger;

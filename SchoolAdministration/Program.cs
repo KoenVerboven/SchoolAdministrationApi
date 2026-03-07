@@ -50,7 +50,7 @@ namespace SchoolAdministration
             builder.Services.AddScoped<IStudentRepository, StudentRepository>();
             builder.Services.AddScoped<ITeacherRepository,TeacherRepository>();
             builder.Services.AddScoped<ICourseRepository, CourseRepository>();
-            builder.Services.AddScoped<IQAExamDetailRepository, QAExamDetailRepository>();
+            builder.Services.AddScoped<IQAExamRepository, QAExamRepository>();
             builder.Services.AddScoped<IExamResultRepository, ExamResultRepository>();
             builder.Services.AddScoped<IStudyPlanRepository, StudyPlanRepository>();
             builder.Services.AddScoped<IStudyPlanPartRepository, StudyPlanPartRepository>();

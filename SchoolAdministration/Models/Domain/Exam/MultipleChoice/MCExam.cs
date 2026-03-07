@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SchoolAdministration.Models.Domain.Exam.MultipleChoice
 {
-    public class MCExamDetail
+    public class MCExam
     {
         [Key]
         public int Id { get; set; }

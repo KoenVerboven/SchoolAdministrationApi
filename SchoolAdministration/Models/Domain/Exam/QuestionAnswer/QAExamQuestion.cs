@@ -6,7 +6,7 @@ namespace SchoolAdministration.Models.Domain.Exam.QuestionAnswer
     {
         [Key]
         public int Id { get; set; }
-        public int QAExamDetailId { get; set; } //FK to QAExamDetail
+        public int QAExamId { get; set; } //FK to QAExam
         public int QuestionNumber { get; set; }
         public required string QuestionText { get; set; }
         public double QuestionGrade { get; set; }

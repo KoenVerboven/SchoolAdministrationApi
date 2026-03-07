@@ -2,7 +2,7 @@
 
 namespace SchoolAdministration.Models.Domain.Exam.QuestionAnswer
 {
-    public class QAExamDetail
+    public class QAExam
     {
         [Key]
         public int Id { get; set; }

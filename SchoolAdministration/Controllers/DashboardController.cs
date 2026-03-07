@@ -13,7 +13,7 @@ namespace SchoolAdministration.Controllers
         private readonly ITeacherRepository _teacherRepository;
         private readonly ICourseRepository _courseRepository;
         private readonly IUserRepository _userRepository;
-        private readonly IQAExamDetailRepository _qAExamDetailRepository;
+        private readonly IQAExamRepository _qAExamDetailRepository;
         private readonly ILogger<DashboardController> _logger;
         private readonly IMapper _mapper;
 
@@ -22,7 +22,7 @@ namespace SchoolAdministration.Controllers
             ITeacherRepository teacherRepository,
             ICourseRepository courseRepository,
             IUserRepository userRepository,
-            IQAExamDetailRepository qAExamDetailRepository,
+            IQAExamRepository qAExamDetailRepository,
             ILogger<DashboardController> logger,
             IMapper mapper
             )
