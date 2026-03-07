@@ -8,7 +8,7 @@ namespace SchoolAdministration.Models.Domain.Exam
         public int Id { get; set; }
         public int StudentId { get; set; }
         public int CourseId { get; set; }
-        public  int ExamId { get; set; }
+        public  int QAExamDetailId { get; set; } //FK to QAExamDetail
         public double?  ExamenResultScore { get; set; }
         public string? ExamenResultComment { get; set; }
         public int CheckedByTeacherId { get; set; }
