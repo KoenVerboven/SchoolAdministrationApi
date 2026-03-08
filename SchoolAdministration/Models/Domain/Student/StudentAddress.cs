@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SchoolAdministration.Models.Domain.General;
 
 namespace SchoolAdministration.Models.Domain.Student
 {
@@ -11,5 +12,6 @@ namespace SchoolAdministration.Models.Domain.Student
         public DateTime RegistrationDate { get; set; }
         public int RegisteredByUserId { get; set; }
         public Student Student { get; set; } = null!;
+        public Address Address { get; set; } = null!;
     }
 }

@@ -10,12 +10,12 @@ namespace SchoolAdministration.Controllers
     [ApiController]
     public class QAExamController : ControllerBase
     {
-        private readonly IQAExamRepository _qAExamDetailRepository;
+        private readonly IQAExamRepository _qAExamRepository;
         private readonly ILogger<ExamResultController> _logger;
 
         public QAExamController(IQAExamRepository qAExamDetailRepository, ILogger<ExamResultController> logger)
         {
-            _qAExamDetailRepository = qAExamDetailRepository;
+            _qAExamRepository = qAExamDetailRepository;
             _logger = logger;
         }
 
@@ -28,7 +28,7 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<QAExamAnswer>>> GetAllExamQuestionsAsync()
         {
-            var examQuestions = await _qAExamDetailRepository.GetAllAsync();
+            var examQuestions = await _qAExamRepository.GetAllAsync();
             return Ok(examQuestions);
         }
 
@@ -45,7 +45,7 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            var examQuestion = await _qAExamDetailRepository.GetByIdAsync(id);
+            var examQuestion = await _qAExamRepository.GetByIdAsync(id);
 
             if (examQuestion == null)
             {
