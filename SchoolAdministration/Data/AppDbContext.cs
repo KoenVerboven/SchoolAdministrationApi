@@ -24,7 +24,8 @@ namespace SchoolAdministration.Data
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<QAExam> QAExams { get; set; }
         public DbSet<QAExamQuestion> QAExamQuestions { get; set; }
-        public DbSet<QAExamAnswer>  QAExamAnswers { get; set; }  
+        public DbSet<QAExamAnswer>  QAExamAnswers { get; set; }
+        public DbSet<QAExamAnswerByStudentId> QAExamAnswerByStudentIds { get; set; }
         public DbSet<ExamResult> ExamResults { get; set; }
         public DbSet<StudyPlan> StudyPlans { get; set; }
         public DbSet<StudyPlanPart> StudyPlanParts { get; set; }
