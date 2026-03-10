@@ -114,6 +114,10 @@ We use code first.
 
 By Migrations we keep our database in SQL-Server in Sync.
 
+<img width="408" height="172" alt="image" src="https://github.com/user-attachments/assets/101488d4-3f7f-4b1a-b433-fbef475d7b44" />
+
+
+
 example:
 
 Type in Package Manager Console:
