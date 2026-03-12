@@ -2,7 +2,7 @@
 
 namespace SchoolAdministration.Models.Domain.Student
 {
-    public class StudyPlanPart
+    public class StudyPlanPart //Todo : change name to StudyPlanDetailLine
     {
         [Key]
         public int Id { get; set; }
