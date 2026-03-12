@@ -47,8 +47,7 @@ Development:
 
 * Database diagram :
 
-<img width="1505" height="852" alt="image" src="https://github.com/user-attachments/assets/0fceba14-9be4-4ea6-872e-765a7fda1c55" />
-
+<img width="1598" height="873" alt="image" src="https://github.com/user-attachments/assets/b7102c72-995b-481b-8dc1-23f851c57302" />
 
 
 Swagger :
@@ -114,6 +113,10 @@ Installed NuGet-packages :
 We use code first.
 
 By Migrations we keep our database in SQL-Server in Sync.
+
+<img width="408" height="172" alt="image" src="https://github.com/user-attachments/assets/101488d4-3f7f-4b1a-b433-fbef475d7b44" />
+
+
 
 example:
 
