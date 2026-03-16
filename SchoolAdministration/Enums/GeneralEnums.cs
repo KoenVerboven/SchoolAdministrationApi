@@ -1,4 +1,4 @@
-﻿public enum ClassScheduleStatus : byte
+﻿internal enum ClassScheduleStatus : byte
 {
     Planned = 1,
     Ongoing = 2,
@@ -6,7 +6,7 @@
     Cancelled = 4
 }
 
-public enum ParentRelationship : byte
+internal enum ParentRelationship : byte
 {
     Father = 1,
     Mother = 2,
@@ -16,12 +16,12 @@ public enum ParentRelationship : byte
     Other = 6
 }
 
-public enum MessageType : byte
+internal enum MessageType : byte
 {
     SMS = 0,
     Email = 1
 }
-public enum MessageWeight : byte
+internal enum MessageWeight : byte
 {
     Normal = 0,
     Important = 1,

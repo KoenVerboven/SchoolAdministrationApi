@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using SchoolAdministration.Models.Domain.Student;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolAdministration.Models.DTO
 {
@@ -35,15 +36,12 @@ namespace SchoolAdministration.Models.DTO
         public required string Phone { get; set; }
 
         public DateTime RegistrationDate { get; set; }
-
-        public string? ParentPhoneNumber { get; set; }
-
-        [StringLength(30, ErrorMessage = "Parent lastname cannot longer than 30 characters")]
-        public string? ParentLastname { get; set; }
-
-        [StringLength(30, ErrorMessage = "Parent first cannot longer than 30 characters")]
-        public string? ParentFirstName { get; set; }
+      
         public string? Picture { get; set; }
+
+        public ICollection<StudentAddress>? StudentAddresses { get; set; }
+
+        public ICollection<Parent>? Parents { get; set; }
 
     }
 }

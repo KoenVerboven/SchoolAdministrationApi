@@ -193,9 +193,6 @@ namespace TestSchoolAdmin
                 Gender = 1,
                 Email = "maria@test.be",
                 Phone = "4483892639",
-                ParentPhoneNumber = "54644",
-                ParentLastname = null,
-                ParentFirstName = null,
             };
 
             var mapper = new Mapper(_mapperConfiguration);
@@ -237,9 +234,6 @@ namespace TestSchoolAdmin
                 Gender = 1,
                 Email = "koen@test.be",
                 Phone = "448389639",
-                ParentPhoneNumber = "546",
-                ParentLastname = null,
-                ParentFirstName = null,
             };
 
             var mapper = new Mapper(_mapperConfiguration);

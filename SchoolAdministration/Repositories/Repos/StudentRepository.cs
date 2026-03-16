@@ -12,10 +12,8 @@ namespace SchoolAdministration.Repositories.Repos
     {
         private readonly AppDbContext _context;
 
-        public StudentRepository(AppDbContext context)
-        {
-            _context = context;
-        }
+        public StudentRepository(AppDbContext context) => _context = context;
+
         public async Task AddStudentAsync(Student student)
         {
             await _context.Students.AddAsync(student);
@@ -29,7 +27,7 @@ namespace SchoolAdministration.Repositories.Repos
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Student>> GetAllAsync()
+        public async Task<IEnumerable<Student>> GetAllAsync()//todo : add include for courses and payments
         {
             return await _context.Students.ToListAsync();
         }
@@ -106,7 +104,7 @@ namespace SchoolAdministration.Repositories.Repos
         }
 
 
-        public async Task<Student?> GetByIdAsync(int id)
+        public async Task<Student?> GetByIdAsync(int id) //todo : add include for courses and payments
         {
             return await _context.Students.FindAsync(id);
         }

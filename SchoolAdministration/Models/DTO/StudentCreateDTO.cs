@@ -32,14 +32,7 @@ namespace SchoolAdministration.Models.DTO
 
         [Required(ErrorMessage = "Phone Name is required.")]
         public required string Phone { get; set; }
-
-        public string? ParentPhoneNumber { get; set; }
-
-        [StringLength(30, ErrorMessage = "Parent lastname cannot longer than 30 characters")]
-        public string? ParentLastname { get; set; }
-
-        [StringLength(30, ErrorMessage = "Parent first cannot longer than 30 characters")]
-        public string? ParentFirstName { get; set; }
+       
         public string? Picture { get; set; }
     }
 }

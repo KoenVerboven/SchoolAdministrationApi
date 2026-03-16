@@ -11,5 +11,6 @@ namespace SchoolAdministration.Models.Domain.Exam.QuestionAnswer
         public required string QuestionText { get; set; }
         public double QuestionGrade { get; set; }
         public QAExamAnswer? QAExamAnswer { get; set; }
+        public ICollection<QAExamAnswerByStudentId>? QAExamAnswerByStudentId { get; set; }
     }
 }

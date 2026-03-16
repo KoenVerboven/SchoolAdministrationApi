@@ -22,7 +22,7 @@ namespace SchoolAdministration
             //logger :
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
-                .WriteTo.File("log/schoolManagementLogs.txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.File("log/schoolManagementLog.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
             builder.Host.UseSerilog();
 
