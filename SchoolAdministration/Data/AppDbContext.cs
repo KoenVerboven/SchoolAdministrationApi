@@ -7,6 +7,7 @@ using SchoolAdministration.Models.Domain.General;
 using SchoolAdministration.Models.Domain.HomeWork;
 using SchoolAdministration.Models.Domain.Invoice;
 using SchoolAdministration.Models.Domain.Qualification;
+using SchoolAdministration.Models.Domain.Scheduling;
 using SchoolAdministration.Models.Domain.School;
 using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.Domain.Teacher;
@@ -21,6 +22,7 @@ namespace SchoolAdministration.Data
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<CourseScheduling> CourseSchedulings { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<QAExam> QAExams { get; set; }
         public DbSet<QAExamQuestion> QAExamQuestions { get; set; }

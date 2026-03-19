@@ -1,6 +1,8 @@
 ﻿
 -- Populate database School2 with testdata
-
+-- Note:
+-- Filling in the tables must follow a specific order.
+-- First, the tables that do not have foreign key dependencies should be filled (e.g., Addresses, Schools, Students, Teachers, Courses).
 use School2
 
   Insert into [Addresses]
@@ -108,6 +110,20 @@ use School2
   ('Classic Guitar','G1','Guitar beginner','2026-06-01  10:00:00','2026-06-05  10:00:00',22,22),
   ('Piano','P1','Piano beginner','2026-06-05  10:00:00','2026-06-07  12:00:00',19,10)
 
+  Insert into [SchoolDepartments]
+  (
+     [Name]
+     ,[SchoolId]
+     ,[IsActive]
+     ,[Description]
+     ,[LocationWithinTheSchool]
+     ,[CreatedAt]
+  )
+  Values
+  ('Electronica2',1,1,'',null,getdate()),
+  ('Mechanica2',1,1,'',null,getdate()),
+  ('Bouw',1,1,'',null,getdate())
 
-  -- insert into Departments
+  -- inert into SchoolClasses
+  -- insert into StudentClassRegistrations
   -- insert into [TeacherAddresses]
