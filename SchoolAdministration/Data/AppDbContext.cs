@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.Domain.Exam;
+using SchoolAdministration.Models.Domain.Exam.MultipleChoice;
 using SchoolAdministration.Models.Domain.Exam.QuestionAnswer;
 using SchoolAdministration.Models.Domain.General;
 using SchoolAdministration.Models.Domain.HomeWork;
@@ -28,6 +29,9 @@ namespace SchoolAdministration.Data
         public DbSet<QAExamQuestion> QAExamQuestions { get; set; }
         public DbSet<QAExamAnswer>  QAExamAnswers { get; set; }
         public DbSet<QAExamAnswerByStudentId> QAExamAnswerByStudentIds { get; set; }
+        public DbSet<MCExam> MCExams { get; set; }  
+        public DbSet<MCExamQuestion> MCExamQuestions { get; set; }
+        public DbSet<MCExamOption> MCExamOptions { get; set; }
         public DbSet<ExamResult> ExamResults { get; set; }
         public DbSet<StudyPlan> StudyPlans { get; set; }
         public DbSet<StudyPlanPart> StudyPlanParts { get; set; }

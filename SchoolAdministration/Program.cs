@@ -33,6 +33,11 @@ namespace SchoolAdministration
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
             });
 
+
+            //todo : get higher version of automapper (Vulnerabilities)
+            // With te latest version of AutoMapper , you must add a license to use it.
+            //https://stackoverflow.com/questions/79711967/asp-net-cannot-add-automapper-service
+            //https://docs.automapper.io/en/latest/Dependency-injection.html#Configuration.html#profile-instances
             builder.Services.AddAutoMapper(typeof(MappingConfig));
 
             builder.Services.AddCors(options =>

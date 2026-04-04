@@ -5,6 +5,6 @@
         public int Id { get; set; }
         public int QuestionNumber { get; set; }
         public int QuestionText { get; set; }
-        public ICollection<MCExamAnswer>? MCExamAnswers { get; set; }
+        public ICollection<MCExamOption>? MCExamAnswers { get; set; }
     }
 }

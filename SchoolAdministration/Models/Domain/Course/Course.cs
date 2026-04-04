@@ -34,6 +34,7 @@ namespace SchoolAdministration.Models.Domain.Course
         public int MaxNumberOfStudents { get; set; }
         public ICollection<Student.Student>? Students { get; set; }
         public ICollection<StudentPresence>? StudentPresences { get; set; }
+        public ICollection<CourseScheduling>? CourseSchedulings { get; set; }
 
     }
 

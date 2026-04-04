@@ -17,7 +17,7 @@ namespace SchoolAdministration.Models.Domain.Exam.MultipleChoice
         public DateTime ExamEndDateTime { get; set; }
         public int MaxScore { get; set; }
         public int MinScoreToPassExam { get; set; }
-        public ICollection<MCExamQuestion>? ExamQuestionMultipleChoices { get; set; }
+        public ICollection<MCExamQuestion>? MCExamQuestions { get; set; }
         public ICollection<ExamResult>? ExamResults { get; set; }
     }
 }
