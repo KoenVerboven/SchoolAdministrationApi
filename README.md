@@ -47,7 +47,7 @@ Development:
 
 * Database diagram :
 
-<img width="1598" height="873" alt="image" src="https://github.com/user-attachments/assets/b7102c72-995b-481b-8dc1-23f851c57302" />
+![Schermafbeelding 2026-03-19 170902](https://github.com/user-attachments/assets/128f9ddb-8a67-480d-bce0-7fe2f5ccf858)
 
 
 Swagger :
