@@ -91,11 +91,9 @@ Installed NuGet-packages :
 * Serilog.AspNetCore
 * Serilog.Sinks.file
 
-With Serilog we can easly write our logs to a txt.file.
-
 Program.cs:
 
-<img width="948" height="157" alt="image" src="https://github.com/user-attachments/assets/5306dabb-9bcd-40bb-8be6-808cfee74233" />
+<img width="1288" height="233" alt="image" src="https://github.com/user-attachments/assets/7c5cf76f-0824-495d-8ece-37cd125c20d6" />
 
 
  StudentController:
