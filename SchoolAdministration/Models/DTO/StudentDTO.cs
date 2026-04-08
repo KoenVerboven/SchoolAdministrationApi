@@ -1,4 +1,6 @@
-﻿using SchoolAdministration.Models.Domain.Student;
+﻿using SchoolAdministration.Models.Domain.Exam;
+using SchoolAdministration.Models.Domain.Invoice;
+using SchoolAdministration.Models.Domain.Student;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -40,8 +42,15 @@ namespace SchoolAdministration.Models.DTO
         public string? Picture { get; set; }
 
         public ICollection<StudentAddress>? StudentAddresses { get; set; }
-
         public ICollection<Parent>? Parents { get; set; }
+        public ICollection<StudentClassRegistration>? StudentClassRegistrations { get; set; }
+        public ICollection<Invoice>? Invoices { get; set; }
+        public ICollection<Payment>? Payments { get; set; }
+        public ICollection<StudyPlan>? StudyPlans { get; set; }
+        public ICollection<ExamResult>? ExamResults { get; set; }
+        public ICollection<StudentPresence>? StudentPresences { get; set; }
+
+        //todo : add courses,    homeworks
 
     }
 }

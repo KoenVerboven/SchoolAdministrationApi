@@ -33,12 +33,12 @@ namespace SchoolAdministration
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
             });
 
+            // Current
+            builder.Services.AddAutoMapper(cfg => 
+            cfg.LicenseKey = "eyJhbGciOiJSUzI1NiIsImtpZCI6Ikx1Y2t5UGVubnlTb2Z0d2FyZUxpY2Vuc2VLZXkvYmJiMTNhY2I1OTkwNGQ4OWI0Y2IxYzg1ZjA4OGNjZjkiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2x1Y2t5cGVubnlzb2Z0d2FyZS5jb20iLCJhdWQiOiJMdWNreVBlbm55U29mdHdhcmUiLCJleHAiOiIxODA1NDE0NDAwIiwiaWF0IjoiMTc3MzkyOTgxNiIsImFjY291bnRfaWQiOiIwMTlkMDY3MDkxYmM3YmM0YWM0MGU2M2MwYmRjYzAwZCIsImN1c3RvbWVyX2lkIjoiY3RtXzAxa20zNzlyZjcyZ2Fna3JzZ2prc2d0eXNwIiwic3ViX2lkIjoiLSIsImVkaXRpb24iOiIwIiwidHlwZSI6IjIifQ.ePB0aHCScYiAEkBaRc6ptNMVd8XH9YxyCsrJqJBdPCDeCe_0Cxxi3Pn-9WjnDmUCOE7Pd3pUQK1OvWuqDD__au2D6rd0-0aAedCHGQm0wn411CRrUkKk8R0wJuqg46OdDJWeOCgaa6htpzo9so8_wLG1lST7ikqv_QYu6PTgFUorqtUKmYZ4xrOK_eFGDGepItGqKMkn2uK76jh8M2VuW3sm_ad2fEQAtKI-qe5rIGEo5jyWxVDC1Uc33xSjGRM_uX8-ny1VEZhnwKotYQ8ORLcuBAAoox31VulMKYyqbLQsaWaqWyjpGnqd_PaD2ggUHrF4qJvQSgqtV772FffFcQ"
+            , typeof(MappingConfig));
 
-            //todo : get higher version of automapper (Vulnerabilities)
-            // With te latest version of AutoMapper , you must add a license to use it.
-            //https://stackoverflow.com/questions/79711967/asp-net-cannot-add-automapper-service
-            //https://docs.automapper.io/en/latest/Dependency-injection.html#Configuration.html#profile-instances
-            builder.Services.AddAutoMapper(typeof(MappingConfig));
+
 
             builder.Services.AddCors(options =>
             {
