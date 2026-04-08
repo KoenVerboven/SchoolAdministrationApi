@@ -46,8 +46,9 @@ Development:
 * SQL-Server 2022
 
 * Database diagram :
+<img width="1616" height="905" alt="image" src="https://github.com/user-attachments/assets/5c976561-11e9-4753-b41e-77326fc1c454" />
 
-![Schermafbeelding 2026-03-19 170902](https://github.com/user-attachments/assets/128f9ddb-8a67-480d-bce0-7fe2f5ccf858)
+
 
 
 Swagger :
