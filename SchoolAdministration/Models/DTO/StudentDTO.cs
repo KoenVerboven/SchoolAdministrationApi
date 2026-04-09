@@ -1,4 +1,5 @@
 ﻿using SchoolAdministration.Models.Domain.Exam;
+using SchoolAdministration.Models.Domain.HomeWork;
 using SchoolAdministration.Models.Domain.Invoice;
 using SchoolAdministration.Models.Domain.Student;
 using System.ComponentModel.DataAnnotations;
@@ -49,6 +50,7 @@ namespace SchoolAdministration.Models.DTO
         public ICollection<StudyPlan>? StudyPlans { get; set; }
         public ICollection<ExamResult>? ExamResults { get; set; }
         public ICollection<StudentPresence>? StudentPresences { get; set; }
+        public ICollection<HomeWork>? HomeWorks { get; set; }
 
         //todo : add courses,    homeworks
 
