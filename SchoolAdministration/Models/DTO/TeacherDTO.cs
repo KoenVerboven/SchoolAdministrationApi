@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SchoolAdministration.Models.Domain.School;
+using SchoolAdministration.Models.Domain.Teacher;
+using System.ComponentModel.DataAnnotations;
 
 namespace SchoolAdministration.Models.DTO
 {
@@ -36,5 +38,9 @@ namespace SchoolAdministration.Models.DTO
 
         [Display(Name = "Marital status")]
         public byte MaritalStatusId { get; set; }
+
+        public ICollection<TeacherAddress>? TeacherAddresses { get; set; }
+        public ICollection<TeacherPresence>? TeacherPresences { get; set; }
+        public ICollection<SchoolClass>? SchoolClasses { get; set; }
     }
 }

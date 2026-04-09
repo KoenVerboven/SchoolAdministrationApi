@@ -32,10 +32,11 @@ namespace SchoolAdministration
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
             });
-           
-            builder.Services.AddAutoMapper(cfg => 
-            cfg.LicenseKey = "your_license_key_here"
-            , typeof(MappingConfig));
+
+
+            builder.Services.AddAutoMapper(cfg =>
+                cfg.LicenseKey = builder.Configuration.GetValue<string>("AutoMapper:LicenseKey"),
+                typeof(MappingConfig));
 
             builder.Services.AddCors(options =>
             {
