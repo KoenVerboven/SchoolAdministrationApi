@@ -1,14 +1,15 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using SchoolAdministration.AutoMapper;
 using SchoolAdministration.Data;
+using SchoolAdministration.Models.Domain.General;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Repositories.Repos;
-using Microsoft.IdentityModel.Tokens;
 using Serilog;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Serilog.Core;
 using System.Text;
-using SchoolAdministration.Models.Domain.General;
 
 
 namespace SchoolAdministration
@@ -20,9 +21,14 @@ namespace SchoolAdministration
             var builder = WebApplication.CreateBuilder(args);
 
             //logger :
+            var configuration = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("appsettings.json")
+               .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", true)
+               .Build();
+
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Information()
-                .WriteTo.File("log/SchoolManagement.log", rollingInterval: RollingInterval.Day)
+                .ReadFrom.Configuration(configuration)
                 .CreateLogger();
             builder.Host.UseSerilog();
 
@@ -122,7 +128,8 @@ namespace SchoolAdministration
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), "Images\\StudentImages")),
+                    Path.Combine(Directory.GetCurrentDirectory(), "Images\\StudentImages")
+                ),
                 RequestPath = "/images/studentimages"
             });
 

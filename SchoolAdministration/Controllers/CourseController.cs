@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
+using Serilog;
 
 namespace SchoolAdministration.Controllers
 {
@@ -29,6 +30,7 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<CourseDTO>>> GetAllCoursers()
         {
+            _logger.LogInformation("Getting all courses");
             var allCourses = await _courseRepository.GetAllAsync();
             var coursesDTO = _mapper.Map<List<CourseDTO>>(allCourses);
             return Ok(coursesDTO);
