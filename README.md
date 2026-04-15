@@ -29,10 +29,14 @@ How to start the application :
 ------------------------------
 
 * Setup the database in SQL-Server
-* Adjust the connectionstring (DefaultSQLConnection) in appsettings.json with your credentinals.
-* Start the application in Visual Studio by clicking the Startbutton (choose https)
   
-  <img width="73" height="32" alt="image" src="https://github.com/user-attachments/assets/9f6ff179-07ca-4b6d-b389-a927057e22ea" />
+In file appsettings.json:
+1 Adjust the Connectionstrings (to SQL-database)     How to see : https://stackoverflow.com/questions/15631602/how-can-i-set-an-sql-server-connection-string
+2 Adjust the SecretKey (AppiSettings)
+3 Adjust theand Licensekey(Automapper) in appsettings.json with your credentinals.  How to see : You can register for your license key at https:AutoMapper.io
+
+* Start the application in Visual Studio by clicking the Startbutton (choose https)
+    <img width="73" height="32" alt="image" src="https://github.com/user-attachments/assets/9f6ff179-07ca-4b6d-b389-a927057e22ea" />
 
 * The application start now the Swagger-screen where you can explore the available endpoints.
 
