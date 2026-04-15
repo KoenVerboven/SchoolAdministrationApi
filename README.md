@@ -36,7 +36,7 @@ In file appsettings.json:
         How to see : https://stackoverflow.com/questions/15631602/how-can-i-set-an-sql-server-connection-string
 * Adjust the SecretKey (AppiSettings)
 * Adjust theand Licensekey(Automapper) in appsettings.json with your credentinals.
-         How to see : You can register for your license key at https:AutoMapper.io
+         How to see : You can register for your license key at https://AutoMapper.io
 
 Visual studio:
 --------------
