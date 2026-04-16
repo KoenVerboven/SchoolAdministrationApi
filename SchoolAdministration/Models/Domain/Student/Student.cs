@@ -51,7 +51,7 @@ namespace SchoolAdministration.Models.Domain.Student
         public ICollection<ExamResult>? ExamResults { get; set; }
         public ICollection<StudentPresence>? StudentPresences { get; set; }
         public ICollection<Parent>? Parents { get; set; }
-        public StudentImage? StudentImage { get; set; }
+        public StudentImage? StudentImage { get; set; }  
         public ICollection<Payment>? Payments { get; set; }
         public ICollection<StudentClassRegistration>? StudentClassRegistrations { get; set; }
         public ICollection<StudentAddress>? StudentAddresses { get; set; }

@@ -23,7 +23,9 @@ namespace TestSchoolAdmin
             _mockILogger = new Mock<ILogger<StudentController>>(MockBehavior.Default);
 
             var myProfile = new MappingConfig();
-            _mapperConfiguration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
+            _mapperConfiguration = new MapperConfiguration(
+                cfg => cfg.AddProfile(myProfile),new LoggerFactory()
+                );
         }
 
         [Fact]
@@ -78,8 +80,19 @@ namespace TestSchoolAdmin
                 Gender = 1,
                 Email = "koen@test.be",
                 Phone = "448389639",
-                Courses = null,
-                StudyPlans = null
+                Picture = null,
+                Courses = [],
+                StudyPlans = [],
+                StudentAddresses = [],
+                StudentClassRegistrations = [],
+                StudentPresences = [],
+                Parents = [],
+                Invoices = [],
+                HomeWorks = [],
+                StudentImage = null,
+                Payments = [],
+                ExamResults = []
+
             };
            
             var studentsDTO = new StudentDTO
@@ -91,6 +104,16 @@ namespace TestSchoolAdmin
                 Gender = student.Gender,
                 Email = student.Email,
                 Phone = student.Phone,
+                Picture = student.Picture,
+                StudyPlans = student.StudyPlans,
+                StudentAddresses = student.StudentAddresses,
+                StudentClassRegistrations = student.StudentClassRegistrations,
+                StudentPresences = student.StudentPresences,
+                Parents = student.Parents,
+                Invoices = student.Invoices,
+                HomeWorks = student.HomeWorks,
+                Payments = student.Payments,
+                ExamResults = student.ExamResults
             };
            
             var mapper = new Mapper(_mapperConfiguration);

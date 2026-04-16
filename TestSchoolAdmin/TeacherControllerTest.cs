@@ -23,7 +23,9 @@ namespace TestSchoolAdmin
             _mockILogger = new Mock<ILogger<TeacherController>>(MockBehavior.Default);
 
             var myProfile = new MappingConfig();
-            _mapperConfiguration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
+            _mapperConfiguration = new MapperConfiguration(
+                cfg => cfg.AddProfile(myProfile), new LoggerFactory()
+                );
         }
 
         [Fact]
@@ -67,20 +69,27 @@ namespace TestSchoolAdmin
         {
             //arrange
             var myProfile = new MappingConfig();
-            var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
+            var configuration = new MapperConfiguration(
+                cfg => cfg.AddProfile(myProfile), new LoggerFactory()
+                );
             var mapper = new Mapper(configuration);
+
+
             var teacher = new Teacher()
             {
-                Id = 1,
-                FirstName = "Koen",
-                LastName = "Verboven",
-                DateOfBirth = new DateTime(1999, 10, 10),
+                Id = 13,
+                FirstName = "Piet1",
+                LastName = "Gevers",
+                DateOfBirth = new DateTime(2000, 06, 15),
                 Gender = 1,
-                Email = "koen@test.be",
+                Email = "Piet1@test.be",
                 Phone = "448389639",
                 HireDate = new DateTime(2020, 10, 10),
                 LeaveDate = null,
                 MaritalStatusId = 1,
+                TeacherAddresses = [],
+                TeacherPresences = [],
+                SchoolClasses = []
             };
 
             var teacherDTO = new TeacherDTO
@@ -95,13 +104,16 @@ namespace TestSchoolAdmin
                 HireDate = teacher.HireDate,
                 LeaveDate = teacher.LeaveDate,
                 MaritalStatusId = teacher.MaritalStatusId,
+                TeacherAddresses = teacher.TeacherAddresses,
+                TeacherPresences = teacher.TeacherPresences,
+                SchoolClasses = teacher.SchoolClasses
             };
 
-            _mockTeacherRepo.Setup(x => x.GetAsynById(1)).ReturnsAsync(teacher);
+            _mockTeacherRepo.Setup(x => x.GetAsynById(13)).ReturnsAsync(teacher);
             var controller = new TeacherController(_mockTeacherRepo.Object, _mockILogger.Object, mapper);
 
             //act
-            var actionResult = await controller.GetTeacherById(1);
+            var actionResult = await controller.GetTeacherById(13);
 
             //assert
             var okObjectResult = actionResult.Result as OkObjectResult;

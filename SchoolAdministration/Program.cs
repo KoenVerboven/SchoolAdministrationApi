@@ -40,9 +40,10 @@ namespace SchoolAdministration
             });
 
 
-            builder.Services.AddAutoMapper(cfg =>
-                cfg.LicenseKey = builder.Configuration.GetValue<string>("AutoMapper:LicenseKey"),
-                typeof(MappingConfig));
+            builder.Services.AddAutoMapper(
+                cfg => cfg.LicenseKey = builder.Configuration.GetValue<string>("AutoMapper:LicenseKey"),
+                typeof(MappingConfig)
+                );
 
             builder.Services.AddCors(options =>
             {
