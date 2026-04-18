@@ -32,7 +32,7 @@ How to start the application :
   
 file appsettings.json :
 --------------------------
- Replace the _Connectionstring_, AppiSettings-_SecretKey_ and the AutoMapper-_LicenseKey_ with your settings
+ Replace the _Connectionstring_, AppiSettings-_SecretKey_ , _Cors-AllowedOrigins_ and the AutoMapper-_LicenseKey_ with your settings
 
 Visual studio:
 --------------
@@ -190,7 +190,7 @@ In the Controller we can write some like this to map student to StudentDTO :
 
  _mapper.Map < StudentDTO > (student)
  
-NOte : In the latest verstion of Automapper, you need a license key.
+Note : In the latest version of Automapper, you need a license key.
 Check te website:   [https://AutoMapper.io](https://AutoMapper.io)
 
 Versioning :
