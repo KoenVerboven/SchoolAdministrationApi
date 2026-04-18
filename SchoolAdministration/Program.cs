@@ -8,7 +8,6 @@ using SchoolAdministration.Models.Domain.General;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Repositories.Repos;
 using Serilog;
-using Serilog.Core;
 using System.Text;
 
 
@@ -34,6 +33,7 @@ namespace SchoolAdministration
 
 
             //Add services to the container :
+            //--------------------------------
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
@@ -45,14 +45,15 @@ namespace SchoolAdministration
                 typeof(MappingConfig)
                 );
 
-            builder.Services.AddCors(options =>
+            //CORS :    
+            var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
+
+            _ = builder.Services.AddCors(options =>
             {
-                options.AddPolicy("SchoolAdministrationCors", builder =>
-                {
-                    builder.WithOrigins("http://localhost:4200")
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-                });
+                options.AddPolicy("SchoolAdministrationCors",
+                    builder => builder.WithOrigins(allowedOrigins) 
+                                      .AllowAnyMethod()
+                                      .AllowAnyHeader());
             });
 
             // Dependency Injection for Repositories:
