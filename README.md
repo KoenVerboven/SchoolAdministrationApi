@@ -30,16 +30,9 @@ How to start the application :
 
 * Setup the database in SQL-Server
   
-In file appsettings.json:
+file appsettings.json :
 --------------------------
-* Adjust the Connectionstrings (to SQL-database)
-
-        https://stackoverflow.com/questions/15631602/how-can-i-set-an-sql-server-connection-string
-* Adjust the SecretKey (AppiSettings)
-  
-* Adjust the Licensekey(Automapper)
-  
-         https://AutoMapper.io
+ Replace the _Connectionstring_, AppiSettings-_SecretKey_ and the AutoMapper-_LicenseKey_ with your settings
 
 Visual studio:
 --------------
@@ -63,13 +56,11 @@ Development:
 
 
 
-
 Swagger :
 ----------
 Exploring Endpoints.
 
 <img width="400"  alt="localhost_7213_index html (4)" src="https://github.com/user-attachments/assets/fa042a26-a521-4c5c-866d-c1f327ea20f6" />
-
 
 
 
@@ -108,11 +99,9 @@ Program.cs:
 
 <img width="1288" height="233" alt="image" src="https://github.com/user-attachments/assets/7c5cf76f-0824-495d-8ece-37cd125c20d6" />
 
-
  StudentController:
 
-  _logger.LogInformation("Getting all the students.")
-
+ _logger.LogInformation("Getting all the students.")
 
 
 
@@ -197,11 +186,12 @@ MappingConfig:
 
  CreateMap<Student, StudentDTO>().ReverseMap();
  
-In the Controller we can write some like this:
+In the Controller we can write some like this to map student to StudentDTO :
 
  _mapper.Map < StudentDTO > (student)
  
-Here we map student to StudentDTO.
+NOte : In the latest verstion of Automapper, you need a license key.
+Check te website:   [https://AutoMapper.io](https://AutoMapper.io)
 
 Versioning :
 -----------
