@@ -1,0 +1,24 @@
+﻿1/ BUG: Warning about decimal property 'TotalAmount' on entity type 'Invoice'
+[
+12:43:58 INF] Getting all courses
+[12:44:00 WRN] No store type was specified for the decimal property 'TotalAmount' on entity type 'Invoice'.
+This will cause values to be silently truncated if they do not fit in the default precision and scale.
+Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating'
+using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+
+Solution:
+
+ public class Invoice
+    {
+        [Key]
+        public int Id { get; set; }
+        public required string InvoiceNumber { get; set; }
+        public int StudentId { get; set; }
+        
+        [Column(TypeName = "money")]  --> ADD THIS : This line specifies the SQL Server column type for the TotalAmount property.
+        public Decimal TotalAmount { get; set; }
+     }
+
+PS : the type from TotalAmount in SQL-Server : decimal(18, 2)
+
+--------------------------------------------------------------------------------------------------

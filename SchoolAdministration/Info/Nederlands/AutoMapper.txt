@@ -34,5 +34,12 @@
             //};
 
 
-            link :
             https://kenbonny.net/injecting-automapper-profiles-in-tests
+
+            The latest version of Automapper, you need a license key:
+            program.cs:
+             builder.Services.AddAutoMapper(
+                cfg => cfg.LicenseKey = builder.Configuration.GetValue<string>("AutoMapper:LicenseKey"),
+                typeof(MappingConfig)
+                );
+            https://AutoMapper.io
