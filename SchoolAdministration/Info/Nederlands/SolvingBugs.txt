@@ -19,6 +19,18 @@ Solution:
         public Decimal TotalAmount { get; set; }
      }
 
-PS : the type from TotalAmount in SQL-Server : decimal(18, 2)
+PS : the type from TotalAmount in SQL-Server : money
+
+be careful :- The 'money' data type in SQL Server has a fixed precision of 19 digits and a scale of 4 decimal places. This means it can store values up to 922,337,203,685,477.5807. If you need to store larger values or more decimal places, you may want to consider using the 'decimal' data type with appropriate precision and scale instead.
+
+https://learn.microsoft.com/en-us/sql/t-sql/data-types/money-and-smallmoney-transact-sql?view=sql-server-ver17
+
+20-04-2026:
+I changed the precision of InvoiceDetailLine Amount : 
+
+        [Microsoft.EntityFrameworkCore.Precision(18,4)]
+        public decimal Amount { get; set; }
+
+Result in sql-server : decimal(18,4)
 
 --------------------------------------------------------------------------------------------------

@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolAdministration.Models.Domain.Invoice
 {
@@ -14,7 +13,7 @@ namespace SchoolAdministration.Models.Domain.Invoice
         public int NumberOfCourses { get; set; }
         public string Description { get; set; } = string.Empty;
 
-        [Column(TypeName = "money")]
+        [Microsoft.EntityFrameworkCore.Precision(18,4)]
         public decimal Amount { get; set; }
     }
 }
