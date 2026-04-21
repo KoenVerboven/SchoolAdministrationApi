@@ -99,9 +99,13 @@ Program.cs:
 
 <img width="1288" height="233" alt="image" src="https://github.com/user-attachments/assets/7c5cf76f-0824-495d-8ece-37cd125c20d6" />
 
- StudentController:
+If you choose RollingInterval.Day : 
+You get EVERYDAY DAY a separete log file : Filename = SchoolManagement + date(yyyyMMdd) .log :
 
- _logger.LogInformation("Getting all the students.")
+<img width="298" height="173" alt="image" src="https://github.com/user-attachments/assets/1ea36564-0eb2-4f7b-b5bd-8c81d9e41af4" />
+
+
+ StudentController: _logger.LogInformation("Getting all the students.")
 
 
 
