@@ -190,18 +190,18 @@ ONE TO MANY relationship
 
 https://learn.microsoft.com/en-us/ef/core/modeling/relationships/one-to-many
 
-tussen StudyPlan en StudyPlanPart
+tussen StudyPlan en StudyPlanDetailLine
 
 
 
 model StudyPlan:
 public int Id { get; set; }
 ..
-public ICollection<StudyPlanPart>? StudyPlanParts { get; set; } -> wordt ook 'Navigation property' genoemd
+public ICollection<StudyPlanDetailLine>? StudyPlanDetailLines { get; set; } -> wordt ook 'Navigation property' genoemd
 
-model StudyPlanPart:
+model StudyPlanDetailLine:
 [Key] --> Attribuut voor primary key.Dit hoeft hier in principe niet als we Id als naam gebuiken.
-Als we bv StudyPlanPartId zouden gebruiken moet dit wel!
+Als we bv StudyPlanDetailLineId zouden gebruiken moet dit wel!
 public int Id { get; set; }
 public int StudyPlanId { get; set; } --> dit wordt een foreign key in de database. Hou je wel aan de naamgeving : tabel (hier: StudyPlan) + Id
 
@@ -210,14 +210,14 @@ https://learn.microsoft.com/en-us/ef/ef6/modeling/code-first/conventions/built-i
 
 Voeg toe in de contextClass (AppDbContext) :
  public DbSet<StudyPlan> StudyPlans { get; set; }
- public DbSet<StudyPlanPart> StudyPlanParts { get; set; }
+ public DbSet<StudyPlanDetailLine> StudyPlanDetailLines { get; set; }
 
  opmerking:
  de controller voor beide tabellen is niet nodig om te tabelen aan te maken in de database.
  Een controller en endpoints zijn natuurlijk wel nodig om deze endpoint in swagger te laten verschijnen.
 
 Voer uit in Package Manager Console:
-Add-Migration "AddStudyPlanAndStudyPlanPart"
+Add-Migration "AddStudyPlanAndStudyPlanDetailLine"
 Update-Database
 
 SQL-server:
@@ -238,7 +238,7 @@ Nu zijn beide tabellen en de meer op 1 relatie toegevoegd in database.
 	[Zipcode] [int] NULL,
  CONSTRAINT [PK_Students] PRIMARY KEY CLUSTERED 
 
-  TABLE [dbo].[StudyPlanParts](
+  TABLE [dbo].[StudyPlanDetailLines](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Start] [datetime2](7) NOT NULL,
 	[End] [datetime2](7) NOT NULL,
@@ -246,8 +246,8 @@ Nu zijn beide tabellen en de meer op 1 relatie toegevoegd in database.
 	[Remarks] [nvarchar](max) NOT NULL,
 	[StudyObjectiveArchievedInProcent] [int] NOT NULL,
 	[StudyPlanId] [int] NOT NULL,
- CONSTRAINT [PK_StudyPlanParts] PRIMARY KEY CLUSTERED 
- ONSTRAINT [FK_StudyPlanParts_StudyPlans_StudyPlanId] FOREIGN KEY([StudyPlanId])  --> foreign key
+ CONSTRAINT [PK_StudyPlanDetailLines] PRIMARY KEY CLUSTERED 
+ ONSTRAINT [FK_StudyPlanDetailLines_StudyPlans_StudyPlanId] FOREIGN KEY([StudyPlanId])  --> foreign key
 REFERENCES [dbo].[StudyPlans] ([Id])
 ON DELETE CASCADE --> let hier wel mee op, als je dit niet wilt moet dit aangepast worden
 

@@ -34,7 +34,7 @@ namespace SchoolAdministration.Data
         public DbSet<MCExamOption> MCExamOptions { get; set; }
         public DbSet<ExamResult> ExamResults { get; set; }
         public DbSet<StudyPlan> StudyPlans { get; set; }
-        public DbSet<StudyPlanPart> StudyPlanParts { get; set; }
+        public DbSet<StudyPlanDetailLine> StudyPlanDetailLines { get; set; }
         public DbSet<School>Schools { get; set; }
         public DbSet <SchoolDepartment>SchoolDepartments { get; set; }
         public DbSet<SchoolClass> SchoolClasses { get; set; }

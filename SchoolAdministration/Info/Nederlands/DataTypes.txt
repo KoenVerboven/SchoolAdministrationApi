@@ -1,4 +1,4 @@
-﻿1/ BUG: Warning about decimal property 'TotalAmount' on entity type 'Invoice'
+﻿1/ ERROR: Warning about decimal property 'TotalAmount' on entity type 'Invoice'
 [
 12:43:58 INF] Getting all courses
 [12:44:00 WRN] No store type was specified for the decimal property 'TotalAmount' on entity type 'Invoice'.

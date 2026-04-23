@@ -131,7 +131,6 @@ make end-points like this :
   //show related data : 
         //student - exam - examResult
         //student - course
-        //student - studyplan - studyplanpart
         //student - payment - course
 
         //student - gender (enum?)

@@ -12,7 +12,9 @@ namespace SchoolAdministration.Models.Domain.Invoice
         
         [Column(TypeName = "money")]
         public Decimal TotalAmount { get; set; }
-       
+        public DateTime InvoiceDate { get; set; }
+        public DateOnly DueDate { get; set; }
+
         public ICollection<InvoiceDetailLine>? InvoiceDetailLines { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace SchoolAdministration.Models.Domain.Student
         public required string Name { get; set; }
         public string? Description { get; set; }
         public int StudentId { get; set; }
-        public ICollection<StudyPlanPart>? StudyPlanParts { get; set; }
+        public ICollection<StudyPlanDetailLine>? StudyPlanDetailLines { get; set; }
     }
 }
 
