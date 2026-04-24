@@ -52,7 +52,8 @@ Development:
 * SQL-Server 2022
 
 * Database diagram :
-<img width="1616" height="905" alt="image" src="https://github.com/user-attachments/assets/5c976561-11e9-4753-b41e-77326fc1c454" />
+<img width="1603" height="911" alt="Schermafbeelding 2026-04-24 101305" src="https://github.com/user-attachments/assets/f3d4a919-ef3f-47b7-98f0-6499d4cdf38a" />
+
 
 
 
