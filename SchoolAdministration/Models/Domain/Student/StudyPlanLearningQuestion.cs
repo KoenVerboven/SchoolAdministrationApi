@@ -8,7 +8,7 @@ namespace SchoolAdministration.Models.Domain.Student
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey("StudyPlan")]
+        [ForeignKey("StudyPlans")]
         public int StudyPlanId { get; set; }
         public required string QuestionText { get; set; }
         public string? Answer { get; set; }
