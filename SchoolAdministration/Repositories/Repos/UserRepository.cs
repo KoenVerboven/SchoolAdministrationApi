@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SchoolAdministration.Data;
-using SchoolAdministration.Models.Domain.General;
+using SchoolAdministration.Models.Domain.User;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
@@ -30,7 +30,7 @@ namespace SchoolAdministration.Repositories.Repos
             _context = context;
             _userManager = userManager;
             _mapper = mapper;
-            secretKey = configuration.GetValue<string>("ApiSettings:Secret");
+            secretKey = configuration.GetValue<string>("ApiSettings:SecretKey");
         }
 
         public Task<int> CountAsync()

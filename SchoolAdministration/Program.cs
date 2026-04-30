@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using SchoolAdministration.AutoMapper;
 using SchoolAdministration.Data;
 using SchoolAdministration.Models.Domain.General;
+using SchoolAdministration.Models.Domain.User;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Repositories.Repos;
 using Serilog;

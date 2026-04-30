@@ -1,4 +1,5 @@
-﻿using SchoolAdministration.Models.Domain.General;
+﻿
+using SchoolAdministration.Models.Domain.User;
 using SchoolAdministration.Models.DTO;
 
 namespace SchoolAdministration.Repositories.Interfaces
