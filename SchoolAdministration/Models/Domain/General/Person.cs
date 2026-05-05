@@ -28,6 +28,8 @@ namespace SchoolAdministration.Models.Domain.General
         [NotMapped]
         public string FullName { get => LastName + " " + FirstName; }
 
+
+
         [NotMapped]
         public int Age { get; set; }
 

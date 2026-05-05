@@ -128,6 +128,9 @@ namespace SchoolAdministration.Repositories.Repos
             ApplicationUser user = new()
             {
                 UserName = registrationRequestDTO.UserName,
+                LastName = registrationRequestDTO.LastName,
+                FirstName = registrationRequestDTO.FirstName,
+                DateOfBirth = registrationRequestDTO.DateOfBirth,
                 Email = registrationRequestDTO.Email,
                 NormalizedEmail = registrationRequestDTO.Email.ToUpper(),
                 Name = registrationRequestDTO.Name,
