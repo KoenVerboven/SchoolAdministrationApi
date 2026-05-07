@@ -1,26 +1,9 @@
 ﻿using SchoolAdministration.Models.Domain.General;
-using System.ComponentModel.DataAnnotations;
 
 namespace SchoolAdministration.Models.Domain.Student
 {
-    public class Parent
+    public class Parent : Person
     {
-        [Key]
-        public int Id { get; set; }
-        [Display(Name = "First name")]
-        [Required(ErrorMessage = "First Name is required.")]
-        [StringLength(30, ErrorMessage = "First Name cannot longer than 30 characters")]
-        public required string FirstName { get; set; }
-        [Display(Name = "Last name")]
-        [Required(ErrorMessage = "Last Name is required.")]
-        [StringLength(30, ErrorMessage = "Last Name cannot longer than 30 characters")]
-        public required string LastName { get; set; }
-        [Display(Name = "Date of birth")]
-        [Required(ErrorMessage = "Date of birth is required.")]
-        public required DateTime DateOfBirth { get; set; }
-        [Required(ErrorMessage = "PhoneNumber is required.")]
-        public required string PhoneNumber { get; set; }
-        public string? Email { get; set; }
         public int SortOrder { get; set; } //most import : 1
         public int RelationShipToStudent { get; set; } //todo int to byte
         public string? Occupation { get; set; }
