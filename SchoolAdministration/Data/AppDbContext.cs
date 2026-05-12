@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.Domain.Exam;
@@ -8,7 +9,6 @@ using SchoolAdministration.Models.Domain.General;
 using SchoolAdministration.Models.Domain.HomeWork;
 using SchoolAdministration.Models.Domain.Invoice;
 using SchoolAdministration.Models.Domain.Qualification;
-using SchoolAdministration.Models.Domain.Scheduling;
 using SchoolAdministration.Models.Domain.School;
 using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.Domain.Teacher;
@@ -66,20 +66,32 @@ namespace SchoolAdministration.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //var address1 = new Address { Id = 1, StreetAndNumber = "Hoofdweg 1",Zipcode = 2300, City = "Turnhout", CountryCode = "BEL" };
-            //var address2 = new Address { Id = 1, StreetAndNumber = "Molenstraat 10", Zipcode = 2350, City = "Vosselaar", CountryCode = "BEL" };
-            //var address3 = new Address { Id = 1, StreetAndNumber = "Kerkstraat 13", Zipcode = 2350, City = "Vosselaar", CountryCode = "BEL" };
-            //var address4 = new Address { Id = 1, StreetAndNumber = "Pelikaanstraat 188", Zipcode = 2000, City = "Antwerpen", CountryCode = "BEL" };
-            //modelBuilder.Entity<School>().HasData(school1,school2,school3, school4);
+
+            base.OnModelCreating(modelBuilder);
 
             //var school1 = new School { Id = 1, Name = "Vrije Technische School", StreetAndNumber = "Hoofdweg 1", ZipCode = 2300, CountryId = 0, ContactEmail = "VTechnischool@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
             //var school2 = new School { Id = 2, Name = "Basisschool Turnhout", StreetAndNumber = "Kerkstraat 23", ZipCode = 2300, CountryId = 0, ContactEmail = "BSchoolTurnhout@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
             //var school3 = new School { Id = 3, Name = "Kleuterschool Turnhout", StreetAndNumber = "Hoofdbaan 213", ZipCode = 2300, CountryId = 0, ContactEmail = "KSchoolTurnhout@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
-            //var school4 = new School { Id = 4, Name = "Privateschool Turnhout", StreetAndNumber = "steenweg 88", ZipCode = 2300, CountryId = 0, ContactEmail = "PSchoolTurnhout@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
+            //var school4 = new School { Id = 4, Name = "Privateschool Turnhout", StreetAndNumber = "steenweg 88", ZipCode = 2300, ContactEmail = "PSchoolTurnhout@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
             //var school5 = new School { Id = 5, Name = "Avondonderwijs Turnhout", StreetAndNumber = "Hoofdweg 1", ZipCode = 2300, CountryId = 0, ContactEmail = "ASchoolTurnhout@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
             //modelBuilder.Entity<School>().HasData(school1,school2,school3, school4);
 
-            base.OnModelCreating(modelBuilder);
+            //var address1 = new Address { Id = 1, StreetAndNumber = "Hoofdweg 1", Zipcode = 2300, City = "Turnhout", CountryCode = "BEL" };
+            //var address2 = new Address { Id = 2, StreetAndNumber = "Molenstraat 10", Zipcode = 2350, City = "Vosselaar", CountryCode = "BEL" };
+            //var address3 = new Address { Id = 3, StreetAndNumber = "Kerkstraat 13", Zipcode = 2350, City = "Vosselaar", CountryCode = "BEL" };
+            //var address4 = new Address { Id = 4, StreetAndNumber = "Pelikaanstraat 188", Zipcode = 2000, City = "Antwerpen", CountryCode = "BEL" };
+            //modelBuilder.Entity<School>().HasData(address1, address2, address3, address4);
+
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Id = "f570f646-3f00-477f-a9cf-5053f03f0eaf", Name = "SuperAdmin", NormalizedName = "SUPERADMIN" },
+                new IdentityRole { Id = "7cc42937-7905-486c-bfcc-7c9319994565", Name = "Admin", NormalizedName = "ADMIN" },
+                new IdentityRole { Id = "d1c8e5b6-9a3f-4c8e-9f0a-2b5e6c7d8f90", Name = "SchoolEmployee", NormalizedName = "SCHOOLEMPLOYEE" },
+                new IdentityRole { Id = "906572c2-a601-4286-8e0f-8c03e0395e85", Name = "Teacher", NormalizedName = "TEACHER" },
+                new IdentityRole { Id = "c09ca4e9-4fb1-4599-8213-4385b5ba9e68", Name = "Student", NormalizedName = "STUDENT" },
+                new IdentityRole { Id = "4de15cdf-c009-4a7c-9134-245106e8ed02", Name = "Parent", NormalizedName = "PARENT" },
+                new IdentityRole { Id = "a1b2c3d4-e5f6-7890-abcd-ef1234567890", Name = "Tester", NormalizedName = "TESTER" }
+            );
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
