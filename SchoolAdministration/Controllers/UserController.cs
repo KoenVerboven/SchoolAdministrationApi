@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Models.Domain.General;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
-using SchoolAdministration.Repositories.Repos;
 
 namespace SchoolAdministration.Controllers
 {
@@ -11,11 +11,13 @@ namespace SchoolAdministration.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
+        private readonly IRoleRepository _roleRepository;
         protected ApiResponse _apiResponse;
 
-        public UserController(IUserRepository userRepo)
+        public UserController(IUserRepository userRepository, IRoleRepository roleRepository)
         {
-            _userRepository = userRepo;
+            _userRepository = userRepository;
+            _roleRepository = roleRepository;
             this._apiResponse = new ApiResponse();
         }
 
@@ -59,17 +61,12 @@ namespace SchoolAdministration.Controllers
                 return NotFound();
             }
 
-            //var userDTO = new UserDTO { 
-            //    Id = user.Id ,
-            //    Name = user.Name,
-            //    UserName = user.UserName   
-            //};
-
             return Ok(user);
         }
 
 
-
+        //todo : add Authorization 
+        //https://learn.microsoft.com/en-us/aspnet/core/security/authorization/iauthorizationpolicyprovider?view=aspnetcore-10.0
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO model) // correct login : username: maddy@test.be   password: Admin123+    ; Koen Admin123@
         {
@@ -87,11 +84,18 @@ namespace SchoolAdministration.Controllers
             return Ok(_apiResponse);
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegistrationRequestDTO model)
+        //todo :
+        // check if the role is valid 
+        // check if the password complies with the policy (min length, uppercase, lowercase, digit, special character)
+        // https://stackoverflow.com/questions/39825634/how-override-asp-net-core-identitys-password-policy
+        // https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-10.0&tabs=visual-studio
+
+        [HttpPost("registerUser")]
+        public async Task<IActionResult> RegisterUser([FromBody] RegistrationRequestDTO model)
         {
-            bool ifUserNamUnique = _userRepository.IsUniqueUser(model.UserName);
-            if (!ifUserNamUnique)
+            bool userNameIsUnique = _userRepository.IsUniqueUser(model.UserName);
+            
+            if (!userNameIsUnique)
             {
                 _apiResponse.Statuscode = System.Net.HttpStatusCode.BadRequest;
                 _apiResponse.IsSuccess = false;
@@ -100,6 +104,7 @@ namespace SchoolAdministration.Controllers
             }
 
             var user = await _userRepository.Register(model);
+           
             if (user == null)
             {
                 _apiResponse.Statuscode = System.Net.HttpStatusCode.BadRequest;
@@ -112,5 +117,31 @@ namespace SchoolAdministration.Controllers
             _apiResponse.IsSuccess = true;
             return Ok(_apiResponse);
         }
+
+        [HttpPost("AssignRoleToUserAsync")]
+        public async Task AssignRoleToUserAsync(string userId, string roleName) // todo : change roleName in list of roleNames, so we can assign multiple roles to a user in one call
+        {
+            var user = await _userRepository.GetByIdAsync(userId) ?? throw new Exception("User not found");
+
+            if (!await _roleRepository.RoleExistsAsync(roleName))
+            {
+                //await _roleRepository.CreateAsync(new IdentityRole(roleName));
+                //throw new Exception($"Rol '{roleName}' bestaat niet.");
+                //return BadRequest($"Role '{roleName}' does not exist.");
+            }
+
+            var isInRole =  _userRepository.IsInRole(userId, roleName);
+
+            if (!isInRole)
+            {
+                var result = await _userRepository.AddToRoleAsync(userId, roleName);
+            }
+
+            //return result;
+        }
+
     }
+
 }
+
+

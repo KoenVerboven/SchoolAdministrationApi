@@ -33,6 +33,15 @@ namespace SchoolAdministration.Repositories.Repos
             secretKey = configuration.GetValue<string>("ApiSettings:SecretKey");
         }
 
+        public Task<bool> AddToRoleAsync(string userId, string roleName)
+        {
+            var user = _context.ApplicationUsers.FirstOrDefault(x => x.Id == userId) ?? throw new InvalidOperationException("User not found");
+            var role = _context.Roles.FirstOrDefault(x => x.Name == roleName)?? throw new InvalidOperationException("Role not found");
+
+           
+            throw new NotImplementedException();//todo implement this method
+        }
+
         public Task<int> CountAsync()
         {
             return _context.Users.CountAsync();
@@ -60,13 +69,29 @@ namespace SchoolAdministration.Repositories.Repos
             return userDTO;
         }
 
-        public bool IsUniqueUser(string username)
+        public bool IsInRole(string userId, string roleName)
         {
-            var user = _context.ApplicationUsers.FirstOrDefault(x => x.UserName == username);
-            if (user == null)
+            var user = from s in _context.ApplicationUsers join r in _context.UserRoles on s.Id equals r.UserId
+                       where s.Id == userId && r.RoleId == roleName
+                       select s;
+
+            if(user != null)
             {
                 return true;
             }
+
+            return false;
+        }
+
+        public bool IsUniqueUser(string username)
+        {
+            var user = _context.ApplicationUsers.FirstOrDefault(x => x.UserName == username);
+
+            if (user != null)
+            {
+                return true;
+            }
+
             return false;
         }
 
@@ -118,10 +143,17 @@ namespace SchoolAdministration.Repositories.Repos
                 Name= user.Name,
                 Email= user.Email,
                 Role = roles.FirstOrDefault(),
-                //Token ????
+                //todo Token ????
             };
             return loginResponseDTO;
         }
+
+        //todo :
+        // check if the user already exists
+        // check if the role is valid 
+        // check if the password complies with the policy 
+        // check if the email-address is already in use
+        // use transaction to ensure data integrity
 
         public async Task<UserDTO> Register(RegistrationRequestDTO registrationRequestDTO)
         {
@@ -152,7 +184,7 @@ namespace SchoolAdministration.Repositories.Repos
                 throw;
             }
 
-            return new UserDTO();
+            return new UserDTO { Id = string.Empty };
         }
     }
 }

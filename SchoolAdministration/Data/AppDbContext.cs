@@ -66,22 +66,8 @@ namespace SchoolAdministration.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             base.OnModelCreating(modelBuilder);
-
-            //var school1 = new School { Id = 1, Name = "Vrije Technische School", StreetAndNumber = "Hoofdweg 1", ZipCode = 2300, CountryId = 0, ContactEmail = "VTechnischool@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
-            //var school2 = new School { Id = 2, Name = "Basisschool Turnhout", StreetAndNumber = "Kerkstraat 23", ZipCode = 2300, CountryId = 0, ContactEmail = "BSchoolTurnhout@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
-            //var school3 = new School { Id = 3, Name = "Kleuterschool Turnhout", StreetAndNumber = "Hoofdbaan 213", ZipCode = 2300, CountryId = 0, ContactEmail = "KSchoolTurnhout@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
-            //var school4 = new School { Id = 4, Name = "Privateschool Turnhout", StreetAndNumber = "steenweg 88", ZipCode = 2300, ContactEmail = "PSchoolTurnhout@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
-            //var school5 = new School { Id = 5, Name = "Avondonderwijs Turnhout", StreetAndNumber = "Hoofdweg 1", ZipCode = 2300, CountryId = 0, ContactEmail = "ASchoolTurnhout@gmail.com", CreatedAt = DateTime.Now, EstablishedYear = DateTime.Now, CreatedBy = "system", UpdatedBy = "" };
-            //modelBuilder.Entity<School>().HasData(school1,school2,school3, school4);
-
-            //var address1 = new Address { Id = 1, StreetAndNumber = "Hoofdweg 1", Zipcode = 2300, City = "Turnhout", CountryCode = "BEL" };
-            //var address2 = new Address { Id = 2, StreetAndNumber = "Molenstraat 10", Zipcode = 2350, City = "Vosselaar", CountryCode = "BEL" };
-            //var address3 = new Address { Id = 3, StreetAndNumber = "Kerkstraat 13", Zipcode = 2350, City = "Vosselaar", CountryCode = "BEL" };
-            //var address4 = new Address { Id = 4, StreetAndNumber = "Pelikaanstraat 188", Zipcode = 2000, City = "Antwerpen", CountryCode = "BEL" };
-            //modelBuilder.Entity<School>().HasData(address1, address2, address3, address4);
-
+          
             modelBuilder.Entity<IdentityRole>().HasData(
                 new IdentityRole { Id = "f570f646-3f00-477f-a9cf-5053f03f0eaf", Name = "SuperAdmin", NormalizedName = "SUPERADMIN" },
                 new IdentityRole { Id = "7cc42937-7905-486c-bfcc-7c9319994565", Name = "Admin", NormalizedName = "ADMIN" },
@@ -92,6 +78,7 @@ namespace SchoolAdministration.Data
                 new IdentityRole { Id = "a1b2c3d4-e5f6-7890-abcd-ef1234567890", Name = "Tester", NormalizedName = "TESTER" }
             );
 
+            //https://stackoverflow.com/questions/34343599/how-to-seed-users-and-roles-with-code-first-migration-using-identity-asp-net-cor
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

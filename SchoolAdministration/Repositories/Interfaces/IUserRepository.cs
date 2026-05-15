@@ -12,5 +12,8 @@ namespace SchoolAdministration.Repositories.Interfaces
         Task<LoginResponseDTO> Login(LoginRequestDTO loginRequestDTO);
         Task<UserDTO> Register(RegistrationRequestDTO registrationRequestDTO);
         Task<int> CountAsync();
+        bool IsInRole(string userId, string roleName);
+        Task<bool> AddToRoleAsync(string userId, string roleName);
+
     }
 }
