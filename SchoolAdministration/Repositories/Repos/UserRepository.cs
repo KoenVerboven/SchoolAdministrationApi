@@ -37,9 +37,8 @@ namespace SchoolAdministration.Repositories.Repos
         {
             var user = _context.ApplicationUsers.FirstOrDefault(x => x.Id == userId) ?? throw new InvalidOperationException("User not found");
             var role = _context.Roles.FirstOrDefault(x => x.Name == roleName)?? throw new InvalidOperationException("Role not found");
-
-           
-            throw new NotImplementedException();//todo implement this method
+            _userManager.AddToRoleAsync(user, role.Name);
+            return Task.FromResult(true);
         }
 
         public Task<int> CountAsync()

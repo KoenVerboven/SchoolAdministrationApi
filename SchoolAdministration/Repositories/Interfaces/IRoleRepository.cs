@@ -4,6 +4,6 @@ namespace SchoolAdministration.Repositories.Interfaces
 {
     public interface IRoleRepository
     {
-        Task<bool> RoleExistsAsync(string name);
+        bool RoleExistsAsync(string name);
     }
 }

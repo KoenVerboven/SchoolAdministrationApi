@@ -119,15 +119,16 @@ namespace SchoolAdministration.Controllers
         }
 
         [HttpPost("AssignRoleToUserAsync")]
-        public async Task AssignRoleToUserAsync(string userId, string roleName) // todo : change roleName in list of roleNames, so we can assign multiple roles to a user in one call
+        public async Task<IActionResult> AssignRoleToUserAsync(string userId, string roleName) // todo : change roleName in list of roleNames, so we can assign multiple roles to a user in one call
         {
             var user = await _userRepository.GetByIdAsync(userId) ?? throw new Exception("User not found");
 
-            if (!await _roleRepository.RoleExistsAsync(roleName))
+            if (!_roleRepository.RoleExistsAsync(roleName))
             {
-                //await _roleRepository.CreateAsync(new IdentityRole(roleName));
-                //throw new Exception($"Rol '{roleName}' bestaat niet.");
-                //return BadRequest($"Role '{roleName}' does not exist.");
+                _apiResponse.Statuscode = System.Net.HttpStatusCode.BadRequest;
+                _apiResponse.IsSuccess = false;
+                _apiResponse.ErrorMessages.Add($"Role '{roleName}' does not exist.");
+                return BadRequest(_apiResponse);
             }
 
             var isInRole =  _userRepository.IsInRole(userId, roleName);
@@ -135,9 +136,19 @@ namespace SchoolAdministration.Controllers
             if (!isInRole)
             {
                 var result = await _userRepository.AddToRoleAsync(userId, roleName);
+
+                if (!result)
+                {
+                    _apiResponse.Statuscode = System.Net.HttpStatusCode.BadRequest;
+                    _apiResponse.IsSuccess = false;
+                    _apiResponse.ErrorMessages.Add("Error while AssignRoleToUserAsync");
+                    return BadRequest(_apiResponse);
+                }
             }
 
-            //return result;
+            _apiResponse.Statuscode = System.Net.HttpStatusCode.OK;
+            _apiResponse.IsSuccess = true;
+            return Ok(_apiResponse);
         }
 
     }

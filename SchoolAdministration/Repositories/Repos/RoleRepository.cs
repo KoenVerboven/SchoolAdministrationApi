@@ -1,10 +1,21 @@
-﻿namespace SchoolAdministration.Repositories.Repos
+﻿using SchoolAdministration.Data;
+
+namespace SchoolAdministration.Repositories.Repos
 {
-    public class RoleRepository : Interfaces.IRoleRepository
+    public class RoleRepository(AppDbContext context) : Interfaces.IRoleRepository
     {
-        public Task<bool> RoleExistsAsync(string name)
+        private readonly AppDbContext _context = context;
+
+        public bool RoleExistsAsync(string name)
         {
-            throw new NotImplementedException(); //todo implement this method
+            var role = _context.Roles.FirstOrDefault(x => x.Name == name);
+
+            if (role != null)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
