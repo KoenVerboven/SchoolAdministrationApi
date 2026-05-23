@@ -33,14 +33,7 @@ namespace SchoolAdministration.Repositories.Repos
             secretKey = configuration.GetValue<string>("ApiSettings:SecretKey");
         }
 
-        public Task<bool> AddToRoleAsync(string userId, string roleName)
-        {
-            var user = _context.ApplicationUsers.FirstOrDefault(x => x.Id == userId) ?? throw new InvalidOperationException("User not found");
-            var role = _context.Roles.FirstOrDefault(x => x.Name == roleName)?? throw new InvalidOperationException("Role not found");
-            _userManager.AddToRoleAsync(user, role.Name);
-            return Task.FromResult(true);
-        }
-
+      
         public Task<int> CountAsync()
         {
             return _context.Users.CountAsync();
@@ -185,5 +178,56 @@ namespace SchoolAdministration.Repositories.Repos
 
             return new UserDTO { Id = string.Empty };
         }
+
+        public Task<bool> AddToRoleAsync(string userId, string roleName)
+        {
+            var user = _context.ApplicationUsers.FirstOrDefault(x => x.Id == userId) ?? throw new InvalidOperationException("User not found");
+            var role = _context.Roles.FirstOrDefault(x => x.Name == roleName) ?? throw new InvalidOperationException("Role not found");
+            _userManager.AddToRoleAsync(user, role.Name);
+            return Task.FromResult(true);
+        }
+
+        //public async Task<List<Claim>> GetRoleClaimsForUserAsync(string userId)
+        //{
+        //    var roleClaims = new List<Claim>();
+
+        //    // 1. Zoek de gebruiker op
+        //    var user = await _userManager.FindByIdAsync(userId);
+        //    if (user == null) return roleClaims;
+
+        //    // 2. Haal alle rollen op die aan deze gebruiker zijn gekoppeld (AspNetRoles / AspNetUserRoles)
+        //    var roles = await _userManager.GetRolesAsync(user);
+
+        //    // 3. Loop door elke rol en haal de bijbehorende claims op (AspNetRoleClaims)
+        //    foreach (var roleName in roles)
+        //    {
+        //        var role = await _roleManager.FindByNameAsync(roleName);
+        //        if (role != null)
+        //        {
+        //            var claims = await _roleManager.GetClaimsAsync(role);
+        //            roleClaims.AddRange(claims);
+        //        }
+        //    }
+
+        //    return roleClaims;
+        //}
+
+        public async Task<List<Claim>> GetRoleClaimsDirectAsync(string userId)
+        {
+            // Combineert de tabellen AspNetUserRoles, AspNetRoles en AspNetRoleClaims in één database call
+            var claimsData = await (from ur in _context.UserRoles
+                                    where ur.UserId == userId
+                                    join rc in _context.RoleClaims on ur.RoleId equals rc.RoleId
+                                    select new { rc.ClaimType, rc.ClaimValue })
+                                    .ToListAsync();
+
+            // Converteer de anonieme databaseobjecten naar echte Claim-objecten
+            return claimsData
+                .Select(c => new Claim(c.ClaimType, c.ClaimValue))
+                .ToList();
+        }
+
+
+
     }
 }
