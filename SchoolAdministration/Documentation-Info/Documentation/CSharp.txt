@@ -1,32 +1,32 @@
 ﻿
-In TeacherController : 
+TeacherController : 
 
 public async Task<ActionResult<Teacher>>GetTeacherById(int id)   --> endpoint 1
 
 
  public async Task<ActionResult<Teacher>> CreateTeacher(Teacher teacher) --> endpoint 2
      return CreatedAtAction(nameof(GetTeacherById), new {id= teacher.Id, teacher});
+The advantage of nameof(GetTeacherById) is now: that when GetTeacherById changes name in endpoint 1,
 
-het voordeel van nameof(GetTeacherById) is nu: dat waneer GetTeacherById van naam verandert in endpoint 1:
-de naam in enpoint 2 van GetTeacherById , automatisch mee veranderd.
+The advantage of nameof(GetTeacherById) is now: that when GetTeacherById changes name in endpoint 1,
+the name of GetTeacherById in endpoint 2 changes automatically along with it.
 
 ----------------------------------------------------------
 
-string interpolation voorbeeld :
+//string interpolation: 
 
 if (studentInDb == null) {
-   throw new KeyNotFoundException($"Student with id {id} was not found.");//string interpolation
+   throw new KeyNotFoundException($"Student with id {id} was not found.");
 }
 
 ----------------------------------------------------------
-var courseInDb = await _context.Courses.FindAsync(id)
-                ?? throw new KeyNotFoundException($"course with id {id} was not found."); //coalesce expression
+//coalesce expression:
+var courseInDb = await _context.Courses.FindAsync(id) ?? throw new KeyNotFoundException($"course with id {id} was not found."); 
 
 --------------------------------------------------------------
 
-
-een constructor aanmaken -> ctor tab 
-een property aanmaken --> prop tab 
+ Create a constructor  -> ctor tab 
+ Create a  property  --> prop tab 
 
 -------------------------------------------------------------
 IEnumerable vs IList vs ICollection :
@@ -41,11 +41,11 @@ IEnumerable vs IList vs ICollection :
             _courseRepository = courseRepository;
         }
 
-  bovenstaande snel aanmaken :
+  the above can be created quickly :
 
-  tik ctor
-  vul de parameter aan : ICourseRepository courseRepository
-  cursor op courseRepository, kies quick Action: create and assign property
+  1/type ctor
+  2/complete the parameter : ICourseRepository courseRepository
+  3/set cursor on courseRepository, choose quick Action: create and assign property
 
 
   public CourseController(ICourseRepository courseRepository)
@@ -54,7 +54,7 @@ IEnumerable vs IList vs ICollection :
         }
 
 -----------------------------------------------------------
-
-input!.SumOfEvenNumbes -> != null forgiving operator
+forgiving operator:
+input!.SumOfEvenNumbes -> != null 
 
 -------------------------------------------------------------

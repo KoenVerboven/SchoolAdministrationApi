@@ -26,8 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Info\Englisch\" />
-    <Folder Include="Info\ScreenShots\" />
     <Folder Include="log\" />
     <Folder Include="Images\" />
     <Folder Include="Images\StudentImages\" />

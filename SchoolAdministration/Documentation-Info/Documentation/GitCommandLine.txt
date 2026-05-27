@@ -36,25 +36,25 @@ cls
 working directory:
 git status
 
-aanmaken working directory:
+create working directory:
 git init
 -> maakt een .git folder aan in de directory (is een hidden folder)
 
 git status
--> geeft nu :
+-> result :
 o commits yet
 Untracked files:
 (use "git add <file>..." to include in what will be committed)
 initial-commitTextFile.txt
 nothing added to commit but untracked files present (use "git add" to track)
 
-files toevoegen aan de staging area:
-punt wil zeggen : alle files
+add files to staging area:
+point means : alle files
 use git add TO TRACK
 git add .
 
 git status
-geeft nu:
+result:
 On branch master
 No commits yet
 Changes to be committed:
@@ -63,9 +63,9 @@ new file: initial-commitTextFile.txt
 
 git commit -m "eerste tekstfile toegevoegd"
 
-Toon alle commits:
+Show all commits:
 git log
-geeft:
+result:
 commit 204d6170a33f537a76cf769630aa090d673f35c4 (HEAD -> master)
 Author: Koen Verboven
 Date: Tue Feb 11 14:32:42 2025 +0100
@@ -103,21 +103,21 @@ Turn off this advice by setting config variable advice.detachedHead to false
 HEAD is now at 204d617 eerste tekstfile toegevoegd
 
 git checkout master
-geeft:
+result:
 Previous HEAD position was 204d617 eerste tekstfile toegevoegd
 Switched to branch 'master'
 
-Toon alle branches:
+Show all branches:
 git branch
-geeft:
+result:
 
 - master
 
-nieuwe branch aanmaken:
+create new branch aanmaken:
 git branch featherbranchkoen
 
 git branch
-geeft nu :
+result :
 featherbranchkoen
 
 - master
@@ -133,7 +133,7 @@ git checkout -b thirdbranch
 Switched to a new branch 'thirdbranch'
 
 git branch
-geeft nu:
+result:
 featherbranchkoen
 master
 

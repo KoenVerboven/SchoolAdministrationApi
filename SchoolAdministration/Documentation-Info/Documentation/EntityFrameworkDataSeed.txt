@@ -1,0 +1,26 @@
+﻿Adding new IdentityRoles to the database :
+
+AppDbContext.cs : 
+
+ modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Id = superAdminRoleId, Name = "SuperAdmin", NormalizedName = "SUPERADMIN" },
+                new IdentityRole { Id = adminRoleId, Name = "Admin", NormalizedName = "ADMIN" },
+                new IdentityRole { Id = schoolEmployeeRoleId, Name = "SchoolEmployee", NormalizedName = "SCHOOLEMPLOYEE" },
+                new IdentityRole { Id = teacherRoleId, Name = "Teacher", NormalizedName = "TEACHER" },
+                new IdentityRole { Id = studentRoleId, Name = "Student", NormalizedName = "STUDENT" },
+                new IdentityRole { Id = parentRoleId, Name = "Parent", NormalizedName = "PARENT" },
+                new IdentityRole { Id = testerRoleId, Name = "Tester", NormalizedName = "TESTER" }
+            );
+
+ 
+The actual addition is done by means of a migration:
+1. Open the Package Manager Console in Visual Studio (Tools > NuGet Package Manager > Package Manager Console).
+2. Execute the following command to create a new migration: Add-Migration AddIdentityRoles
+3. After executing the above command, a new migration class will be generated in the Migrations folder of your project.
+   Open this class and check if the Up method contains the correct code to add the new IdentityRoles.
+4. Next, execute the following command to apply the migration and update the database: Update-Database
+5. After executing the Update-Database command, the new IdentityRoles will be added to the database.
+   You can verify this by opening the database and looking at the AspNetRoles table,
+   where you should see the new roles.
+
+

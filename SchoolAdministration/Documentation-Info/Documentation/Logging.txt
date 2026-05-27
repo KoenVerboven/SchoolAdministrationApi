@@ -25,7 +25,7 @@
                 return BadRequest();
          }
 -------------------------------------------------------------------------------------------------------------------------------------------
-    Serilog gebruiken om de logging weg te schrijven naar een file :
+    Use Serilog to write the log to a file :
     
     Install nuget package(s) : 
          Serilog.AspNetCore

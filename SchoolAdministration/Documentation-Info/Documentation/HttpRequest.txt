@@ -1,0 +1,7 @@
+﻿
+
+Http GET   example get student data
+Http DELETE example delete a student
+Http PUT  exampleupdate a student
+Http POST example create a student
+

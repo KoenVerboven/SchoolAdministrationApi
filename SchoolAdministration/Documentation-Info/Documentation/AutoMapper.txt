@@ -1,7 +1,7 @@
 ﻿            
             nuget-package :  automapper
 
-            maak volgende classe aan :
+            create class :
 
             public class MappingConfig:Profile
             {
@@ -15,7 +15,7 @@
             
             
             Student student = _mapper.Map<Student>(studentCreateDTO);
-            vervangt ->
+            replaced ->
 
             //obsolete :
             //Student student = new()

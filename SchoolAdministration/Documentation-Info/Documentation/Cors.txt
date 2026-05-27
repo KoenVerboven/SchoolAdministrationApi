@@ -1,13 +1,13 @@
 ﻿Cors:
 Cross-Origin Requests
 
--> onze API is bereikbaar van bepaalde domains of van bepaalde locaties.
+-> Our API is accessible from certain domains or from certain locations.
 
 link : 
 https://learn.microsoft.com/en-us/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api
 
 
-configureren in file Program.cs:
+configure in file Program.cs:
 
 builder.Services.AddCors(options =>
             {

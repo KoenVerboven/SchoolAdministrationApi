@@ -2,13 +2,13 @@
 
 StudentController :
 
-[HttpPost] --> dit attribuut is verplicht
+[HttpPost] --> This attribute is required
 public async Task<ActionResult<Student>> CreateStudent(Student student)
 
- [HttpGet] --> dit attribuut is verplicht
+ [HttpGet] --> This attribute is required
  public async Task<ActionResult<IEnumerable<Student>>> GetAllStudentsAsync()
 
- -> dit zijn end-points
+ -> these are end-points
 
  ----------------------------------------------------------------
 
@@ -24,16 +24,16 @@ public async Task<ActionResult<Student>> CreateStudent(Student student)
             return Ok(student);
         }
 
- --> async Task -> de task wordt asynchroon uitgevoerd.
+ --> async Task -> the task is executed asynchronously.
  Bij een asynchrone task hoort ook steeds het keyword 'await'.
- Await wordt gebruikt voor een aktie die een bepaalde tijd gaat duren.
- Bv een resultaat ophalen uit de database : await _studentRepository.GetByIdAsync(id);
+ Await is used for an action that will last a certain amount of time.
+ For example, retrieving a result from the database : await _studentRepository.GetByIdAsync(id);
 
- De Task is hier van het generieke type <ActionResult<Student>>
+ The Task here is of the generic type <ActionResult<Student>>
 
- We moeten dus een actionResult returnen van het type student.
+ We must therefore return an actionResult of the student type.
 
- een actionResult kan bv zijn : 
+ an actionResult can be, for example : 
  Ok (statusCode 200), 
  CreatedAtAction (statusCode 201), 
  NoContent (statuscode 204),

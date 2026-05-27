@@ -1,14 +1,14 @@
-Make entity framwork work with sql-server :
+﻿Make entity framwork work with sql-server :
 
-Rechte muisklik op het project in Visual Studio -> Manage Nuget Packages for Solution...
+Right-click on the project in Visual Studio -> Manage Nuget Packages for Solution...
 
 Nuget- solution, kies 'Browse' 
 
-installeer volgende nuget-packet: microsoft.EntityFrameworkCore
+Install nuget-packet: microsoft.EntityFrameworkCore
 
 microsoft.entityframeworkcore.sqlserver\9.0.0
 
-entityframeworkcore.tools\9.0.0  (anders kunnen we geen commandos intikken in de Package Manager Console)
+entityframeworkcore.tools\9.0.0  (otherwise we cannot type commands into the Package Manager Console)
 
 microsoft.entityframeworkcore\9.0.0 (is niet nodig, microsoft.entityframeworkcore.sqlserver installeerd dit automatisch mee)
 
@@ -16,7 +16,7 @@ in Program.cs :
 
 useSqlServer
 
-en vul de connectie string in
+enter the connection string:
 
   var builder = WebApplication.CreateBuilder(args);
 
@@ -25,13 +25,13 @@ en vul de connectie string in
       );
 
  Beter : 
- plaats de connectiestring in appsettings.json :
+ place the connection string in appsettings.json :
 
   "ConnectionStrings": {
     "DefaultSQLConnection": "Data Source=KOENI7;Initial Catalog=School2;Integrated Security=True;TrustServerCertificate=True;"
   },
 
- Maak de file AppDbContext.cs aan in de Data map:
+ Create the file AppDbContext.cs in the Data folder:
 
 using Microsoft.EntityFrameworkCore;
 using VKmfSoft_EHealth_API.Models.Domain.Hospital;
@@ -51,21 +51,21 @@ namespace VKmfSoft_EHealth_API.Data
 }
 
 
-Om er voor te zorgen dat de map 'Migrations' verschijnt in ons project:
+To ensure that the 'Migrations' folder appears in our project:
 
-open de Package Manager Console.
-(Kies Tools - NuGet package Manager -  Package Manager Console)
+open the Package Manager Console.
+(Choose Tools - NuGet package Manager -  Package Manager Console)
 
-tik nu in : 
+type in now : 
 
 Add-Migration InitialMigration
 
---> de map Migration, met hieronder de migration-files worden aangemaakt
+--> the Migration folder, with the migration files below it being created
 To undo this action, use Remove-Migration.
 
 update-Database
 
--> in sql server wordt nu de database 'School2' aangemaakt met hierin onze tabel Student.
+-> In SQL Server, the database 'School2' is now being created, containing our Student table.
 
 ---------------------------------------------------------------------------
 
@@ -156,7 +156,7 @@ namespace SchoolAdministration
 
 --------------------------------------------
 
-na het toevoegen van nieuwe velden in de student classe : 
+after adding new fields in the student classe : 
 
 Add-Migration AddAdditionalFieldsToStudent
 
@@ -169,13 +169,13 @@ MANY TO MANY relationship
 
 https://learn.microsoft.com/en-us/ef/core/modeling/relationships/many-to-many
 
-tussen Student en Course
+between Student en Course
 
-AddStudentCourseRelationship = vrij te kiezen naam, geeft duidelijk aan wat de betreffende update bewerkstelligd.
+AddStudentCourseRelationship = Freely selectable name, clearly indicates what the relevant update accomplishes.
 
-de tussen-table 'CourseStudent' wordt nu automatisch aangemaakt.
+The intermediate table 'CourseStudent' is now automatically created.
 
-Dit komt doordat we onderstaande properties hebben toegevoegd :
+This is because we have added the properties below:
 
 model Student:
 ->  public ICollection<Course> Courses { get; set; }
@@ -208,20 +208,20 @@ public int StudyPlanId { get; set; } --> dit wordt een foreign key in de databas
 Het is belangrijk om bij de benaming van de pk en fk, aan de naming conventions te houden.
 https://learn.microsoft.com/en-us/ef/ef6/modeling/code-first/conventions/built-in
 
-Voeg toe in de contextClass (AppDbContext) :
+Add in the contextClass (AppDbContext) :
  public DbSet<StudyPlan> StudyPlans { get; set; }
  public DbSet<StudyPlanDetailLine> StudyPlanDetailLines { get; set; }
 
- opmerking:
- de controller voor beide tabellen is niet nodig om te tabelen aan te maken in de database.
- Een controller en endpoints zijn natuurlijk wel nodig om deze endpoint in swagger te laten verschijnen.
+ remark:
+ The controller for both tables is not needed to create the tables in the database.
+ A controller and endpoints are, of course, required for this endpoint to appear in Swagger
 
-Voer uit in Package Manager Console:
+Execute in Package Manager Console:
 Add-Migration "AddStudyPlanAndStudyPlanDetailLine"
 Update-Database
 
 SQL-server:
-Nu zijn beide tabellen en de meer op 1 relatie toegevoegd in database.
+Both tables and the more-to-one relationship have now been added to the database.
 
  TABLE [dbo].[Students](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -249,7 +249,7 @@ Nu zijn beide tabellen en de meer op 1 relatie toegevoegd in database.
  CONSTRAINT [PK_StudyPlanDetailLines] PRIMARY KEY CLUSTERED 
  ONSTRAINT [FK_StudyPlanDetailLines_StudyPlans_StudyPlanId] FOREIGN KEY([StudyPlanId])  --> foreign key
 REFERENCES [dbo].[StudyPlans] ([Id])
-ON DELETE CASCADE --> let hier wel mee op, als je dit niet wilt moet dit aangepast worden
+ON DELETE CASCADE --> Do pay attention to this; if you do not want this, it needs to be adjusted.
 
 -------------------------------------------------------------------------------------
 

@@ -1,7 +1,0 @@
-﻿
-
-Http GET   bv get student gegevens ophalen
-Http DELETE verwijderen van een student
-Http PUT update van een student
-Http POST aanmaken van een nieuwe student
-
