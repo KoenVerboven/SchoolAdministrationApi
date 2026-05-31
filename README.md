@@ -222,7 +222,7 @@ More Info :
 
 If you want to read more info about this API or the used technology :
 
-https://github.com/KoenVerboven/SchoolAdministrationApi/tree/master/SchoolAdministration/Info
+https://github.com/KoenVerboven/SchoolAdministrationApi/tree/master/SchoolAdministration/Documentation-Info/Documentation
 
 
 
