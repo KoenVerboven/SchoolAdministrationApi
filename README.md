@@ -70,7 +70,15 @@ UnitTests :
 
 add new project to solution : xUnit test Project
 
-Installed Nuget-Packages:
+Installed Packages:
+* xunit
+* xunit.runner.visualstudio
+
+Right click project SchoolAdministration
+
+Choose Manage Nuget Packages
+
+Search and install Nuget-Packages:
 * FluentAssertions
 * Moq
 
