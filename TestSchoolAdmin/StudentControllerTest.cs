@@ -307,7 +307,7 @@ namespace TestSchoolAdmin
         }
 
 
-        private IEnumerable<Student> StudentList()
+    private IEnumerable<Student> StudentList()
     {
             IEnumerable<Student> studentList = [
                 new Student()

@@ -33,7 +33,7 @@ namespace SchoolAdministration.Repositories.Repos
             secretKey = configuration.GetValue<string>("ApiSettings:SecretKey");
         }
 
-      
+
         public Task<int> CountAsync()
         {
             return _context.Users.CountAsync();
@@ -41,15 +41,16 @@ namespace SchoolAdministration.Repositories.Repos
 
         public async Task<IEnumerable<ApplicationUser>> GetAllAsync()
         {
-           return await _context.ApplicationUsers.ToListAsync();
+            return await _context.ApplicationUsers.ToListAsync();
         }
 
         public async Task<UserDTO?> GetByIdAsync(string id)
         {
             var user = await _context.ApplicationUsers.FindAsync(id);
-            var roles = await _userManager.GetRolesAsync(user);//we gaan er hier van uit : 1 role per user 
+            var roles = await _userManager.GetRolesAsync(user);//Make it work with a list of users
             var role = "";
-            if (roles != null) { role = roles[0]; };
+            if (roles != null) { role = roles[0]; }
+            ;
             var userDTO = new UserDTO
             {
                 Id = user.Id,
@@ -63,11 +64,12 @@ namespace SchoolAdministration.Repositories.Repos
 
         public bool IsInRole(string userId, string roleName)
         {
-            var user = from s in _context.ApplicationUsers join r in _context.UserRoles on s.Id equals r.UserId
+            var user = from s in _context.ApplicationUsers
+                       join r in _context.UserRoles on s.Id equals r.UserId
                        where s.Id == userId && r.RoleId == roleName
                        select s;
 
-            if(user != null)
+            if (user != null)
             {
                 return true;
             }
@@ -101,7 +103,7 @@ namespace SchoolAdministration.Repositories.Repos
                 {
                     Id = "",
                     UserName = "",
-                    Name= "",
+                    Name = "",
                     Email = "",
                     Role = "",
                     Token = ""
@@ -131,9 +133,9 @@ namespace SchoolAdministration.Repositories.Repos
                 Token = tokenHandler.WriteToken(token),
                 //User = _mapper.Map<UserDTO>(user),
                 Id = user.Id,
-                UserName= user.Name,
-                Name= user.Name,
-                Email= user.Email,
+                UserName = user.Name,
+                Name = user.Name,
+                Email = user.Email,
                 Role = roles.FirstOrDefault(),
                 //todo Token ????
             };
@@ -168,7 +170,7 @@ namespace SchoolAdministration.Repositories.Repos
                     await _userManager.AddToRoleAsync(user, registrationRequestDTO.Role);
                     var userToReturn = _context.ApplicationUsers
                         .FirstOrDefault(u => u.UserName == registrationRequestDTO.UserName);
-                    return _mapper.Map<UserDTO>(userToReturn); 
+                    return _mapper.Map<UserDTO>(userToReturn);
                 }
             }
             catch (Exception)
@@ -187,47 +189,48 @@ namespace SchoolAdministration.Repositories.Repos
             return Task.FromResult(true);
         }
 
-        //public async Task<List<Claim>> GetRoleClaimsForUserAsync(string userId)
-        //{
-        //    var roleClaims = new List<Claim>();
-
-        //    // 1. Zoek de gebruiker op
-        //    var user = await _userManager.FindByIdAsync(userId);
-        //    if (user == null) return roleClaims;
-
-        //    // 2. Haal alle rollen op die aan deze gebruiker zijn gekoppeld (AspNetRoles / AspNetUserRoles)
-        //    var roles = await _userManager.GetRolesAsync(user);
-
-        //    // 3. Loop door elke rol en haal de bijbehorende claims op (AspNetRoleClaims)
-        //    foreach (var roleName in roles)
-        //    {
-        //        var role = await _roleManager.FindByNameAsync(roleName);
-        //        if (role != null)
-        //        {
-        //            var claims = await _roleManager.GetClaimsAsync(role);
-        //            roleClaims.AddRange(claims);
-        //        }
-        //    }
-
-        //    return roleClaims;
-        //}
 
         public async Task<List<Claim>> GetRoleClaimsDirectAsync(string userId)
         {
-            // Combineert de tabellen AspNetUserRoles, AspNetRoles en AspNetRoleClaims in één database call
             var claimsData = await (from ur in _context.UserRoles
                                     where ur.UserId == userId
                                     join rc in _context.RoleClaims on ur.RoleId equals rc.RoleId
                                     select new { rc.ClaimType, rc.ClaimValue })
                                     .ToListAsync();
-
-            // Converteer de anonieme databaseobjecten naar echte Claim-objecten
             return claimsData
                 .Select(c => new Claim(c.ClaimType, c.ClaimValue))
                 .ToList();
         }
 
 
+        //to : make it work
+        //todo : implement update user (name, email, password, role)
+        public async Task<UserDTO> ChangeUserPasswordAsync(string userId, UserChangePasswordDTO userChangePasswordDTO)
+        {
+            var user = await _context.ApplicationUsers.FindAsync(userId) ?? throw new InvalidOperationException("User not found");
+            user.Name = userChangePasswordDTO.Name ?? user.Name;
+            user.Email = userChangePasswordDTO.Email ?? user.Email;
+            user.FirstName = userChangePasswordDTO.FirstName ?? user.FirstName;
+            user.LastName = userChangePasswordDTO.LastName ?? user.LastName;
+            var result = await _userManager.UpdateAsync(user);
 
+            if (!result.Succeeded) throw new InvalidOperationException("Failed to update user");
+
+            if (!string.IsNullOrEmpty(userChangePasswordDTO.Password))
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var passwordResult = await _userManager.ResetPasswordAsync(user, token, userChangePasswordDTO.Password);
+                if (!passwordResult.Succeeded) throw new InvalidOperationException("Failed to update password");
+            }
+
+            if (!string.IsNullOrEmpty(userChangePasswordDTO.Role))
+            {
+                var currentRoles = await _userManager.GetRolesAsync(user);
+                await _userManager.RemoveFromRolesAsync(user, currentRoles);
+                await _userManager.AddToRoleAsync(user, userChangePasswordDTO.Role);
+            }
+
+            return _mapper.Map<UserDTO>(userChangePasswordDTO);
+        }
     }
 }
