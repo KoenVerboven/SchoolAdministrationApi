@@ -66,11 +66,20 @@ Exploring Endpoints.
 
 UnitTests :
 ------------
-![image](https://github.com/user-attachments/assets/96426350-2387-4e3e-a6c5-d1930969257e)
+<img width="728" height="528" alt="image" src="https://github.com/user-attachments/assets/c8244898-45c5-4aaf-9c19-56bda28b45c1" />
+
 
 add new project to solution : xUnit test Project
 
-Installed Nuget-Packages:
+Installed Packages:
+* xunit
+* xunit.runner.visualstudio
+
+Right click project SchoolAdministration
+
+Choose Manage Nuget Packages
+
+Search and install Nuget-Packages:
 * FluentAssertions
 * Moq
 
@@ -222,7 +231,7 @@ More Info :
 
 If you want to read more info about this API or the used technology :
 
-https://github.com/KoenVerboven/SchoolAdministrationApi/tree/master/SchoolAdministration/Info
+https://github.com/KoenVerboven/SchoolAdministrationApi/tree/master/SchoolAdministration/Documentation-Info/Documentation
 
 
 
