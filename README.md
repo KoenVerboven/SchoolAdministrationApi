@@ -66,7 +66,8 @@ Exploring Endpoints.
 
 UnitTests :
 ------------
-<img width="728" height="528" alt="image" src="https://github.com/user-attachments/assets/c8244898-45c5-4aaf-9c19-56bda28b45c1" />
+
+<img width="911" height="706" alt="image" src="https://github.com/user-attachments/assets/bb47b535-d7b1-46a7-93f2-8cc2cd5ca56b" />
 
 
 add new project to solution : xUnit test Project
