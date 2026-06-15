@@ -2,6 +2,7 @@
 using SchoolAdministration.Data;
 using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.Domain.Exam;
+using SchoolAdministration.Models.Domain.General;
 using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
@@ -20,21 +21,21 @@ namespace SchoolAdministration.Repositories.Repos
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteStudentAsync(int id)
+        public async Task DeleteStudentAsync(int id)//set cascade to off.
         {
             var studentInDb = await _context.Students.FindAsync(id) ?? throw new KeyNotFoundException($"Student with id {id} was not found.");
             _context.Students.Remove(studentInDb);
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Student>> GetAllAsync()//todo : add include for courses and payments
+        public async Task<IEnumerable<Student>> GetAllAsync()
         {
             return await _context.Students.ToListAsync();
         }
 
         public async Task<IEnumerable<StudentCourseDTO>> GetStudentCoursesAsync(int studentId)                
         {
-            var studentCourses = await _context.Students.Include(p => p.Courses)//todo : add inculde for payments
+            var studentCourses = await _context.Students.Include(p => p.Courses)//todo : add inculde for payments 
                                                         .Where(p=>p.Id == studentId)
                                                         .ToListAsync();
             var studentCoursesList = new List<StudentCourseDTO>();
@@ -62,6 +63,30 @@ namespace SchoolAdministration.Repositories.Repos
                 }
             }
             return studentCoursesList;
+        }
+
+
+        public async Task<IEnumerable<StudentAddressDTO>> GetStudentAddressesAsync(int studentId)
+        {
+            var studentAddresses = await _context.StudentAddresses.Include(p => p.Address).Where(p => p.StudentId == studentId).ToListAsync();
+            var studentAddressesList = new List<StudentAddressDTO>();
+
+            foreach (var studentAddress in studentAddresses)
+            {
+                var studentAddressDTO = new StudentAddressDTO()
+                {
+                    Id = studentAddress.Address.Id,
+                    AddressOrder = studentAddress.AddressOrder,
+                    //IsMainAddress = studentAddress.IsMainAddress,
+                    StreetAndNumber = studentAddress.Address.StreetAndNumber,
+                    BusNumber = studentAddress.Address.BusNumber,
+                    Zipcode = studentAddress.Address.Zipcode,
+                    City = studentAddress.Address.City,
+                    CountryCode = studentAddress.Address.CountryCode
+                };
+                studentAddressesList.Add(studentAddressDTO);
+            }
+            return studentAddressesList;
         }
 
         public async Task<IEnumerable<StudentExamsResultDTO>> GetStudentExamResultsAsync()
@@ -104,9 +129,11 @@ namespace SchoolAdministration.Repositories.Repos
         }
 
 
-        public async Task<Student?> GetByIdAsync(int id) //todo : add include for courses and payments
+
+
+        public async Task<Student?> GetByIdAsync(int id) 
         {
-            return await _context.Students.FindAsync(id);
+            return await _context.Students.FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<IEnumerable<Student>> GetByNameStartWithAsync(string name)

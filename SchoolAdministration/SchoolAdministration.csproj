@@ -33,6 +33,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Models\DTO\StudentAddresDTO.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>

@@ -8,6 +8,7 @@ namespace SchoolAdministration.Repositories.Interfaces
         Task<IEnumerable<Student>> GetAllAsync();
         Task<Student?> GetByIdAsync(int id);
         Task<IEnumerable<StudentExamsResultDTO>> GetStudentExamResultsAsync();
+        Task<IEnumerable<StudentAddressDTO>> GetStudentAddressesAsync(int studentId);
         Task<IEnumerable<StudentCourseDTO>> GetStudentCoursesAsync(int studentId);
         Task<IEnumerable<Student>> GetByNameStartWithAsync(string name);
 

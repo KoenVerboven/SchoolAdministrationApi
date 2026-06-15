@@ -9,6 +9,8 @@ using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Repositories.Repos;
 using Serilog;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 
 namespace SchoolAdministration
@@ -122,6 +124,17 @@ namespace SchoolAdministration
                     c.RoutePrefix = string.Empty;
                 });
             }
+
+            //JsonSerializerOptions options = new()
+            //{
+            //    ReferenceHandler = ReferenceHandler.IgnoreCycles,
+            //    WriteIndented = true
+            //};
+
+            //builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
+            //{
+            //    options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+            //});
 
             app.UseCors("SchoolAdministrationCors");
             app.UseAuthentication();
