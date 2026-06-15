@@ -62,6 +62,10 @@ Exploring Endpoints.
 
 <img width="400"  alt="localhost_7213_index html (4)" src="https://github.com/user-attachments/assets/fa042a26-a521-4c5c-866d-c1f327ea20f6" />
 
+Execute Get-method /api/Course:
+--------------------------------
+
+<img width="1661" height="907" alt="image" src="https://github.com/user-attachments/assets/68361373-5db3-4e6d-be61-d9129f4d6a20" />
 
 
 UnitTests :
