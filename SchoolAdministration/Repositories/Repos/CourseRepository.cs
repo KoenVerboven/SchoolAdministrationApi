@@ -1,8 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Data;
 using SchoolAdministration.Models.Domain.Course;
-using SchoolAdministration.Models.DTO;
+using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Repositories.Interfaces;
+using SchoolAdministration.Specifications;
 
 
 namespace SchoolAdministration.Repositories.Repos
@@ -50,27 +51,47 @@ namespace SchoolAdministration.Repositories.Repos
             return await _context.Courses.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Course>> GetSearchAsync(CourseSearchParameters courseSearchParameters)
+        public async Task<IEnumerable<Course>> GetSearchAsync(CourseSearchParams courseSearchParameters)
         {
-            var query = _context.Courses.AsQueryable();
+            var pageSize = courseSearchParameters.PageSize ;
+            IQueryable<Course> courses;
+
+            courses = _context.Courses;
 
             if (!string.IsNullOrWhiteSpace(courseSearchParameters.CourseName) && string.IsNullOrWhiteSpace(courseSearchParameters.CourseCode))
             {
-                query = query.Where(p => p.CourseName.ToLower().Contains(courseSearchParameters.CourseName.ToLower()));
+                courses = courses.Where(p => p.CourseName.ToLower().Contains(courseSearchParameters.CourseName.ToLower()));
             }
 
             if (!string.IsNullOrWhiteSpace(courseSearchParameters.CourseName) && !string.IsNullOrWhiteSpace(courseSearchParameters.CourseCode))
             {
-                query = query.Where(p => p.CourseName.ToLower().Contains(courseSearchParameters.CourseName.ToLower())
+                courses = courses.Where(p => p.CourseName.ToLower().Contains(courseSearchParameters.CourseName.ToLower())
                                          && p.CourseCode.ToLower().Contains(courseSearchParameters.CourseCode.ToLower()));//todo courseCode may be null
                           
             }
 
-            return await query.ToListAsync();
+            courses = courseSearchParameters.Sort.ToLower() switch
+            {
+                "id" => courses.OrderBy(p => p.Id).AsQueryable(),
+                "id_desc" => courses.OrderByDescending(p => p.Id).AsQueryable(),
+                "name" => courses.OrderBy(p => p.CourseName).AsQueryable(),
+                "name_desc" => courses.OrderByDescending(p => p.CourseName).AsQueryable(),
+                 _ => courses.OrderBy(p => p.Id).AsQueryable(),
+            };
+
+            if (courseSearchParameters.PageSize > 0 && courseSearchParameters.PageNumber > 0) //todo : kan korter
+            {
+                if (courseSearchParameters.PageSize > 30)
+                {
+                    pageSize = 30;
+                }
+
+                courses = courses.Skip(courseSearchParameters.PageSize * (courseSearchParameters.PageNumber - 1)).Take(pageSize);
+            }
+
+            return await courses.ToListAsync();
         }
-
-       
-
+    
         public async Task UpdateCourseAsync(Course course)
         {
             _context.Courses.Update(course);

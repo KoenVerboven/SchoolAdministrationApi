@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
-using Serilog;
+using SchoolAdministration.Specifications;
+
 
 namespace SchoolAdministration.Controllers
 {
@@ -113,15 +114,15 @@ namespace SchoolAdministration.Controllers
             return CreatedAtAction(nameof(GetCourseById), new { id = course.Id }, course );
         }
 
-        [HttpGet("getBySearch")]
+        [HttpGet("getCourseByCourseSearchParamsFilter")]
         [ProducesResponseType(typeof(IEnumerable<CourseDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<CourseDTO>>> Search([FromQuery] CourseSearchParameters @params)
+        public async Task<ActionResult<IEnumerable<CourseDTO>>> GetCourseByCourseSearchParamsFilter([FromQuery] CourseSearchParams @params)
         {
             var courses = await _courseRepository.GetSearchAsync(@params);
 
-            if (courses == null)
+            if (courses == null) 
             {
                 return NotFound();
             }

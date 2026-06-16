@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
+using SchoolAdministration.Specifications;
 
 namespace SchoolAdministration.Controllers
 {
@@ -61,7 +62,7 @@ namespace SchoolAdministration.Controllers
             return Ok(studentDTO);
         }
 
-        [HttpGet("GetStudentAddresses/{studentId}")]
+        [HttpGet("getStudentAddresses/{studentId}")]
         public async Task<ActionResult<IEnumerable<StudentAddressDTO>>> GetStudentAddresses(int studentId)
         {
             if (studentId == 0)
@@ -99,24 +100,24 @@ namespace SchoolAdministration.Controllers
             return Ok(studentsDTO);
         }
 
-        //[HttpGet("getStudentByFilter1")]
-        //[ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        //public async Task<ActionResult<IEnumerable<StudentDTO>>> getStudentByFilter1([FromQuery] StudentSpecParams studentSpecParams)
-        //{
-        //    var students = await _studentRepository.GetFilterAsync1(studentSpecParams);
-        //    var studentsDTO = _mapper.Map<IEnumerable<StudentDTO>>(students);
-        //    return Ok(studentsDTO);
-        //}
+        [HttpGet("getStudentByStudentSearchParamsFilter")]
+        [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudentByStudentSearchParamsFilter([FromQuery] StudentSearchParams studentSearchParams)
+        {
+            var students = await _studentRepository.GetStudentsByStudentSearchParamsFilterAsync(studentSearchParams);
+            var studentsDTO = _mapper.Map<IEnumerable<StudentDTO>>(students);
+            return Ok(studentsDTO);
+        }
 
         [HttpGet("getStudentByFilter")]
         [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<StudentDTO>>> getStudentByFilter([FromQuery] string? Name,string? Email, int ZipCode, string Sort, int PageSize, int PageNumber)
+        public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudentByFilter([FromQuery] string? Name,string? Email, int ZipCode, string Sort, int PageSize, int PageNumber)
         {
-            var students = await _studentRepository.GetFilterAsync(Name,Email, ZipCode,Sort,PageSize,PageNumber);
+            var students = await _studentRepository.GetStudentsByFilterAsync(Name,Email, ZipCode,Sort,PageSize,PageNumber);
             var studentsDTO = _mapper.Map<IEnumerable<StudentDTO>>(students);
             return Ok(studentsDTO);
         }
@@ -176,19 +177,19 @@ namespace SchoolAdministration.Controllers
         }
 
         [HttpGet("getStudentCount")]
-        public async Task<int> StudentCountAsync()
+        public async Task<int> GetStudentCount()
         {
             return await _studentRepository.CountAsync();
         }
 
         [HttpGet("getStudentFilterCount")]
-        public async Task<int> StudentFilterCountAsync2(string? Name, string? Email, int ZipCode)
+        public async Task<int> GetStudentFilterCount(string? Name, string? Email, int ZipCode)
         {
-            return await _studentRepository.CountFilterAsync(Name,Email,ZipCode);
+            return await _studentRepository.CountStudentsByFilterAsync(Name,Email,ZipCode);
         }
 
 
-        [HttpGet("StudentCourses/{id}")]
+        [HttpGet("getStudentCourses/{id}")]
         [ProducesResponseType(typeof(StudentCourseDTO), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

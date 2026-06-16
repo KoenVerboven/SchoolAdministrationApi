@@ -2,10 +2,10 @@
 using SchoolAdministration.Data;
 using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.Domain.Exam;
-using SchoolAdministration.Models.Domain.General;
 using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
+using SchoolAdministration.Specifications;
 
 namespace SchoolAdministration.Repositories.Repos
 {
@@ -21,7 +21,7 @@ namespace SchoolAdministration.Repositories.Repos
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteStudentAsync(int id)//set cascade to off.
+        public async Task DeleteStudentAsync(int id)//todo : make it soft-delete or  set cascade to off.
         {
             var studentInDb = await _context.Students.FindAsync(id) ?? throw new KeyNotFoundException($"Student with id {id} was not found.");
             _context.Students.Remove(studentInDb);
@@ -64,7 +64,6 @@ namespace SchoolAdministration.Repositories.Repos
             }
             return studentCoursesList;
         }
-
 
         public async Task<IEnumerable<StudentAddressDTO>> GetStudentAddressesAsync(int studentId)
         {
@@ -129,8 +128,6 @@ namespace SchoolAdministration.Repositories.Repos
         }
 
 
-
-
         public async Task<Student?> GetByIdAsync(int id) 
         {
             return await _context.Students.FirstOrDefaultAsync(s => s.Id == id);
@@ -160,7 +157,7 @@ namespace SchoolAdministration.Repositories.Repos
             return _context.Students.CountAsync();
         }
 
-        public Task<int> CountFilterAsync(string? Name, string? Email, int ZipCode)
+        public Task<int> CountStudentsByFilterAsync(string? Name, string? Email, int ZipCode)
         {
             IQueryable<Student> students;
 
@@ -190,70 +187,61 @@ namespace SchoolAdministration.Repositories.Repos
             return students.CountAsync();
         }
 
+        public async Task<IEnumerable<Student>> GetStudentsByStudentSearchParamsFilterAsync(StudentSearchParams studentSearchParams)
+        {
+            int pageSize = studentSearchParams.PageSize;
+            IQueryable<Student> students;
+
+            students = _context.Students;
+
+            if (studentSearchParams.Name is not null)
+            {
+                if (studentSearchParams.Name.Trim() != string.Empty)
+                {
+                    students = students.Where(p => (p.LastName.ToLower() + " " + p.FirstName).Contains(studentSearchParams.Name.ToLower())).AsQueryable();
+                }
+            }
+
+            if (studentSearchParams.Email is not null)
+            {
+                if (studentSearchParams.Email.Trim() != string.Empty)
+                {
+                    students = students.Where(p => (p.Email.ToLower()).Contains(studentSearchParams.Email.ToLower())).AsQueryable();
+                }
+            }
+
+            students = studentSearchParams.Sort.ToLower() switch
+            {
+                "id" => students.OrderBy(p => p.Id).AsQueryable(),
+                "id_desc" => students.OrderByDescending(p => p.Id).AsQueryable(),
+                "name" => students.OrderBy(p => p.LastName).ThenBy(p => p.FirstName).AsQueryable(),
+                "name_desc" => students.OrderByDescending(p => p.LastName).ThenBy(p => p.FirstName).AsQueryable(),
+                "email" => students.OrderBy(p => p.Email).AsQueryable(),
+                "email_desc" => students.OrderByDescending(p => p.Email).AsQueryable(),
+                "phone" => students.OrderBy(p => p.Phone).AsQueryable(),
+                "phone_desc" => students.OrderByDescending(p => p.Phone).AsQueryable(),
+                "dateofbirth" => students.OrderBy(p => p.DateOfBirth).AsQueryable(),
+                "dateofbirth_desc" => students.OrderByDescending(p => p.DateOfBirth).AsQueryable(),
+                "gender" => students.OrderBy(p => p.Gender).AsQueryable(),
+                "gender_desc" => students.OrderByDescending(p => p.Gender).AsQueryable(),
+                _ => students.OrderBy(p => p.Id).AsQueryable(),
+            };
+
+            if (studentSearchParams.PageSize > 0)
+            {
+                if (studentSearchParams.PageSize > 30)
+                {
+                    pageSize = 30;
+                }
+
+                students = students.Skip(pageSize * (studentSearchParams.PageNumber - 1)).Take(pageSize);
+            }
+
+            return await students.ToListAsync();
+        }
 
 
-
-        //public async Task<IEnumerable<Student>> GetFilterAsync1(StudentSpecParams studentSpecParams)
-        //{
-        //    IQueryable<Student> students;
-
-        //    students = _context.Students;
-
-        //    if(studentSpecParams.Name is not null)
-        //    {
-        //        if (studentSpecParams.Name.Trim() != string.Empty)
-        //        {
-        //            students = students.Where(p => (p.LastName.ToLower() + " " + p.FirstName).Contains(studentSpecParams.Name.ToLower())).AsQueryable();
-        //        }
-        //    }
-
-        //    if(studentSpecParams.Email is not null)
-        //    {
-        //        if (studentSpecParams.Email.Trim() != string.Empty)
-        //        {
-        //            students = students.Where(p => (p.Email.ToLower()).Contains(studentSpecParams.Email.ToLower())).AsQueryable();
-        //        }
-        //    }
-
-        //    if (studentSpecParams.ZipCode > 0)
-        //    {
-        //        students =students.Where(p => p.Zipcode == studentSpecParams.ZipCode).AsQueryable();
-        //    }
-
-        //    students = studentSpecParams.Sort.ToLower() switch
-        //    {
-        //        "id" =>  students.OrderBy(p => p.Id).AsQueryable(),
-        //        "id_desc" => students.OrderByDescending(p => p.Id).AsQueryable(),
-        //        "name" =>   students.OrderBy(p => p.LastName).ThenBy(p => p.FirstName).AsQueryable(),
-        //        "name_desc" => students.OrderByDescending(p => p.LastName).ThenBy(p => p.FirstName).AsQueryable(),
-        //        "email" =>  students.OrderBy(p => p.Email).AsQueryable(),
-        //        "email_desc" => students.OrderByDescending(p => p.Email).AsQueryable(),
-        //        "phone" =>  students.OrderBy(p => p.Phone).AsQueryable(),
-        //        "phone_desc" => students.OrderByDescending(p => p.Phone).AsQueryable(),
-        //        "zipcode" => students.OrderBy(p => p.Zipcode).AsQueryable(),
-        //        "zipcode_desc" => students.OrderByDescending(p => p.Zipcode).AsQueryable(),
-        //        "dateofbirth" => students.OrderBy(p => p.DateOfBirth).AsQueryable(),
-        //        "dateofbirth_desc" => students.OrderByDescending(p => p.DateOfBirth).AsQueryable(),
-        //        "gender" => students.OrderBy(p => p.Gender).AsQueryable(),
-        //        "gender_desc" => students.OrderByDescending(p => p.Gender).AsQueryable(),
-        //         _ => students.OrderBy(p => p.Id).AsQueryable(),
-        //    };
-
-        //    if (studentSpecParams.PageSize > 0)
-        //    {
-        //        if (studentSpecParams.PageSize > 30)
-        //        {
-        //            studentSpecParams.PageSize = 30;
-        //        }
-
-        //        students = students.Skip(studentSpecParams.PageSize * (studentSpecParams.PageNumber - 1)).Take(studentSpecParams.PageSize);
-        //    }
-
-        //    return await students.ToListAsync();
-        //}
-
-
-        public async Task<IEnumerable<Student>> GetFilterAsync(string? Name,string? Email, int ZipCode, string Sort, int PageSize, int PageNumber)
+        public async Task<IEnumerable<Student>> GetStudentsByFilterAsync(string? Name,string? Email, int ZipCode, string Sort, int PageSize, int PageNumber)
         {
             IQueryable<Student> students;
 
