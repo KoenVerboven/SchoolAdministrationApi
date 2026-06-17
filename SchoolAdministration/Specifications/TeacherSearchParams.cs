@@ -1,6 +1,6 @@
 ﻿namespace SchoolAdministration.Specifications
 {
-    public record StudentSearchParams
+    public record TeacherSearchParams
     (
         string? Name,
         string? Email,

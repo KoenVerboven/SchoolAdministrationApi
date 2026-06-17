@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Models.Domain.Teacher;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
+using SchoolAdministration.Repositories.Repos;
+using SchoolAdministration.Specifications;
 
 namespace SchoolAdministration.Controllers
 {
@@ -61,7 +63,17 @@ namespace SchoolAdministration.Controllers
             return Ok(teachersDTO);
         }
 
-
+        [HttpGet("getTeacherByTeacherSearchParamsFilter")]
+        //[Authorize]
+        [ProducesResponseType(typeof(IEnumerable<TeacherDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<TeacherDTO>>> GetTeacherByTeacherSearchParamsFilter([FromQuery] TeacherSearchParams teacherSearchParams)
+        {
+            var teachers = await _teacherRepository.GetTeachersByTeachersSearchParamsFilterAsync(teacherSearchParams);
+            var teachersDTO = _mapper.Map<IEnumerable<TeacherDTO>>(teachers);
+            return Ok(teachersDTO);
+        }
 
         [HttpGet("{id}")]
         //[Authorize]

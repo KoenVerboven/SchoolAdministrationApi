@@ -179,11 +179,6 @@ namespace SchoolAdministration.Repositories.Repos
                 }
             }
 
-            //if (ZipCode > 0)
-            //{
-            //    students = students.Where(p => p.Zipcode == ZipCode).AsQueryable();
-            //}
-
             return students.CountAsync();
         }
 
@@ -208,6 +203,15 @@ namespace SchoolAdministration.Repositories.Repos
                 {
                     students = students.Where(p => (p.Email.ToLower()).Contains(studentSearchParams.Email.ToLower())).AsQueryable();
                 }
+            }
+              
+            if (studentSearchParams.DateOfBirth is not null)
+            {
+                var dob = studentSearchParams.DateOfBirth.Value;
+    
+                var start = new DateTime(dob.Year, dob.Month, dob.Day);
+                var end = start.AddDays(1);
+                students = students.Where(p => p.DateOfBirth >= start && p.DateOfBirth < end).AsQueryable();
             }
 
             students = studentSearchParams.Sort.ToLower() switch
@@ -263,11 +267,6 @@ namespace SchoolAdministration.Repositories.Repos
                 }
             }
 
-            //if (ZipCode > 0)
-            //{
-            //    students = students.Where(p => p.Zipcode == ZipCode).AsQueryable();
-            //}
-
             students = Sort.ToLower() switch
             {
                 "id" => students.OrderBy(p => p.Id).AsQueryable(),
@@ -278,8 +277,6 @@ namespace SchoolAdministration.Repositories.Repos
                 "email_desc" => students.OrderByDescending(p => p.Email).AsQueryable(),
                 "phone" => students.OrderBy(p => p.Phone).AsQueryable(),
                 "phone_desc" => students.OrderByDescending(p => p.Phone).AsQueryable(),
-                //"zipcode" => students.OrderBy(p => p.Zipcode).AsQueryable(),
-                //"zipcode_desc" => students.OrderByDescending(p => p.Zipcode).AsQueryable(),
                 "dateofbirth" => students.OrderBy(p => p.DateOfBirth).AsQueryable(),
                 "dateofbirth_desc" => students.OrderByDescending(p => p.DateOfBirth).AsQueryable(),
                 "gender" => students.OrderBy(p => p.Gender).AsQueryable(),

@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Data;
+using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.Domain.Teacher;
 using SchoolAdministration.Repositories.Interfaces;
+using SchoolAdministration.Specifications;
 
 namespace SchoolAdministration.Repositories.Repos
 {
@@ -38,6 +40,7 @@ namespace SchoolAdministration.Repositories.Repos
             return await _context.Teachers.ToListAsync();   
         }
 
+        //todo : is obsolete ? use GetTeachersByTeachersSearchParamsFilterAsync instead
         public async Task<IEnumerable<Teacher>> GetFilterAsyn(string sort, int pageSize, int pageNumber)
         {
             IQueryable<Teacher>? teachers;
@@ -100,6 +103,68 @@ namespace SchoolAdministration.Repositories.Repos
         {
             _context.Teachers.Update(teacher);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Teacher>> GetTeachersByTeachersSearchParamsFilterAsync(TeacherSearchParams teacherSearchParams)
+        {
+            int pageSize = teacherSearchParams.PageSize;
+            IQueryable<Teacher> teachers;
+
+            teachers = _context.Teachers;
+
+            if (teacherSearchParams.Name is not null)
+            {
+                if (teacherSearchParams.Name.Trim() != string.Empty)
+                {
+                    teachers = teachers.Where(p => (p.LastName.ToLower() + " " + p.FirstName).Contains(teacherSearchParams.Name.ToLower())).AsQueryable();
+                }
+            }
+
+            if (teacherSearchParams.Email is not null)
+            {
+                if (teacherSearchParams.Email.Trim() != string.Empty)
+                {
+                    teachers = teachers.Where(p => p.Email.ToLower().Contains(teacherSearchParams.Email.ToLower())).AsQueryable();
+                }
+            }
+
+            if (teacherSearchParams.DateOfBirth is not null)
+            {
+                var dob = teacherSearchParams.DateOfBirth.Value;
+
+                var start = new DateTime(dob.Year, dob.Month, dob.Day);
+                var end = start.AddDays(1);
+                teachers = teachers.Where(p => p.DateOfBirth >= start && p.DateOfBirth < end).AsQueryable();
+            }
+
+            teachers = teacherSearchParams.Sort.ToLower() switch
+            {
+                "id" => teachers.OrderBy(p => p.Id).AsQueryable(),
+                "id_desc" => teachers.OrderByDescending(p => p.Id).AsQueryable(),
+                "name" => teachers.OrderBy(p => p.LastName).ThenBy(p => p.FirstName).AsQueryable(),
+                "name_desc" => teachers.OrderByDescending(p => p.LastName).ThenBy(p => p.FirstName).AsQueryable(),
+                "email" => teachers.OrderBy(p => p.Email).AsQueryable(),
+                "email_desc" => teachers.OrderByDescending(p => p.Email).AsQueryable(),
+                "phone" => teachers.OrderBy(p => p.Phone).AsQueryable(),
+                "phone_desc" => teachers.OrderByDescending(p => p.Phone).AsQueryable(),
+                "dateofbirth" => teachers.OrderBy(p => p.DateOfBirth).AsQueryable(),
+                "dateofbirth_desc" => teachers.OrderByDescending(p => p.DateOfBirth).AsQueryable(),
+                "gender" => teachers.OrderBy(p => p.Gender).AsQueryable(),
+                "gender_desc" => teachers.OrderByDescending(p => p.Gender).AsQueryable(),
+                _ => teachers.OrderBy(p => p.Id).AsQueryable(),
+            };
+
+            if (teacherSearchParams.PageSize > 0)
+            {
+                if (teacherSearchParams.PageSize > 30)
+                {
+                    pageSize = 30;
+                }
+
+                teachers = teachers.Skip(pageSize * (teacherSearchParams.PageNumber - 1)).Take(pageSize);
+            }
+
+            return await teachers.ToListAsync();
         }
     }
 }

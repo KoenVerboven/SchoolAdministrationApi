@@ -1,4 +1,5 @@
 ﻿using SchoolAdministration.Models.Domain.Teacher;
+using SchoolAdministration.Specifications;
 
 namespace SchoolAdministration.Repositories.Interfaces
 {
@@ -7,6 +8,7 @@ namespace SchoolAdministration.Repositories.Interfaces
         Task<IEnumerable<Teacher>> GetAllAsyn();
         Task<IEnumerable<Teacher>> GetFilterAsyn(string sort, int pageSize, int pageNumber);
         Task<IEnumerable<Teacher>> GetAllAsynSort(string sort);
+        Task<IEnumerable<Teacher>> GetTeachersByTeachersSearchParamsFilterAsync(TeacherSearchParams teacherSearchParams);
         Task<Teacher?> GetAsynById(int id);
         Task AddTeacherAsync(Teacher teacher);
         Task UpdateTeacherAsync(Teacher teacher);

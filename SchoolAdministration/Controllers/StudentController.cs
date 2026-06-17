@@ -89,6 +89,7 @@ namespace SchoolAdministration.Controllers
             return Ok(studentExamsResultDTOList);
         }
 
+        //todo : endpoint is obsolete, need to remove it in future
         [HttpGet("getByNameStartWith/{name}")]
         [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
