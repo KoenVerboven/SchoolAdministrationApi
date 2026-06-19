@@ -1,4 +1,5 @@
 ﻿using SchoolAdministration.Models.Domain.Exam;
+using SchoolAdministration.Specifications;
 
 namespace SchoolAdministration.Repositories.Interfaces
 {
@@ -6,10 +7,10 @@ namespace SchoolAdministration.Repositories.Interfaces
     {
         Task<IEnumerable<ExamResult>> GetAllExamResultsAsync();
         Task<ExamResult?> GetByIdAsync(int id);
+        Task<IEnumerable<ExamResult>> GetSearchAsync(ExamenResultSearchParams examResultSearchParameters);
         Task AddExamResultAsync(ExamResult examResult);
         Task UpdateExamResultAsync(ExamResult examResult);
         Task DeleteExamResultAsync(int id);
-
         Task<int> CountAsync();
     }
 }

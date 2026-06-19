@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Models.Domain.Exam;
+using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
+using SchoolAdministration.Repositories.Repos;
+using SchoolAdministration.Specifications;
 
 
 namespace SchoolAdministration.Controllers
@@ -11,13 +15,30 @@ namespace SchoolAdministration.Controllers
     {
         private readonly IExamResultRepository _examResultRepository;
         private readonly ILogger<ExamResultController> _logger;
+        private readonly IMapper _mapper;
 
-        public ExamResultController(IExamResultRepository examResultRepository, ILogger<ExamResultController> logger)
+        public ExamResultController(IExamResultRepository examResultRepository, ILogger<ExamResultController> logger, IMapper mapper)
         {
             _examResultRepository = examResultRepository;
             _logger = logger;
+            _mapper = mapper;
         }
 
+        [HttpGet("getExamResultsByCourseSearchParamsFilter")]
+        [ProducesResponseType(typeof(IEnumerable<ExamResult>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<ExamResult>>> GetExamResultsByExamSearchParamsFilter([FromQuery] ExamenResultSearchParams @params)
+        {
+            var examResults = await _examResultRepository.GetSearchAsync(@params);
+
+            if (examResults == null)
+            {
+                return NotFound();
+            }
+            var examResultsDTO = _mapper.Map<List<ExamResultDTO>>(examResults);
+            return Ok(examResultsDTO    );
+        }
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<ExamResult>), StatusCodes.Status200OK)]
