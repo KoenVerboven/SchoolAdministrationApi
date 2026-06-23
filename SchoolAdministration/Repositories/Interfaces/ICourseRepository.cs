@@ -7,7 +7,7 @@ namespace SchoolAdministration.Repositories.Interfaces
     {
         Task<IEnumerable<Course>> GetAllAsync();
         Task<Course?> GetByIdAsync(int id);
-        Task<IEnumerable<Course>> GetSearchAsync(CourseSearchParams courseSearchParameters);
+        Task<IEnumerable<Course>> GetCoursesByFilterAsync(CourseSearchParams courseSearchParameters);
         Task AddCourseAsync(Course course);
         Task UpdateCourseAsync(Course course);
         Task DeleteCourseAsync(int id);

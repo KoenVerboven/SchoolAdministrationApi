@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Models.Domain.Exam;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
-using SchoolAdministration.Repositories.Repos;
 using SchoolAdministration.Specifications;
 
 
@@ -24,13 +23,13 @@ namespace SchoolAdministration.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("getExamResultsByCourseSearchParamsFilter")]
+        [HttpGet("GetExamResultsByFilter")] // todo: add params?
         [ProducesResponseType(typeof(IEnumerable<ExamResult>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<ExamResult>>> GetExamResultsByExamSearchParamsFilter([FromQuery] ExamenResultSearchParams @params)
+        public async Task<ActionResult<IEnumerable<ExamResult>>> GetExamResultsByFilter([FromQuery] ExamenResultSearchParams @params)
         {
-            var examResults = await _examResultRepository.GetSearchAsync(@params);
+            var examResults = await _examResultRepository.GetExamResultsByFilterAsync(@params);
 
             if (examResults == null)
             {

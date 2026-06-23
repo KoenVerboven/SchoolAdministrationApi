@@ -90,35 +90,36 @@ namespace SchoolAdministration.Controllers
         }
 
         //todo : endpoint is obsolete, need to remove it in future
-        [HttpGet("getByNameStartWith/{name}")]
-        [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudentByNameStartWith(string name)
-        {
-            var students = await _studentRepository.GetByNameStartWithAsync(name);
-            var studentsDTO = _mapper.Map<IEnumerable<StudentDTO>>(students);
-            return Ok(studentsDTO);
-        }
-
-        [HttpGet("getStudentByStudentSearchParamsFilter")]
-        [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudentByStudentSearchParamsFilter([FromQuery] StudentSearchParams studentSearchParams)
-        {
-            var students = await _studentRepository.GetStudentsByStudentSearchParamsFilterAsync(studentSearchParams);
-            var studentsDTO = _mapper.Map<IEnumerable<StudentDTO>>(students);
-            return Ok(studentsDTO);
-        }
+        //[HttpGet("getByNameStartWith/{name}")]
+        //[ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        //public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudentByNameStartWith(string name)
+        //{
+        //    var students = await _studentRepository.GetByNameStartWithAsync(name);
+        //    var studentsDTO = _mapper.Map<IEnumerable<StudentDTO>>(students);
+        //    return Ok(studentsDTO);
+        //}
 
         [HttpGet("getStudentByFilter")]
         [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudentByFilter([FromQuery] string? Name,string? Email, int ZipCode, string Sort, int PageSize, int PageNumber)
+        public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudentByFilter([FromQuery] StudentSearchParams studentSearchParams)
         {
-            var students = await _studentRepository.GetStudentsByFilterAsync(Name,Email, ZipCode,Sort,PageSize,PageNumber);
+            var students = await _studentRepository.GetStudentsByFilterAsync(studentSearchParams);
+            var studentsDTO = _mapper.Map<IEnumerable<StudentDTO>>(students);
+            return Ok(studentsDTO);
+        }
+
+        //todo : endpoint is obsolete, need to remove it in future
+        [HttpGet("getStudentByFilterOld")]
+        [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudentByFilterOld([FromQuery] string? Name, string? Email, int ZipCode, string Sort, int PageSize, int PageNumber)
+        {
+            var students = await _studentRepository.GetStudentsByFilterAsyncOld(Name, Email, ZipCode, Sort, PageSize, PageNumber);
             var studentsDTO = _mapper.Map<IEnumerable<StudentDTO>>(students);
             return Ok(studentsDTO);
         }

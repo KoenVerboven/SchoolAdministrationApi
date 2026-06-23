@@ -24,7 +24,6 @@ namespace SchoolAdministration.Controllers
             _mapper = mapper;
         }
 
-
         [HttpGet]
         //[Authorize]
         [ProducesResponseType(typeof(IEnumerable<TeacherDTO>), StatusCodes.Status200OK)]
@@ -63,12 +62,12 @@ namespace SchoolAdministration.Controllers
             return Ok(teachersDTO);
         }
 
-        [HttpGet("getTeacherByTeacherSearchParamsFilter")]
+        [HttpGet("GetTeacherByFilter")]
         //[Authorize]
         [ProducesResponseType(typeof(IEnumerable<TeacherDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<TeacherDTO>>> GetTeacherByTeacherSearchParamsFilter([FromQuery] TeacherSearchParams teacherSearchParams)
+        public async Task<ActionResult<IEnumerable<TeacherDTO>>> GetTeacherByFilter([FromQuery] TeacherSearchParams teacherSearchParams)
         {
             var teachers = await _teacherRepository.GetTeachersByTeachersSearchParamsFilterAsync(teacherSearchParams);
             var teachersDTO = _mapper.Map<IEnumerable<TeacherDTO>>(teachers);

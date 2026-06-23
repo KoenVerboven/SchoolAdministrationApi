@@ -114,13 +114,13 @@ namespace SchoolAdministration.Controllers
             return CreatedAtAction(nameof(GetCourseById), new { id = course.Id }, course );
         }
 
-        [HttpGet("getCourseByCourseSearchParamsFilter")]
+        [HttpGet("GetCourseByFilter")]//todo : add params?
         [ProducesResponseType(typeof(IEnumerable<CourseDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<CourseDTO>>> GetCourseByCourseSearchParamsFilter([FromQuery] CourseSearchParams @params)
+        public async Task<ActionResult<IEnumerable<CourseDTO>>> GetCourseByFilter([FromQuery] CourseSearchParams @params)
         {
-            var courses = await _courseRepository.GetSearchAsync(@params);
+            var courses = await _courseRepository.GetCoursesByFilterAsync(@params);
 
             if (courses == null) 
             {

@@ -44,7 +44,7 @@ namespace SchoolAdministration.Repositories.Repos
             return await _context.ExamResults.FindAsync(id);
         }
 
-        public async Task<IEnumerable<ExamResult>> GetSearchAsync(ExamenResultSearchParams examResultSearchParameters)
+        public async Task<IEnumerable<ExamResult>> GetExamResultsByFilterAsync(ExamenResultSearchParams examResultSearchParameters)
         {
             var pageSize = examResultSearchParameters.PageSize;
             IQueryable<ExamResult> examResults;

@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Data;
 using SchoolAdministration.Models.Domain.Course;
-using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Specifications;
 
@@ -51,23 +50,21 @@ namespace SchoolAdministration.Repositories.Repos
             return await _context.Courses.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Course>> GetSearchAsync(CourseSearchParams courseSearchParameters)
+        public async Task<IEnumerable<Course>> GetCoursesByFilterAsync(CourseSearchParams courseSearchParameters)
         {
             var pageSize = courseSearchParameters.PageSize ;
             IQueryable<Course> courses;
 
             courses = _context.Courses;
 
-            if (!string.IsNullOrWhiteSpace(courseSearchParameters.CourseName) && string.IsNullOrWhiteSpace(courseSearchParameters.CourseCode))
+            if (!string.IsNullOrWhiteSpace(courseSearchParameters.CourseName))
             {
                 courses = courses.Where(p => p.CourseName.ToLower().Contains(courseSearchParameters.CourseName.ToLower()));
             }
 
-            if (!string.IsNullOrWhiteSpace(courseSearchParameters.CourseName) && !string.IsNullOrWhiteSpace(courseSearchParameters.CourseCode))
+            if (!string.IsNullOrWhiteSpace(courseSearchParameters.CourseCode))
             {
-                courses = courses.Where(p => p.CourseName.ToLower().Contains(courseSearchParameters.CourseName.ToLower())
-                                         && p.CourseCode.ToLower().Contains(courseSearchParameters.CourseCode.ToLower()));//todo courseCode may be null
-                          
+                courses = courses.Where(p => p.CourseName.ToLower().Contains(courseSearchParameters.CourseCode.ToLower()));
             }
 
             courses = courseSearchParameters.Sort.ToLower() switch
@@ -76,7 +73,9 @@ namespace SchoolAdministration.Repositories.Repos
                 "id_desc" => courses.OrderByDescending(p => p.Id).AsQueryable(),
                 "name" => courses.OrderBy(p => p.CourseName).AsQueryable(),
                 "name_desc" => courses.OrderByDescending(p => p.CourseName).AsQueryable(),
-                 _ => courses.OrderBy(p => p.Id).AsQueryable(),
+                "courseCode" => courses.OrderBy(p => p.CourseCode).AsQueryable(),
+                "courseCode_desc" => courses.OrderByDescending(p => p.CourseCode).AsQueryable(),
+                _ => courses.OrderBy(p => p.Id).AsQueryable(),
             };
 
             if (courseSearchParameters.PageSize > 0 && courseSearchParameters.PageNumber > 0) //todo : kan korter

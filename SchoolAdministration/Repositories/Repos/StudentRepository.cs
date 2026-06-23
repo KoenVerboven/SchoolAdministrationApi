@@ -21,7 +21,7 @@ namespace SchoolAdministration.Repositories.Repos
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteStudentAsync(int id)//todo : make it soft-delete or  set cascade to off.
+        public async Task DeleteStudentAsync(int id)//todo : make it soft-delete or  set cascade delete to off.
         {
             var studentInDb = await _context.Students.FindAsync(id) ?? throw new KeyNotFoundException($"Student with id {id} was not found.");
             _context.Students.Remove(studentInDb);
@@ -182,7 +182,7 @@ namespace SchoolAdministration.Repositories.Repos
             return students.CountAsync();
         }
 
-        public async Task<IEnumerable<Student>> GetStudentsByStudentSearchParamsFilterAsync(StudentSearchParams studentSearchParams)
+        public async Task<IEnumerable<Student>> GetStudentsByFilterAsync(StudentSearchParams studentSearchParams)
         {
             int pageSize = studentSearchParams.PageSize;
             IQueryable<Student> students;
@@ -244,8 +244,8 @@ namespace SchoolAdministration.Repositories.Repos
             return await students.ToListAsync();
         }
 
-
-        public async Task<IEnumerable<Student>> GetStudentsByFilterAsync(string? Name,string? Email, int ZipCode, string Sort, int PageSize, int PageNumber)
+        //obstacle method, need to remove it in future
+        public async Task<IEnumerable<Student>> GetStudentsByFilterAsyncOld(string? Name, string? Email, int ZipCode, string Sort, int PageSize, int PageNumber)
         {
             IQueryable<Student> students;
 

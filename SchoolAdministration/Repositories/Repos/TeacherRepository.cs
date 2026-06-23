@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Data;
-using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.Domain.Teacher;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Specifications;

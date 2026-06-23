@@ -12,8 +12,9 @@ namespace SchoolAdministration.Repositories.Interfaces
         Task<IEnumerable<StudentAddressDTO>> GetStudentAddressesAsync(int studentId);
         Task<IEnumerable<StudentCourseDTO>> GetStudentCoursesAsync(int studentId);
         Task<IEnumerable<Student>> GetByNameStartWithAsync(string name);
-        Task<IEnumerable<Student>> GetStudentsByFilterAsync(string? Name, string? Email, int ZipCode, string Sort, int PageSize, int PageNumber);
-        Task<IEnumerable<Student>> GetStudentsByStudentSearchParamsFilterAsync(StudentSearchParams studentSearchParams);
+        //obsolete:
+        Task<IEnumerable<Student>> GetStudentsByFilterAsyncOld(string? Name, string? Email, int ZipCode, string Sort, int PageSize, int PageNumber);
+        Task<IEnumerable<Student>> GetStudentsByFilterAsync(StudentSearchParams studentSearchParams);
         Task AddStudentAsync(Student student);
         Task UpdateStudentAsync(Student student);
         Task DeleteStudentAsync(int id);
