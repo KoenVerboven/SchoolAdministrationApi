@@ -23,7 +23,7 @@ namespace SchoolAdministration.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("GetExamResultsByFilter")] // todo: add params?
+        [HttpGet("GetExamResultsByFilter")] // todo: add params to HttpGet("GetExamResultsByFilter")  ?
         [ProducesResponseType(typeof(IEnumerable<ExamResult>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

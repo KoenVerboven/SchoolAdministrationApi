@@ -13,7 +13,7 @@ use School2
       ,[City]
       ,[CountryCode]
       )
-      values
+  values
       ('Hoofdweg 12',null,2300,'Turnhout','BE'),
       ('Antwerpsesteenweg 300',null,2300,'Turnhout','BE'),
       ('Atomiumlaan 1',null,3000,'Brussel','BE'),
@@ -43,10 +43,10 @@ use School2
       ,[UpdatedAt]
   )
   values
-  ('Vrije technische school turnhout','Hoofdweg', 2300,1,'541646464','vtt@gmail.com', 'www.vtst.com',null,null,null,null,null,null,null,null,'system',getdate(),null,null),
-  ('Universiteit Turnhout','Kerkstraat 45 ', 2300,1,'5415287678','ut@gmail.com', 'www.UTurnhout.com',null,null,null,null,null,null,null,null,'system',getdate(),null,null),
-  ('Basisschool Turnhout','Merodelei 500 ', 2300,1,'753993387','ut@gmail.com', 'www.BSchoolTurnhout.com',null,null,null,null,null,null,null,null,'system',getdate(),null,null),
-  ('Kleuterschool Turnhout','Merodelei 501 ', 2300,1,'87638763876','k@gmail.com', 'www.KSchoolTurnhout.com',null,null,null,null,null,null,null,null,'system',getdate(),null,null)
+      ('Vrije technische school turnhout','Hoofdweg', 2300,1,'541646464','vtt@gmail.com', 'www.vtst.com',null,null,null,null,null,null,null,null,'system',getdate(),null,null),
+      ('Universiteit Turnhout','Kerkstraat 45 ', 2300,1,'5415287678','ut@gmail.com', 'www.UTurnhout.com',null,null,null,null,null,null,null,null,'system',getdate(),null,null),
+      ('Basisschool Turnhout','Merodelei 500 ', 2300,1,'753993387','ut@gmail.com', 'www.BSchoolTurnhout.com',null,null,null,null,null,null,null,null,'system',getdate(),null,null),
+      ('Kleuterschool Turnhout','Merodelei 501 ', 2300,1,'87638763876','k@gmail.com', 'www.KSchoolTurnhout.com',null,null,null,null,null,null,null,null,'system',getdate(),null,null)
 
 
   Insert into [Students]
@@ -60,7 +60,7 @@ use School2
       ,[RegistrationDate]
       ,[Picture]
       )
-      values
+  values
       ( 'Koen','Verboven','koen@test.be' , '345464646','2003-06-01  10:00:00',1,'2003-06-01  10:00:00','/StudentPictures/Student1.jpg'),
       ( 'Maddy','Poels','maddy@test.be' , '345464646','2002-06-01  10:00:00',1,'2003-06-02  10:00:00',null)
 
@@ -74,10 +74,10 @@ use School2
       ,[RegisteredByUserId]
   )
   values
-  (1,2,1,'2026-07-01  10:00:00',1),
-  (1,3,2,'2026-07-01  11:00:00',1),
-  (5,4,1,'2026-07-01  10:00:00',1),
-  (5,1,2,'2026-07-01  11:00:00',1)
+      (1,2,1,'2026-07-01  10:00:00',1),
+      (1,3,2,'2026-07-01  11:00:00',1),
+      (5,4,1,'2026-07-01  10:00:00',1),
+      (5,1,2,'2026-07-01  11:00:00',1)
 
 
   Insert into [Teachers]
@@ -93,8 +93,8 @@ use School2
       ,[MaritalStatusId]
   )
   values
-  ('Piet','Smulders', '1985-06-01  10:00:00',1, 'Piet@test.be','04846844','2002-06-01  10:00:00',null,1),
-  ('Linda','Janssens', '1989-07-08  10:00:00',2, 'Linda@test.be','0484444545','2008-06-01  10:00:00',null,2)
+      ('Piet','Smulders', '1985-06-01  10:00:00',1, 'Piet@test.be','04846844','2002-06-01  10:00:00',null,1),
+      ('Linda','Janssens', '1989-07-08  10:00:00',2, 'Linda@test.be','0484444545','2008-06-01  10:00:00',null,2)
 
   Insert into [Courses]
   (
@@ -107,8 +107,8 @@ use School2
       ,[MaxNumberOfStudents]
   )
   Values
-  ('Classic Guitar','G1','Guitar beginner','2026-06-01  10:00:00','2026-06-05  10:00:00',22,22),
-  ('Piano','P1','Piano beginner','2026-06-05  10:00:00','2026-06-07  12:00:00',19,10)
+      ('Classic Guitar','G1','Guitar beginner','2026-06-01  10:00:00','2026-06-05  10:00:00',22,22),
+      ('Piano','P1','Piano beginner','2026-06-05  10:00:00','2026-06-07  12:00:00',19,10)
 
   Insert into [SchoolDepartments]
   (
@@ -120,9 +120,47 @@ use School2
      ,[CreatedAt]
   )
   Values
-  ('Electronica2',1,1,'',null,getdate()),
-  ('Mechanica2',1,1,'',null,getdate()),
-  ('Bouw',1,1,'',null,getdate())
+      ('Electronica2',1,1,'',null,getdate()),
+      ('Mechanica2',1,1,'',null,getdate()),
+      ('Bouw',1,1,'',null,getdate())
+
+
+Insert into [QAExams]
+      (
+      [CourseId]
+      ,[TeacherId]
+      ,[ExamTitle]
+      ,[ExamType]
+      ,[IsReExam]
+      ,[Description]
+      ,[ExamenDate]
+      ,[ExamEndDateTime]
+      ,[MaxScore]
+      ,[MinScoreToPassExam]
+      )
+  values
+      (2,13,'Classical Guitar',1,0,null,'2026-06-05  10:00:00','2026-06-05  10:00:00',10,7),
+      (1002,13,'Piano',1,0,null,'2026-06-05  10:00:00','2026-06-05  10:00:00',10,7),
+      (2,13,'Classical Guitar Re-Exam',1,1,null,'2026-06-05  10:00:00','2026-06-05  10:00:00',1,7),
+      (1002,13,'Piano Re-Exam',1,1,null,'2026-06-05  10:00:00','2026-06-05  10:00:00',1,7)
+
+
+  Insert into [ExamResults]
+  (
+       [StudentId]
+      ,[CourseId]
+      ,[ExamenResultComment]
+      ,[CheckedByTeacherId]
+      ,[ExamenResultScore]
+      ,[QAExamId]
+      ,[MCExamId]
+  )
+  values
+      (1,2,null,13,10,1,null),
+      (5,2,null,13,8,1,null),
+      (1,1,null,13,9,1,null),
+      (5,1,null,13,7,1,null)
+
 
   -- inert into SchoolClasses
   -- insert into StudentClassRegistrations

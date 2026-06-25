@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Data;
-using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.Domain.Exam;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Specifications;
@@ -44,29 +43,28 @@ namespace SchoolAdministration.Repositories.Repos
             return await _context.ExamResults.FindAsync(id);
         }
 
-        public async Task<IEnumerable<ExamResult>> GetExamResultsByFilterAsync(ExamenResultSearchParams examResultSearchParameters)
+        public async Task<IEnumerable<ExamResult>> GetExamResultsByFilterAsync(ExamenResultSearchParams examResultSearchParameters) 
         {
-            var pageSize = examResultSearchParameters.PageSize;
-            IQueryable<ExamResult> examResults;
+            var pageSize = examResultSearchParameters.PageSize; //todo : include student, exam,..
 
-            examResults = _context.ExamResults;
+            IQueryable<ExamResult> examResults = _context.ExamResults;//.Include(e => e.Student); 
 
-            if (!string.IsNullOrWhiteSpace(examResultSearchParameters.StudentId.ToString()) && string.IsNullOrWhiteSpace(examResultSearchParameters.CourseId.ToString()))
+            if (examResultSearchParameters.StudentId != 0)
             {
                examResults = examResults.Where(p => p.StudentId == examResultSearchParameters.StudentId);
             }
-
-            if (!string.IsNullOrWhiteSpace(examResultSearchParameters.CourseId.ToString()) && string.IsNullOrWhiteSpace(examResultSearchParameters.CourseId.ToString()))
+                
+            if (examResultSearchParameters.CourseId != 0)
             {
-                examResults = examResults.Where(p => p.CourseId == examResultSearchParameters.CourseId);
+               examResults = examResults.Where(p => p.CourseId == examResultSearchParameters.CourseId);
             }
 
-            if (!string.IsNullOrWhiteSpace(examResultSearchParameters.ExamId.ToString()) && string.IsNullOrWhiteSpace(examResultSearchParameters.ExamId.ToString()))
+            if (examResultSearchParameters.ExamId != 0)
             {
                 examResults = examResults.Where(p => p.QAExamId == examResultSearchParameters.ExamId);
             }
 
-            if (!string.IsNullOrWhiteSpace(examResultSearchParameters.TeacherId.ToString()) && string.IsNullOrWhiteSpace(examResultSearchParameters.TeacherId.ToString()))
+            if (examResultSearchParameters.TeacherId != 0)
             {
                 examResults = examResults.Where(p => p.CheckedByTeacherId == examResultSearchParameters.TeacherId);
             }
@@ -82,7 +80,6 @@ namespace SchoolAdministration.Repositories.Repos
                 "courseId_desc" => examResults.OrderByDescending(p => p.CourseId).AsQueryable(),
                 "examId" => examResults.OrderBy(p => p.QAExamId).AsQueryable(),
                 "examId_desc" => examResults.OrderByDescending(p => p.QAExamId).AsQueryable(),
-
                 _ => examResults.OrderBy(p => p.Id).AsQueryable(),
             };
 
@@ -95,7 +92,6 @@ namespace SchoolAdministration.Repositories.Repos
 
                 examResults = examResults.Skip(examResultSearchParameters.PageSize * (examResultSearchParameters.PageNumber - 1)).Take(pageSize);
             }
-
             return await examResults.ToListAsync();
         }       
 
