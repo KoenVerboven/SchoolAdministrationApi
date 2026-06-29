@@ -6,14 +6,9 @@ using SchoolAdministration.Specifications;
 
 namespace SchoolAdministration.Repositories.Repos
 {
-    public class ExamResultRepository : IExamResultRepository
+    public class ExamResultRepository(AppDbContext context) : IExamResultRepository
     {
-        private readonly AppDbContext _context;
-
-        public ExamResultRepository(AppDbContext context)
-        {
-            _context = context;
-        }
+        private readonly AppDbContext _context = context;
 
         public async Task AddExamResultAsync(ExamResult examResult)
         {
@@ -45,9 +40,9 @@ namespace SchoolAdministration.Repositories.Repos
 
         public async Task<IEnumerable<ExamResult>> GetExamResultsByFilterAsync(ExamenResultSearchParams examResultSearchParameters) 
         {
-            var pageSize = examResultSearchParameters.PageSize; //todo : include student, exam,..
+            var pageSize = examResultSearchParameters.PageSize;
 
-            IQueryable<ExamResult> examResults = _context.ExamResults;//.Include(e => e.Student); 
+            IQueryable<ExamResult> examResults = _context.ExamResults.Include(e => e.Student);  //todo : include  exam,..
 
             if (examResultSearchParameters.StudentId != 0)
             {

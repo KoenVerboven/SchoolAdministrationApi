@@ -1,0 +1,37 @@
+﻿Error:
+
+A possible object cycle was detected.This can either be due to a cycle or if the object depth is larger 
+than the maximum allowed depth of 32. Consider using ReferenceHandler.Preserve on JsonSerializerOptions
+to support cycles.Path:
+$.Student.ExamResults.Student.ExamResults.Student.ExamResults.Student.ExamResults.Student.ExamResults.Student
+.ExamResults.Student.ExamResults.Student.ExamResults.Student.ExamResults.Student.ExamResults.Id.",
+
+
+Probable Cause:
+
+The error message indicates that there is a potential object cycle in the data structure being serialized to JSON.
+This can occur when an object references itself directly or indirectly, creating a loop. 
+In this case, it seems that the `Student` object has a property `ExamResults`, which in turn references the `Student` 
+object again, leading to a cycle.
+
+student.cs
+   public ICollection<ExamResult>? ExamResults { get; set; }
+ExamResults.cs
+   public required Student.Student Student { get; set; }
+ExamResultRepository
+ public async Task<IEnumerable<ExamResult>> GetExamResultsByFilterAsync(ExamenResultSearchParams examResultSearchParameters) 
+        {
+           IQueryable<ExamResult> examResults = _context.ExamResults.Include(e => e.Student); 
+
+
+Solution:
+
+Add to program.cs:
+
+//To avoid the circular reference problem when serializing objects to JSON
+//Solution for Error :A possible object cycle was detected ...
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+   options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
+
+ https://stackoverflow.com/questions/59199593/net-core-3-0-possible-object-cycle-was-detected-which-is-not-supported

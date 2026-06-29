@@ -9,9 +9,6 @@ using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Repositories.Repos;
 using Serilog;
 using System.Text;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-
 
 namespace SchoolAdministration
 {
@@ -33,7 +30,6 @@ namespace SchoolAdministration
                 .CreateLogger();
             builder.Host.UseSerilog();
 
-
             //Add services to the container :
             //--------------------------------
             builder.Services.AddDbContext<AppDbContext>(options =>
@@ -41,6 +37,11 @@ namespace SchoolAdministration
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
             });
 
+            //To avoid the circular reference problem when serializing objects to JSON
+            //Solution for Error :A possible object cycle was detected ...
+            builder.Services.AddControllers().AddNewtonsoftJson(options =>
+               options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
 
             builder.Services.AddAutoMapper(
                 cfg => cfg.LicenseKey = builder.Configuration.GetValue<string>("AutoMapper:LicenseKey"),
