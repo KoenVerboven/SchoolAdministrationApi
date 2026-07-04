@@ -230,13 +230,13 @@ Installed NuGet-packages :
  });
 
 
-More Info :
------------
+More Info / Documentation :
+----------------------------
 
 
 If you want to read more info about this API or the used technology :
 
-https://github.com/KoenVerboven/SchoolAdministrationApi/tree/master/SchoolAdministration/Documentation-Info/Documentation
+[More Info / Documentation](https://github.com/KoenVerboven/SchoolAdministrationApi/tree/master/SchoolAdministration/Documentation-Info/Documentation)
 
 
 
