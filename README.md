@@ -102,6 +102,11 @@ Program.cs:
 
 <img width="641" height="207" alt="image" src="https://github.com/user-attachments/assets/7fec70e5-84f6-4549-b08f-7b17e3e438bc" />
 
+Warning :
+* This are my settings for now.
+* Will be reviewed later.
+* Be carefully  with security settings, especially in production environment.
+
 
 Logging :
 ---------
@@ -230,13 +235,13 @@ Installed NuGet-packages :
  });
 
 
-More Info :
------------
+More Info / Documentation :
+----------------------------
 
 
 If you want to read more info about this API or the used technology :
 
-https://github.com/KoenVerboven/SchoolAdministrationApi/tree/master/SchoolAdministration/Documentation-Info/Documentation
+[More Info / Documentation](https://github.com/KoenVerboven/SchoolAdministrationApi/tree/master/SchoolAdministration/Documentation-Info/Documentation)
 
 
 
