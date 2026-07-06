@@ -14,12 +14,9 @@ namespace TestSchoolAdmin;
 
 public class CourseControllerTests
 {
-
     private readonly Mock<ICourseRepository>? _mockCourseRepo;
     private readonly Mock<ILogger<CourseController>> _mockILogger;
     private readonly MapperConfiguration? _mapperConfiguration;                  
-              
-
 
     public CourseControllerTests()
     {

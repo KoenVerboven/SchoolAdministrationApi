@@ -23,7 +23,10 @@ namespace SchoolAdministration.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("GetExamResultsByFilter")] // todo: add params to HttpGet("GetExamResultsByFilter")  ?
+
+        //The request url example : 
+        //https://localhost:7213/api/ExamResult/GetExamResultsByFilter?StudentId=1&Sort=name&PageSize=10&PageNumber=1
+        [HttpGet("GetExamResultsByFilter")]
         [ProducesResponseType(typeof(IEnumerable<ExamResult>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

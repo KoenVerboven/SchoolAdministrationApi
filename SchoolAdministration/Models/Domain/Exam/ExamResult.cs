@@ -19,8 +19,5 @@ namespace SchoolAdministration.Models.Domain.Exam
         public int CheckedByTeacherId { get; set; }
         public required Student.Student Student { get; set; }
 
-
-       //A possible object cycle was detected.This can either be due to a cycle or if the object depth is larger than the maximum allowed depth of 32. Consider using ReferenceHandler.Preserve on JsonSerializerOptions to support cycles.Path: $.Student.ExamResults.Student.ExamResults.Student.ExamResults.Student.ExamResults.Student.ExamResults.Student.ExamResults.Student.ExamResults.Student.ExamResults.Student.ExamResults.Student.ExamResults.Id.",
-       //todo : this error is not written to the log??!!
     }
 }
