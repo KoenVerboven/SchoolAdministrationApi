@@ -102,6 +102,11 @@ Program.cs:
 
 <img width="641" height="207" alt="image" src="https://github.com/user-attachments/assets/7fec70e5-84f6-4549-b08f-7b17e3e438bc" />
 
+Warning :
+* This are my settings for now.
+* Will be reviewed later.
+* Be carefully  with security settings, especially in production environment.
+
 
 Logging :
 ---------
