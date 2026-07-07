@@ -25,15 +25,35 @@ namespace SchoolAdministration.Controllers
             _mapper = mapper;
         }
 
+        //be carefull with GetAllCourses with big data, it can cause performance issues,
+        //consider using pagination or filtering (GetCourseByFilter is better for that)
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<CourseDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<CourseDTO>>> GetAllCoursers()
+        public async Task<ActionResult<IEnumerable<CourseDTO>>> GetAllCourses()
         {
+            List<CourseDTO> coursesDTO = new();
+
             _logger.LogInformation("Getting all courses");
             var allCourses = await _courseRepository.GetAllAsync();
-            var coursesDTO = _mapper.Map<List<CourseDTO>>(allCourses);
+
+            foreach(var course in allCourses)
+            {
+                coursesDTO.Add(new CourseDTO
+                {
+                    Id = course.Id,
+                    CourseName = course.CourseName,
+                    CourseCode = course.CourseCode,
+                    CourseDescription = course.CourseDescription,
+                    StartDate = course.StartDate,
+                    EndDate = course.EndDate,
+                    CoursePrice = course.CoursePrice,
+                    MaxNumberOfStudents = course.MaxNumberOfStudents,
+                    Students = course.Students
+                });
+            }
+
             return Ok(coursesDTO);
         }
 
@@ -56,7 +76,19 @@ namespace SchoolAdministration.Controllers
                 return NotFound();
             }
 
-            var courseDTO = _mapper.Map<CourseDTO>(course);
+            var courseDTO = new CourseDTO
+            {
+                Id = course.Id,
+                CourseName = course.CourseName,
+                CourseCode = course.CourseCode,
+                CourseDescription = course.CourseDescription,
+                StartDate = course.StartDate,
+                EndDate = course.EndDate,
+                CoursePrice = course.CoursePrice,
+                MaxNumberOfStudents = course.MaxNumberOfStudents,
+                Students = course.Students
+            };
+
             return Ok(courseDTO);
         }
 
@@ -71,7 +103,16 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            Course course = _mapper.Map<Course>(courseCreateDTO);
+            var course = new Course
+            {
+                CourseName = courseCreateDTO.CourseName,
+                CourseCode = courseCreateDTO.CourseCode,
+                CourseDescription = courseCreateDTO.CourseDescription,
+                StartDate = courseCreateDTO.StartDate ?? DateTime.Now,
+                EndDate = courseCreateDTO.EndDate ?? DateTime.Now.AddMonths(1),
+                CoursePrice = courseCreateDTO.CoursePrice,
+                MaxNumberOfStudents = courseCreateDTO.MaxNumberOfStudents
+            };
 
             if (_courseRepository.CourseExist(course))
             {
@@ -109,24 +150,52 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            Course course = _mapper.Map<Course>(courseUpdateDTO);
+            var course = new Course
+            {
+                CourseName = courseUpdateDTO.CourseName,
+                CourseCode = courseUpdateDTO.CourseCode,
+                CourseDescription = courseUpdateDTO.CourseDescription,
+                StartDate = courseUpdateDTO.StartDate ?? DateTime.Now,
+                EndDate = courseUpdateDTO.EndDate ?? DateTime.Now.AddMonths(1),
+                CoursePrice = courseUpdateDTO.CoursePrice,
+                MaxNumberOfStudents = courseUpdateDTO.MaxNumberOfStudents
+            };
+
+
             await _courseRepository.UpdateCourseAsync(course);
             return CreatedAtAction(nameof(GetCourseById), new { id = course.Id }, course );
         }
 
-        [HttpGet("GetCourseByFilter")]//todo : add params?
+        [HttpGet("GetCourseByFilter")]
         [ProducesResponseType(typeof(IEnumerable<CourseDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<CourseDTO>>> GetCourseByFilter([FromQuery] CourseSearchParams @params)
         {
+            List<CourseDTO> coursesDTO = new();
             var courses = await _courseRepository.GetCoursesByFilterAsync(@params);
 
             if (courses == null) 
             {
                 return NotFound();
             }
-            var coursesDTO = _mapper.Map<List<CourseDTO>>(courses);
+
+            foreach (var course in courses)
+            {
+                coursesDTO.Add(new CourseDTO
+                {
+                    Id = course.Id,
+                    CourseName = course.CourseName,
+                    CourseCode = course.CourseCode,
+                    CourseDescription = course.CourseDescription,
+                    StartDate = course.StartDate,
+                    EndDate = course.EndDate,
+                    CoursePrice = course.CoursePrice,
+                    MaxNumberOfStudents = course.MaxNumberOfStudents,
+                    Students = course.Students
+                });
+            }
+
             return Ok(coursesDTO);
         }
 
