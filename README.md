@@ -219,6 +219,8 @@ Check te website:   [https://AutoMapper.io](https://AutoMapper.io)
 Note:
 I am considering to switch from automapper to manual mapping.
 Both have its pros and contras.
+I Started with the conversion of the CourseController from 
+automapper to manual mapping.
 
 
 Versioning :
