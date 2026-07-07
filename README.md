@@ -216,6 +216,11 @@ In the Controller we can write some like this to map student to StudentDTO :
 Note : In the latest version of Automapper, you need a license key.
 Check te website:   [https://AutoMapper.io](https://AutoMapper.io)
 
+Note:
+I am considering to switch from automapper to manual mapping.
+Both have its pros and contras.
+
+
 Versioning :
 -----------
 
