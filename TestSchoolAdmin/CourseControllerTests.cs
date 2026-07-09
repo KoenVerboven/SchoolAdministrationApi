@@ -39,7 +39,7 @@ public class CourseControllerTests
         var controller = new CourseController(_mockCourseRepo.Object, _mockILogger.Object, mapper);                                                                                                                     
 
         //act
-        var actionResult = await controller.GetAllCoursers();
+        var actionResult = await controller.GetAllCourses();
         //assert
         Assert.IsType<OkObjectResult>(actionResult.Result);
         Assert.NotNull(actionResult);

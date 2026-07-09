@@ -13,11 +13,18 @@ namespace SchoolAdministration.Models.Domain.Teacher
         [Display(Name = "Marital status")]
         public byte MaritalStatusId { get; set; }
 
+        // navigation properties
         public ICollection<TeacherAddress>? TeacherAddresses { get; set; }
         public ICollection<TeacherPresence>? TeacherPresences { get; set; }
         public ICollection<SchoolClass>? SchoolClasses { get; set; }
-    
-        //todo leraar geeft volgend lessen + create date + updatedate + createdby + updatedby
+
+        // audit fields
+        public int CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public int UpdatedBy { get; set; }
+        public DateTime UpdateDate { get; set; }
+
+        //todo leraar geeft volgend lessen
 
     }
 }

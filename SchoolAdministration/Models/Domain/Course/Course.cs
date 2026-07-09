@@ -18,9 +18,7 @@ namespace SchoolAdministration.Models.Domain.Course
 
         [StringLength(400, ErrorMessage = "Course description cannot longer than 400 characters")]
         public string? CourseDescription { get; set; }
-
-        //public bool Remote { get; set; }
-
+            
         [DataType(DataType.DateTime)]
         public DateTime StartDate { get; set; }
 
@@ -32,9 +30,17 @@ namespace SchoolAdministration.Models.Domain.Course
         public decimal?  CoursePrice { get; set; }
         [Range(1, 10000, ErrorMessage = "Max number of students must be between 1 and 10000")]
         public int MaxNumberOfStudents { get; set; }
+
+        // Navigation properties
         public ICollection<Student.Student>? Students { get; set; }
         public ICollection<StudentPresence>? StudentPresences { get; set; }
         public ICollection<CourseScheduling>? CourseSchedulings { get; set; }
+        
+        //audit fields
+        public int CreatedBy { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public int UpdatedBy { get; set; }
+        public DateTime UpdateDate { get; set; }
 
     }
 
