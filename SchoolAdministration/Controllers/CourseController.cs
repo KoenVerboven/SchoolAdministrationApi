@@ -108,10 +108,12 @@ namespace SchoolAdministration.Controllers
                 CourseName = courseCreateDTO.CourseName,
                 CourseCode = courseCreateDTO.CourseCode,
                 CourseDescription = courseCreateDTO.CourseDescription,
-                StartDate = courseCreateDTO.StartDate ?? DateTime.Now,
-                EndDate = courseCreateDTO.EndDate ?? DateTime.Now.AddMonths(1),
+                StartDate = courseCreateDTO.StartDate ?? DateTime.Now, 
+                EndDate = courseCreateDTO.EndDate ?? DateTime.Now, 
                 CoursePrice = courseCreateDTO.CoursePrice,
-                MaxNumberOfStudents = courseCreateDTO.MaxNumberOfStudents
+                MaxNumberOfStudents = courseCreateDTO.MaxNumberOfStudents,
+                CreatedBy = courseCreateDTO.CreatedBy,
+                CreatedDate = DateTime.Now
             };
 
             if (_courseRepository.CourseExist(course))
@@ -156,9 +158,11 @@ namespace SchoolAdministration.Controllers
                 CourseCode = courseUpdateDTO.CourseCode,
                 CourseDescription = courseUpdateDTO.CourseDescription,
                 StartDate = courseUpdateDTO.StartDate ?? DateTime.Now,
-                EndDate = courseUpdateDTO.EndDate ?? DateTime.Now.AddMonths(1),
+                EndDate = courseUpdateDTO.EndDate ?? DateTime.Now,
                 CoursePrice = courseUpdateDTO.CoursePrice,
-                MaxNumberOfStudents = courseUpdateDTO.MaxNumberOfStudents
+                MaxNumberOfStudents = courseUpdateDTO.MaxNumberOfStudents,
+                UpdatedBy = courseUpdateDTO.UpdatedBy,
+                UpdateDate = DateTime.Now
             };
 
 
@@ -172,7 +176,7 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<CourseDTO>>> GetCourseByFilter([FromQuery] CourseSearchParams @params)
         {
-            List<CourseDTO> coursesDTO = new();
+            List<CourseDTO> coursesDTO = [];
             var courses = await _courseRepository.GetCoursesByFilterAsync(@params);
 
             if (courses == null) 

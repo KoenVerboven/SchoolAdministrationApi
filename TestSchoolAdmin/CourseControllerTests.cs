@@ -57,7 +57,7 @@ public class CourseControllerTests
             StartDate = DateTime.Now,
             EndDate = DateTime.Now,
             CoursePrice = 10.99M,
-            Students = new List<Student>()
+            Students = []
         };
 
         var courseDTO = new CourseDTO
@@ -68,7 +68,7 @@ public class CourseControllerTests
             StartDate = course.StartDate,
             EndDate = course.EndDate,
             CoursePrice = course.CoursePrice,
-            Students = new List<Student>()
+            Students = []
         };
 
         var mapper = new Mapper(_mapperConfiguration);
