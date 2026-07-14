@@ -32,9 +32,8 @@ namespace TestSchoolAdmin
         public async Task GetAllAync_ShallReturnTypeOK_ForStudentListContainItems()
         {
             //arrange
-            var mapper = new Mapper(_mapperConfiguration);
             _mockStudentRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(StudentList());
-            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object,mapper);
+            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object);
 
             //act
             var actionResult = await controller.GetAllStudentsAsync();
@@ -49,9 +48,8 @@ namespace TestSchoolAdmin
         public async Task GetAllAync_ShallReturnItemsCount_ForStudentListContainItems()
         {
             //arrange
-            var mapper = new Mapper(_mapperConfiguration);
             _mockStudentRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(StudentList());
-            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object, mapper);
+            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object);
 
             //act
             var actionResult = await controller.GetAllStudentsAsync();
@@ -81,17 +79,17 @@ namespace TestSchoolAdmin
                 Email = "koen@test.be",
                 Phone = "448389639",
                 Picture = null,
-                Courses = [],
-                StudyPlans = [],
-                StudentAddresses = [],
-                StudentClassRegistrations = [],
-                StudentPresences = [],
-                Parents = [],
-                Invoices = [],
-                HomeWorks = [],
+                Courses = null,
+                StudyPlans = null,
+                StudentAddresses = null,
+                StudentClassRegistrations = null,
+                StudentPresences = null,
+                Parents = null,
+                Invoices = null,
+                HomeWorks = null,
                 StudentImage = null,
-                Payments = [],
-                ExamResults = []
+                Payments = null,
+                ExamResults = null
 
             };
            
@@ -116,9 +114,8 @@ namespace TestSchoolAdmin
                 ExamResults = student.ExamResults
             };
            
-            var mapper = new Mapper(_mapperConfiguration);
             _mockStudentRepo.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(student);
-            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object, mapper);
+            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object);
 
             //act
             var actionResult = await controller.GetStudentById(1);
@@ -151,9 +148,8 @@ namespace TestSchoolAdmin
                 StudyPlans = null
             };
 
-            var mapper = new Mapper(_mapperConfiguration);
             _mockStudentRepo.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(student);
-            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object, mapper);
+            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object);
 
             //act
             var actionResult = await controller.GetStudentById(99);
@@ -180,9 +176,8 @@ namespace TestSchoolAdmin
                 StudyPlans = null
             };
 
-            var mapper = new Mapper(_mapperConfiguration);
             _mockStudentRepo.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(student);
-            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object, mapper);
+            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object);
 
             //act
             var actionResult = await controller.GetStudentById(0);
@@ -218,9 +213,8 @@ namespace TestSchoolAdmin
                 Phone = "4483892639",
             };
 
-            var mapper = new Mapper(_mapperConfiguration);
             _mockStudentRepo.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(student);
-            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object, mapper);
+            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object);
 
             //act
             var actionResult = await controller.CreateStudent(newStudent);
@@ -259,9 +253,8 @@ namespace TestSchoolAdmin
                 Phone = "448389639",
             };
 
-            var mapper = new Mapper(_mapperConfiguration);
             _mockStudentRepo.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(student);
-            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object, mapper);
+            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object);
 
             //act
             var actionResult = await controller.UpdateStudentAsync(1, updatedStudent);
@@ -294,9 +287,8 @@ namespace TestSchoolAdmin
                 StudyPlans = null
             };
 
-            var mapper = new Mapper(_mapperConfiguration);
             _mockStudentRepo.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(student);
-            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object, mapper);
+            var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object);
 
             //act
             var actionResult = await controller.DeleteStudentById(1);

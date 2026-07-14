@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
@@ -11,14 +10,13 @@ namespace SchoolAdministration.Controllers
     [Route("api/[Controller]")]
     [ApiVersion("1.0")] 
     [ApiController]
-    public class StudentController(IStudentRepository studentRepository, ILogger<StudentController> logger, IMapper mapper) : ControllerBase
+    public class StudentController(IStudentRepository studentRepository, ILogger<StudentController> logger) : ControllerBase
     {
         private const string controllerName = "StudentController";
 
         private readonly IStudentRepository _studentRepository = studentRepository;
         private readonly ILogger<StudentController> _logger = logger;
-        private readonly IMapper _mapper = mapper;
-
+ 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)] 
@@ -28,7 +26,19 @@ namespace SchoolAdministration.Controllers
             try
             {
                 var allStudents = await _studentRepository.GetAllAsync();
-                var studentsDTO = _mapper.Map<List<StudentDTO>>(allStudents);
+                var studentsDTO = allStudents.Select(student => new StudentDTO
+                {
+                    Id = student.Id,
+                    LastName = student.LastName,
+                    FirstName = student.FirstName,
+                    Gender = student.Gender,
+                    Email = student.Email,
+                    DateOfBirth = student.DateOfBirth,
+                    Phone = student.Phone,
+                    RegistrationDate = student.RegistrationDate,
+                    StudentAddresses = student.StudentAddresses,
+                }).ToList();
+
                 return Ok(studentsDTO);
             }
             catch (Exception ex)
@@ -58,7 +68,19 @@ namespace SchoolAdministration.Controllers
                 return NotFound();
             }
 
-            var studentDTO = _mapper.Map<StudentDTO>(student);
+            var studentDTO = new StudentDTO
+            {
+                Id = student.Id,
+                LastName = student.LastName,
+                FirstName = student.FirstName,
+                Gender = student.Gender,
+                Email = student.Email,
+                DateOfBirth = student.DateOfBirth,
+                Phone = student.Phone,
+                RegistrationDate = student.RegistrationDate,
+                StudentAddresses = student.StudentAddresses
+            };
+
             return Ok(studentDTO);
         }
 
@@ -90,16 +112,28 @@ namespace SchoolAdministration.Controllers
         }
 
         //todo : endpoint is obsolete, need to remove it in future
-        //[HttpGet("getByNameStartWith/{name}")]
-        //[ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        //public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudentByNameStartWith(string name)
-        //{
-        //    var students = await _studentRepository.GetByNameStartWithAsync(name);
-        //    var studentsDTO = _mapper.Map<IEnumerable<StudentDTO>>(students);
-        //    return Ok(studentsDTO);
-        //}
+        [HttpGet("getByNameStartWith/{name}")]
+        [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudentByNameStartWith(string name)
+        {
+            var students = await _studentRepository.GetByNameStartWithAsync(name);
+            var studentsDTO = students.Select(student => new StudentDTO
+            {
+                Id = student.Id,
+                LastName = student.LastName,
+                FirstName = student.FirstName,
+                Gender = student.Gender,
+                Email = student.Email,
+                DateOfBirth = student.DateOfBirth,
+                Phone = student.Phone,
+                RegistrationDate = student.RegistrationDate,
+                StudentAddresses = student.StudentAddresses,
+            }).ToList();
+
+            return Ok(studentsDTO);
+        }
 
         [HttpGet("getStudentByFilter")]
         [ProducesResponseType(typeof(IEnumerable<StudentDTO>), StatusCodes.Status200OK)]
@@ -108,7 +142,19 @@ namespace SchoolAdministration.Controllers
         public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudentByFilter([FromQuery] StudentSearchParams studentSearchParams)
         {
             var students = await _studentRepository.GetStudentsByFilterAsync(studentSearchParams);
-            var studentsDTO = _mapper.Map<IEnumerable<StudentDTO>>(students);
+            var studentsDTO = students.Select(student => new StudentDTO
+            {
+                Id = student.Id,
+                LastName = student.LastName,
+                FirstName = student.FirstName,
+                Gender = student.Gender,
+                Email = student.Email,
+                DateOfBirth = student.DateOfBirth,
+                Phone = student.Phone,
+                RegistrationDate = student.RegistrationDate,
+                StudentAddresses = student.StudentAddresses,
+            }).ToList();
+
             return Ok(studentsDTO);
         }
 
@@ -120,7 +166,19 @@ namespace SchoolAdministration.Controllers
         public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudentByFilterOld([FromQuery] string? Name, string? Email, int ZipCode, string Sort, int PageSize, int PageNumber)
         {
             var students = await _studentRepository.GetStudentsByFilterAsyncOld(Name, Email, ZipCode, Sort, PageSize, PageNumber);
-            var studentsDTO = _mapper.Map<IEnumerable<StudentDTO>>(students);
+            var studentsDTO = students.Select(student => new StudentDTO
+            {
+                Id = student.Id,
+                LastName = student.LastName,
+                FirstName = student.FirstName,
+                Gender = student.Gender,
+                Email = student.Email,
+                DateOfBirth = student.DateOfBirth,
+                Phone = student.Phone,
+                RegistrationDate = student.RegistrationDate,
+                StudentAddresses = student.StudentAddresses,
+            }).ToList();
+
             return Ok(studentsDTO);
         }
 
@@ -135,8 +193,18 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            Student student = _mapper.Map<Student>(studentCreateDTO);
-
+            var student = new Student
+            {
+                LastName = studentCreateDTO.LastName,
+                FirstName = studentCreateDTO.FirstName,
+                Gender = studentCreateDTO.Gender,
+                Email = studentCreateDTO.Email,
+                DateOfBirth = studentCreateDTO.DateOfBirth,
+                Phone = studentCreateDTO.Phone,
+                CreatedBy = studentCreateDTO.CreatedBy,
+                CreatedDate = DateTime.Now,
+            };
+  
             if (_studentRepository.StudentExist(student))
             {
                 ModelState.AddModelError("CustomError", "Student already Exists!");
@@ -173,7 +241,19 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            Student student = _mapper.Map<Student>(studentUpdateDTO);
+            var student = new Student
+            {
+                Id = studentUpdateDTO.Id,
+                LastName = studentUpdateDTO.LastName,
+                FirstName = studentUpdateDTO.FirstName,
+                Gender = studentUpdateDTO.Gender,
+                Email = studentUpdateDTO.Email,
+                DateOfBirth = studentUpdateDTO.DateOfBirth,
+                Phone = studentUpdateDTO.Phone,
+                UpdatedBy = studentUpdateDTO.UpdatedBy,
+                UpdateDate = DateTime.Now,
+            };
+        
             await _studentRepository.UpdateStudentAsync(student);
             return CreatedAtAction(nameof(GetStudentById), new { id = student.Id }, student); 
         }

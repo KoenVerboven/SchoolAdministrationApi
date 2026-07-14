@@ -29,5 +29,7 @@ namespace SchoolAdministration.Models.DTO
         public required string Phone { get; set; }
      
         public string? Picture { get; set; }
+
+        public int UpdatedBy { get; set; }
     }
 }

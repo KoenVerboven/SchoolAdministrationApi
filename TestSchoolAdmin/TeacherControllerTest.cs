@@ -32,9 +32,8 @@ namespace TestSchoolAdmin
         public async Task GetAllAync_ShallReturnTypeOK_ForTeacherListContainItems()
         {
             //arrange
-            var mapper = new Mapper(_mapperConfiguration);
             _mockTeacherRepo.Setup(x => x.GetAllAsyn()).ReturnsAsync(TeacherList());
-            var controller = new TeacherController(_mockTeacherRepo.Object, _mockILogger.Object, mapper);
+            var controller = new TeacherController(_mockTeacherRepo.Object, _mockILogger.Object);
 
             //act
             var actionResult = await controller.GetAllTeachersAsync();
@@ -48,9 +47,8 @@ namespace TestSchoolAdmin
         public async Task GetAllAync_ShallReturnCount_ForTeacherListContainItems()
         {
             //arrange
-            var mapper = new Mapper(_mapperConfiguration);
             _mockTeacherRepo.Setup(x => x.GetAllAsyn()).ReturnsAsync(TeacherList());
-            var controller = new TeacherController(_mockTeacherRepo.Object, _mockILogger.Object, mapper);
+            var controller = new TeacherController(_mockTeacherRepo.Object, _mockILogger.Object);
 
             //act
             var actionResult = await controller.GetAllTeachersAsync();
@@ -72,9 +70,7 @@ namespace TestSchoolAdmin
             var configuration = new MapperConfiguration(
                 cfg => cfg.AddProfile(myProfile), new LoggerFactory()
                 );
-            var mapper = new Mapper(configuration);
-
-
+          
             var teacher = new Teacher()
             {
                 Id = 13,
@@ -87,9 +83,9 @@ namespace TestSchoolAdmin
                 HireDate = new DateTime(2020, 10, 10),
                 LeaveDate = null,
                 MaritalStatusId = 1,
-                TeacherAddresses = [],
-                TeacherPresences = [],
-                SchoolClasses = []
+                TeacherAddresses = null,
+                TeacherPresences = null,
+                SchoolClasses = null
             };
 
             var teacherDTO = new TeacherDTO
@@ -110,7 +106,7 @@ namespace TestSchoolAdmin
             };
 
             _mockTeacherRepo.Setup(x => x.GetAsynById(13)).ReturnsAsync(teacher);
-            var controller = new TeacherController(_mockTeacherRepo.Object, _mockILogger.Object, mapper);
+            var controller = new TeacherController(_mockTeacherRepo.Object, _mockILogger.Object);
 
             //act
             var actionResult = await controller.GetTeacherById(13);

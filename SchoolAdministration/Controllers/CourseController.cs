@@ -34,11 +34,10 @@ namespace SchoolAdministration.Controllers
         public async Task<ActionResult<IEnumerable<CourseDTO>>> GetAllCourses()
         {
             List<CourseDTO> coursesDTO = new();
-
-            _logger.LogInformation("Getting all courses");
             var allCourses = await _courseRepository.GetAllAsync();
+            _logger.LogInformation("Getting all courses");
 
-            foreach(var course in allCourses)
+            foreach (var course in allCourses)
             {
                 coursesDTO.Add(new CourseDTO
                 {
@@ -161,10 +160,9 @@ namespace SchoolAdministration.Controllers
                 EndDate = courseUpdateDTO.EndDate ?? DateTime.Now,
                 CoursePrice = courseUpdateDTO.CoursePrice,
                 MaxNumberOfStudents = courseUpdateDTO.MaxNumberOfStudents,
-                UpdatedBy = courseUpdateDTO.UpdatedBy,
+                UpdatedBy = courseUpdateDTO.UpdatedBy, //todo : instead of updatedBy and updateDate : make a class UpdateHistory with UpdatedBy ,UpdateDate, OldValue and NewValue , so we can keep track of all updates
                 UpdateDate = DateTime.Now
             };
-
 
             await _courseRepository.UpdateCourseAsync(course);
             return CreatedAtAction(nameof(GetCourseById), new { id = course.Id }, course );

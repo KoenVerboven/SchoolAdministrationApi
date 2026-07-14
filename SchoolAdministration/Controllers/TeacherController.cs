@@ -1,10 +1,7 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Models.Domain.Teacher;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
-using SchoolAdministration.Repositories.Repos;
 using SchoolAdministration.Specifications;
 
 namespace SchoolAdministration.Controllers
@@ -15,13 +12,11 @@ namespace SchoolAdministration.Controllers
     {
         private readonly ITeacherRepository _teacherRepository;
         private readonly ILogger<TeacherController> _logger;
-        private readonly IMapper _mapper;
 
-        public TeacherController(ITeacherRepository teacherRepository,ILogger<TeacherController> logger,IMapper mapper)
+        public TeacherController(ITeacherRepository teacherRepository,ILogger<TeacherController> logger)
         {
             _teacherRepository = teacherRepository;
             _logger = logger;
-            _mapper = mapper;
         }
 
         [HttpGet]
@@ -31,11 +26,30 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<TeacherDTO>>> GetAllTeachersAsync()
         {
+            List<TeacherDTO> teachersDTO = new();
             var allTeachers = await _teacherRepository.GetAllAsyn();
-            var teachersDTO = _mapper.Map<List<TeacherDTO>>(allTeachers);
+
+            foreach (var teacher in allTeachers)
+            {
+                teachersDTO.Add(new TeacherDTO
+                {
+                    Id = teacher.Id,
+                    LastName = teacher.LastName,
+                    FirstName = teacher.FirstName,
+                    Gender = teacher.Gender,
+                    Email = teacher.Email,
+                    DateOfBirth = teacher.DateOfBirth,
+                    Phone = teacher.Phone,
+                    HireDate = teacher.HireDate,
+                    MaritalStatusId = teacher.MaritalStatusId,
+                    TeacherAddresses = teacher.TeacherAddresses
+                });
+            }
+
             return Ok(teachersDTO);
         }
 
+        //obsolete : use GetTeacherByFilter instead
         [HttpGet("getAllTeachersSort/{sort}")]
         //[Authorize]
         [ProducesResponseType(typeof(IEnumerable<TeacherDTO>), StatusCodes.Status200OK)]
@@ -43,13 +57,29 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<TeacherDTO>>> GetAllTeachersAsyncSort(string sort)
         {
+            List<TeacherDTO> teachersDTO = new();
             var allTeachers = await _teacherRepository.GetAllAsynSort(sort);
-            var teachersDTO = _mapper.Map<List<TeacherDTO>>(allTeachers);
+
+            foreach (var teacher in allTeachers)
+            {
+                teachersDTO.Add(new TeacherDTO
+                {
+                    Id = teacher.Id,
+                    LastName = teacher.LastName,
+                    FirstName = teacher.FirstName,
+                    Gender = teacher.Gender,
+                    Email = teacher.Email,
+                    DateOfBirth = teacher.DateOfBirth,
+                    Phone = teacher.Phone,
+                    HireDate = teacher.HireDate,
+                    MaritalStatusId = teacher.MaritalStatusId,
+                    TeacherAddresses = teacher.TeacherAddresses
+                });
+            }
             return Ok(teachersDTO);
         }
 
-
-
+        //obsolete : use GetTeacherByFilter instead
         [HttpGet("getAllFilter/{sort}")]
         //[Authorize]
         [ProducesResponseType(typeof(IEnumerable<TeacherDTO>), StatusCodes.Status200OK)]
@@ -58,7 +88,23 @@ namespace SchoolAdministration.Controllers
         public async Task<ActionResult<IEnumerable<TeacherDTO>>> GetAllAsyncFilter(string sort, int pageSize, int pageNumber, int zipCode = 0) //add filter object
         {
             var allTeachers = await _teacherRepository.GetFilterAsyn(sort, pageSize: pageSize, pageNumber: pageNumber);
-            var teachersDTO = _mapper.Map<List<TeacherDTO>>(allTeachers);
+            List<TeacherDTO> teachersDTO = new();
+            foreach (var teacher in allTeachers)
+            {
+                teachersDTO.Add(new TeacherDTO
+                {
+                    Id = teacher.Id,
+                    LastName = teacher.LastName,
+                    FirstName = teacher.FirstName,
+                    Gender = teacher.Gender,
+                    Email = teacher.Email,
+                    DateOfBirth = teacher.DateOfBirth,
+                    Phone = teacher.Phone,
+                    HireDate = teacher.HireDate,
+                    MaritalStatusId = teacher.MaritalStatusId,
+                    TeacherAddresses = teacher.TeacherAddresses
+                });
+            }
             return Ok(teachersDTO);
         }
 
@@ -70,7 +116,23 @@ namespace SchoolAdministration.Controllers
         public async Task<ActionResult<IEnumerable<TeacherDTO>>> GetTeacherByFilter([FromQuery] TeacherSearchParams teacherSearchParams)
         {
             var teachers = await _teacherRepository.GetTeachersByTeachersSearchParamsFilterAsync(teacherSearchParams);
-            var teachersDTO = _mapper.Map<IEnumerable<TeacherDTO>>(teachers);
+            List<TeacherDTO> teachersDTO = new();
+            foreach (var teacher in teachers)
+            {
+                teachersDTO.Add(new TeacherDTO
+                {
+                    Id = teacher.Id,
+                    LastName = teacher.LastName,
+                    FirstName = teacher.FirstName,
+                    Gender = teacher.Gender,
+                    Email = teacher.Email,
+                    DateOfBirth = teacher.DateOfBirth,
+                    Phone = teacher.Phone,
+                    HireDate = teacher.HireDate,
+                    MaritalStatusId = teacher.MaritalStatusId,
+                    TeacherAddresses = teacher.TeacherAddresses
+                });
+            }
             return Ok(teachersDTO);
         }
 
@@ -94,7 +156,23 @@ namespace SchoolAdministration.Controllers
                 return NotFound();
             }
 
-            var teacherDTO = _mapper.Map<TeacherDTO>(teacher);
+            var teacherDTO = new TeacherDTO
+            {
+                Id = teacher.Id,
+                LastName = teacher.LastName,
+                FirstName = teacher.FirstName,
+                Gender = teacher.Gender,
+                Email = teacher.Email,
+                DateOfBirth = teacher.DateOfBirth,
+                Phone = teacher.Phone,
+                HireDate = teacher.HireDate,
+                MaritalStatusId = teacher.MaritalStatusId,
+                TeacherAddresses = teacher.TeacherAddresses,
+                TeacherPresences = teacher.TeacherPresences,
+                SchoolClasses = teacher.SchoolClasses
+
+            };
+
             return Ok(teacherDTO);
         }
 
@@ -110,7 +188,19 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            Teacher teacher = _mapper.Map<Teacher>(teacherCreateDTO);
+            var teacher = new Teacher
+            {
+                LastName = teacherCreateDTO.LastName,
+                FirstName = teacherCreateDTO.FirstName,
+                Gender = teacherCreateDTO.Gender,
+                Email = teacherCreateDTO.Email,
+                DateOfBirth = teacherCreateDTO.DateOfBirth,
+                Phone = teacherCreateDTO.Phone,
+                HireDate = teacherCreateDTO.HireDate,
+                MaritalStatusId = teacherCreateDTO.MaritalStatusId,
+                CreatedBy = teacherCreateDTO.CreatedBy,
+                CreatedDate = DateTime.Now
+            };
 
             if (_teacherRepository.TeacherExist(teacher))
             {
@@ -148,7 +238,20 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            Teacher teacher = _mapper.Map<Teacher>(teacherUpdateDTO);
+            var teacher = new Teacher
+            {
+                LastName = teacherUpdateDTO.LastName,
+                FirstName = teacherUpdateDTO.FirstName,
+                Gender = teacherUpdateDTO.Gender,
+                Email = teacherUpdateDTO.Email,
+                DateOfBirth = teacherUpdateDTO.DateOfBirth,
+                Phone = teacherUpdateDTO.Phone,
+                MaritalStatusId = teacherUpdateDTO.MaritalStatusId,
+                HireDate = teacherUpdateDTO.HireDate,
+                UpdatedBy = teacherUpdateDTO.UpdatedBy,
+                UpdateDate = DateTime.Now
+            };
+
             await _teacherRepository.UpdateTeacherAsync(teacher);
             return CreatedAtAction(nameof(GetTeacherById), new { id = teacher.Id }, teacher);
         }

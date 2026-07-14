@@ -32,7 +32,9 @@ namespace SchoolAdministration.Models.DTO
 
         [Required(ErrorMessage = "Phone Name is required.")]
         public required string Phone { get; set; }
-       
+     
         public string? Picture { get; set; }
+
+        public int CreatedBy { get; set; }
     }
 }

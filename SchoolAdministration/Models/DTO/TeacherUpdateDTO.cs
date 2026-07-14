@@ -18,7 +18,7 @@ namespace SchoolAdministration.Models.DTO
         public required string LastName { get; set; }
 
         [Display(Name = "Date of birth")]
-        public DateTime? DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         public int Gender { get; set; }
 
@@ -36,5 +36,7 @@ namespace SchoolAdministration.Models.DTO
 
         [Display(Name = "Marital status")]
         public byte MaritalStatusId { get; set; }
+
+        public int UpdatedBy { get; set; }
     }
 }

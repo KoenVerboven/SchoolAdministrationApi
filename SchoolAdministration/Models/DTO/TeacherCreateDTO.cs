@@ -34,5 +34,7 @@ namespace SchoolAdministration.Models.DTO
 
         [Display(Name = "Marital status")]
         public byte MaritalStatusId { get; set; }
+
+        public int CreatedBy { get; set; }
     }
 }
