@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using SchoolAdministration.AutoMapper;
 using SchoolAdministration.Controllers;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
@@ -19,8 +18,6 @@ namespace TestSchoolAdmin
         {
             _mockStudentRepo = new Mock<IStudentRepository>(MockBehavior.Default);
             _mockILogger = new Mock<ILogger<StudentController>>(MockBehavior.Default);
-
-            var myProfile = new MappingConfig();
         }
 
         [Fact]

@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using SchoolAdministration.AutoMapper;
 using SchoolAdministration.Controllers;
 using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.DTO;
@@ -19,8 +18,6 @@ public class CourseControllerTests
     {
         _mockCourseRepo = new Mock<ICourseRepository>(MockBehavior.Default);
        _mockILogger = new Mock<ILogger<CourseController>>(MockBehavior.Default);
-
-        var myProfile = new MappingConfig();
     }
 
 

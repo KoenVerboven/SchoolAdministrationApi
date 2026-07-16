@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
-using SchoolAdministration.AutoMapper;
 using SchoolAdministration.Controllers;
 using SchoolAdministration.Models.Domain.Teacher;
 using SchoolAdministration.Models.DTO;
@@ -19,8 +18,6 @@ namespace TestSchoolAdmin
         {
             _mockTeacherRepo = new Mock<ITeacherRepository>(MockBehavior.Default);
             _mockILogger = new Mock<ILogger<TeacherController>>(MockBehavior.Default);
-
-            var myProfile = new MappingConfig();
         }
 
         [Fact]
@@ -61,8 +58,6 @@ namespace TestSchoolAdmin
         public async Task GetAsynById_ShallReturnTeacherWithId_ForExistingTeacherWithId()
         {
             //arrange
-            var myProfile = new MappingConfig();
-          
             var teacher = new Teacher()
             {
                 Id = 13,
