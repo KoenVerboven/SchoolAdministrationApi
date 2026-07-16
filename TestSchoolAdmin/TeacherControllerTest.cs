@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using SchoolAdministration.AutoMapper;
@@ -15,7 +14,6 @@ namespace TestSchoolAdmin
     {
         private readonly Mock<ITeacherRepository> _mockTeacherRepo;
         private readonly Mock<ILogger<TeacherController>> _mockILogger;
-        private readonly MapperConfiguration _mapperConfiguration;
 
         public TeacherControllerTest()
         {
@@ -23,9 +21,6 @@ namespace TestSchoolAdmin
             _mockILogger = new Mock<ILogger<TeacherController>>(MockBehavior.Default);
 
             var myProfile = new MappingConfig();
-            _mapperConfiguration = new MapperConfiguration(
-                cfg => cfg.AddProfile(myProfile), new LoggerFactory()
-                );
         }
 
         [Fact]
@@ -67,9 +62,6 @@ namespace TestSchoolAdmin
         {
             //arrange
             var myProfile = new MappingConfig();
-            var configuration = new MapperConfiguration(
-                cfg => cfg.AddProfile(myProfile), new LoggerFactory()
-                );
           
             var teacher = new Teacher()
             {

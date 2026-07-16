@@ -1,11 +1,9 @@
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using SchoolAdministration.AutoMapper;
 using SchoolAdministration.Controllers;
 using SchoolAdministration.Models.Domain.Course;
-using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
 
@@ -16,17 +14,13 @@ public class CourseControllerTests
 {
     private readonly Mock<ICourseRepository>? _mockCourseRepo;
     private readonly Mock<ILogger<CourseController>> _mockILogger;
-    private readonly MapperConfiguration? _mapperConfiguration;                  
-
+         
     public CourseControllerTests()
     {
         _mockCourseRepo = new Mock<ICourseRepository>(MockBehavior.Default);
        _mockILogger = new Mock<ILogger<CourseController>>(MockBehavior.Default);
 
         var myProfile = new MappingConfig();
-        _mapperConfiguration = new MapperConfiguration(
-            cfg => cfg.AddProfile(myProfile), new LoggerFactory()
-        );
     }
 
 
@@ -34,9 +28,8 @@ public class CourseControllerTests
     public async Task GetAllAync_ShallReturnTypeOK_ForCourseListContainItems()
     {
         //arrange
-        var mapper = new Mapper(_mapperConfiguration);
         _mockCourseRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(CourseList());
-        var controller = new CourseController(_mockCourseRepo.Object, _mockILogger.Object, mapper);                                                                                                                     
+        var controller = new CourseController(_mockCourseRepo.Object, _mockILogger.Object);                                                                                                                     
 
         //act
         var actionResult = await controller.GetAllCourses();
@@ -71,9 +64,8 @@ public class CourseControllerTests
             Students = []
         };
 
-        var mapper = new Mapper(_mapperConfiguration);
         _mockCourseRepo.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(course);
-        var controller = new CourseController(_mockCourseRepo.Object, _mockILogger.Object, mapper);
+        var controller = new CourseController(_mockCourseRepo.Object, _mockILogger.Object);
 
         //act
         var actionResult = await controller.GetCourseById(1);
@@ -114,8 +106,7 @@ public class CourseControllerTests
             CoursePrice = 15.99M
         };
 
-        var mapper = new Mapper(_mapperConfiguration);
-        var controller = new CourseController(_mockCourseRepo.Object, _mockILogger.Object, mapper);
+        var controller = new CourseController(_mockCourseRepo.Object, _mockILogger.Object);
 
         //act
         var actionResult = await controller.CreateCourse(courseCreateDTO);

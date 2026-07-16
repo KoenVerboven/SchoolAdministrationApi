@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
@@ -15,14 +14,11 @@ namespace SchoolAdministration.Controllers
     {
         private readonly ICourseRepository _courseRepository;
         private readonly ILogger<CourseController> _logger;
-        private readonly IMapper _mapper;
-
        
-        public CourseController(ICourseRepository courseRepository,ILogger<CourseController> logger,IMapper mapper)
+        public CourseController(ICourseRepository courseRepository,ILogger<CourseController> logger)
         {
             _courseRepository = courseRepository;
             _logger = logger;
-            _mapper = mapper;
         }
 
         //be carefull with GetAllCourses with big data, it can cause performance issues,
