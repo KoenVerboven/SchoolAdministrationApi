@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SchoolAdministration.ManualMapper;
 using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Specifications;
 
-
+//POC Manual Mapping
 namespace SchoolAdministration.Controllers
 {
 
@@ -29,26 +30,9 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<CourseDTO>>> GetAllCourses()
         {
-            List<CourseDTO> coursesDTO = new();
             var allCourses = await _courseRepository.GetAllAsync();
             _logger.LogInformation("Getting all courses");
-
-            foreach (var course in allCourses)
-            {
-                coursesDTO.Add(new CourseDTO
-                {
-                    Id = course.Id,
-                    CourseName = course.CourseName,
-                    CourseCode = course.CourseCode,
-                    CourseDescription = course.CourseDescription,
-                    StartDate = course.StartDate,
-                    EndDate = course.EndDate,
-                    CoursePrice = course.CoursePrice,
-                    MaxNumberOfStudents = course.MaxNumberOfStudents,
-                    Students = course.Students
-                });
-            }
-
+            var coursesDTO = allCourses.MapCoursesToCourseDtos();   
             return Ok(coursesDTO);
         }
 
@@ -71,19 +55,7 @@ namespace SchoolAdministration.Controllers
                 return NotFound();
             }
 
-            var courseDTO = new CourseDTO
-            {
-                Id = course.Id,
-                CourseName = course.CourseName,
-                CourseCode = course.CourseCode,
-                CourseDescription = course.CourseDescription,
-                StartDate = course.StartDate,
-                EndDate = course.EndDate,
-                CoursePrice = course.CoursePrice,
-                MaxNumberOfStudents = course.MaxNumberOfStudents,
-                Students = course.Students
-            };
-
+            var courseDTO = course.MapCourseToCourseDto();
             return Ok(courseDTO);
         }
 

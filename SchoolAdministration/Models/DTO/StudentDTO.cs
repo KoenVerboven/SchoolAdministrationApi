@@ -19,6 +19,7 @@ namespace SchoolAdministration.Models.DTO
         [StringLength(30, ErrorMessage = "Last Name cannot longer than 30 characters")]
         public required string LastName { get; set; }
 
+      
         [Display(Name = "Date of birth")]
         public DateTime DateOfBirth { get; set; } 
 

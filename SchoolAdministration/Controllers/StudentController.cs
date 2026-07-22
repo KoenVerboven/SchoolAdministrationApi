@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SchoolAdministration.ManualMapper;
 using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Specifications;
 
+//POC Manual Mapping
 namespace SchoolAdministration.Controllers
 {
 
@@ -26,19 +28,7 @@ namespace SchoolAdministration.Controllers
             try
             {
                 var allStudents = await _studentRepository.GetAllAsync();
-                var studentsDTO = allStudents.Select(student => new StudentDTO
-                {
-                    Id = student.Id,
-                    LastName = student.LastName,
-                    FirstName = student.FirstName,
-                    Gender = student.Gender,
-                    Email = student.Email,
-                    DateOfBirth = student.DateOfBirth,
-                    Phone = student.Phone,
-                    RegistrationDate = student.RegistrationDate,
-                    StudentAddresses = student.StudentAddresses,
-                }).ToList();
-
+                var studentsDTO = allStudents.MapStudentsToStudentDtos();
                 return Ok(studentsDTO);
             }
             catch (Exception ex)
@@ -68,19 +58,7 @@ namespace SchoolAdministration.Controllers
                 return NotFound();
             }
 
-            var studentDTO = new StudentDTO
-            {
-                Id = student.Id,
-                LastName = student.LastName,
-                FirstName = student.FirstName,
-                Gender = student.Gender,
-                Email = student.Email,
-                DateOfBirth = student.DateOfBirth,
-                Phone = student.Phone,
-                RegistrationDate = student.RegistrationDate,
-                StudentAddresses = student.StudentAddresses
-            };
-
+            var studentDTO =  student.MapStudentToStudentDto();
             return Ok(studentDTO);
         }
 

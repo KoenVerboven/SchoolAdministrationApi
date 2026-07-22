@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SchoolAdministration.ManualMapper;
 using SchoolAdministration.Models.Domain.Teacher;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Specifications;
 
+//POC Manual Mapping
 namespace SchoolAdministration.Controllers
 {
     [Route("api/[controller]")]
@@ -26,26 +28,8 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<TeacherDTO>>> GetAllTeachersAsync()
         {
-            List<TeacherDTO> teachersDTO = new();
             var allTeachers = await _teacherRepository.GetAllAsyn();
-
-            foreach (var teacher in allTeachers)
-            {
-                teachersDTO.Add(new TeacherDTO
-                {
-                    Id = teacher.Id,
-                    LastName = teacher.LastName,
-                    FirstName = teacher.FirstName,
-                    Gender = teacher.Gender,
-                    Email = teacher.Email,
-                    DateOfBirth = teacher.DateOfBirth,
-                    Phone = teacher.Phone,
-                    HireDate = teacher.HireDate,
-                    MaritalStatusId = teacher.MaritalStatusId,
-                    TeacherAddresses = teacher.TeacherAddresses
-                });
-            }
-
+            var teachersDTO = allTeachers.MapTeachersToTeacherDtos();
             return Ok(teachersDTO);
         }
 
@@ -156,23 +140,7 @@ namespace SchoolAdministration.Controllers
                 return NotFound();
             }
 
-            var teacherDTO = new TeacherDTO
-            {
-                Id = teacher.Id,
-                LastName = teacher.LastName,
-                FirstName = teacher.FirstName,
-                Gender = teacher.Gender,
-                Email = teacher.Email,
-                DateOfBirth = teacher.DateOfBirth,
-                Phone = teacher.Phone,
-                HireDate = teacher.HireDate,
-                MaritalStatusId = teacher.MaritalStatusId,
-                TeacherAddresses = teacher.TeacherAddresses,
-                TeacherPresences = teacher.TeacherPresences,
-                SchoolClasses = teacher.SchoolClasses
-
-            };
-
+            var teacherDTO = teacher.MapTeacherToTeacherDto();
             return Ok(teacherDTO);
         }
 
