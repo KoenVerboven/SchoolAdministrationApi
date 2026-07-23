@@ -15,7 +15,6 @@ namespace SchoolAdministration.Controllers
     public class StudentController(IStudentRepository studentRepository, ILogger<StudentController> logger) : ControllerBase
     {
         private const string controllerName = "StudentController";
-
         private readonly IStudentRepository _studentRepository = studentRepository;
         private readonly ILogger<StudentController> _logger = logger;
  
@@ -120,19 +119,7 @@ namespace SchoolAdministration.Controllers
         public async Task<ActionResult<IEnumerable<StudentDTO>>> GetStudentByFilter([FromQuery] StudentSearchParams studentSearchParams)
         {
             var students = await _studentRepository.GetStudentsByFilterAsync(studentSearchParams);
-            var studentsDTO = students.Select(student => new StudentDTO
-            {
-                Id = student.Id,
-                LastName = student.LastName,
-                FirstName = student.FirstName,
-                Gender = student.Gender,
-                Email = student.Email,
-                DateOfBirth = student.DateOfBirth,
-                Phone = student.Phone,
-                RegistrationDate = student.RegistrationDate,
-                StudentAddresses = student.StudentAddresses,
-            }).ToList();
-
+            var studentsDTO = students.MapStudentsToStudentDtos();
             return Ok(studentsDTO);
         }
 
@@ -170,19 +157,9 @@ namespace SchoolAdministration.Controllers
             {
                 return BadRequest();
             }
-
-            var student = new Student
-            {
-                LastName = studentCreateDTO.LastName,
-                FirstName = studentCreateDTO.FirstName,
-                Gender = studentCreateDTO.Gender,
-                Email = studentCreateDTO.Email,
-                DateOfBirth = studentCreateDTO.DateOfBirth,
-                Phone = studentCreateDTO.Phone,
-                CreatedBy = studentCreateDTO.CreatedBy,
-                CreatedDate = DateTime.Now,
-            };
   
+            var student = studentCreateDTO.MapStudentDtoCreateToStudent();
+
             if (_studentRepository.StudentExist(student))
             {
                 ModelState.AddModelError("CustomError", "Student already Exists!");
@@ -219,19 +196,7 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            var student = new Student
-            {
-                Id = studentUpdateDTO.Id,
-                LastName = studentUpdateDTO.LastName,
-                FirstName = studentUpdateDTO.FirstName,
-                Gender = studentUpdateDTO.Gender,
-                Email = studentUpdateDTO.Email,
-                DateOfBirth = studentUpdateDTO.DateOfBirth,
-                Phone = studentUpdateDTO.Phone,
-                UpdatedBy = studentUpdateDTO.UpdatedBy,
-                UpdateDate = DateTime.Now,
-            };
-        
+            var student = studentUpdateDTO.MapStudentDtoUpdateToStudent();
             await _studentRepository.UpdateStudentAsync(student);
             return CreatedAtAction(nameof(GetStudentById), new { id = student.Id }, student); 
         }

@@ -72,23 +72,7 @@ namespace SchoolAdministration.Controllers
         public async Task<ActionResult<IEnumerable<TeacherDTO>>> GetAllAsyncFilter(string sort, int pageSize, int pageNumber, int zipCode = 0) //add filter object
         {
             var allTeachers = await _teacherRepository.GetFilterAsyn(sort, pageSize: pageSize, pageNumber: pageNumber);
-            List<TeacherDTO> teachersDTO = new();
-            foreach (var teacher in allTeachers)
-            {
-                teachersDTO.Add(new TeacherDTO
-                {
-                    Id = teacher.Id,
-                    LastName = teacher.LastName,
-                    FirstName = teacher.FirstName,
-                    Gender = teacher.Gender,
-                    Email = teacher.Email,
-                    DateOfBirth = teacher.DateOfBirth,
-                    Phone = teacher.Phone,
-                    HireDate = teacher.HireDate,
-                    MaritalStatusId = teacher.MaritalStatusId,
-                    TeacherAddresses = teacher.TeacherAddresses
-                });
-            }
+            var teachersDTO = allTeachers.MapTeachersToTeacherDtos();
             return Ok(teachersDTO);
         }
 
@@ -156,19 +140,7 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            var teacher = new Teacher
-            {
-                LastName = teacherCreateDTO.LastName,
-                FirstName = teacherCreateDTO.FirstName,
-                Gender = teacherCreateDTO.Gender,
-                Email = teacherCreateDTO.Email,
-                DateOfBirth = teacherCreateDTO.DateOfBirth,
-                Phone = teacherCreateDTO.Phone,
-                HireDate = teacherCreateDTO.HireDate,
-                MaritalStatusId = teacherCreateDTO.MaritalStatusId,
-                CreatedBy = teacherCreateDTO.CreatedBy,
-                CreatedDate = DateTime.Now
-            };
+            var teacher = teacherCreateDTO.MapTeacherCreateDtoToTeacher();
 
             if (_teacherRepository.TeacherExist(teacher))
             {
@@ -206,19 +178,7 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            var teacher = new Teacher
-            {
-                LastName = teacherUpdateDTO.LastName,
-                FirstName = teacherUpdateDTO.FirstName,
-                Gender = teacherUpdateDTO.Gender,
-                Email = teacherUpdateDTO.Email,
-                DateOfBirth = teacherUpdateDTO.DateOfBirth,
-                Phone = teacherUpdateDTO.Phone,
-                MaritalStatusId = teacherUpdateDTO.MaritalStatusId,
-                HireDate = teacherUpdateDTO.HireDate,
-                UpdatedBy = teacherUpdateDTO.UpdatedBy,
-                UpdateDate = DateTime.Now
-            };
+            var teacher = teacherUpdateDTO.MapTeacherUpdateDtoToTeacher();
 
             await _teacherRepository.UpdateTeacherAsync(teacher);
             return CreatedAtAction(nameof(GetTeacherById), new { id = teacher.Id }, teacher);

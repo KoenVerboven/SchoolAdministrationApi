@@ -27,24 +27,6 @@ namespace SchoolAdministration.ManualMapper
             return coursesDTO;  
         }
 
-        public static Course MapCourseDtoToCourse(this CourseDTO dto)
-        {
-            return new Course
-            {
-                Id = dto.Id,
-                CourseName = dto.CourseName,
-                CourseCode = dto.CourseCode,
-                CourseDescription = dto.CourseDescription,
-                StartDate = dto.StartDate ?? DateTime.MinValue,
-                EndDate = dto.EndDate ?? DateTime.MinValue,
-                CoursePrice = dto.CoursePrice,
-                MaxNumberOfStudents = dto.MaxNumberOfStudents,
-                Students = dto.Students
-
-                //todo : map other properties as needed
-            };
-        }
-
         public static CourseDTO MapCourseToCourseDto(this Course course)
         {
             return new CourseDTO
@@ -60,6 +42,38 @@ namespace SchoolAdministration.ManualMapper
                 Students = course.Students
 
                 //todo : map other properties as needed
+            };
+        }
+
+        public static Course MapCourseCreateDtoToCourse(this CourseCreateDTO dto)
+        {
+            return new Course
+            {
+                CourseName = dto.CourseName,
+                CourseCode = dto.CourseCode,
+                CourseDescription = dto.CourseDescription,
+                StartDate = dto.StartDate ?? DateTime.MinValue,
+                EndDate = dto.EndDate ?? DateTime.MinValue,
+                CoursePrice = dto.CoursePrice,
+                MaxNumberOfStudents = dto.MaxNumberOfStudents,
+                CreatedBy = dto.CreatedBy,
+                CreatedDate = DateTime.Now,
+            };
+        }
+
+        public static Course MapCourseUpdateDtoToCourse(this CourseUpdateDTO dto)
+        {
+            return new Course
+            {
+                CourseName = dto.CourseName,
+                CourseCode = dto.CourseCode,
+                CourseDescription = dto.CourseDescription,
+                StartDate = dto.StartDate ?? DateTime.MinValue,
+                EndDate = dto.EndDate ?? DateTime.MinValue,
+                CoursePrice = dto.CoursePrice,
+                MaxNumberOfStudents = dto.MaxNumberOfStudents,
+                UpdatedBy = dto.UpdatedBy, //todo : instead of updatedBy and updateDate : make a class UpdateHistory with UpdatedBy ,UpdateDate, OldValue and NewValue , so we can keep track of all updates
+                UpdateDate = DateTime.Now
             };
         }
     }

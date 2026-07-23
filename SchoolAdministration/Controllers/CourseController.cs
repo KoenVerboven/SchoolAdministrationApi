@@ -32,7 +32,7 @@ namespace SchoolAdministration.Controllers
         {
             var allCourses = await _courseRepository.GetAllAsync();
             _logger.LogInformation("Getting all courses");
-            var coursesDTO = allCourses.MapCoursesToCourseDtos();   
+            var coursesDTO = allCourses.MapCoursesToCourseDtos();   //extension method to map domain model to DTO
             return Ok(coursesDTO);
         }
 
@@ -70,18 +70,7 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            var course = new Course
-            {
-                CourseName = courseCreateDTO.CourseName,
-                CourseCode = courseCreateDTO.CourseCode,
-                CourseDescription = courseCreateDTO.CourseDescription,
-                StartDate = courseCreateDTO.StartDate ?? DateTime.Now, 
-                EndDate = courseCreateDTO.EndDate ?? DateTime.Now, 
-                CoursePrice = courseCreateDTO.CoursePrice,
-                MaxNumberOfStudents = courseCreateDTO.MaxNumberOfStudents,
-                CreatedBy = courseCreateDTO.CreatedBy,
-                CreatedDate = DateTime.Now
-            };
+            var course = courseCreateDTO.MapCourseCreateDtoToCourse(); 
 
             if (_courseRepository.CourseExist(course))
             {
@@ -119,19 +108,7 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            var course = new Course
-            {
-                CourseName = courseUpdateDTO.CourseName,
-                CourseCode = courseUpdateDTO.CourseCode,
-                CourseDescription = courseUpdateDTO.CourseDescription,
-                StartDate = courseUpdateDTO.StartDate ?? DateTime.Now,
-                EndDate = courseUpdateDTO.EndDate ?? DateTime.Now,
-                CoursePrice = courseUpdateDTO.CoursePrice,
-                MaxNumberOfStudents = courseUpdateDTO.MaxNumberOfStudents,
-                UpdatedBy = courseUpdateDTO.UpdatedBy, //todo : instead of updatedBy and updateDate : make a class UpdateHistory with UpdatedBy ,UpdateDate, OldValue and NewValue , so we can keep track of all updates
-                UpdateDate = DateTime.Now
-            };
-
+            var course = courseUpdateDTO.MapCourseUpdateDtoToCourse();
             await _courseRepository.UpdateCourseAsync(course);
             return CreatedAtAction(nameof(GetCourseById), new { id = course.Id }, course );
         }
@@ -142,7 +119,6 @@ namespace SchoolAdministration.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<IEnumerable<CourseDTO>>> GetCourseByFilter([FromQuery] CourseSearchParams @params)
         {
-            List<CourseDTO> coursesDTO = [];
             var courses = await _courseRepository.GetCoursesByFilterAsync(@params);
 
             if (courses == null) 
@@ -150,22 +126,7 @@ namespace SchoolAdministration.Controllers
                 return NotFound();
             }
 
-            foreach (var course in courses)
-            {
-                coursesDTO.Add(new CourseDTO
-                {
-                    Id = course.Id,
-                    CourseName = course.CourseName,
-                    CourseCode = course.CourseCode,
-                    CourseDescription = course.CourseDescription,
-                    StartDate = course.StartDate,
-                    EndDate = course.EndDate,
-                    CoursePrice = course.CoursePrice,
-                    MaxNumberOfStudents = course.MaxNumberOfStudents,
-                    Students = course.Students
-                });
-            }
-
+            var coursesDTO = courses.MapCoursesToCourseDtos();
             return Ok(coursesDTO);
         }
 

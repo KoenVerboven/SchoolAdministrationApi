@@ -28,26 +28,6 @@ namespace SchoolAdministration.ManualMapper
         }
 
 
-        public static Teacher MapTeacherDtoToTeacher(this TeacherDTO dto)
-        {
-            return new Teacher
-            {
-                Id = dto.Id,
-                LastName = dto.LastName,
-                FirstName = dto.FirstName,
-                Email = dto.Email,
-                Phone = dto.Phone,
-                DateOfBirth = dto.DateOfBirth,
-                HireDate = dto.HireDate,
-                MaritalStatusId = dto.MaritalStatusId,
-                TeacherAddresses = dto.TeacherAddresses,
-                TeacherPresences = dto.TeacherPresences,
-                SchoolClasses = dto.SchoolClasses
-
-                //todo : map other properties as needed
-            };
-        }
-
         public static TeacherDTO MapTeacherToTeacherDto(this Teacher teacher)
         {
             return new TeacherDTO
@@ -65,6 +45,40 @@ namespace SchoolAdministration.ManualMapper
                 SchoolClasses = teacher.SchoolClasses
 
                 //todo : map other properties as needed
+            };
+        }
+
+
+        public static Teacher MapTeacherCreateDtoToTeacher(this TeacherCreateDTO dto)
+        {
+            return new Teacher
+            {
+                LastName = dto.LastName,
+                FirstName = dto.FirstName,
+                Email = dto.Email,
+                Phone = dto.Phone,
+                DateOfBirth = dto.DateOfBirth,
+                HireDate = dto.HireDate,
+                MaritalStatusId = dto.MaritalStatusId,
+                CreatedBy = dto.CreatedBy,
+                CreatedDate = DateTime.Now
+            };
+        }
+
+        public static Teacher MapTeacherUpdateDtoToTeacher(this TeacherUpdateDTO dto)
+        {
+            return new Teacher
+            {
+                Id = dto.Id,
+                LastName = dto.LastName,
+                FirstName = dto.FirstName,
+                Email = dto.Email,
+                Phone = dto.Phone,
+                DateOfBirth = dto.DateOfBirth,
+                HireDate = dto.HireDate,
+                MaritalStatusId = dto.MaritalStatusId,
+                UpdatedBy = dto.UpdatedBy,
+                UpdateDate = DateTime.Now
             };
         }
     }

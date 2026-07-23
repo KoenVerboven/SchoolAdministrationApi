@@ -26,21 +26,6 @@ namespace SchoolAdministration.ManualMapper
             return studentsDTO;
         }
 
-        public static Student MapStudentDtoToStudent(this StudentDTO dto)
-        {
-            return new Student
-            {
-                Id = dto.Id,        
-                LastName = dto.LastName,
-                FirstName = dto.FirstName,
-                Email = dto.Email,
-                Phone = dto.Phone,
-                DateOfBirth = dto.DateOfBirth
-
-                //todo : map other properties as needed
-            };
-        }
-
         public static StudentDTO MapStudentToStudentDto(this Student student)
         {
             return new StudentDTO
@@ -59,5 +44,39 @@ namespace SchoolAdministration.ManualMapper
                 //todo : map other properties as needed
             };
         }
+
+        public static Student MapStudentDtoCreateToStudent(this StudentCreateDTO dto)
+        {
+            return new Student
+            {
+                LastName = dto.LastName,
+                FirstName = dto.FirstName,
+                Email = dto.Email,
+                Phone = dto.Phone,
+                DateOfBirth = dto.DateOfBirth,
+                CreatedBy = dto.CreatedBy,
+                CreatedDate = DateTime.Now,
+                RegistrationDate = DateTime.Now
+            };
+        }
+
+        public static Student MapStudentDtoUpdateToStudent(this StudentUpdateDTO dto)
+        {
+            return new Student
+            {
+                Id = dto.Id,
+                LastName = dto.LastName,
+                FirstName = dto.FirstName,
+                Email = dto.Email,
+                Phone = dto.Phone,
+                DateOfBirth = dto.DateOfBirth,
+                UpdatedBy = dto.UpdatedBy,
+            };
+        }
+
+
     }
 }
+
+
+
