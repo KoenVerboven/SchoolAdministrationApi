@@ -223,7 +223,7 @@ Both have its pros and contras.
 I Started with the conversion of the CourseController from 
 automapper to manual mapping.
 
-Manual mapping with EXTENTION METHODS :
+Manual mapping with EXTENSION METHODS :
 
 <img width="1142" height="32" alt="Schermafbeelding 2026-07-23 180341" src="https://github.com/user-attachments/assets/abe53b1b-1160-4ddb-8eac-4112bcd954d0" />
 
