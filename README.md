@@ -216,11 +216,19 @@ In the Controller we can write some like this to map student to StudentDTO :
 Note : In the latest version of Automapper, you need a license key.
 Check te website:   [https://AutoMapper.io](https://AutoMapper.io)
 
-Note:
+Manual Mapping : 
+-----------------
 I am considering to switch from automapper to manual mapping.
 Both have its pros and contras.
 I Started with the conversion of the CourseController from 
 automapper to manual mapping.
+
+Manual mapping with EXTENTION METHODS :
+
+<img width="1142" height="32" alt="Schermafbeelding 2026-07-23 180341" src="https://github.com/user-attachments/assets/abe53b1b-1160-4ddb-8eac-4112bcd954d0" />
+
+
+<img width="1160" height="568" alt="mapping" src="https://github.com/user-attachments/assets/faf031b9-1c82-4927-80b5-3ba0892a90bd" />
 
 
 Versioning :
