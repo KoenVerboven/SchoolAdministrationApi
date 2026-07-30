@@ -231,8 +231,7 @@ CourseController.cs:
 
 CourseMappingExtensions.cs :
 
-<img width="800" height="370" alt="image" src="https://github.com/user-attachments/assets/3a29aa12-d261-4f2e-bb9e-12d952214467" />
-
+<img width="861" height="332" alt="image" src="https://github.com/user-attachments/assets/4ad9800b-bc36-4174-bcbc-fe6c64927a6c" />
 
 
 Versioning :
