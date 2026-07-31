@@ -7,12 +7,9 @@ namespace SchoolAdministration.ManualMapper
     {
         public static IEnumerable<TeacherDTO> MapTeachersToTeacherDtos(this IEnumerable<Teacher> teachers)
         {
-            List<TeacherDTO> teachersDTO = new();
-            foreach (var teacher in teachers)
+            return teachers.Select(teacher => new TeacherDTO
             {
-                teachersDTO.Add(new TeacherDTO      
-                {
-                    Id = teacher.Id,
+                Id = teacher.Id,
                     LastName = teacher.LastName,
                     FirstName = teacher.FirstName,
                     Gender = teacher.Gender,
@@ -20,13 +17,9 @@ namespace SchoolAdministration.ManualMapper
                     DateOfBirth = teacher.DateOfBirth,
                     Phone = teacher.Phone,
                     HireDate = teacher.HireDate,
-                    MaritalStatusId = teacher.MaritalStatusId,
-                    TeacherAddresses = teacher.TeacherAddresses
-                });
-            }
-            return teachersDTO;
+                    MaritalStatusId = teacher.MaritalStatusId
+            });
         }
-
 
         public static TeacherDTO MapTeacherToTeacherDto(this Teacher teacher)
         {
@@ -43,8 +36,6 @@ namespace SchoolAdministration.ManualMapper
                 TeacherAddresses = teacher.TeacherAddresses,
                 TeacherPresences = teacher.TeacherPresences,
                 SchoolClasses = teacher.SchoolClasses
-
-                //todo : map other properties as needed
             };
         }
 

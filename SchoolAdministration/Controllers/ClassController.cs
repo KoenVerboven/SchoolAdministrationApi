@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using SchoolAdministration.ManualMapper;
 using SchoolAdministration.Models.Domain.School;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
 
+//Manual Mapping
 namespace SchoolAdministration.Controllers
 {
     [Route("api/[controller]")]
@@ -11,12 +13,10 @@ namespace SchoolAdministration.Controllers
     public class ClassController : ControllerBase
     {
         private readonly IClassRepository _classRepository;
-        private readonly IMapper _mapper;
 
-        public ClassController(IClassRepository  classRepository, IMapper mapper)
+        public ClassController(IClassRepository  classRepository)
         {
             _classRepository = classRepository;
-            _mapper = mapper;
         }
 
         [HttpGet]
@@ -26,7 +26,7 @@ namespace SchoolAdministration.Controllers
         public async Task<ActionResult<IEnumerable<ClassDTO>>> GetAllClasses()
         {
             var allClasses = await _classRepository.GetAllAsync();
-            var classesDTO = _mapper.Map<List<ClassDTO>>(allClasses);
+            var classesDTO = allClasses.MapSchoolClassToClassClassDtos();
             return Ok(classesDTO);
         }
 
@@ -38,7 +38,7 @@ namespace SchoolAdministration.Controllers
         public async Task<ActionResult<IEnumerable<ClassDTO>>> GetClassesByDepartmentId(int departmentId)
         {
             var allClasses = await _classRepository.GetClassByDepartmentIdAsync(departmentId);
-            var classesDTO = _mapper.Map<List<ClassDTO>>(allClasses);
+            var classesDTO = allClasses.MapSchoolClassToClassClassDtos();
             return Ok(classesDTO);
         }
 
@@ -62,7 +62,7 @@ namespace SchoolAdministration.Controllers
                 return NotFound();
             }
 
-            var classDTO = _mapper.Map<ClassDTO>(schoolclass);
+            var classDTO = schoolclass.MapSchoolClassToSchoolClassDto();
             return Ok(classDTO);
         }
 
@@ -77,7 +77,7 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            SchoolClass schoolclass = _mapper.Map<SchoolClass>(classCreateDTO);
+            SchoolClass schoolclass = classCreateDTO.MapClassCreateDtoToSchoolClass();
 
             //if (_classRepository.ClassExist(schoolclass))
             //{
@@ -115,7 +115,7 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            SchoolClass schoolClass = _mapper.Map<SchoolClass>(classUpdateDTO);
+            SchoolClass schoolClass = classUpdateDTO.MapClassUpdateDtoToSchoolClass();
             await _classRepository.UpdateClassAsync(schoolClass);
             return CreatedAtAction(nameof(GetClassById), new { id = schoolClass.Id }, schoolClass);
         }

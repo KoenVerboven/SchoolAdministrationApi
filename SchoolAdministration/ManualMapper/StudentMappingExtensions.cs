@@ -7,10 +7,7 @@ namespace SchoolAdministration.ManualMapper
     {
         public static IEnumerable<StudentDTO> MapStudentsToStudentDtos(this IEnumerable<Student> students)
         {
-            List<StudentDTO> studentsDTO = new();
-            foreach (var student in students)
-            {
-                studentsDTO.Add(new StudentDTO
+            return students.Select(student => new StudentDTO
                 {
                     Id = student.Id,
                     LastName = student.LastName,
@@ -20,10 +17,7 @@ namespace SchoolAdministration.ManualMapper
                     DateOfBirth = student.DateOfBirth,
                     Phone = student.Phone,
                     RegistrationDate = student.RegistrationDate,
-                    StudentAddresses = student.StudentAddresses,
                 });
-            }
-            return studentsDTO;
         }
 
         public static StudentDTO MapStudentToStudentDto(this Student student)
@@ -39,13 +33,18 @@ namespace SchoolAdministration.ManualMapper
                 Phone = student.Phone,
                 Age = student.Age,
                 RegistrationDate = student.RegistrationDate,
-                StudentAddresses = student.StudentAddresses
-
-                //todo : map other properties as needed
+                StudentAddresses = student.StudentAddresses,
+                Parents = student.Parents,
+                StudentClassRegistrations = student.StudentClassRegistrations,
+                Invoices = student.Invoices,
+                Payments = student.Payments,
+                StudyPlans = student.StudyPlans,
+                StudentPresences = student.StudentPresences,
+                HomeWorks = student.HomeWorks
             };
         }
 
-        public static Student MapStudentDtoCreateToStudent(this StudentCreateDTO dto)
+        public static Student MapStudentCreateDtoToStudent(this StudentCreateDTO dto)
         {
             return new Student
             {
@@ -73,7 +72,6 @@ namespace SchoolAdministration.ManualMapper
                 UpdatedBy = dto.UpdatedBy,
             };
         }
-
 
     }
 }

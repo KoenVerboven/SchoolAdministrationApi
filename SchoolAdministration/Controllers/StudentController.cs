@@ -158,7 +158,7 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
   
-            var student = studentCreateDTO.MapStudentDtoCreateToStudent();
+            var student = studentCreateDTO.MapStudentCreateDtoToStudent();
 
             if (_studentRepository.StudentExist(student))
             {

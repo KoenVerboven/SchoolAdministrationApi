@@ -1,9 +1,10 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using SchoolAdministration.ManualMapper;
 using SchoolAdministration.Models.Domain.School;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
 
+// Manual Mapping
 namespace SchoolAdministration.Controllers
 {
     [Route("api/[controller]")]
@@ -11,12 +12,10 @@ namespace SchoolAdministration.Controllers
     public class SchoolController : ControllerBase
     {
         private readonly IGenericRepository<School> _repository;
-        private readonly IMapper _mapper;
-
-        public SchoolController(IGenericRepository<School> repository, IMapper mapper )
+  
+        public SchoolController(IGenericRepository<School> repository)
         {
             _repository = repository;
-            _mapper = mapper;
         }
 
         [HttpGet]
@@ -26,7 +25,7 @@ namespace SchoolAdministration.Controllers
         public async Task<ActionResult<IEnumerable<SchoolDTO>>> GetAllSchoolsAsync()
         {
             var schools = await _repository.ListAllAsync();
-            var schoolsDTO = _mapper.Map<List<SchoolDTO>>(schools);
+            var schoolsDTO = schools.MapSchoolsToSchoolDtos();
             return Ok(schoolsDTO);
         }
 
@@ -49,7 +48,7 @@ namespace SchoolAdministration.Controllers
                 return NotFound();
             }
 
-            var SchoolDTO = _mapper.Map<SchoolDTO>(school);
+            var SchoolDTO = school.MapSchoolToSchoolDto();
             return Ok(SchoolDTO);
         }
 
@@ -64,7 +63,7 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            School school = _mapper.Map<School>(schoolCreateDTO);
+            School school = schoolCreateDTO.MapSchoolCreateDtoToSchool();
 
             //if (_schoolRepository.SchoolExist(schoolCreateDTO))
             //{
@@ -112,7 +111,7 @@ namespace SchoolAdministration.Controllers
                 return BadRequest();
             }
 
-            School school = _mapper.Map<School>(schoolUpdateDTO);
+            School school = schoolUpdateDTO.MapSchoolUpdateDtoToSchool();
             _repository.Update(school);
             await _repository.SaveAllAsync();
             return CreatedAtAction(nameof(GetSchoolById), new { id = school.Id }, school);

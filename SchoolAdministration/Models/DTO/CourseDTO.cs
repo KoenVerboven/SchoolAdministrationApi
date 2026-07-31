@@ -28,6 +28,6 @@ namespace SchoolAdministration.Models.DTO
         [Column(TypeName = "decimal(6, 2)")]
         public decimal? CoursePrice { get; set; }
         public int MaxNumberOfStudents { get; set; }
-        public ICollection<Student> Students { get; set; }
+        public ICollection<Student>? Students { get; set; }
     }
 }
