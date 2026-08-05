@@ -1,0 +1,28 @@
+﻿
+Naming conventions:
+
+C#:
+Class names should be in PascalCase (e.g., StudentRecord, CourseSchedule).
+Add an empty line for an if statement and after it to improve readability.
+
+Follow the microsoft guidelines:
+https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/naming-guidelines
+
+
+
+GIT :
+Use Prefixes to Indicate Purpose
+Use hyphens (-) to separate words
+
+correct branch names:
+
+feature/feature-name
+bugfix/bug-name
+feature/authorization
+refactor/replace-automapping-by-manualmapping
+
+
+branch names:
+https://dev.to/jps27cse/github-branching-name-best-practices-49ei
+
+

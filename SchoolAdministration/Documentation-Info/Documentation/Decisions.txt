@@ -1,0 +1,8 @@
+﻿
+date (dd-mm-yyyy) + Lastname & Firstname 
++ decision
++ reason:
+
+02-08-2026  Verboven Koen 
+Replace Automapper by Manual mapping.
+Reason : not be dependent on third parties

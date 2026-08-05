@@ -1,0 +1,46 @@
+﻿
+
+SuperAmin
+Can create,read ,update and delete Schools
+
+SchoolAdmin
+Can create,read ,update and delete Deparments
+Can create,read ,update and delete Classes
+Can create,read ,update and delete Teachers
+Can create,read ,update and delete Students
+Can create,read ,update and delete Courses
+Can create,read ,update and delete Invoices
+
+
+Students
+A Student can take one or more Courses,
+Qualifications for those students,
+A Student can have one on more Addresses,
+A student can create a study plan to prepare for upcoming exams.
+
+Teachers,
+Can create,read ,update and delete Homework
+A Teacher can plan a Parent-Teacher meeting for their Students,
+A Teacher can have one on more Addresses,
+Can create documents for their Students, such as a documents for a specific lessen or a document for a specific course 
+or a document for a specific exam,
+or a document for a specific homework assignment,
+or a document for a specific Parent-Teacher meeting,
+or a document for an overview of exam marks
+
+Courses
+A Course can be given remote or in a specific ClassRoom,
+
+Exams
+A Exam can be associated with one or more Courses,
+A Exam can be associated with one or more Students,
+A Exam can be associated with one Teachers,
+A Exam can be of the type QuestionAndAnswer or MultipleChoice
+
+A school consists of
+Departments, which have Classes, which have Students and Teachers.
+
+Invoices
+A student may have outstanding invoices, for example,
+due to enrolling in a specific course.
+
