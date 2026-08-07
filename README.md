@@ -256,12 +256,14 @@ Installed NuGet-packages :
 More Info / Documentation :
 ----------------------------
 
-
 If you want to read more info about this API or the used technology :
 
-[More Info / Documentation](https://github.com/KoenVerboven/SchoolAdministrationApi/tree/master/SchoolAdministration/Documentation-Info/Documentation)
+[More Info / Documentation](https://github.com/KoenVerboven/SchoolAdministrationApi/tree/master/SchoolAdministration/Documentation-Info/Info)
 
+Analyse:
+---------
 
+[Analyse](https://github.com/KoenVerboven/SchoolAdministrationApi/blob/master/SchoolAdministration/Documentation-Info/Documentation/Analyse.txt)
 
 
 
