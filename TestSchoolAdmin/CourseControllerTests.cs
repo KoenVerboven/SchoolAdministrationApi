@@ -6,7 +6,7 @@ using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
 
-namespace TestSchoolAdmin;
+namespace SchoolAdministrationTests;
 
 
 public class CourseControllerTests

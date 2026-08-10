@@ -7,7 +7,7 @@ using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Models.Domain.Student;
 
 
-namespace TestSchoolAdmin
+namespace SchoolAdministrationTests
 {
     public  class StudentControllerTest
     {
@@ -290,9 +290,11 @@ namespace TestSchoolAdmin
             Assert.IsType<NoContentResult>(actionResult);
         }
 
+        //todo : test also : GetStudentByFilter
 
-    private IEnumerable<Student> StudentList()
-    {
+        //todo : place StudentList in a separate class and use it in the test class
+        private IEnumerable<Student> StudentList()
+        {
             IEnumerable<Student> studentList = [
                 new Student()
                 {
@@ -321,8 +323,6 @@ namespace TestSchoolAdmin
                 ];
             return studentList;
         }
-
-        
 
     }
 }

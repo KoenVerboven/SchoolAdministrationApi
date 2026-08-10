@@ -9,7 +9,7 @@ using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
 
-namespace TestSchoolAdmin;
+namespace SchoolAdministrationTests;
 
 public class HomeWorkControllerTest
 {

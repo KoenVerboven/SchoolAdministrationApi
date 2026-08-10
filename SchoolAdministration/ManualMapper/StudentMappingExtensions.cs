@@ -50,6 +50,7 @@ namespace SchoolAdministration.ManualMapper
             {
                 LastName = dto.LastName,
                 FirstName = dto.FirstName,
+                Gender = dto.Gender,
                 Email = dto.Email,
                 Phone = dto.Phone,
                 DateOfBirth = dto.DateOfBirth,
@@ -66,6 +67,7 @@ namespace SchoolAdministration.ManualMapper
                 Id = dto.Id,
                 LastName = dto.LastName,
                 FirstName = dto.FirstName,
+                Gender = dto.Gender,
                 Email = dto.Email,
                 Phone = dto.Phone,
                 DateOfBirth = dto.DateOfBirth,

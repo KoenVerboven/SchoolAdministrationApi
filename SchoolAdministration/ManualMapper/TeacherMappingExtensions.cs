@@ -28,6 +28,7 @@ namespace SchoolAdministration.ManualMapper
                 Id = teacher.Id,
                 LastName = teacher.LastName,
                 FirstName = teacher.FirstName,
+                Gender = teacher.Gender,
                 Email = teacher.Email,
                 Phone = teacher.Phone,
                 DateOfBirth = teacher.DateOfBirth,
@@ -46,6 +47,7 @@ namespace SchoolAdministration.ManualMapper
             {
                 LastName = dto.LastName,
                 FirstName = dto.FirstName,
+                Gender = dto.Gender,
                 Email = dto.Email,
                 Phone = dto.Phone,
                 DateOfBirth = dto.DateOfBirth,
@@ -63,6 +65,7 @@ namespace SchoolAdministration.ManualMapper
                 Id = dto.Id,
                 LastName = dto.LastName,
                 FirstName = dto.FirstName,
+                Gender = dto.Gender,
                 Email = dto.Email,
                 Phone = dto.Phone,
                 DateOfBirth = dto.DateOfBirth,
