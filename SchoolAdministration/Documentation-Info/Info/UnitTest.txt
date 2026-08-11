@@ -1,6 +1,42 @@
-﻿unitTest :
+﻿Unit Test :
 -----------
 
+Unit testing is a software testing technique where individual units or components 
+of a software application are tested in isolation to ensure that they function as expected.
+The primary goal of unit testing is to validate that each unit of the software performs as designed,
+which helps in identifying and fixing bugs early in the development process.
+
+Remarks: Write a test for each method in the controller and each possible scenario!
+
+Practical example 
+-------------------
+where unit testings helped me:
+
+I made the converstion of automapping to manual mapping.
+I forgot to map the property gender in the method MapStudentDtoUpdateToStudent.
+public static Student MapStudentDtoUpdateToStudent(this StudentUpdateDTO dto)
+        {
+            return new Student
+            {
+                Id = dto.Id,
+                LastName = dto.LastName,
+                FirstName = dto.FirstName,
+                //Gender = dto.Gender, <-- I forgot to map this property
+                Email = dto.Email,
+                Phone = dto.Phone,
+                DateOfBirth = dto.DateOfBirth,
+                UpdatedBy = dto.UpdatedBy,
+            };
+        }
+
+ Unit Test faild :
+ SchoolAdministrationTests.StudentControllerTest.UpdateStudentAsync_UpdateStudentCorrectly_WhenIdIsEqualToDtudentUpdateDTOIdAndModelStateIsValid
+ Assert.Equivalent() Failure: Mismatched value on member 'Gender'
+ Expected: 1
+ Actual:   0
+
+Set up unit testing in SchoolAdministrationApi:
+------------------------------------------------
 add new project to solution : xUnit test Project
 
 nuget packages install : FluentAssertions, Moq
@@ -16,7 +52,7 @@ example:
 GetAllAync_ShallReturnTypeOK_ForStudentListNotNull
 
 links :
-
+--------
 https://programmingwithwolfgang.com/xunit-getting-started/
 
 https://learn.microsoft.com/en-us/aspnet/web-api/overview/testing-and-debugging/unit-testing-with-aspnet-web-api
