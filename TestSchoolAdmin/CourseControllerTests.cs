@@ -5,6 +5,7 @@ using SchoolAdministration.Controllers;
 using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
+using SchoolAdministrationTests.Data;
 
 namespace SchoolAdministrationTests;
 
@@ -25,7 +26,7 @@ public class CourseControllerTests
     public async Task GetAllAync_ShallReturnTypeOK_ForCourseListContainItems()
     {
         //arrange
-        _mockCourseRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(CourseList());
+        _mockCourseRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(CourseMockData.CourseList());
         var controller = new CourseController(_mockCourseRepo.Object, _mockILogger.Object);                                                                                                                     
 
         //act
@@ -111,30 +112,4 @@ public class CourseControllerTests
         //assert
         Assert.IsType<CreatedAtActionResult>(actionResult.Result);
     }
-
-    private IEnumerable<Course> CourseList()
-    {
-        IEnumerable<Course> courseList = [
-            new Course()
-                {
-                    Id = 1,
-                   CourseName = "Electronica A2",
-                   CourseCode= "E2," ,
-                   StartDate= DateTime.Now,
-                   EndDate= DateTime.Now,
-                   CoursePrice= 10.99M
-                },
-                new Course()
-                {
-                    Id = 2,
-                   CourseName = "Mathemtics M2",
-                   CourseCode= "E2," ,
-                   StartDate= DateTime.Now,
-                   EndDate= DateTime.Now,
-                   CoursePrice= 15.99M
-                }
-            ]; ;
-        return courseList;
-    }
-
 }

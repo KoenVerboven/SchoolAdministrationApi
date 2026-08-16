@@ -2,9 +2,10 @@
 using Microsoft.Extensions.Logging;
 using Moq;
 using SchoolAdministration.Controllers;
+using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
-using SchoolAdministration.Models.Domain.Student;
+using SchoolAdministrationTests.Data;
 
 
 namespace SchoolAdministrationTests
@@ -24,7 +25,7 @@ namespace SchoolAdministrationTests
         public async Task GetAllAync_ShallReturnTypeOK_ForStudentListContainItems()
         {
             //arrange
-            _mockStudentRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(StudentList());
+            _mockStudentRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(StudentMockData.StudentList());
             var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object);
 
             //act
@@ -40,7 +41,7 @@ namespace SchoolAdministrationTests
         public async Task GetAllAync_ShallReturnItemsCount_ForStudentListContainItems()
         {
             //arrange
-            _mockStudentRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(StudentList());
+            _mockStudentRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(StudentMockData.StudentList());
             var controller = new StudentController(_mockStudentRepo.Object, _mockILogger.Object);
 
             //act
@@ -291,38 +292,5 @@ namespace SchoolAdministrationTests
         }
 
         //todo : test also : GetStudentByFilter
-
-        //todo : place StudentList in a separate class and use it in the test class
-        private IEnumerable<Student> StudentList()
-        {
-            IEnumerable<Student> studentList = [
-                new Student()
-                {
-                    Id = 1,
-                    FirstName = "Koen",
-                    LastName = "Verboven",
-                    DateOfBirth = DateTime.Now.AddYears(-30),
-                    Gender = 1,
-                    Email="koen@test.be",
-                    Phone = "448389639",
-                    Courses = null,
-                    StudyPlans = null
-                },
-                new Student()
-                {
-                    Id = 2,
-                    FirstName = "Mark",
-                    LastName = "Peeters",
-                    DateOfBirth = DateTime.Now.AddYears(-34),
-                    Gender = 1,
-                    Email="mark@test.be",
-                    Phone = "44994989",
-                    Courses = null,
-                    StudyPlans = null
-                }
-                ];
-            return studentList;
-        }
-
     }
 }

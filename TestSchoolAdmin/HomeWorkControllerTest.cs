@@ -5,9 +5,9 @@ using Moq;
 using SchoolAdministration.AutoMapper;
 using SchoolAdministration.Controllers;
 using SchoolAdministration.Models.Domain.HomeWork;
-using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
+using SchoolAdministrationTests.Data;
 
 namespace SchoolAdministrationTests;
 
@@ -35,7 +35,7 @@ public class HomeWorkControllerTest
     {
         //arrange
         var mapper = new Mapper(_mapperConfiguration);
-        _mockHomeWorkRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(HomeWorkList());
+        _mockHomeWorkRepo.Setup(x => x.GetAllAsync()).ReturnsAsync(HomeWorkMockData.HomeWorkList());
         var controller = new HomeWorkController(_mockHomeWorkRepo.Object, _mockILogger.Object, mapper);
 
         //act
@@ -101,55 +101,4 @@ public class HomeWorkControllerTest
         Assert.Equivalent(homeWorkDTO, actual);
     }
 
-    private IEnumerable<HomeWork> HomeWorkList()
-    {
-        IEnumerable<HomeWork> homeWorkList = [
-            new HomeWork()
-                {
-                   Id = 1,
-                   Name= "HomeWork 1",
-                   DueDate= DateTime.Now,
-                   TeacherId= 1,
-                   HomeWorkDetailLines = new HomeWorkDetailLine[]
-                   {
-                       new()
-                       {
-                           Id = 1,
-                           HomeWorkAssignment = "HomeWork Detail Line 1",
-                           HomeWorkId = 1
-                       },
-                       new()
-                       {
-                           Id = 2,
-                           HomeWorkAssignment = "HomeWork Detail Line 2",
-                           HomeWorkId = 1
-                       }
-                   }
-                },
-            new HomeWork()
-                {
-                   Id = 2,
-                    Name= "HomeWork 1",
-                   DueDate= DateTime.Now,
-                   TeacherId= 1,
-                   HomeWorkDetailLines = new HomeWorkDetailLine[]
-                   {
-                       new()
-                       {
-                           Id = 1,
-                           HomeWorkAssignment = "HomeWork Detail Line 1",
-                           HomeWorkId = 1
-                       },
-                       new()
-                       {
-                           Id = 2,
-                           HomeWorkAssignment = "HomeWork Detail Line 2",
-                           HomeWorkId = 1
-                       }
-                   }
-
-                }
-            ]; ;
-        return homeWorkList;
-    }
 }
