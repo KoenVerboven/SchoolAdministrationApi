@@ -6,7 +6,17 @@ of a software application are tested in isolation to ensure that they function a
 The primary goal of unit testing is to validate that each unit of the software performs as designed,
 which helps in identifying and fixing bugs early in the development process.
 
-Remarks: Write a test for each method in the controller and each possible scenario!
+Remarks:
+Write a test for each method in the controller and each possible scenario!
+examples:
+
+Test if the method returns the correct student when a VALID ID is provided:
+GetAsynById_ShallReturnStudentWithId_ForExistingStudentWithId()
+
+Test if the method returns the correct student when a INVALID ID is provided:
+GetAsynById_ShallReturnNotFoundResult_WhenStudentNotFound()
+GetAsynById_ShallReturnBadRequest_WhenStudentIdEqualsZero()
+
 
 Practical example 
 -------------------

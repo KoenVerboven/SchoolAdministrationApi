@@ -1,0 +1,116 @@
+﻿*********************************
+Solid pricipes
+********************************
+
+
+
+1/ Single Responsibility Principle (SRP): 
+*****************************************
+Each class or module should have one, and only one, reason to change. In school administration, this means that
+each component of the system should focus on a single aspect of the school's operations, 
+such as student management, teacher management, or course scheduling. This makes the system easier to maintain and understand.
+
+Example in SchoolAdministration-api: 
+------------------------------------
+A class named "StudenController"handle student-related operations, while a separate class named "TeacherCpntroller"
+should handle teacher-related operations.
+
+
+
+
+
+2/ Open/Closed Principle (OCP):
+******************************
+Classes should be open for extension but closed for modification. In school administration, 
+this means that new functionality can be added to the system without modifying existing code,
+promoting code reusability and reducing the risk of introducing bugs.
+
+Example in SchoolAdministration-api: 
+------------------------------------
+extension methods can be used to add new functionality to existing classes without modifying their source code:
+
+public static class CourseMappingExtensions.cs:
+public static IEnumerable<CourseDTO> MapCoursesToCourseDtos(this IEnumerable<Course> courses) //MapCoursesToCourseDtos is an extension method that maps a collection of Course objects to a collection of CourseDTO objects.
+{      return courses.Select(course => new CourseDTO            {
+         Id = course.Id,
+         CourseName = course.CourseName,
+         CourseCode = course.CourseCode,
+         CourseDescription = course.CourseDescription,
+         StartDate = course.StartDate,
+         EndDate = course.EndDate,
+         CoursePrice = course.CoursePrice,
+         MaxNumberOfStudents = course.MaxNumberOfStudents
+       );
+}
+
+CourseController.cs :
+public async Task<ActionResult<IEnumerable<CourseDTO>>> GetAllCourses()
+{
+    var allCourses = await _courseRepository.GetAllAsync();
+    _logger.LogInformation("Getting all courses");
+    var coursesDTO = allCourses.MapCoursesToCourseDtos();   //here we are using the extension method to map the courses to courseDTOs
+    return Ok(coursesDTO);
+}
+
+
+
+
+
+3/ Liskov Substitution Principle (LSP):
+***************************************
+Subtypes must be substitutable for their base types. In school administration, this means that any object of
+a superclass should be replaceable with an object of any of its subclasses without affecting the correctness of the program.
+
+Example in SchoolAdministration-api: 
+------------------------------------
+If there is a base class "Person" with subclasses "Student" and "Teacher", any code that
+uses a "Person" object should be able to use a "Student" or "Teacher" object without any issues.
+Example in SchoolAdministration-api:
+
+
+
+
+
+
+4/ Interface Segregation Principle (ISP):
+*****************************************
+Clients should not be forced to depend on interfaces they do not use. In school administration, this means that classes 
+should not be required to implement methods they do not need, promoting more focused and maintainable code.
+Instead of having a single large interface with many methods, it's better to have smaller,
+more specific interfaces that can be implemented by different classes as needed.
+
+Example in SchoolAdministration-api:
+------------------------------------
+ICourseRepository.cs -> CourseRepository.cs implements ICourseRepository.cs interface which contains only the methods related to course management,
+ 
+
+
+
+ 5/ Dependency Inversion Principle (DIP):
+*****************************************
+ High-level modules should not depend on low-level modules. Both should depend on abstractions.
+ In school administration, this means that the system should be designed in a way that high-level 
+ components (like a student registration system) are not tightly coupled to low-level components
+ (like a specific database implementation). Instead, they should both depend on abstract interfaces or protocols.
+ 
+ Example in SchoolAdministration-api:	
+ ------------------------------------ 
+ program.cs :
+ builder.Services.AddScoped<IStudentRepository, StudentRepository>();// add the student repository to the DI (dependency injection) :
+
+ studentController :
+
+ [Route("api/[Controller]")]
+    [ApiController]
+    public class StudentController : ControllerBase
+    {
+        private readonly IStudentRepository _studentRepository;
+
+
+        public StudentController(
+            IStudentRepository studentRepository  <-- DI , DependencyInjection
+            )
+        {
+            _studentRepository = studentRepository;
+        }
+
