@@ -170,16 +170,14 @@ Dependency injection aims to separate the concerns of constructing objects and u
  leading to loosely coupled programs.
 
 
-We use DI for injection from : studentRepository,logger and mapper
+We use DI for injection from : examResultRepository,logger and mapper
 
- public StudentController(
-     IStudentRepository studentRepository,
-     ILogger<StudentController> logger,
-     IMapper mapper)
+<img width="1086" height="262" alt="di controller2" src="https://github.com/user-attachments/assets/9f89d2ef-9bb9-4141-b8c8-accc8eea75b7" />
 
  In program.cs we must configure:
  
- builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+ <img width="705" height="27" alt="examResult" src="https://github.com/user-attachments/assets/0c8ec376-171e-40b8-8f0b-0297f7cf3abc" />
+
 
 AutoMapper : 
 -------------
