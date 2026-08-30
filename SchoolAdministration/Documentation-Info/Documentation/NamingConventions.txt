@@ -2,8 +2,8 @@
 Naming conventions:
 
 C#:
-Class names should be in PascalCase (e.g., StudentRecord, CourseSchedule).
-Add an empty line for an if statement and after it to improve readability.
+* Class names should be in PascalCase (e.g., StudentRecord, CourseSchedule).
+* Add an empty line for an if statement and after it to improve readability.
 
 Follow the microsoft guidelines:
 https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/naming-guidelines

@@ -1,5 +1,5 @@
 ﻿
-SuperAmin
+SuperAdmin
 Can create,read ,update and delete Schools
 
 SchoolAdmin, School Staff member
