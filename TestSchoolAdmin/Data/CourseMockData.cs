@@ -9,7 +9,7 @@ namespace SchoolAdministrationTests.Data
             IEnumerable<Course> courseList = [
                 new Course()
                 {
-                    Id = 1,
+                   Id = 1,
                    CourseName = "Electronica A2",
                    CourseCode= "E2," ,
                    StartDate= DateTime.Now,
@@ -18,14 +18,14 @@ namespace SchoolAdministrationTests.Data
                 },
                 new Course()
                 {
-                    Id = 2,
+                   Id = 2,
                    CourseName = "Mathemtics M2",
                    CourseCode= "E2," ,
                    StartDate= DateTime.Now,
                    EndDate= DateTime.Now,
                    CoursePrice= 15.99M
                 }
-                ]; ;
+            ]; 
             return courseList;
         }
     }

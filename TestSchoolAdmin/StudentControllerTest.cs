@@ -219,7 +219,7 @@ namespace SchoolAdministrationTests
 
 
         [Fact]
-        public async Task UpdateStudentAsync_UpdateStudentCorrectly_WhenIdIsEqualToDtudentUpdateDTOIdAndModelStateIsValid()
+        public async Task UpdateStudentAsync_UpdateStudentCorrectly_WhenIdIsEqualToStudentUpdateDTOIdAndModelStateIsValid()//todo : add test for invalid modelstate 
         {
             //arrange
             var student = new Student()

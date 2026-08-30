@@ -112,4 +112,46 @@ public class CourseControllerTests
         //assert
         Assert.IsType<CreatedAtActionResult>(actionResult.Result);
     }
+
+    [Fact]
+    public async Task UpdateCourseAsync_UpdateCourseCorrectly_WhenIdIsEqualToCourseUpdateDTOIdAndModelStateIsValid()
+    {
+        //arrange
+        var course = new Course()
+        {
+            Id = 1,
+            CourseName = "Electronica A2",
+            CourseCode = "E2",
+            StartDate = DateTime.Now,
+            EndDate = DateTime.Now,
+            CoursePrice = 10.99M,
+        };
+
+        var updatedCourse = new CourseUpdateDTO()
+        {
+            Id = 1,
+            CourseName = "Electronica A2",
+            CourseCode = "E2",
+            StartDate = DateTime.Now,
+            EndDate = DateTime.Now,
+            CoursePrice = 15.99M,
+        };
+
+        _mockCourseRepo.Setup(x => x.GetByIdAsync(1)).ReturnsAsync(course);
+        var controller = new CourseController(_mockCourseRepo.Object, _mockILogger.Object);
+
+        //act
+        var actionResult = await controller.UpdateCourseAsync(1, updatedCourse);
+ 
+        //assert
+        var okObjectResult = actionResult as CreatedAtActionResult;
+        Assert.IsType<CreatedAtActionResult>(actionResult);
+
+        var actual = okObjectResult!.Value as Course;
+        Assert.NotNull(actual);
+        Assert.Equal(updatedCourse.Id, actual.Id);
+        Assert.Equal(updatedCourse.CourseName, actual.CourseName);
+        Assert.Equivalent(updatedCourse, actual);
+    }
+
 }

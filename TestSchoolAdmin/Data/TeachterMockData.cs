@@ -35,7 +35,7 @@ namespace SchoolAdministrationTests.Data
                 },
                 new Teacher()
                 {
-                    Id = 2,
+                    Id = 3,
                     FirstName = "Linda",
                     LastName = "Versmissen",
                     DateOfBirth = DateTime.Now.AddYears(-30),
@@ -46,8 +46,7 @@ namespace SchoolAdministrationTests.Data
                     LeaveDate = null,
                     MaritalStatusId = 1,
                 },
-
-                ];
+            ];
             return teacherList;
         }
     }

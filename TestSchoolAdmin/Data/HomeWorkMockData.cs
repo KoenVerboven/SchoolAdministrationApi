@@ -29,7 +29,7 @@ namespace SchoolAdministrationTests.Data
                        }
                    }
                 },
-            new HomeWork()
+                new HomeWork()
                 {
                    Id = 2,
                     Name= "HomeWork 1",
@@ -52,7 +52,7 @@ namespace SchoolAdministrationTests.Data
                    }
 
                 }
-                ]; ;
+            ]; 
             return homeWorkList;
         }
     }

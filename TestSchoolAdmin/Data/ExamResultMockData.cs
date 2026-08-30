@@ -51,8 +51,8 @@ namespace SchoolAdministrationTests.Data
                         Courses = null,
                         StudyPlans = null
                     }
-                }];
-
+                }
+            ];
             return examResultList;
         }
     }
