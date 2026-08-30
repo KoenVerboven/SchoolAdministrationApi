@@ -263,6 +263,10 @@ Analyse:
 
 [Analyse](https://github.com/KoenVerboven/SchoolAdministrationApi/blob/master/SchoolAdministration/Documentation-Info/Documentation/Analyse.txt)
 
+Naming conventions:
+--------------------
+
+[Naming conventions](https://github.com/KoenVerboven/SchoolAdministrationApi/blob/master/SchoolAdministration/Documentation-Info/Documentation/NamingConventions.txt)
 
 
 
