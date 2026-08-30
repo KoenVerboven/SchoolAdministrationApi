@@ -9,24 +9,16 @@ namespace SchoolAdministration.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudentPresenceController : ControllerBase
+    public class StudentPresenceController(IStudentPresenceRepository studentPresenceRepository, IStudentRepository studentRepository, IClassRepository classRepository, ILogger<StudentPresenceController> logger, IMapper mapper) : ControllerBase
     {
         private const string controllerName = "StudentPresenceController";
-        private readonly IStudentPresenceRepository _studentPresenceRepository;
-        private readonly IStudentRepository _studentRepository;
-        private readonly IClassRepository _classRepository;
-        private readonly ILogger<StudentPresenceController> _logger;
-        private readonly IMapper _mapper;
+        private readonly IStudentPresenceRepository _studentPresenceRepository = studentPresenceRepository;
+        private readonly IStudentRepository _studentRepository = studentRepository;
+        private readonly IClassRepository _classRepository = classRepository;
+        private readonly ILogger<StudentPresenceController> _logger = logger;
+        private readonly IMapper _mapper = mapper;
 
         public IStudentRepository StudentRepository { get; }
-
-        public StudentPresenceController(IStudentPresenceRepository studentPresenceRepository, IStudentRepository studentRepository, IClassRepository classRepository ,ILogger<StudentPresenceController> logger, IMapper mapper) { 
-            _studentPresenceRepository = studentPresenceRepository;
-            _studentRepository = studentRepository;
-            _classRepository = classRepository;
-            _logger = logger;
-            _mapper = mapper;
-        }
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<StudentPresenceDTO>), StatusCodes.Status200OK)]

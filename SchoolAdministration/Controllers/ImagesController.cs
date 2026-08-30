@@ -7,17 +7,11 @@ namespace SchoolAdministration.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ImagesController : ControllerBase
+    public class ImagesController(IImageRepository imageRepository, IMapper mapper) : ControllerBase
     {
    
-        private readonly IImageRepository _imageRepository;
-        private readonly IMapper _mapper;
-
-        public ImagesController(IImageRepository imageRepository, IMapper mapper)
-        {
-            _imageRepository = imageRepository;
-            _mapper = mapper;
-        }
+        private readonly IImageRepository _imageRepository = imageRepository;
+        private readonly IMapper _mapper = mapper;
 
         [HttpGet]
         public async Task<IActionResult>GetAllStudentImages()

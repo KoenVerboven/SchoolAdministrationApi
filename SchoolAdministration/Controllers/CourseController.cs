@@ -10,16 +10,10 @@ namespace SchoolAdministration.Controllers
 
     [Route("api/[Controller]")]
     [ApiController]
-    public class CourseController : ControllerBase
+    public class CourseController(ICourseRepository courseRepository, ILogger<CourseController> logger) : ControllerBase
     {
-        private readonly ICourseRepository _courseRepository;
-        private readonly ILogger<CourseController> _logger;
-       
-        public CourseController(ICourseRepository courseRepository,ILogger<CourseController> logger)
-        {
-            _courseRepository = courseRepository;
-            _logger = logger;
-        }
+        private readonly ICourseRepository _courseRepository = courseRepository;
+        private readonly ILogger<CourseController> _logger = logger;
 
         //be carefull with GetAllCourses with big data, it can cause performance issues,
         //consider using pagination or filtering (GetCourseByFilter is better for that)

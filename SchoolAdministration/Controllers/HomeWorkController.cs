@@ -9,19 +9,11 @@ namespace SchoolAdministration.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HomeWorkController : ControllerBase
+    public class HomeWorkController(IHomeWorkRepository homeWorkRepository, ILogger<HomeWorkController> logger, IMapper mapper) : ControllerBase
     {
-        private readonly IHomeWorkRepository _homeWorkRepository;
-        private readonly ILogger<HomeWorkController> _logger;
-        private readonly IMapper _mapper;
-
-        public HomeWorkController(IHomeWorkRepository homeWorkRepository, ILogger<HomeWorkController> logger, IMapper mapper)
-        {
-           _homeWorkRepository = homeWorkRepository;
-           _logger = logger;
-           _mapper = mapper;
-        }
-
+        private readonly IHomeWorkRepository _homeWorkRepository = homeWorkRepository;
+        private readonly ILogger<HomeWorkController> _logger = logger;
+        private readonly IMapper _mapper = mapper;
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<CourseDTO>), StatusCodes.Status200OK)]

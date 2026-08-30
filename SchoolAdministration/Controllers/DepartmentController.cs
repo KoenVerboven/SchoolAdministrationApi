@@ -9,16 +9,10 @@ namespace SchoolAdministration.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DepartmentController : ControllerBase
+    public class DepartmentController(IDepartmentRepository departmentRepository, IMapper mapper) : ControllerBase
     {
-        private readonly IDepartmentRepository _departmentRepository;
-        private readonly IMapper _mapper;
-
-        public DepartmentController(IDepartmentRepository departmentRepository, IMapper mapper)
-        {
-            _departmentRepository = departmentRepository;
-            _mapper = mapper;
-        }
+        private readonly IDepartmentRepository _departmentRepository = departmentRepository;
+        private readonly IMapper _mapper = mapper;
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<DepartmentDTO>), StatusCodes.Status200OK)]

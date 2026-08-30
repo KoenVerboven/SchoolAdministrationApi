@@ -9,14 +9,9 @@ namespace SchoolAdministration.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SchoolController : ControllerBase
+    public class SchoolController(IGenericRepository<School> repository) : ControllerBase
     {
-        private readonly IGenericRepository<School> _repository;
-  
-        public SchoolController(IGenericRepository<School> repository)
-        {
-            _repository = repository;
-        }
+        private readonly IGenericRepository<School> _repository = repository;
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<SchoolDTO>), StatusCodes.Status200OK)]

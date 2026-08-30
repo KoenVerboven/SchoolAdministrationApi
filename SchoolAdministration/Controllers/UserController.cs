@@ -8,18 +8,11 @@ namespace SchoolAdministration.Controllers
 {
     [Route("api/User")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController(IUserRepository userRepository, IRoleRepository roleRepository) : ControllerBase
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IRoleRepository _roleRepository;
-        protected ApiResponse _apiResponse;
-
-        public UserController(IUserRepository userRepository, IRoleRepository roleRepository)
-        {
-            _userRepository = userRepository;
-            _roleRepository = roleRepository;
-            this._apiResponse = new ApiResponse();
-        }
+        private readonly IUserRepository _userRepository = userRepository;
+        private readonly IRoleRepository _roleRepository = roleRepository;
+        protected ApiResponse _apiResponse = new ApiResponse();
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<UserDTO>), StatusCodes.Status200OK)]

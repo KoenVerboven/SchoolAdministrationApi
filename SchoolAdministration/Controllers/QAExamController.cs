@@ -8,18 +8,10 @@ namespace SchoolAdministration.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class QAExamController : ControllerBase
+    public class QAExamController(IQAExamRepository qAExamDetailRepository, ILogger<ExamResultController> logger) : ControllerBase
     {
-        private readonly IQAExamRepository _qAExamRepository;
-        private readonly ILogger<ExamResultController> _logger;
-
-        public QAExamController(IQAExamRepository qAExamDetailRepository, ILogger<ExamResultController> logger)
-        {
-            _qAExamRepository = qAExamDetailRepository;
-            _logger = logger;
-        }
-
-     
+        private readonly IQAExamRepository _qAExamRepository = qAExamDetailRepository;
+        private readonly ILogger<ExamResultController> _logger = logger;
 
         [HttpGet]
         [ResponseCache(Duration = 30)]

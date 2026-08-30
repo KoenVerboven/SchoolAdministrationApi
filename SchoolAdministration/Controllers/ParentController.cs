@@ -3,24 +3,16 @@ using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
-using SchoolAdministration.Repositories.Repos;
 
 namespace SchoolAdministration.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ParentController : ControllerBase
+    public class ParentController(IParentRepository parentRepository, ILogger<ParentController> logger, IMapper mapper) : ControllerBase
     {
-        private readonly IParentRepository _parentRepository;
-        private readonly ILogger<ParentController> _logger;
-        private readonly IMapper _mapper;
-
-        public ParentController(IParentRepository parentRepository,ILogger<ParentController> logger, IMapper mapper)
-        {
-            _parentRepository = parentRepository;
-            _logger = logger;
-            _mapper = mapper;
-        }
+        private readonly IParentRepository _parentRepository = parentRepository;
+        private readonly ILogger<ParentController> _logger = logger;
+        private readonly IMapper _mapper = mapper;
 
         [HttpGet]
         //[Authorize]

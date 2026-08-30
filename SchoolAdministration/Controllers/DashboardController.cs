@@ -7,36 +7,24 @@ namespace SchoolAdministration.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DashboardController : ControllerBase
+    public class DashboardController(
+        IStudentRepository studentRepository,
+        ITeacherRepository teacherRepository,
+        ICourseRepository courseRepository,
+        IUserRepository userRepository,
+        IQAExamRepository qAExamDetailRepository,
+        ILogger<DashboardController> logger,
+        IMapper mapper
+            ) : ControllerBase
     {
-        private readonly IStudentRepository _studentRepository;
-        private readonly ITeacherRepository _teacherRepository;
-        private readonly ICourseRepository _courseRepository;
-        private readonly IUserRepository _userRepository;
-        private readonly IQAExamRepository _qAExamDetailRepository;
-        private readonly ILogger<DashboardController> _logger;
-        private readonly IMapper _mapper;
+        private readonly IStudentRepository _studentRepository = studentRepository;
+        private readonly ITeacherRepository _teacherRepository = teacherRepository;
+        private readonly ICourseRepository _courseRepository = courseRepository;
+        private readonly IUserRepository _userRepository = userRepository;
+        private readonly IQAExamRepository _qAExamDetailRepository = qAExamDetailRepository;
+        private readonly ILogger<DashboardController> _logger = logger;
+        private readonly IMapper _mapper = mapper;
 
-        public DashboardController(
-            IStudentRepository studentRepository,
-            ITeacherRepository teacherRepository,
-            ICourseRepository courseRepository,
-            IUserRepository userRepository,
-            IQAExamRepository qAExamDetailRepository,
-            ILogger<DashboardController> logger,
-            IMapper mapper
-            )
-        {
-            _studentRepository = studentRepository;
-            _teacherRepository = teacherRepository;
-            _courseRepository = courseRepository;
-            _userRepository = userRepository;
-            _qAExamDetailRepository = qAExamDetailRepository;
-            _logger = logger;
-            _mapper = mapper;
-        }
-
-      
         [HttpGet("getStudentCount")]
         [ProducesResponseType(typeof(int), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

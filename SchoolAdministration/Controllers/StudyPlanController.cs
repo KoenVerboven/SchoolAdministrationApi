@@ -7,13 +7,9 @@ namespace SchoolAdministration.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudyPlanController : ControllerBase
+    public class StudyPlanController(IStudyPlanRepository studyPlanRepository) : ControllerBase
     {
-        private readonly IStudyPlanRepository _studyPlanRepository;
-        public StudyPlanController(IStudyPlanRepository studyPlanRepository )
-        {
-            _studyPlanRepository = studyPlanRepository;
-        }
+        private readonly IStudyPlanRepository _studyPlanRepository = studyPlanRepository;
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<StudyPlan>), StatusCodes.Status200OK)]

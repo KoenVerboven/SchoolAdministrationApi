@@ -6,14 +6,9 @@ namespace SchoolAdministration.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudyPlanDetailLineController : ControllerBase
+    public class StudyPlanDetailLineController(IStudyPlanDetailLineRepository studyPlanDetailLineRepository) : ControllerBase
     {
-        private readonly IStudyPlanDetailLineRepository _studyPlanDetailLineRepository;
-
-        public StudyPlanDetailLineController(IStudyPlanDetailLineRepository studyPlanDetailLineRepository)
-        {
-            _studyPlanDetailLineRepository = studyPlanDetailLineRepository;
-        }
+        private readonly IStudyPlanDetailLineRepository _studyPlanDetailLineRepository = studyPlanDetailLineRepository;
 
         [HttpGet("getStudyplanDetailLinesFilter")]
         [ProducesResponseType(typeof(IEnumerable<StudyPlanDetailLine>), StatusCodes.Status200OK)]

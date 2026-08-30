@@ -10,16 +10,10 @@ namespace SchoolAdministration.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TeacherController : ControllerBase
+    public class TeacherController(ITeacherRepository teacherRepository, ILogger<TeacherController> logger) : ControllerBase
     {
-        private readonly ITeacherRepository _teacherRepository;
-        private readonly ILogger<TeacherController> _logger;
-
-        public TeacherController(ITeacherRepository teacherRepository,ILogger<TeacherController> logger)
-        {
-            _teacherRepository = teacherRepository;
-            _logger = logger;
-        }
+        private readonly ITeacherRepository _teacherRepository = teacherRepository;
+        private readonly ILogger<TeacherController> _logger = logger;
 
         [HttpGet]
         //[Authorize]

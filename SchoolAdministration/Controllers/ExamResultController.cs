@@ -10,18 +10,12 @@ namespace SchoolAdministration.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ExamResultController : ControllerBase
+    public class ExamResultController(IExamResultRepository examResultRepository, ILogger<ExamResultController> logger, IMapper mapper) : ControllerBase
     {
-        private readonly IExamResultRepository _examResultRepository;
-        private readonly ILogger<ExamResultController> _logger;
-        private readonly IMapper _mapper;
-
-        public ExamResultController(IExamResultRepository examResultRepository, ILogger<ExamResultController> logger, IMapper mapper)
-        {
-            _examResultRepository = examResultRepository;
-            _logger = logger;
-            _mapper = mapper;
-        }
+        //use of primary constructor injection to inject the repository, logger and mapper into the controller
+        private readonly IExamResultRepository _examResultRepository = examResultRepository;
+        private readonly ILogger<ExamResultController> _logger = logger;
+        private readonly IMapper _mapper = mapper;
 
 
         //The request url example : 
