@@ -211,10 +211,12 @@ MappingConfig:
 In the Controller :
 
 get all homeworks :
+
 <img width="686" height="222" alt="Schermafbeelding 2026-08-31 123605" src="https://github.com/user-attachments/assets/b48c25b1-810e-4410-9ba1-a810da885293" />
 
 insert a new homework :
-<img width="881" height="331" alt="image" src="https://github.com/user-attachments/assets/8a3960f7-d871-4ae7-aec6-9e33d110d6a1" />
+
+<img width="881" height="331" alt="Schermafbeelding 2026-08-31 123752" src="https://github.com/user-attachments/assets/1089a8ae-6ef3-4ae5-ab88-7eb74a4c9dfc" />
 
 
  
