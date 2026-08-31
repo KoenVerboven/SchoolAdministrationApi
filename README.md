@@ -174,7 +174,8 @@ We use DI for injection from : examResultRepository,logger and mapper
 
 <img width="1086" height="262" alt="di controller2" src="https://github.com/user-attachments/assets/9f89d2ef-9bb9-4141-b8c8-accc8eea75b7" />
 
-Same , but more modern syntax (primary constructor) :
+The Same , but with more modern syntax : 
+primary constructor (C# 12+) :
 
 <img width="1277" height="242" alt="Schermafbeelding 2026-08-31 124518" src="https://github.com/user-attachments/assets/fab306c6-1289-425e-a9ca-69efe1194b2d" />
 
