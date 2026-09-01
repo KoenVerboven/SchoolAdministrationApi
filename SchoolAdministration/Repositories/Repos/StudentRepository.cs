@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Data;
+using SchoolAdministration.Helpers;
 using SchoolAdministration.Models.Domain.Course;
 using SchoolAdministration.Models.Domain.Exam;
 using SchoolAdministration.Models.Domain.Student;
@@ -17,6 +18,8 @@ namespace SchoolAdministration.Repositories.Repos
 
         public async Task AddStudentAsync(Student student)
         {
+            student.LastName = StringHelper.ChangeFirstCharFromNameToUpperCase(student.LastName);
+            student.FirstName = StringHelper.ChangeFirstCharFromNameToUpperCase(student.FirstName);
             await _context.Students.AddAsync(student);
             await _context.SaveChangesAsync();
         }
