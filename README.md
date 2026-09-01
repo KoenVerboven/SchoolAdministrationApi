@@ -250,15 +250,15 @@ CourseMappingExtensions.cs :
 Versioning :
 -----------
 
-<img width="1465" height="66" alt="image" src="https://github.com/user-attachments/assets/51d90494-4088-4e7b-b9a2-cdf212506aa4" />
-
-
 Installed NuGet-packages : 
 * Microsoft.AspNetCore.Mvc.Versioning
 * Microsoft.AspNetCore.Mvc.Versioning.ApiExlorer
 
-  Program.cs :
+StudentController:
+<img width="437" height="130" alt="controllerversioning" src="https://github.com/user-attachments/assets/158a3a0c-0e06-473c-acbd-58e900b0fa0a" />
 
+
+Program.cs :
 <img width="657" height="131" alt="versioning" src="https://github.com/user-attachments/assets/e6528db6-4791-41a5-9c0e-db9c2c4937ea" />
 
 
