@@ -174,6 +174,12 @@ We use DI for injection from : examResultRepository,logger and mapper
 
 <img width="1086" height="262" alt="di controller2" src="https://github.com/user-attachments/assets/9f89d2ef-9bb9-4141-b8c8-accc8eea75b7" />
 
+The Same , but with more modern syntax : 
+primary constructor (C# 12+) :
+
+<img width="1277" height="242" alt="Schermafbeelding 2026-08-31 124518" src="https://github.com/user-attachments/assets/fab306c6-1289-425e-a9ca-69efe1194b2d" />
+
+
  In program.cs we must configure:
  
  <img width="705" height="27" alt="examResult" src="https://github.com/user-attachments/assets/0c8ec376-171e-40b8-8f0b-0297f7cf3abc" />
@@ -205,11 +211,20 @@ Example : for insert we do not need a ID, for a update is ID necessary.
  
 MappingConfig:
 
- CreateMap<Student, StudentDTO>().ReverseMap();
- 
-In the Controller we can write some like this to map student to StudentDTO :
+ <img width="556" height="82" alt="mappingConfig" src="https://github.com/user-attachments/assets/43d395b1-352f-4e43-9f5d-4b5aff8f3555" />
 
- _mapper.Map < StudentDTO > (student)
+ 
+In the Controller :
+
+get all homeworks :
+
+<img width="686" height="222" alt="Schermafbeelding 2026-08-31 123605" src="https://github.com/user-attachments/assets/b48c25b1-810e-4410-9ba1-a810da885293" />
+
+insert a new homework :
+
+<img width="881" height="331" alt="Schermafbeelding 2026-08-31 123752" src="https://github.com/user-attachments/assets/1089a8ae-6ef3-4ae5-ab88-7eb74a4c9dfc" />
+
+
  
 Note : In the latest version of Automapper, you need a license key.
 Check te website:   [https://AutoMapper.io](https://AutoMapper.io)
