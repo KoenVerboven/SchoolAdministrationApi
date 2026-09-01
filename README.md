@@ -259,11 +259,8 @@ Installed NuGet-packages :
 
   Program.cs :
 
- builder.Services.AddApiVersioning(options =>
- {
-    options.AssumeDefaultVersionWhenUnspecified = true;
-    options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
- });
+<img width="657" height="131" alt="versioning" src="https://github.com/user-attachments/assets/e6528db6-4791-41a5-9c0e-db9c2c4937ea" />
+
 
 
 More Info / Documentation :
