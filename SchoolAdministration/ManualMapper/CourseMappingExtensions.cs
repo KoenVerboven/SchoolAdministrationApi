@@ -56,6 +56,7 @@ namespace SchoolAdministration.ManualMapper
         {
             return new Course
             {
+                Id = dto.Id,
                 CourseName = dto.CourseName,
                 CourseCode = dto.CourseCode,
                 CourseDescription = dto.CourseDescription,

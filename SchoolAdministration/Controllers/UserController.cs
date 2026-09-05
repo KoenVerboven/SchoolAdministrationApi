@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SchoolAdministration.Models.Domain.General;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
@@ -8,10 +7,9 @@ namespace SchoolAdministration.Controllers
 {
     [Route("api/User")]
     [ApiController]
-    public class UserController(IUserRepository userRepository, IRoleRepository roleRepository) : ControllerBase
+    public class UserController(IUserRepository userRepository) : ControllerBase
     {
         private readonly IUserRepository _userRepository = userRepository;
-        private readonly IRoleRepository _roleRepository = roleRepository;
         protected ApiResponse _apiResponse = new ApiResponse();
 
         [HttpGet]
@@ -116,15 +114,15 @@ namespace SchoolAdministration.Controllers
         {
             var user = await _userRepository.GetByIdAsync(userId) ?? throw new Exception("User not found");
 
-            if (!_roleRepository.RoleExistsAsync(roleName))
-            {
-                _apiResponse.Statuscode = System.Net.HttpStatusCode.BadRequest;
-                _apiResponse.IsSuccess = false;
-                _apiResponse.ErrorMessages.Add($"Role '{roleName}' does not exist.");
-                return BadRequest(_apiResponse);
-            }
+            //if (!_roleRepository.RoleExistsAsync(roleName))
+            //{
+            //    _apiResponse.Statuscode = System.Net.HttpStatusCode.BadRequest;
+            //    _apiResponse.IsSuccess = false;
+            //    _apiResponse.ErrorMessages.Add($"Role '{roleName}' does not exist.");
+            //    return BadRequest(_apiResponse);
+            //}
 
-            var isInRole =  _userRepository.IsInRole(userId, roleName);
+            var isInRole = _userRepository.IsInRole(userId, roleName);
 
             if (!isInRole)
             {

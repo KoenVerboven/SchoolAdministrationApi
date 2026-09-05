@@ -120,7 +120,7 @@ namespace SchoolAdministration.Repositories.Repos
                 Subject = new System.Security.Claims.ClaimsIdentity(
                     [
                         new Claim(ClaimTypes.Name, user.Id.ToString()),
-                        new Claim(ClaimTypes.Role,roles.FirstOrDefault())
+                        new Claim(ClaimTypes.Role,roles.FirstOrDefault()) // todo : the table AspNetUserRoles must contain at least one role, else this will throw an exception. If you want to allow users without roles, you should check if roles is not empty before adding the claim.
                     ]
                 ),
                 Expires = DateTime.UtcNow.AddDays(1000),
