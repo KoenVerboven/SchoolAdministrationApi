@@ -29,6 +29,9 @@ How to start the application :
 ------------------------------
 
 * Setup the database in SQL-Server
+
+* Populate the user and security tables with data :
+  https://github.com/KoenVerboven/SchoolAdministrationApi/blob/master/SchoolAdministration/DatabaseScripts/UserInsertScript.sql
   
 file appsettings.json :
 --------------------------
