@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Data;
 using SchoolAdministration.Helpers;
-using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.Domain.Teacher;
 using SchoolAdministration.Repositories.Interfaces;
 using SchoolAdministration.Specifications;
@@ -12,6 +11,7 @@ namespace SchoolAdministration.Repositories.Repos
     {
 
         private readonly AppDbContext _context;
+        const int MaxPageSize = 30;// todo : move to appsettings.json
 
         public TeacherRepository(AppDbContext context)
         {
@@ -40,7 +40,9 @@ namespace SchoolAdministration.Repositories.Repos
 
         public async Task<IEnumerable<Teacher>> GetAllAsyn()
         {
-            return await _context.Teachers.ToListAsync();   
+            return await _context.Teachers
+                                     .AsNoTracking()
+                                     .ToListAsync();   
         }
 
         //todo : is obsolete ? use GetTeachersByTeachersSearchParamsFilterAsync instead
@@ -59,9 +61,9 @@ namespace SchoolAdministration.Repositories.Repos
 
             if (pageSize > 0)
             {
-                if (pageSize > 30)
+                if (pageSize > MaxPageSize)
                 {
-                    pageSize = 30;
+                    pageSize = MaxPageSize;
                 }
                 teachers = teachers.Skip(pageSize * (pageNumber - 1)).Take(pageSize);
             }
@@ -159,15 +161,17 @@ namespace SchoolAdministration.Repositories.Repos
 
             if (teacherSearchParams.PageSize > 0)
             {
-                if (teacherSearchParams.PageSize > 30)
+                if (teacherSearchParams.PageSize > MaxPageSize)
                 {
-                    pageSize = 30;
+                    pageSize = MaxPageSize;
                 }
 
                 teachers = teachers.Skip(pageSize * (teacherSearchParams.PageNumber - 1)).Take(pageSize);
             }
 
-            return await teachers.ToListAsync();
+            return await teachers
+                             .AsNoTracking()
+                             .ToListAsync();
         }
     }
 }

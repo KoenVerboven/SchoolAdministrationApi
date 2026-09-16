@@ -13,6 +13,7 @@ namespace SchoolAdministration.Repositories.Repos
     public class StudentRepository : IStudentRepository
     {
         private readonly AppDbContext _context;
+        const int MaxPageSize = 30;
 
         public StudentRepository(AppDbContext context) => _context = context;
 
@@ -33,12 +34,15 @@ namespace SchoolAdministration.Repositories.Repos
 
         public async Task<IEnumerable<Student>> GetAllAsync()
         {
-            return await _context.Students.ToListAsync();
+            return await _context.Students
+                                     .AsNoTracking()
+                                     .ToListAsync();
         }
 
         public async Task<IEnumerable<StudentCourseDTO>> GetStudentCoursesAsync(int studentId)                
         {
             var studentCourses = await _context.Students.Include(p => p.Courses)//todo : add inculde for payments 
+                                                        .AsNoTracking()
                                                         .Where(p=>p.Id == studentId)
                                                         .ToListAsync();
             var studentCoursesList = new List<StudentCourseDTO>();
@@ -236,15 +240,17 @@ namespace SchoolAdministration.Repositories.Repos
 
             if (studentSearchParams.PageSize > 0)
             {
-                if (studentSearchParams.PageSize > 30)
+                if (studentSearchParams.PageSize > MaxPageSize)
                 {
-                    pageSize = 30;
+                    pageSize = MaxPageSize;
                 }
 
                 students = students.Skip(pageSize * (studentSearchParams.PageNumber - 1)).Take(pageSize);
             }
 
-            return await students.ToListAsync();
+            return await students
+                            .AsNoTracking()
+                            .ToListAsync();
         }
 
         //obstacle method, need to remove it in future
@@ -289,9 +295,9 @@ namespace SchoolAdministration.Repositories.Repos
 
             if (PageSize > 0 && PageNumber > 0)
             {
-                if (PageSize > 30)
+                if (PageSize > MaxPageSize)
                 {
-                    PageSize = 30;
+                    PageSize = MaxPageSize;
                 }
 
                 students = students.Skip(PageSize * (PageNumber - 1)).Take(PageSize);

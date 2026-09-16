@@ -11,6 +11,7 @@ namespace SchoolAdministration.Repositories.Repos
     {
 
         private readonly AppDbContext _context;
+        const int MaxPageSize = 30;
 
         public CourseRepository(AppDbContext context)
         {
@@ -42,7 +43,9 @@ namespace SchoolAdministration.Repositories.Repos
 
         public async Task<IEnumerable<Course>> GetAllAsync()
         {
-            return await _context.Courses.ToListAsync();
+            return await _context.Courses
+                                     .AsNoTracking()
+                                     .ToListAsync();
         }
 
         public async Task<Course?> GetByIdAsync(int id)
@@ -80,15 +83,17 @@ namespace SchoolAdministration.Repositories.Repos
 
             if (courseSearchParameters.PageSize > 0 && courseSearchParameters.PageNumber > 0) //todo : kan korter
             {
-                if (courseSearchParameters.PageSize > 30)
+                if (courseSearchParameters.PageSize > MaxPageSize)
                 {
-                    pageSize = 30;
+                    pageSize = MaxPageSize;
                 }
 
                 courses = courses.Skip(courseSearchParameters.PageSize * (courseSearchParameters.PageNumber - 1)).Take(pageSize);
             }
 
-            return await courses.ToListAsync();
+            return await courses
+                            .AsNoTracking()
+                            .ToListAsync();
         }
     
         public async Task UpdateCourseAsync(Course course)
