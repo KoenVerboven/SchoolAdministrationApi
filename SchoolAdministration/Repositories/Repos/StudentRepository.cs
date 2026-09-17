@@ -41,32 +41,34 @@ namespace SchoolAdministration.Repositories.Repos
 
         public async Task<IEnumerable<StudentCourseDTO>> GetStudentCoursesAsync(int studentId)                
         {
-            var studentCourses = await _context.Students.Include(p => p.Courses)//todo : add inculde for payments 
+            var studentCoursesList = new List<StudentCourseDTO>();
+            var studentCourses = await _context.Students.Include(p => p.Courses) 
                                                         .AsNoTracking()
                                                         .Where(p=>p.Id == studentId)
                                                         .ToListAsync();
-            var studentCoursesList = new List<StudentCourseDTO>();
 
             foreach (var studentCourse in studentCourses)
             {
                 var studentFirstname = studentCourse.LastName;
                 var studentLastname = studentCourse.FirstName;
 
-                foreach (Course course in studentCourse.Courses)
-                {
-                    var studentCourseDTO = new StudentCourseDTO()
+                if (studentCourse.Courses is not null) {
+                    foreach (Course course in studentCourse.Courses)
                     {
-                        StudentId = studentId,
-                        StudentLastName = studentLastname,
-                        StudentFirstName = studentFirstname,
-                        CourseId = course.Id,
-                        CourseName = course.CourseName,
-                        CourseStartDate = course.StartDate,
-                        CourseEndDate = course.EndDate,
-                        TotalAmount = course.CoursePrice,
-                        FullyPaid = null
-                    };
-                    studentCoursesList.Add(studentCourseDTO);
+                        var studentCourseDTO = new StudentCourseDTO()
+                        {
+                            StudentId = studentId,
+                            StudentLastName = studentLastname,
+                            StudentFirstName = studentFirstname,
+                            CourseId = course.Id,
+                            CourseName = course.CourseName,
+                            CourseStartDate = course.StartDate,
+                            CourseEndDate = course.EndDate,
+                            TotalAmount = course.CoursePrice,
+                            FullyPaid = null
+                        };
+                        studentCoursesList.Add(studentCourseDTO);
+                    }
                 }
             }
             return studentCoursesList;
@@ -114,18 +116,17 @@ namespace SchoolAdministration.Repositories.Repos
                 foreach (ExamResult examResult in studentExamResult.ExamResults)
                 {
                     var exam =  _context.QAExams.SingleOrDefault(p=>p.Id == examResult.QAExamId);
-                    var studentExamResultId = examResult.Id;
-                    var examResultScore = examResult.ExamenResultScore;
+
                     var studentExamResul = new StudentExamsResultDTO()
                     {
-                        Id = studentExamResultId,
+                        Id = examResult.Id,
                         StudentLastName = lastname,
                         StudentFirstName = firstname,
                         StudentEmail = studentEmail,
-                        ExamName = exam.ExamTitle, 
-                        ExamenResult = (double)examResultScore,
-                        MaxScore = exam.MaxScore,
-                        MinScoreToPassExam = exam.MinScoreToPassExam
+                        ExamName = exam?.ExamTitle ?? "unknown",
+                        ExamenResult = examResult?.ExamenResultScore ?? 0,
+                        MaxScore = exam?.MaxScore ?? 0,
+                        MinScoreToPassExam = exam?.MinScoreToPassExam ?? 0
                     };
                     studentExamResultList.Add(studentExamResul);
                 }
