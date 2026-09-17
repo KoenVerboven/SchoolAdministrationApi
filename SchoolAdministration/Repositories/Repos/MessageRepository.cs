@@ -1,13 +1,18 @@
-﻿using SchoolAdministration.Models.Domain.Communication;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolAdministration.Data;
+using SchoolAdministration.Models.Domain.Communication;
 using SchoolAdministration.Repositories.Interfaces;
 
 namespace SchoolAdministration.Repositories.Repos
 {
-    public class MessageRepository : IMessageRepository
+    public class MessageRepository(AppDbContext context) : IMessageRepository
     {
-        public Task AddMessageWorkAsync(Message message)
+        private readonly AppDbContext _context = context;
+
+        public async Task AddMessageAsync(Message message)
         {
-            throw new NotImplementedException();
+            await _context.Messages.AddAsync(message);
+            await _context.SaveChangesAsync();
         }
 
         public Task<int> CountAsync()
@@ -15,7 +20,7 @@ namespace SchoolAdministration.Repositories.Repos
             throw new NotImplementedException();
         }
 
-        public Task DeleteMessageAsync(int id)
+        public Task DeleteMessageAsync(int id) // todo : soft delete
         {
             throw new NotImplementedException();
         }
@@ -34,5 +39,7 @@ namespace SchoolAdministration.Repositories.Repos
         {
             throw new NotImplementedException();
         }
+
+        //todo : get all messages filtered by receiverId , SenderId ,...
     }
 }
