@@ -7,16 +7,11 @@ using SchoolAdministration.Specifications;
 
 namespace SchoolAdministration.Repositories.Repos
 {
-    public class CourseRepository : ICourseRepository
+    public class CourseRepository(AppDbContext context) : ICourseRepository
     {
 
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _context = context;
         const int MaxPageSize = 30;
-
-        public CourseRepository(AppDbContext context)
-        {
-            _context = context;
-        }
 
         public async Task AddCourseAsync(Course course)
         {

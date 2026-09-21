@@ -5,16 +5,10 @@ using SchoolAdministration.Repositories.Interfaces;
 
 namespace SchoolAdministration.Repositories.Repos
 {
-    public class ImageRepository : IImageRepository
+    public class ImageRepository(IWebHostEnvironment webHostEnvironment, AppDbContext context) : IImageRepository
     {
-        private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly AppDbContext _context;
-
-        public ImageRepository(IWebHostEnvironment webHostEnvironment,AppDbContext context)
-        {
-            _webHostEnvironment = webHostEnvironment;
-            _context = context;
-        }
+        private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
+        private readonly AppDbContext _context = context;
 
         public async Task<IEnumerable<StudentImage>> GetAllStudentImages()
         {

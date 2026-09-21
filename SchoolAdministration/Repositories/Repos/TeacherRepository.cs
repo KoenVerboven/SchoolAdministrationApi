@@ -7,16 +7,11 @@ using SchoolAdministration.Specifications;
 
 namespace SchoolAdministration.Repositories.Repos
 {
-    public class TeacherRepository : ITeacherRepository
+    public class TeacherRepository(AppDbContext context) : ITeacherRepository
     {
 
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _context = context;
         const int MaxPageSize = 30;// todo : move to appsettings.json
-
-        public TeacherRepository(AppDbContext context)
-        {
-            _context = context;         
-        }
 
         public async Task AddTeacherAsync(Teacher teacher)
         {

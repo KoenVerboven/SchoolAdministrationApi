@@ -5,14 +5,9 @@ using SchoolAdministration.Repositories.Interfaces;
 
 namespace SchoolAdministration.Repositories.Repos
 {
-    public class StudyPlanDetailLineRepository : IStudyPlanDetailLineRepository
+    public class StudyPlanDetailLineRepository(AppDbContext appDbContext) : IStudyPlanDetailLineRepository
     {
-        private readonly AppDbContext _context;
-
-        public StudyPlanDetailLineRepository(AppDbContext appDbContext)
-        {
-            _context = appDbContext;
-        }
+        private readonly AppDbContext _context = appDbContext;
 
         public async Task AddStudyPlanDetailLineAsync(StudyPlanDetailLine studyPlanDetailLine)
         {

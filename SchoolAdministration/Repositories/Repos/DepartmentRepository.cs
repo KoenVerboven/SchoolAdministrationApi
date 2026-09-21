@@ -5,14 +5,9 @@ using SchoolAdministration.Models.Domain.School;
 
 namespace SchoolAdministration.Repositories.Repos
 {
-    public class DepartmentRepository : IDepartmentRepository
+    public class DepartmentRepository(AppDbContext context) : IDepartmentRepository
     {
-        private readonly AppDbContext _context;
-
-        public DepartmentRepository(AppDbContext context) 
-        {
-            _context = context;
-        }
+        private readonly AppDbContext _context = context;
 
         public AppDbContext Context { get; }
 

@@ -12,27 +12,17 @@ using System.Text;
 
 namespace SchoolAdministration.Repositories.Repos
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository(
+              AppDbContext context,
+              IConfiguration configuration,
+              UserManager<ApplicationUser> userManager,
+              IMapper mapper
+            ) : IUserRepository
     {
-        private readonly AppDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly IMapper _mapper;
-        private readonly string secretKey;
-
-        public UserRepository
-            (
-                  AppDbContext context,
-                  IConfiguration configuration,
-                  UserManager<ApplicationUser> userManager,
-                  IMapper mapper
-            )
-        {
-            _context = context;
-            _userManager = userManager;
-            _mapper = mapper;
-            secretKey = configuration.GetValue<string>("ApiSettings:SecretKey");
-        }
-
+        private readonly AppDbContext _context = context;
+        private readonly UserManager<ApplicationUser> _userManager = userManager;
+        private readonly IMapper _mapper = mapper;
+        private readonly string secretKey = configuration.GetValue<string>("ApiSettings:SecretKey");
 
         public Task<int> CountAsync()
         {

@@ -6,14 +6,9 @@ using SchoolAdministration.Repositories.Interfaces;
 
 namespace SchoolAdministration.Repositories.Repos
 {
-    public class SchoolRepository : ISchoolRepository
+    public class SchoolRepository(AppDbContext context) : ISchoolRepository
     {
-        private readonly AppDbContext _context;
-
-        public SchoolRepository(AppDbContext context)
-        {
-            this._context = context;
-        }
+        private readonly AppDbContext _context = context;
 
         public async Task AddSchoolAsync(School school)
         {

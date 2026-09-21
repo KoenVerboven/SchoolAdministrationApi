@@ -10,12 +10,10 @@ using SchoolAdministration.Specifications;
 
 namespace SchoolAdministration.Repositories.Repos
 {
-    public class StudentRepository : IStudentRepository
+    public class StudentRepository(AppDbContext context) : IStudentRepository
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _context = context;
         const int MaxPageSize = 30;
-
-        public StudentRepository(AppDbContext context) => _context = context;
 
         public async Task AddStudentAsync(Student student)
         {

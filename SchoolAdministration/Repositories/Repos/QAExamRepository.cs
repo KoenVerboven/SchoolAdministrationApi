@@ -5,14 +5,9 @@ using SchoolAdministration.Repositories.Interfaces;
 
 namespace SchoolAdministration.Repositories.Repos
 {
-    public class QAExamRepository : IQAExamRepository
+    public class QAExamRepository(AppDbContext context) : IQAExamRepository
     {
-        private readonly AppDbContext _context;
-
-        public QAExamRepository(AppDbContext context)
-        {
-            _context = context;
-        }
+        private readonly AppDbContext _context = context;
 
         public async Task AddExamAsync(QAExam qAExam)
         {
