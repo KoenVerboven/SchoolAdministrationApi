@@ -12,9 +12,6 @@ namespace SchoolAdministration.Helpers
         public static int CalculateAge(DateTime dateOfBirth)
         {
            return (int)(DateTime.Now - dateOfBirth).TotalDays / 365;
-
-
-           
         }
     }
 }
