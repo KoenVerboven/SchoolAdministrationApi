@@ -8,6 +8,7 @@ namespace SchoolAdministration.Repositories.Interfaces
         Task<HomeWork?> GetByIdAsync(int id);
         Task AddHomeWorkAsync(HomeWork homeWork);
         Task UpdateHomeWorkAsync(HomeWork homeWork);
+        Task UpdateIsActive(int id, bool isActive);
         Task DeleteHomeWorkAsync(int id);
         Task<int> CountAsync();
     }
