@@ -82,7 +82,6 @@ namespace SchoolAdministration.ManualMapper
                 Website = dto.Website,
                 LogoUrl = dto.LogoUrl,
                 Description = dto.Description,
-                CreatedBy = dto.CreatedBy,  // nok nakijken
                 UpdatedBy = dto.UpdatedBy, 
                 //UpdateDate = DateTime.Now
             };

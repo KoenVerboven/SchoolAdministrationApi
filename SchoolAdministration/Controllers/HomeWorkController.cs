@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SchoolAdministration.Models.Domain.HomeWork;
 using SchoolAdministration.Models.DTO;
 using SchoolAdministration.Repositories.Interfaces;
@@ -96,22 +95,5 @@ namespace SchoolAdministration.Controllers
             await _homeWorkRepository.UpdateIsActive(id, isActive);
             return NoContent();
         }
-
-
-
-
-        //[HttpPatch("{id}/price")]
-        //public async Task<IActionResult> UpdatePrice(int id, [FromBody] decimal newPrice)
-        //{
-        //    // Executes a direct SQL "UPDATE Products SET Price = @p0 WHERE Id = @p1" 
-        //    // bypasses the Change Tracker completely.
-        //    int rowsAffected = await _context.Products
-        //        .Where(p => p.Id == id)
-        //        .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.Price, newPrice));
-
-        //    if (rowsAffected == 0) return NotFound();
-
-        //    return NoContent();
-        //}
     }
 }

@@ -8,6 +8,6 @@
         public required string Url { get; set; }
         public int StudentId { get; set; }
         public DateTime DateCreated { get; set; }
-        public int CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

@@ -1,0 +1,30 @@
+﻿// audit fields
+public string CreatedBy { get; set; }
+public DateTime CreatedAt { get; set; }
+public string? UpdatedBy { get; set; }
+public DateTime? UpdatedAt { get; set; }
+
+-> UpdatedBy and UpdatedAt are nullable fields because they have not have a value by creating of the record.
+-> example sql query to create a record:
+ 
+ Insert into [Students]
+      (
+      [FirstName]
+      ,[LastName]
+      ,[Email]
+      ,[Phone]
+      ,[DateOfBirth]
+      ,[Gender]
+      ,[RegistrationDate]
+      ,[Picture]
+      ,[CreatedBy]
+      ,[CreatedDate]
+      ,[UpdateDate]
+      ,[UpdatedBy]
+      )
+  values
+      ( 'Koen','Verboven','koen@test.be' , '345464646','2003-06-01  10:00:00',1,'2003-06-01  10:00:00','/StudentPictures/Student1.jpg',1,getdate(),null,null),
+      ( 'Maddy','Poels','maddy@test.be' , '345464646','2002-06-01  10:00:00',1,'2003-06-02  10:00:00',null,1,getdate(),null,null)
+
+  UpdateDate and UpdatedBy are null by insert a new record because the record has not been updated yet.
+

@@ -35,6 +35,6 @@ namespace SchoolAdministration.Models.DTO
      
         public string? Picture { get; set; }
 
-        public int CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

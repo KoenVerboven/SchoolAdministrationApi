@@ -25,10 +25,10 @@ namespace SchoolAdministration.Models.Domain.Student
         public  ICollection<HomeWork.HomeWork>? HomeWorks { get; set; }
 
         // audit fields
-        public int CreatedBy { get; set; }
+        public string? CreatedBy { get; set; }
         public DateTime CreatedDate { get; set; }
-        public int UpdatedBy { get; set; }
-        public DateTime UpdateDate { get; set; }
+        public string? UpdatedBy { get; set; }
+        public DateTime? UpdateDate { get; set; }
     }
 
 }

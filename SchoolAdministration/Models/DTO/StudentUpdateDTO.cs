@@ -30,6 +30,6 @@ namespace SchoolAdministration.Models.DTO
      
         public string? Picture { get; set; }
 
-        public int UpdatedBy { get; set; }
+        public string UpdatedBy { get; set; }
     }
 }

@@ -57,17 +57,6 @@ namespace SchoolAdministration.Repositories.Repos
                 .Where(p => p.Id == id)
                 .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.IsActive, isActive));
 
-
-            //use patch update to set the IsActive property of the HomeWork entity with the given id to the specified isActive value.
-
-            //var hw = await GetByIdAsync(id);
-            //if (hw == null) throw new KeyNotFoundException($"HomeWork with id {id} not found.");
-
-            //var prop = hw.GetType().GetProperty("IsActive", BindingFlags.NonPublic | BindingFlags.Instance);
-            //prop?.SetValue(hw, isActive);
-
-            //hw.UpdatedAt = DateTime.UtcNow;
-            //await UpdateHomeWorkAsync(hw);
         }
     }
 }

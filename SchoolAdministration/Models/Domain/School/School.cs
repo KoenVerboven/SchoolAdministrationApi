@@ -21,10 +21,13 @@ namespace SchoolAdministration.Models.Domain.School
         public DateTime? EstablishedYear { get; set; }
         public string[]? Facilities { get; set; }
         public string[]? SocialMedia { get; set; }
-        public required string CreatedBy { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public string? UpdatedBy { get; set; } 
-        public DateTime? UpdatedAt { get; set; }
+       
         public ICollection<SchoolDepartment>? SchoolDepartments { get; set; }
+
+        // audit fields
+        public string? CreatedBy { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public string? UpdatedBy { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }

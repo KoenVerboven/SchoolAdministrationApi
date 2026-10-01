@@ -17,9 +17,9 @@ namespace SchoolAdministration.Models.Domain.HomeWork
         public required HomeWorkDetailLine[] HomeWorkDetailLines { get; set; }
 
         // audit fields
-        public int CreatedBy { get; set; }
+        public string CreatedBy { get; set; }
         public DateTime CreatedAt { get; set; }
-        public int? UpdatedBy { get; set; }
+        public string? UpdatedBy { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }
 }

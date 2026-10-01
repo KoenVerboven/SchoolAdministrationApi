@@ -15,13 +15,16 @@ namespace SchoolAdministration.Models.Domain.Student
         public bool ReceivesMailings { get; set; }
         public bool ReceivesSms { get; set; }
         public string? Comments { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public string? CreatedBy { get; set; }
-        public string? UpdatedBy { get; set; }
+        
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
         public ICollection<Student>? Students { get; set; }
+
+        //audit fields
+        public string? CreatedBy { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+        public string? UpdatedBy { get; set; }
 
     }
 }

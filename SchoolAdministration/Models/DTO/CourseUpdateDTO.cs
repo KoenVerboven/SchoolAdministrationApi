@@ -28,6 +28,6 @@ namespace SchoolAdministration.Models.DTO
         [Column(TypeName = "decimal(6, 2)")]
         public decimal? CoursePrice { get; set; }
         public int MaxNumberOfStudents { get; set; }
-        public int UpdatedBy { get; set; }
+        public  string UpdatedBy { get; set; }
     }
 }

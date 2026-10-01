@@ -43,10 +43,10 @@ use School2
       ,[UpdatedAt]
   )
   values
-      ('Vrije technische school turnhout','Hoofdweg', 2300,1,'541646464','vtt@gmail.com', 'www.vtst.com',null,null,null,null,null,null,null,null,'system',getdate(),null,null),
-      ('Universiteit Turnhout','Kerkstraat 45 ', 2300,1,'5415287678','ut@gmail.com', 'www.UTurnhout.com',null,null,null,null,null,null,null,null,'system',getdate(),null,null),
-      ('Basisschool Turnhout','Merodelei 500 ', 2300,1,'753993387','ut@gmail.com', 'www.BSchoolTurnhout.com',null,null,null,null,null,null,null,null,'system',getdate(),null,null),
-      ('Kleuterschool Turnhout','Merodelei 501 ', 2300,1,'87638763876','k@gmail.com', 'www.KSchoolTurnhout.com',null,null,null,null,null,null,null,null,'system',getdate(),null,null)
+      ('Vrije technische school turnhout','Hoofdweg', 2300,1,'541646464','vtt@gmail.com', 'www.vtst.com',null,null,null,null,null,null,null,null,'e6a1b62f-f900-48ba-92a3-5603dc80fbd8',getdate(),null,null),
+      ('Universiteit Turnhout','Kerkstraat 45 ', 2300,1,'5415287678','ut@gmail.com', 'www.UTurnhout.com',null,null,null,null,null,null,null,null,'e6a1b62f-f900-48ba-92a3-5603dc80fbd8',getdate(),null,null),
+      ('Basisschool Turnhout','Merodelei 500 ', 2300,1,'753993387','ut@gmail.com', 'www.BSchoolTurnhout.com',null,null,null,null,null,null,null,null,'e6a1b62f-f900-48ba-92a3-5603dc80fbd8',getdate(),null,null),
+      ('Kleuterschool Turnhout','Merodelei 501 ', 2300,1,'87638763876','k@gmail.com', 'www.KSchoolTurnhout.com',null,null,null,null,null,null,null,null,'e6a1b62f-f900-48ba-92a3-5603dc80fbd8',getdate(),null,null)
 
 
   Insert into [Students]
@@ -59,10 +59,14 @@ use School2
       ,[Gender]
       ,[RegistrationDate]
       ,[Picture]
+      ,[CreatedBy]
+      ,[CreatedDate]
+      ,[UpdateDate]
+      ,[UpdatedBy]
       )
   values
-      ( 'Koen','Verboven','koen@test.be' , '345464646','2003-06-01  10:00:00',1,'2003-06-01  10:00:00','/StudentPictures/Student1.jpg'),
-      ( 'Maddy','Poels','maddy@test.be' , '345464646','2002-06-01  10:00:00',1,'2003-06-02  10:00:00',null)
+      ( 'Koen','Verboven','koen@test.be' , '345464646','2003-06-01  10:00:00',1,'2003-06-01  10:00:00','/StudentPictures/Student1.jpg','e6a1b62f-f900-48ba-92a3-5603dc80fbd8',getdate(),null,null),
+      ( 'Maddy','Poels','maddy@test.be' , '345464646','2002-06-01  10:00:00',1,'2003-06-02  10:00:00',null,'e6a1b62f-f900-48ba-92a3-5603dc80fbd8',getdate(),null,null)
 
 
   Insert into [StudentAddresses]
@@ -162,14 +166,15 @@ Insert into [QAExams]
       (5,1,null,13,7,1,null)
 
 
-Insert Into [HomeWorks] (  [Name] ,[DueDate],[TeacherId] ,[CreatedBy] ,[CreatedAt] ,[UpdatedBy] ,[UpdatedAt] ,[IsActive])
+Insert Into [HomeWorks] 
+([Name] ,[DueDate],[TeacherId] ,[CreatedBy] ,[CreatedAt] ,[UpdatedBy] ,[UpdatedAt] ,[IsActive])
 Values
-('Chemestry','2003-06-01  10:00:00', 13,13,'2003-06-01  10:00:00', null, null, 0 ),
-('Math','2003-06-01  10:00:00', 13,13,'2003-06-01  10:00:00', null, null, 0 ),
-('Dutch','2003-06-01  10:00:00', 13,13,'2003-06-01  10:00:00', null, null, 0 )
+('Chemestry','2003-06-01  10:00:00', 13,'e6a1b62f-f900-48ba-92a3-5603dc80fbd8','2003-06-01  10:00:00', null, null, 0 ),
+('Math','2003-06-01  10:00:00', 13,'e6a1b62f-f900-48ba-92a3-5603dc80fbd8','2003-06-01  10:00:00', null, null, 0 ),
+('Dutch','2003-06-01  10:00:00', 13,'e6a1b62f-f900-48ba-92a3-5603dc80fbd8','2003-06-01  10:00:00', null, null, 0 )
 
 
 
-  -- inert into SchoolClasses
+  -- insert into SchoolClasses
   -- insert into StudentClassRegistrations
-  -- insert into [TeacherAddresses]
+  -- insert into TeacherAddresses
