@@ -12,11 +12,14 @@ namespace SchoolAdministration.Models.Domain.HomeWork
         [Required(ErrorMessage = "DueDate is required.")]
         public required DateTime DueDate { get; set; }
         public int TeacherId { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public string? CreatedBy { get; set; }
-        public string? UpdatedBy { get; set; }
+        public bool IsActive { get; set; } = false;
+      
         public required HomeWorkDetailLine[] HomeWorkDetailLines { get; set; }
-     
+
+        // audit fields
+        public int CreatedBy { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public int? UpdatedBy { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }
