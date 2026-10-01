@@ -162,6 +162,14 @@ Insert into [QAExams]
       (5,1,null,13,7,1,null)
 
 
+Insert Into [HomeWorks] (  [Name] ,[DueDate],[TeacherId] ,[CreatedBy] ,[CreatedAt] ,[UpdatedBy] ,[UpdatedAt] ,[IsActive])
+Values
+('Chemestry','2003-06-01  10:00:00', 13,13,'2003-06-01  10:00:00', null, null, 0 ),
+('Math','2003-06-01  10:00:00', 13,13,'2003-06-01  10:00:00', null, null, 0 ),
+('Dutch','2003-06-01  10:00:00', 13,13,'2003-06-01  10:00:00', null, null, 0 )
+
+
+
   -- inert into SchoolClasses
   -- insert into StudentClassRegistrations
   -- insert into [TeacherAddresses]

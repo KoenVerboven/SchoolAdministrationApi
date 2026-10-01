@@ -13,6 +13,7 @@ using SchoolAdministration.Models.Domain.School;
 using SchoolAdministration.Models.Domain.Student;
 using SchoolAdministration.Models.Domain.Teacher;
 using SchoolAdministration.Models.Domain.User;
+using SchoolAdministration.Models.Domain.Communication;
 
 namespace SchoolAdministration.Data
 {
@@ -57,7 +58,7 @@ namespace SchoolAdministration.Data
         public DbSet<HomeWorkDetailLine> HomeWorkDetailLines { get; set; }
         public DbSet<HomeWorkDetailLineStudentAnswer> HomeWorkDetailLineStudentAnswers { get; set; }
         public DbSet<HomeWorkDetailLineCorrectAnswer> HomeWorkDetailLineCorrectAnswers { get; set; }
-
+        public DbSet<Message> Messages { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             :base(options)
