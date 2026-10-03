@@ -63,7 +63,8 @@ Swagger :
 ----------
 Exploring Endpoints.
 
-<img width="400"  alt="localhost_7213_index html (4)" src="https://github.com/user-attachments/assets/fa042a26-a521-4c5c-866d-c1f327ea20f6" />
+<img width="1902" height="1031" alt="endpoints" src="https://github.com/user-attachments/assets/dc40e911-8ac4-485b-b81b-76b0eb36d310" />
+
 
 Execute Get-method /api/Course:
 --------------------------------
